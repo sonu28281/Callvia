@@ -360,18 +360,18 @@ export function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left: 3D Isometric Elements */}
-            <div className="iso-container h-96 relative flex items-center justify-center">
-              {/* Headset/Agent Icon */}
-              <div className="iso-element absolute left-1/2 top-1/4 -translate-x-1/2">
+            <div className="iso-container h-96 relative flex items-center justify-center px-4">
+              {/* Headset/Agent Icon - Top Center */}
+              <div className="iso-element absolute left-1/2 top-0 -translate-x-1/2">
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-xl transform hover:scale-110 transition-transform duration-300">
                   <span className="text-4xl">🎧</span>
                 </div>
               </div>
 
-              {/* Dashboard/Analytics */}
-              <div className="iso-element absolute -right-4 top-1/3">
+              {/* Dashboard/Analytics - Right Side */}
+              <div className="iso-element absolute right-0 top-1/3">
                 <div className="w-32 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-2xl flex items-center justify-center overflow-hidden">
                   <svg className="w-full h-full" viewBox="0 0 100 75" fill="none">
                     <rect width="100" height="75" fill="url(#grad)" />
@@ -391,8 +391,8 @@ export function Home() {
                 </div>
               </div>
 
-              {/* Server/Infrastructure Stack */}
-              <div className="iso-element absolute left-1/2 bottom-1/4 -translate-x-1/2">
+              {/* Server/Infrastructure Stack - Bottom Center */}
+              <div className="iso-element absolute left-1/2 bottom-0 -translate-x-1/2">
                 <div className="space-y-2">
                   {[0, 1, 2].map((i) => (
                     <div key={i} className="w-24 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg shadow-lg flex items-center justify-center text-white text-xs font-bold">
@@ -404,8 +404,8 @@ export function Home() {
                 </div>
               </div>
 
-              {/* Call/Network Icon */}
-              <div className="iso-element absolute -left-4 bottom-1/4">
+              {/* Call/Network Icon - Left Side */}
+              <div className="iso-element absolute left-0 bottom-1/3">
                 <div className="relative">
                   <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center shadow-xl" style={{ animation: 'pulse3D 2s ease-in-out infinite' }}>
                     <span className="text-2xl">📱</span>
@@ -414,8 +414,8 @@ export function Home() {
                 </div>
               </div>
 
-              {/* Database/Cloud */}
-              <div className="iso-element absolute right-5 bottom-5">
+              {/* Database/Cloud - Center Middle */}
+              <div className="iso-element absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg shadow-xl flex items-center justify-center">
                   <span className="text-3xl">☁️</span>
                 </div>
