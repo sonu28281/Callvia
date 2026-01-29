@@ -9,7 +9,7 @@ export function Home() {
   return (
     <div>
       {/* 1. HERO SECTION - PREMIUM ENTERPRISE */}
-      <section className="relative overflow-visible min-h-screen flex items-center justify-center pt-0 pb-20 -mt-20">
+      <section className="relative overflow-visible min-h-screen flex items-center justify-center pt-6 pb-20">
         {/* Background Layer 1: Darker gradient base */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-blue-50 to-gray-200 z-0" />
 
