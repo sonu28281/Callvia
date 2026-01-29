@@ -1,81 +1,104 @@
 import React from 'react';
-import { 
-  ArrowRight, Phone, Zap, Cpu, BarChart3, 
-  Globe, CreditCard, Building2, TrendingUp, CheckCircle2 
-} from 'lucide-react';
+import { ArrowRight, CheckCircle2, Phone, Zap, Cpu, Globe, CreditCard, Building2 } from 'lucide-react';
 import { InquiryForm } from '../components/sections/InquiryForm.jsx';
 
 export function Home() {
   return (
-    <div>
-      {/* 1. HERO SECTION - PREMIUM ENTERPRISE */}
-      <section className="relative overflow-visible min-h-screen flex items-center justify-center pt-6 pb-20">
-        {/* Background Layer 1: Darker gradient base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-blue-50 to-gray-200 z-0" />
-
-        {/* Background Layer 2: Subtle animated gradients */}
-        <div
-          className="absolute inset-0 z-2 pointer-events-none"
-          style={{
-            background: `
-              radial-gradient(ellipse 800px 600px at 80% 20%, rgba(255, 153, 51, 0.12) 0%, transparent 50%),
-              radial-gradient(ellipse 700px 500px at 10% 70%, rgba(19, 136, 8, 0.1) 0%, transparent 50%)
-            `,
-            animation: 'fadeInOut 12s ease-in-out infinite',
-          }}
-        />
-
+    <div className="w-full">
+      {/* ========== HERO SECTION ========== */}
+      <section className="relative bg-white pt-20 pb-32 px-6 overflow-hidden" style={{
+        background: 'linear-gradient(135deg, #ec4899 0%, #d946ef 25%, #06b6d4 50%, #fbbf24 75%, #10b981 100%)',
+        backgroundSize: '300% 300%',
+        animation: 'gradientShift 12s ease-in-out infinite',
+        borderRadius: '0',
+        position: 'relative'
+      }}>
         <style>{`
-          @keyframes fadeInOut {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
+          @keyframes gradientShift {
+            0% { background-position: 50% 0%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 50% 100%; }
+            75% { background-position: 0% 50%; }
+            100% { background-position: 50% 0%; }
+          }
+          @keyframes cloudFloat1 {
+            0%, 100% { transform: translateX(0) scaleX(1); opacity: 0.3; }
+            50% { transform: translateX(30px) scaleX(1.1); opacity: 0.4; }
+          }
+          @keyframes cloudFloat2 {
+            0%, 100% { transform: translateX(0) scaleX(1); opacity: 0.25; }
+            50% { transform: translateX(-25px) scaleX(0.95); opacity: 0.35; }
+          }
+          @keyframes cloudFloat3 {
+            0%, 100% { transform: translateX(0) scaleX(1); opacity: 0.2; }
+            50% { transform: translateX(40px) scaleX(1.05); opacity: 0.3; }
           }
         `}</style>
 
-        {/* Content Layer */}
-        <div className="max-w-6xl mx-auto px-6 relative z-10 w-full">
+        {/* Cloud overlay effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-0 w-96 h-40 bg-white/10 rounded-full blur-3xl" style={{ animation: 'cloudFloat1 8s ease-in-out infinite' }}></div>
+          <div className="absolute top-40 right-20 w-80 h-32 bg-white/5 rounded-full blur-3xl" style={{ animation: 'cloudFloat2 10s ease-in-out infinite' }}></div>
+          <div className="absolute top-10 left-1/2 w-96 h-40 bg-white/8 rounded-full blur-3xl" style={{ animation: 'cloudFloat3 12s ease-in-out infinite' }}></div>
+        </div>
+
+        {/* Curved bottom transition */}
+        <svg className="absolute bottom-0 left-0 right-0 w-full h-24 text-blue-50" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ marginBottom: '-1px' }}>
+          <path d="M0,40 Q300,0 600,40 T1200,40 L1200,120 L0,120 Z" fill="currentColor"></path>
+        </svg>
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left: Text Content */}
-            <div className="text-center lg:text-left">
-              {/* Coming Soon Badge */}
-              <div className="inline-block mb-8 px-6 py-3 bg-orange-100 border border-orange-300 rounded-full">
-                <p className="text-orange-900 font-semibold text-sm">🚀 Coming Soon</p>
+            {/* Left Content */}
+            <div className="space-y-6">
+              {/* Badge */}
+              <div className="inline-block">
+                <div className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white font-semibold text-sm border border-white/30">
+                  Coming Soon
+                </div>
               </div>
 
-              {/* Headline */}
-              <h1 className="text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
-                Enterprise Telecom Infrastructure Built for India
+              {/* Main Heading */}
+              <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
+                Enterprise Telecom<br />
+                <span className="text-yellow-200">Infrastructure</span>
               </h1>
 
-              {/* Sub-headline */}
-              <p className="text-lg lg:text-xl text-gray-700 mb-2 leading-relaxed font-light max-w-3xl">
+              {/* Subheading */}
+              <p className="text-lg text-white/90 max-w-xl leading-relaxed font-light">
                 Class-B VNO platform powering secure domestic calling, AI-driven automation, and fully white-label telecom services.
               </p>
 
-              {/* Trust Line */}
-              <p className="text-xs text-gray-500 mb-8 tracking-widest uppercase font-semibold letter-spacing-2">
-                Built for Compliance · Designed for Scale · Controlled by You
-              </p>
-
-              {/* Coming Soon Message */}
-              <div className="mb-8 p-6 bg-blue-50 border-2 border-blue-200 rounded-lg">
-                <p className="text-2xl font-bold text-blue-900 mb-2">🔄 Coming Soon</p>
-                <p className="text-sm text-blue-800 font-light">
-                  We're building something extraordinary. Stay tuned for updates.
-                </p>
+              {/* CTA Buttons */}
+              <div className="flex gap-4 pt-2">
+                <button className="bg-white hover:bg-gray-100 text-gray-900 px-8 py-3 rounded-lg font-bold transition-all duration-300 inline-flex items-center gap-2 shadow-lg">
+                  Book a Demo <ArrowRight size={18} />
+                </button>
+                <button className="border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-lg font-bold transition-all duration-300 backdrop-blur-sm">
+                  Learn More
+                </button>
               </div>
 
-              {/* Micro-trust text */}
-              <p className="text-sm text-gray-500 font-light">
-                No international routes. No grey traffic. India‑only compliance.
-              </p>
+              {/* Features list */}
+              <div className="pt-4 space-y-3">
+                {[
+                  'TRAI-approved VNO infrastructure',
+                  'Carrier-grade backend built in-house',
+                  'White-label platform for resellers'
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-yellow-200 flex-shrink-0" />
+                    <span className="text-white/95 font-medium text-sm">{feature}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Right: Inquiry Form */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+            {/* Right: Form */}
+            <div className="flex justify-center">
+              <div className="w-full max-w-md bg-white/98 backdrop-blur-md border border-white/50 rounded-2xl p-8 shadow-2xl">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Get Early Access</h2>
-                <p className="text-gray-600 text-sm mb-6">Submit your inquiry and we'll reach out soon.</p>
+                <p className="text-gray-600 text-sm mb-6">Limited spots available for enterprise partners.</p>
                 <InquiryForm />
               </div>
             </div>
@@ -83,116 +106,622 @@ export function Home() {
         </div>
       </section>
 
-      {/* 2. CORE TELECOM CAPABILITIES */}
-      <section className="py-32 px-6 bg-gray-100">
+      {/* ========== FEATURES SECTION ========== */}
+      <section className="bg-blue-50 py-12 pb-32 px-6 relative">
+        <style>{`
+          @keyframes slideInUp {
+            from {
+              opacity: 0;
+              transform: translateY(40px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @keyframes card3D {
+            0% {
+              transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+            }
+          }
+          
+          @keyframes iconBounce {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-10px);
+            }
+          }
+          
+          @keyframes iconGlow {
+            0%, 100% {
+              box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+            }
+            50% {
+              box-shadow: 0 0 0 8px rgba(37, 99, 235, 0);
+            }
+          }
+          
+          @keyframes float {
+            0%, 100% {
+              transform: translateY(0px);
+            }
+            50% {
+              transform: translateY(-8px);
+            }
+          }
+          
+          .feature-card {
+            animation: slideInUp 0.6s ease-out forwards;
+            opacity: 0;
+            perspective: 1000px;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+          }
+          
+          .feature-card:nth-child(1) { animation-delay: 0.1s; }
+          .feature-card:nth-child(2) { animation-delay: 0.2s; }
+          .feature-card:nth-child(3) { animation-delay: 0.3s; }
+          .feature-card:nth-child(4) { animation-delay: 0.4s; }
+          .feature-card:nth-child(5) { animation-delay: 0.5s; }
+          .feature-card:nth-child(6) { animation-delay: 0.6s; }
+          
+          .feature-card:hover {
+            transform: translateY(-12px) rotateX(5deg) rotateY(3deg) scale(1.02);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3), 0 0 60px rgba(99, 102, 241, 0.15);
+          }
+          
+          .feature-icon {
+            animation: iconBounce 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+          }
+          
+          .feature-card:hover .feature-icon {
+            animation: iconGlow 0.8s ease-out;
+            transform: scale(1.15) rotateZ(10deg);
+          }
+        `}</style>
+
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-            Core Telecom Capabilities
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Section Header */}
+          <div className="text-center mb-20">
+            <div className="inline-block mb-4">
+              <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold">⚡ CORE FEATURES</span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Core Telecom Capabilities
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Everything you need to build, scale, and manage enterprise voice operations
+            </p>
+          </div>
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Phone, title: 'DID Numbers', desc: 'Pan-India virtual numbers with carrier-grade reliability.' },
-              { icon: Zap, title: 'Cloud Call Center', desc: 'Inbound & outbound calling built for domestic operations.' },
-              { icon: Cpu, title: 'AI Calling & Automation', desc: 'AI receptionist and programmable voice agents.' },
-              { icon: BarChart3, title: 'Dialer & Routing', desc: 'Manual, auto-dialer with IVR & intelligent routing.' },
-              { icon: Globe, title: 'White-Label Platform', desc: 'Launch your own branded telecom service.' },
-              { icon: CreditCard, title: 'Prepaid Billing & Control', desc: 'Usage-based billing with real-time balance control.' },
-            ].map((item, i) => {
-              const Icon = item.icon;
+              {
+                icon: Phone,
+                title: 'DID Numbers',
+                description: 'Pan-India virtual numbers with TRAI-approved infrastructure. Get dedicated numbers for your contact center with instant activation, geographic flexibility, and carrier-grade reliability for seamless domestic calling.',
+                gradient: 'from-blue-500 to-cyan-500'
+              },
+              {
+                icon: Zap,
+                title: 'Cloud Call Center',
+                description: 'Enterprise-grade inbound & outbound calling platform built on our Class-B VNO infrastructure. Handle high-volume calls, automatic call distribution, and comprehensive reporting.',
+                gradient: 'from-purple-500 to-pink-500'
+              },
+              {
+                icon: Cpu,
+                title: 'AI Voice Agents',
+                description: 'Intelligent programmable voice agents that handle customer interactions autonomously. Smart IVR routing, conversation analytics, and seamless handoff to live agents for enhanced customer experience.',
+                gradient: 'from-orange-500 to-red-500'
+              },
+              {
+                icon: Globe,
+                title: 'White-Label Platform',
+                description: 'Launch your own branded telecom service on our proven infrastructure. Complete API access, reseller dashboard, billing management, and all backend support included.',
+                gradient: 'from-green-500 to-teal-500'
+              },
+              {
+                icon: CreditCard,
+                title: 'Prepaid Billing',
+                description: 'Real-time balance management with instant recharge capability. Detailed usage analytics, custom pricing tiers, and automated threshold alerts for continuous service availability.',
+                gradient: 'from-indigo-500 to-blue-500'
+              },
+              {
+                icon: Building2,
+                title: 'Enterprise API',
+                description: 'Full REST API access for custom integrations with your existing systems. Real-time call logs, CDR data, webhooks, and comprehensive documentation for seamless integration.',
+                gradient: 'from-rose-500 to-pink-500'
+              }
+            ].map((feature, index) => {
+              const Icon = feature.icon;
               return (
                 <div 
-                  key={i} 
-                  className="p-8 border border-gray-200 rounded-lg bg-white shadow-sm hover:border-blue-900 hover:shadow-md transition-all"
+                  key={index} 
+                  className="feature-card relative group cursor-pointer"
                 >
-                  <Icon size={32} className="text-blue-900 mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                  {/* Gradient border effect */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur`}></div>
+                  
+                  {/* Card content */}
+                  <div className="relative bg-white p-6 rounded-2xl h-full flex flex-col">
+                    {/* Logo and Title Section */}
+                    <div className="flex items-start gap-4 mb-4">
+                      {/* Gradient icon background */}
+                      <div className={`w-12 h-12 bg-gradient-to-br ${feature.gradient} rounded-lg flex items-center justify-center shadow-lg flex-shrink-0`}>
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-lg font-bold text-gray-900">{feature.title}</h3>
+                    </div>
+                    
+                    <p className="text-gray-600 text-xs leading-relaxed flex-grow mb-3">{feature.description}</p>
+                    
+                    {/* Hover indicator */}
+                    <div className="flex items-center text-xs font-semibold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span>Learn more</span>
+                      <ArrowRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
                 </div>
               );
             })}
           </div>
         </div>
+
+        {/* Curved bottom transition */}
+        <svg className="absolute bottom-0 left-0 right-0 w-full h-24 text-gray-50" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ marginBottom: '-1px' }}>
+          <path d="M0,40 Q300,0 600,40 T1200,40 L1200,120 L0,120 Z" fill="currentColor"></path>
+        </svg>
       </section>
 
-      {/* 3. BUILT FOR TEAMS SECTION */}
-      <section className="py-32 px-6 bg-gray-50">
+      {/* ========== SOLUTIONS SECTION ========== */}
+      <section className="bg-gradient-to-b from-gray-50 to-white py-20 px-6 relative">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
-            Built for Teams That Run on Calls
-          </h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            From call centers to enterprises, Callvia powers compliant, scaled domestic telecom operations.
-          </p>
+          <div className="text-center mb-20">
+            <div className="inline-block mb-4">
+              <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold">🚀 SOLUTIONS</span>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Built for Every Business
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              From call centers to enterprises, scale your voice operations with our flexible platform
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: 'Call Centers',
+                description: 'Scale campaigns with control and compliance. High-volume calling, agent dashboards, and real-time monitoring.',
+                icon: '📞'
+              },
+              {
+                title: 'Enterprises',
+                description: 'Secure API-driven calling infrastructure. Dedicated support, custom integrations, and SLA guarantees.',
+                icon: '🏢'
+              },
+              {
+                title: 'Resellers',
+                description: 'Start your own telecom business. White-label platform, reseller dashboard, and margin optimization.',
+                icon: '📈'
+              },
+              {
+                title: 'Small Business',
+                description: 'Never miss a call with AI receptionist. Simple setup, affordable pricing, and professional features.',
+                icon: '🎯'
+              }
+            ].map((solution, index) => (
+              <div key={index} className="group relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-lg"></div>
+                <div className="relative bg-white p-8 rounded-2xl border-2 border-gray-100 group-hover:border-blue-300 group-hover:shadow-xl transition-all duration-300">
+                  <div className="text-5xl mb-6">{solution.icon}</div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">{solution.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{solution.description}</p>
+                  <div className="mt-6 flex items-center text-sm font-semibold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span>Explore</span>
+                    <ArrowRight size={16} className="ml-2" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========== 3D PLATFORM VISUALIZATION SECTION ========== */}
+      <section className="bg-gradient-to-b from-white to-blue-50 py-32 px-6 relative overflow-hidden">
+        <style>{`
+          @keyframes float3D {
+            0%, 100% {
+              transform: translateY(0px) translateZ(0);
+            }
+            50% {
+              transform: translateY(-20px) translateZ(20px);
+            }
+          }
+
+          @keyframes rotate3D {
+            0% {
+              transform: rotateX(5deg) rotateY(-10deg) rotateZ(0deg);
+            }
+            100% {
+              transform: rotateX(5deg) rotateY(10deg) rotateZ(0deg);
+            }
+          }
+
+          @keyframes spin {
+            0% {
+              transform: rotateZ(0deg);
+            }
+            100% {
+              transform: rotateZ(360deg);
+            }
+          }
+
+          @keyframes pulse3D {
+            0%, 100% {
+              transform: scale(1);
+              opacity: 1;
+            }
+            50% {
+              transform: scale(1.1);
+              opacity: 0.7;
+            }
+          }
+
+          .iso-container {
+            perspective: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .iso-element {
+            animation: float3D 4s ease-in-out infinite;
+          }
+
+          .iso-element:nth-child(1) { animation-delay: 0s; }
+          .iso-element:nth-child(2) { animation-delay: 0.2s; }
+          .iso-element:nth-child(3) { animation-delay: 0.4s; }
+          .iso-element:nth-child(4) { animation-delay: 0.6s; }
+        `}</style>
+
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Enterprise-Grade Platform
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Powerful infrastructure built to scale your call center operations
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: 3D Isometric Elements */}
+            <div className="iso-container h-96 relative">
+              {/* Headset/Agent Icon */}
+              <div className="iso-element absolute left-10 top-10">
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-xl transform hover:scale-110 transition-transform duration-300">
+                  <span className="text-4xl">🎧</span>
+                </div>
+              </div>
+
+              {/* Dashboard/Analytics */}
+              <div className="iso-element absolute right-10 top-20">
+                <div className="w-32 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-2xl flex items-center justify-center overflow-hidden">
+                  <svg className="w-full h-full" viewBox="0 0 100 75" fill="none">
+                    <rect width="100" height="75" fill="url(#grad)" />
+                    <defs>
+                      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#a855f7" />
+                        <stop offset="100%" stopColor="#ec4899" />
+                      </linearGradient>
+                    </defs>
+                    {/* Dashboard bars */}
+                    <rect x="10" y="50" width="8" height="20" fill="white" opacity="0.8" />
+                    <rect x="25" y="40" width="8" height="30" fill="white" opacity="0.9" />
+                    <rect x="40" y="30" width="8" height="40" fill="white" />
+                    <rect x="55" y="45" width="8" height="25" fill="white" opacity="0.8" />
+                    <rect x="70" y="35" width="8" height="35" fill="white" opacity="0.9" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Server/Infrastructure Stack */}
+              <div className="iso-element absolute left-1/4 bottom-10">
+                <div className="space-y-2">
+                  {[0, 1, 2].map((i) => (
+                    <div key={i} className="w-24 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg shadow-lg flex items-center justify-center text-white text-xs font-bold">
+                      <span style={{ animation: 'spin 3s linear infinite', animationDelay: `${i * 0.3}s` }}>
+                        ⚙️
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Call/Network Icon */}
+              <div className="iso-element absolute right-1/4 bottom-20">
+                <div className="relative">
+                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center shadow-xl" style={{ animation: 'pulse3D 2s ease-in-out infinite' }}>
+                    <span className="text-2xl">📱</span>
+                  </div>
+                  <div className="absolute inset-0 rounded-full border-4 border-green-400" style={{ animation: 'pulse 2s ease-in-out infinite', animationDelay: '0s' }}></div>
+                </div>
+              </div>
+
+              {/* Database/Cloud */}
+              <div className="iso-element absolute right-5 bottom-5">
+                <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg shadow-xl flex items-center justify-center">
+                  <span className="text-3xl">☁️</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Features List */}
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <span className="text-xl">🎯</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Real-time Call Management</h3>
+                  <p className="text-gray-600">Monitor and control every call across your network with live dashboard</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <span className="text-xl">📊</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Advanced Analytics</h3>
+                  <p className="text-gray-600">Get deep insights into call quality, duration, routing, and agent performance</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center">
+                  <span className="text-xl">🔐</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Enterprise Security</h3>
+                  <p className="text-gray-600">Bank-grade encryption and compliance with all telecom regulations</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                  <span className="text-xl">⚡</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Infinite Scalability</h3>
+                  <p className="text-gray-600">Handle millions of simultaneous calls without performance degradation</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== DEVELOPMENT & INTEGRATION SECTION ========== */}
+      <section className="bg-gradient-to-b from-purple-50 to-white py-32 px-6 relative overflow-hidden">
+        <style>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+          }
+
+          @keyframes float-left {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(-20px) translateY(-15px); }
+          }
+
+          @keyframes float-right {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(20px) translateY(-15px); }
+          }
+
+          @keyframes orbit {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -15px) rotate(90deg); }
+            50% { transform: translate(0, -30px) rotate(180deg); }
+            75% { transform: translate(-20px, -15px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+          }
+
+          .floating-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+          }
+
+          .particle-1 { animation: orbit 6s linear infinite; top: 15%; left: 10%; }
+          .particle-2 { animation: orbit 7s linear infinite reverse; top: 25%; right: 15%; animation-delay: 0.5s; }
+          .particle-3 { animation: orbit 8s linear infinite; bottom: 20%; left: 20%; }
+          .particle-4 { animation: orbit 6.5s linear infinite reverse; bottom: 25%; right: 10%; animation-delay: 1s; }
+          .particle-5 { animation: float 4s ease-in-out infinite; top: 50%; right: 5%; animation-delay: 0.3s; }
+        `}</style>
+
+        {/* Floating Particles */}
+        <div className="floating-particle particle-1 bg-green-400"></div>
+        <div className="floating-particle particle-2 bg-pink-400"></div>
+        <div className="floating-particle particle-3 bg-purple-400"></div>
+        <div className="floating-particle particle-4 bg-yellow-400"></div>
+        <div className="floating-particle particle-5 bg-blue-400"></div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Illustration */}
+            <div className="relative h-96 flex items-center justify-center">
+              {/* SVG-based illustration */}
+              <svg className="w-full h-full" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Background desk */}
+                <rect x="80" y="180" width="240" height="140" fill="#F97316" rx="8" />
+                <rect x="90" y="190" width="220" height="30" fill="#FFB366" />
+                <rect x="90" y="230" width="220" height="70" fill="#FCA5A5" rx="4" />
+
+                {/* Computer monitor */}
+                <rect x="140" y="80" width="120" height="90" fill="#1F2937" rx="4" />
+                <rect x="145" y="85" width="110" height="75" fill="#87CEEB" />
+                <rect x="130" y="170" width="140" height="8" fill="#374151" />
+                <line x1="200" y1="170" x2="200" y2="180" stroke="#374151" strokeWidth="2" />
+
+                {/* Person - sitting */}
+                <circle cx="280" cy="140" r="18" fill="#8B5A3C" /> {/* Head */}
+                <rect x="270" y="160" width="20" height="50" fill="#4F46E5" /> {/* Body */}
+                <rect x="265" y="210" width="12" height="40" fill="#1F2937" /> {/* Leg 1 */}
+                <rect x="283" y="210" width="12" height="40" fill="#1F2937" /> {/* Leg 2 */}
+
+                {/* Lightbulb */}
+                <circle cx="120" cy="60" r="16" fill="#FCD34D" />
+                <path d="M 110 76 Q 110 82 115 85 L 125 85 Q 130 82 130 76" fill="#F59E0B" />
+
+                {/* Target */}
+                <circle cx="300" cy="80" r="20" fill="none" stroke="#EF4444" strokeWidth="3" />
+                <circle cx="300" cy="80" r="13" fill="none" stroke="#EF4444" strokeWidth="2" />
+                <circle cx="300" cy="80" r="6" fill="#EF4444" />
+                <line x1="320" y1="65" x2="330" y2="55" stroke="#3B82F6" strokeWidth="2" />
+
+                {/* Leaves */}
+                <path d="M 60 240 Q 50 250 60 260" fill="#10B981" stroke="#059669" strokeWidth="2" />
+                <path d="M 70 250 Q 60 260 70 270" fill="#34D399" stroke="#10B981" strokeWidth="2" />
+                <path d="M 330 260 Q 340 250 330 240" fill="#F59E0B" stroke="#D97706" strokeWidth="2" />
+                <path d="M 340 280 Q 350 270 345 260" fill="#FBBF24" stroke="#F59E0B" strokeWidth="2" />
+
+                {/* Floating elements */}
+                <rect x="150" y="40" width="30" height="20" fill="#60A5FA" rx="2" opacity="0.7" />
+                <rect x="200" y="35" width="35" height="25" fill="#A78BFA" rx="2" opacity="0.7" />
+              </svg>
+            </div>
+
+            {/* Right: Services Grid */}
+            <div>
+              <div className="inline-block mb-4">
+                <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold">🔧 OUR SERVICES</span>
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Development & Integration
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Complete telecom infrastructure development with enterprise-grade APIs, AI voice agents, and custom integrations tailored to your business needs.
+              </p>
+
+              {/* Services Grid */}
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { icon: '📱', title: 'IVR Development', color: 'bg-blue-100 text-blue-600' },
+                  { icon: '🤖', title: 'AI Voice Agents', color: 'bg-purple-100 text-purple-600' },
+                  { icon: '📡', title: 'VoIP Integration', color: 'bg-cyan-100 text-cyan-600' },
+                  { icon: '📊', title: 'Call Analytics', color: 'bg-orange-100 text-orange-600' },
+                  { icon: '🔐', title: 'Compliance Tools', color: 'bg-red-100 text-red-600' },
+                  { icon: '⚙️', title: 'API Development', color: 'bg-green-100 text-green-600' }
+                ].map((service, i) => (
+                  <div key={i} className={`${service.color} p-4 rounded-lg font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer`}>
+                    <span className="text-lg">{service.icon}</span> {service.title}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== WHY CHOOSE SECTION ========== */}
+      <section className="bg-gray-50 py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Why Choose Callvia
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Built with carrier-grade standards, not startup shortcuts
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: 'Domestic-Only Compliant',
+                description: 'TRAI-approved VNO infrastructure with full compliance.'
+              },
+              {
+                title: 'Carrier-Grade Backend',
+                description: 'Enterprise-level reliability with proprietary switching.'
+              },
+              {
+                title: 'White-Label Ready',
+                description: 'Launch branded services with your own branding.'
+              },
+              {
+                title: 'Risk-Controlled Billing',
+                description: 'Never chase unpaid invoices with prepaid billing.'
+              },
+              {
+                title: 'AI Voice Automation',
+                description: 'Scale operations without hiring with AI agents.'
+              },
+              {
+                title: 'Operator Mindset',
+                description: 'Built by telecom professionals, not SaaS consultants.'
+              }
+            ].map((benefit, index) => (
+              <div key={index} className="bg-white p-8 rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">{benefit.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========== STATS SECTION ========== */}
+      <section className="bg-gray-900 text-white py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: BarChart3, title: 'Call Centers', desc: 'Scale domestic campaigns with control and compliance.' },
-              { icon: Building2, title: 'Enterprises', desc: 'Secure, API-driven calling infrastructure.' },
-              { icon: TrendingUp, title: 'Resellers', desc: 'Start your own telecom business with white-label control.' },
-              { icon: Phone, title: 'Small Businesses', desc: 'Never miss a call with AI receptionist.' },
-            ].map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div 
-                  key={i} 
-                  className="p-8 bg-white rounded-lg border-l-4 border-blue-900 shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <Icon size={40} className="text-blue-900 mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+              { number: '10M+', label: 'Calls Managed' },
+              { number: '99.99%', label: 'Uptime SLA' },
+              { number: '50+', label: 'Enterprise Clients' },
+              { number: '24/7', label: 'Support Coverage' },
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="text-5xl lg:text-6xl font-bold text-blue-400 mb-2">
+                  {stat.number}
                 </div>
-              );
-            })}
+                <p className="text-gray-300 font-semibold text-sm">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. WHY CALLVIA SECTION */}
-      <section className="py-32 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
-            Why Enterprises Choose Callvia
+      {/* ========== CTA SECTION ========== */}
+      <section className="bg-gradient-to-r from-blue-50 to-cyan-50 py-24 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            Ready to Scale Your<br />Telecom Operations?
           </h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Built with carrier-grade standards, not startup shortcuts.
+          <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
+            Join enterprises building the future of domestic voice infrastructure
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { icon: CheckCircle2, title: 'Domestic-Only, Compliant Calling', desc: 'No international routes. TRAI-approved VNO infrastructure.' },
-              { icon: CheckCircle2, title: 'Carrier-Grade Switching Backend', desc: 'Enterprise-level reliability, not resold third-party capacity.' },
-              { icon: CheckCircle2, title: 'Full White-Label Capability', desc: 'Launch branded telecom services with your own branding.' },
-              { icon: CheckCircle2, title: 'Prepaid, Risk-Controlled Billing', desc: 'Never chase unpaid invoices. Usage-based, real-time balance.' },
-              { icon: CheckCircle2, title: 'AI-Powered Voice Automation', desc: 'Scale operations without hiring. Programmable agents.' },
-              { icon: CheckCircle2, title: 'Direct Operator Mindset', desc: 'Built by telecom ops professionals, not SaaS resellers.' },
-            ].map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div key={i} className="p-6">
-                  <Icon size={28} className="text-blue-900 mb-3" />
-                  <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
-      {/* 5. CTA SECTION */}
-      <section className="py-24 px-6 bg-blue-50">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">
-            Ready to Scale Your Telecom Operations?
-          </h2>
-          <div className="flex gap-6 justify-center flex-wrap">
-            <button className="bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-950 transition-colors inline-flex items-center gap-2">
-              Book a Demo <ArrowRight size={18} />
+          <div className="flex gap-4 justify-center flex-wrap">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-lg font-bold transition-all duration-300 inline-flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105">
+              Get Started <ArrowRight size={20} />
             </button>
-            <button className="bg-transparent text-blue-900 border border-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-100 transition-colors">
+            <button className="border-2 border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50 px-10 py-4 rounded-lg font-bold transition-all duration-300">
               Talk to Sales
             </button>
           </div>
-          <p className="text-gray-600 text-sm mt-8">
-            Live support available for India-based teams. Get connected in under 24 hours.
+
+          <p className="text-gray-500 text-sm mt-10">
+            Enterprise SLA guaranteed. Live support for India-based teams.
           </p>
         </div>
       </section>
