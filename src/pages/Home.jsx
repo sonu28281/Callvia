@@ -763,12 +763,12 @@ export function Home() {
       </section>
 
       {/* ========== CTA SECTION ========== */}
-      <section className="bg-gradient-to-r from-blue-50 to-cyan-50 py-4 px-6">
+      <section className="bg-gradient-to-r from-blue-50 to-cyan-50 py-2 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
             Ready to Scale Your<br />Telecom Operations?
           </h2>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 mb-4 max-w-2xl mx-auto">
             Join enterprises building the future of domestic voice infrastructure
           </p>
 
@@ -781,7 +781,7 @@ export function Home() {
             </button>
           </div>
 
-          <p className="text-gray-500 text-sm mt-8">
+          <p className="text-gray-500 text-sm mt-3">
             Enterprise SLA guaranteed. Live support for India-based teams.
           </p>
         </div>
