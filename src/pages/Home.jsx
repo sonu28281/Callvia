@@ -628,7 +628,48 @@ export function Home() {
       </section>
 
       {/* ========== WHY CHOOSE SECTION ========== */}
-      <section className="bg-gray-50 py-32 px-6">
+      <section className="bg-gradient-to-b from-gray-50 to-white py-32 px-6">
+        <style>{`
+          @keyframes slideInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes scaleIn {
+            from {
+              opacity: 0;
+              transform: scale(0.95);
+            }
+            to {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+          }
+
+          .benefit-card {
+            animation: slideInUp 0.6s ease-out forwards;
+          }
+
+          .benefit-icon {
+            animation: scaleIn 0.5s ease-out forwards;
+          }
+
+          .benefit-card:hover .benefit-icon {
+            animation: float 3s ease-in-out infinite;
+          }
+        `}</style>
+
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -643,32 +684,57 @@ export function Home() {
             {[
               {
                 title: 'Domestic-Only Compliant',
-                description: 'TRAI-approved VNO infrastructure with full compliance.'
+                description: 'TRAI-approved VNO infrastructure with full compliance. Our domestic-first approach ensures maximum regulatory adherence and peace of mind.',
+                icon: '🛡️',
+                color: 'from-green-400 to-emerald-500'
               },
               {
                 title: 'Carrier-Grade Backend',
-                description: 'Enterprise-level reliability with proprietary switching.'
+                description: 'Enterprise-level reliability with proprietary switching. Built to handle millions of concurrent calls with 99.99% uptime SLA.',
+                icon: '⚙️',
+                color: 'from-blue-400 to-cyan-500'
               },
               {
                 title: 'White-Label Ready',
-                description: 'Launch branded services with your own branding.'
+                description: 'Launch branded services with your own branding. Complete white-label platform with custom dashboards and reseller controls.',
+                icon: '🎨',
+                color: 'from-purple-400 to-pink-500'
               },
               {
                 title: 'Risk-Controlled Billing',
-                description: 'Never chase unpaid invoices with prepaid billing.'
+                description: 'Never chase unpaid invoices with prepaid billing. Smart billing system that protects your revenue and reduces financial risk.',
+                icon: '💰',
+                color: 'from-orange-400 to-red-500'
               },
               {
                 title: 'AI Voice Automation',
-                description: 'Scale operations without hiring with AI agents.'
+                description: 'Scale operations without hiring with AI agents. Advanced voice AI that handles complex customer interactions seamlessly.',
+                icon: '🤖',
+                color: 'from-indigo-400 to-blue-500'
               },
               {
                 title: 'Operator Mindset',
-                description: 'Built by telecom professionals, not SaaS consultants.'
+                description: 'Built by telecom professionals, not SaaS consultants. Deep industry expertise with 15+ years of telecom operations experience.',
+                icon: '👥',
+                color: 'from-rose-400 to-pink-500'
               }
             ].map((benefit, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">{benefit.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
+              <div 
+                key={index} 
+                className="benefit-card group relative" 
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-2xl opacity-0 group-hover:opacity-30 transition-all duration-500 blur-xl"></div>
+                <div className="relative bg-white p-8 rounded-2xl border-2 border-gray-100 group-hover:border-blue-300 group-hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                  <div className={`benefit-icon w-16 h-16 bg-gradient-to-br ${benefit.color} rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                    {benefit.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">{benefit.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed flex-grow group-hover:text-gray-700 transition-colors">{benefit.description}</p>
+                  <div className="mt-4 pt-4 border-t border-gray-200 group-hover:border-blue-200 transition-colors">
+                    <p className="text-xs font-semibold text-blue-600 group-hover:text-blue-700">Learn more →</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
