@@ -7,8 +7,8 @@ export function MegaMenu() {
   const activeTabData = megaMenuConfig.tabs[activeTab];
 
   return (
-    <div className="fixed left-0 right-0 top-16 bg-white border-b border-gray-100 shadow-lg z-40 rounded-b-xl">
-      <div className="max-w-7xl mx-auto px-6 py-5">
+    <div className="absolute left-0 top-full z-50">
+      <div className="bg-white border border-gray-200 shadow-lg rounded-lg px-6 py-5">
         {/* Tabs - Smaller and Sleeker */}
         <div className="flex gap-8 border-b border-gray-150 pb-4 mb-6">
           {megaMenuConfig.tabs.map((tab, idx) => (
