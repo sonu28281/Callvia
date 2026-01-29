@@ -331,15 +331,35 @@ export function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left: Circular Animation with Central Agent */}
             <div className="flex justify-center h-96">
-              <div className="relative w-80 h-80 flex items-center justify-center">
+              <div className="relative w-96 h-96 flex items-center justify-center">
                 {/* Orbit circle background */}
                 <div className="absolute inset-0 rounded-full border-2 border-blue-200 opacity-30"></div>
 
-                {/* Central Agent Image */}
-                <div className="center-agent relative z-10 w-40 h-40 flex items-center justify-center">
-                  <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 rounded-full shadow-2xl flex items-center justify-center text-6xl">
-                    👨‍💼
-                  </div>
+                {/* Central Agent Illustration */}
+                <div className="center-agent relative z-10 w-56 h-56 flex items-center justify-center">
+                  <svg viewBox="0 0 300 300" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    {/* Desk */}
+                    <rect x="50" y="180" width="200" height="80" fill="#D4A574" rx="5"/>
+                    
+                    {/* Monitor/Screen */}
+                    <rect x="100" y="100" width="100" height="70" fill="#4A90E2" rx="5"/>
+                    <rect x="105" y="105" width="90" height="60" fill="#E8F4FF" rx="3"/>
+                    
+                    {/* Head */}
+                    <circle cx="150" cy="70" r="25" fill="#F4A261"/>
+                    
+                    {/* Body */}
+                    <ellipse cx="150" cy="130" rx="22" ry="35" fill="#2E86AB"/>
+                    
+                    {/* Arms */}
+                    <rect x="100" y="120" width="50" height="15" fill="#F4A261" rx="7" transform="rotate(-20 125 127)"/>
+                    <rect x="150" y="120" width="50" height="15" fill="#F4A261" rx="7" transform="rotate(20 175 127)"/>
+                    
+                    {/* Chair */}
+                    <circle cx="150" cy="210" r="20" fill="#8B6F47"/>
+                    <line x1="150" y1="230" x2="140" y2="260" stroke="#8B6F47" strokeWidth="8" strokeLinecap="round"/>
+                    <line x1="150" y1="230" x2="160" y2="260" stroke="#8B6F47" strokeWidth="8" strokeLinecap="round"/>
+                  </svg>
                 </div>
 
                 {/* Orbiting Feature Icons */}
