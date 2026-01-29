@@ -336,29 +336,76 @@ export function Home() {
                 <div className="absolute inset-0 rounded-full border-2 border-blue-200 opacity-30"></div>
 
                 {/* Central Agent Illustration */}
-                <div className="center-agent relative z-10 w-56 h-56 flex items-center justify-center">
-                  <svg viewBox="0 0 300 300" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                <div className="center-agent relative z-10 w-64 h-64 flex items-center justify-center">
+                  <svg viewBox="0 0 400 400" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                     {/* Desk */}
-                    <rect x="50" y="180" width="200" height="80" fill="#D4A574" rx="5"/>
+                    <rect x="60" y="220" width="280" height="120" fill="#E8D4C8" rx="8"/>
+                    <rect x="60" y="210" width="280" height="20" fill="#D4A574" rx="4"/>
                     
-                    {/* Monitor/Screen */}
-                    <rect x="100" y="100" width="100" height="70" fill="#4A90E2" rx="5"/>
-                    <rect x="105" y="105" width="90" height="60" fill="#E8F4FF" rx="3"/>
+                    {/* Left Drawer */}
+                    <rect x="70" y="240" width="60" height="50" fill="#C4956A" rx="4"/>
+                    <circle cx="125" cy="265" r="6" fill="#8B7355"/>
+                    
+                    {/* Right Drawer */}
+                    <rect x="270" y="240" width="60" height="50" fill="#C4956A" rx="4"/>
+                    <circle cx="325" cy="265" r="6" fill="#8B7355"/>
+                    
+                    {/* Monitor */}
+                    <rect x="150" y="100" width="100" height="75" fill="#4A90E2" rx="5"/>
+                    <rect x="155" y="110" width="90" height="55" fill="#87CEEB"/>
+                    <line x1="165" y1="120" x2="225" y2="120" stroke="#FFFFFF" strokeWidth="2"/>
+                    <line x1="165" y1="130" x2="225" y2="130" stroke="#FFFFFF" strokeWidth="2"/>
+                    <line x1="165" y1="140" x2="225" y2="140" stroke="#FFFFFF" strokeWidth="2"/>
+                    <line x1="165" y1="150" x2="215" y2="150" stroke="#FFFFFF" strokeWidth="2"/>
+                    
+                    {/* Monitor Stand */}
+                    <rect x="195" y="175" width="10" height="25" fill="#4A5568"/>
+                    
+                    {/* Chair - Backrest */}
+                    <ellipse cx="120" cy="200" rx="35" ry="45" fill="#E74C3C"/>
+                    
+                    {/* Chair - Seat */}
+                    <ellipse cx="120" cy="210" rx="40" ry="25" fill="#E84C3C"/>
+                    
+                    {/* Chair - Base */}
+                    <circle cx="120" cy="235" r="8" fill="#555"/>
                     
                     {/* Head */}
-                    <circle cx="150" cy="70" r="25" fill="#F4A261"/>
+                    <circle cx="120" cy="140" r="22" fill="#F5A962"/>
+                    
+                    {/* Hair */}
+                    <path d="M 100 130 Q 120 115 140 130" fill="#D97706"/>
                     
                     {/* Body */}
-                    <ellipse cx="150" cy="130" rx="22" ry="35" fill="#2E86AB"/>
+                    <rect x="105" y="165" width="30" height="50" fill="#2C5AA0" rx="5"/>
                     
-                    {/* Arms */}
-                    <rect x="100" y="120" width="50" height="15" fill="#F4A261" rx="7" transform="rotate(-20 125 127)"/>
-                    <rect x="150" y="120" width="50" height="15" fill="#F4A261" rx="7" transform="rotate(20 175 127)"/>
+                    {/* Left Arm */}
+                    <rect x="80" y="170" width="25" height="12" fill="#F5A962" rx="6" transform="rotate(-30 92 176)"/>
+                    <circle cx="75" cy="165" r="6" fill="#F5A962"/>
                     
-                    {/* Chair */}
-                    <circle cx="150" cy="210" r="20" fill="#8B6F47"/>
-                    <line x1="150" y1="230" x2="140" y2="260" stroke="#8B6F47" strokeWidth="8" strokeLinecap="round"/>
-                    <line x1="150" y1="230" x2="160" y2="260" stroke="#8B6F47" strokeWidth="8" strokeLinecap="round"/>
+                    {/* Right Arm */}
+                    <rect x="140" y="170" width="25" height="12" fill="#F5A962" rx="6" transform="rotate(30 152 176)"/>
+                    <circle cx="165" cy="165" r="6" fill="#F5A962"/>
+                    
+                    {/* Left Leg */}
+                    <rect x="108" y="215" width="10" height="30" fill="#1A1A1A" rx="5"/>
+                    
+                    {/* Right Leg */}
+                    <rect x="122" y="215" width="10" height="30" fill="#1A1A1A" rx="5"/>
+                    
+                    {/* Keyboard */}
+                    <rect x="110" y="190" width="50" height="15" fill="#333333" rx="2"/>
+                    <circle cx="125" cy="197" r="2" fill="#555555"/>
+                    <circle cx="140" cy="197" r="2" fill="#555555"/>
+                    
+                    {/* Mouse */}
+                    <ellipse cx="170" cy="195" rx="8" ry="10" fill="#666666"/>
+                    
+                    {/* Plant Pot */}
+                    <path d="M 310 280 L 320 320 L 300 320 Z" fill="#8B7355"/>
+                    <circle cx="310" cy="280" r="12" fill="#90EE90"/>
+                    <ellipse cx="302" cy="275" rx="6" ry="8" fill="#228B22"/>
+                    <ellipse cx="318" cy="270" rx="6" ry="8" fill="#228B22"/>
                   </svg>
                 </div>
 
