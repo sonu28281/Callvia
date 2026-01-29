@@ -9,55 +9,16 @@ export function Home() {
     <div>
       {/* 1. HERO SECTION - PREMIUM ENTERPRISE */}
       <section className="relative overflow-hidden min-h-screen flex items-center justify-center pt-24 pb-20">
-        {/* Background Layer 1: Gradient base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50 z-0" />
+        {/* Background Layer 1: Darker gradient base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-blue-50 to-gray-200 z-0" />
 
-        {/* Background Layer 2: Monument images with very low opacity */}
-        <div className="absolute inset-0 z-1 overflow-hidden">
-          {/* Taj Mahal - right side, very subtle */}
-          <div
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 opacity-5 pointer-events-none"
-            style={{
-              width: '700px',
-              height: '600px',
-              backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 280"><defs><linearGradient id="taj" x1="0%25" y1="0%25" x2="0%25" y2="100%25"><stop offset="0%25" style="stop-color:rgba(100,120,140,0.8)"/><stop offset="100%25" style="stop-color:rgba(80,100,120,0.3)"/></linearGradient></defs><path d="M150 20 Q180 40 180 80 L180 140 Q195 130 220 140 L220 200 Q195 185 180 195 L180 250 L120 250 L120 195 Q105 185 80 200 L80 140 Q105 130 120 140 L120 80 Q120 40 150 20 Z" fill="url(%23taj)"/><ellipse cx="150" cy="30" rx="35" ry="25" fill="rgba(100,120,140,0.4)"/><rect x="70" y="220" width="15" height="50" fill="rgba(100,120,140,0.3)"/><rect x="215" y="220" width="15" height="50" fill="rgba(100,120,140,0.3)"/><rect x="110" y="250" width="80" height="25" fill="rgba(100,120,140,0.2)" rx="3"/></svg>')`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'contain',
-            }}
-          />
-
-          {/* India Gate - left side, very subtle */}
-          <div
-            className="absolute left-0 top-1/3 opacity-5 pointer-events-none"
-            style={{
-              width: '600px',
-              height: '500px',
-              backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><defs><linearGradient id="gate" x1="0%25" y1="0%25" x2="0%25" y2="100%25"><stop offset="0%25" style="stop-color:rgba(100,120,140,0.8)"/><stop offset="100%25" style="stop-color:rgba(80,100,120,0.3)"/></linearGradient></defs><path d="M80 180 Q80 100 150 70 Q220 100 220 180" stroke="url(%23gate)" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="70" y="170" width="20" height="100" fill="rgba(100,120,140,0.3)"/><rect x="210" y="170" width="20" height="100" fill="rgba(100,120,140,0.3)"/><rect x="105" y="180" width="12" height="90" fill="rgba(100,120,140,0.2)"/><rect x="183" y="180" width="12" height="90" fill="rgba(100,120,140,0.2)"/><rect x="65" y="265" width="170" height="20" fill="rgba(100,120,140,0.15)" rx="2"/></svg>')`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'contain',
-            }}
-          />
-
-          {/* Lotus Temple - center bottom, very subtle */}
-          <div
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 opacity-4 pointer-events-none"
-            style={{
-              width: '500px',
-              height: '400px',
-              backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><defs><radialGradient id="lotus" cx="50%25" cy="30%25" r="70%25"><stop offset="0%25" style="stop-color:rgba(100,120,140,0.6)"/><stop offset="100%25" style="stop-color:rgba(80,100,120,0.1)"/></radialGradient></defs><ellipse cx="150" cy="80" rx="60" ry="70" fill="url(%23lotus)"/><path d="M120 100 Q100 120 110 150 M180 100 Q200 120 190 150 M150 100 Q130 140 140 170 M150 100 Q170 140 160 170" stroke="rgba(100,120,140,0.3)" stroke-width="3" fill="none"/><circle cx="150" cy="150" r="40" fill="rgba(100,120,140,0.15)"/><rect x="130" y="190" width="40" height="60" fill="rgba(100,120,140,0.2)"/></svg>')`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'contain',
-            }}
-          />
-        </div>
-
-        {/* Background Layer 3: Subtle animated gradients */}
+        {/* Background Layer 2: Subtle animated gradients */}
         <div
           className="absolute inset-0 z-2 pointer-events-none"
           style={{
             background: `
-              radial-gradient(ellipse 800px 600px at 80% 20%, rgba(255, 153, 51, 0.08) 0%, transparent 50%),
-              radial-gradient(ellipse 700px 500px at 10% 70%, rgba(19, 136, 8, 0.06) 0%, transparent 50%)
+              radial-gradient(ellipse 800px 600px at 80% 20%, rgba(255, 153, 51, 0.12) 0%, transparent 50%),
+              radial-gradient(ellipse 700px 500px at 10% 70%, rgba(19, 136, 8, 0.1) 0%, transparent 50%)
             `,
             animation: 'fadeInOut 12s ease-in-out infinite',
           }}

@@ -27,7 +27,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex gap-8 items-center flex-1 ml-12">
+          <nav className="hidden lg:flex gap-6 items-center flex-1 ml-12">
             {navItems.map((item) => (
               <div
                 key={item.label}
@@ -36,13 +36,13 @@ export function Header() {
                 onMouseLeave={() => item.submenu && setProductsOpen(false)}
               >
                 {item.submenu ? (
-                  <button className="text-gray-900 text-base font-normal bg-transparent border-none cursor-pointer hover:text-blue-900 transition-colors py-2">
+                  <button className="text-gray-900 text-sm font-medium bg-transparent border-none cursor-pointer hover:text-blue-900 transition-colors py-2">
                     {item.label}
                   </button>
                 ) : (
                   <Link
                     to={item.href}
-                    className="text-gray-900 text-base font-normal no-underline hover:text-blue-900 transition-colors py-2 block"
+                    className="text-gray-900 text-sm font-medium no-underline hover:text-blue-900 transition-colors py-2 block"
                   >
                     {item.label}
                   </Link>
@@ -62,33 +62,20 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Desktop Auth Links */}
-          <div className="hidden lg:flex gap-6 items-center ml-auto mr-8">
+          {/* Desktop Auth Links - Fancy */}
+          <div className="hidden lg:flex gap-4 items-center ml-auto">
             <Link
               to="#login"
-              className="text-gray-600 text-sm font-normal hover:text-gray-900 transition-colors no-underline"
+              className="text-gray-900 text-sm font-semibold bg-transparent border border-gray-300 px-5 py-2.5 rounded-lg hover:border-blue-900 hover:text-blue-900 transition-all no-underline"
             >
               Login
             </Link>
             <Link
               to="#signup"
-              className="text-gray-600 text-sm font-normal hover:text-gray-900 transition-colors no-underline"
+              className="text-white text-sm font-semibold bg-gradient-to-r from-blue-900 to-blue-800 px-5 py-2.5 rounded-lg hover:shadow-lg hover:from-blue-950 hover:to-blue-900 transition-all no-underline"
             >
               Sign Up
             </Link>
-          </div>
-
-          {/* Desktop CTA Buttons */}
-          <div className="hidden lg:flex gap-3 items-center">
-            <button className="text-blue-900 bg-transparent border border-blue-900 px-4 py-2 rounded-md text-xs font-semibold cursor-pointer hover:bg-blue-900 hover:text-white transition-colors whitespace-nowrap">
-              Talk to Sales
-            </button>
-            <button className="bg-blue-900 text-white border-none px-4 py-2 rounded-md text-xs font-semibold cursor-pointer hover:bg-blue-950 transition-colors whitespace-nowrap">
-              Book Demo
-            </button>
-            <button className="text-blue-900 bg-white border border-blue-900 px-3 py-2 rounded-md text-xs font-semibold cursor-pointer hover:bg-blue-900 hover:text-white transition-colors whitespace-nowrap">
-              Be Your Own Telecom
-            </button>
           </div>
 
           {/* Mobile Menu Button */}
