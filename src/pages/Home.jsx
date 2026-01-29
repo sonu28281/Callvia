@@ -417,7 +417,7 @@ export function Home() {
       </section>
 
       {/* ========== SOLUTIONS SECTION ========== */}
-      <section className="bg-gradient-to-b from-blue-50 via-cyan-50 to-white py-24 px-6 relative overflow-hidden">
+      <section className="bg-white py-24 px-6 relative overflow-hidden">
         <style>{`
           @keyframes slideInUp {
             from {
