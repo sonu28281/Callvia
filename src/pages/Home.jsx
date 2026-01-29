@@ -285,11 +285,6 @@ export function Home() {
             })}
           </div>
         </div>
-
-        {/* Curved bottom transition */}
-        <svg className="absolute bottom-0 left-0 right-0 w-full h-24 text-gray-50" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ marginBottom: '-1px' }}>
-          <path d="M0,40 Q300,0 600,40 T1200,40 L1200,120 L0,120 Z" fill="currentColor"></path>
-        </svg>
       </section>
 
       {/* ========== 3D PLATFORM VISUALIZATION SECTION ========== */}
