@@ -1,0 +1,122 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { Logo } from '../ui/Logo.jsx';
+import { MegaMenu } from './MegaMenu.jsx';
+
+export function Header() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+
+  const navItems = [
+    { label: 'Products', href: '#', submenu: true },
+    { label: 'Solutions', href: '/solutions/call-centers' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Developers', href: '/developers/api' },
+    { label: 'Resources', href: '#' },
+    { label: 'Company', href: '/about' },
+  ];
+
+  return (
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link to="/" className="flex-shrink-0">
+            <Logo size="md" />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex gap-8 items-center flex-1 ml-12">
+            {navItems.map((item) => (
+              <div
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => item.submenu && setProductsOpen(true)}
+                onMouseLeave={() => item.submenu && setProductsOpen(false)}
+              >
+                {item.submenu ? (
+                  <button className="text-gray-900 text-base font-normal bg-transparent border-none cursor-pointer hover:text-blue-900 transition-colors py-2">
+                    {item.label}
+                  </button>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className="text-gray-900 text-base font-normal no-underline hover:text-blue-900 transition-colors py-2 block"
+                  >
+                    {item.label}
+                  </Link>
+                )}
+
+                {/* Mega Menu Dropdown */}
+                {item.submenu && productsOpen && (
+                  <div
+                    className="absolute left-0 top-full pt-2"
+                    onMouseEnter={() => setProductsOpen(true)}
+                    onMouseLeave={() => setProductsOpen(false)}
+                  >
+                    <MegaMenu />
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+
+          {/* Desktop CTA Buttons */}
+          <div className="hidden lg:flex gap-3 items-center ml-auto">
+            <button className="text-blue-900 bg-transparent border border-blue-900 px-4 py-2 rounded-md text-xs font-semibold cursor-pointer hover:bg-blue-900 hover:text-white transition-colors whitespace-nowrap">
+              Talk to Sales
+            </button>
+            <button className="bg-blue-900 text-white border-none px-4 py-2 rounded-md text-xs font-semibold cursor-pointer hover:bg-blue-950 transition-colors whitespace-nowrap">
+              Book Demo
+            </button>
+            <button className="text-blue-900 bg-white border border-blue-900 px-3 py-2 rounded-md text-xs font-semibold cursor-pointer hover:bg-blue-900 hover:text-white transition-colors whitespace-nowrap">
+              Be Your Own Telecom
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="lg:hidden flex items-center justify-center bg-transparent border-none cursor-pointer p-2"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? (
+              <X size={24} className="text-gray-900" strokeWidth={1.5} />
+            ) : (
+              <Menu size={24} className="text-gray-900" strokeWidth={1.5} />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileOpen && (
+          <div className="lg:hidden flex flex-col gap-4 mt-6 pb-6 border-t border-gray-200 pt-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                to={item.href || '#'}
+                className="text-gray-900 text-base font-medium no-underline hover:text-blue-900"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <div className="flex flex-col gap-3 mt-4">
+              <button className="text-blue-900 bg-transparent border border-blue-900 px-6 py-2 rounded-md text-base font-semibold cursor-pointer">
+                Talk to Sales
+              </button>
+              <button className="bg-blue-900 text-white border-none px-6 py-2 rounded-md text-base font-semibold cursor-pointer">
+                Book Demo
+              </button>
+              <button className="text-blue-900 bg-white border border-blue-900 px-4 py-2 rounded-md text-sm font-semibold cursor-pointer">
+                Be Your Own Telecom
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+}
+
+export default Header;

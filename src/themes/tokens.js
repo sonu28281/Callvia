@@ -1,0 +1,82 @@
+export const defaultTheme = {
+  colors: {
+    primary: '#0F4C81',
+    primaryLight: '#1565A0',
+    primaryDark: '#0A3557',
+    secondary: '#E07A1F',
+    secondaryLight: '#F09D3E',
+    secondaryDark: '#B85C14',
+    background: '#FFFFFF',
+    backgroundAlt: '#F8F9FA',
+    backgroundDim: '#F0F3F7',
+    text: '#1F2937',
+    textMuted: '#6B7280',
+    textLight: '#9CA3AF',
+    border: '#E5E7EB',
+    borderLight: '#F3F4F6',
+    success: '#10B981',
+    warning: '#F59E0B',
+    error: '#EF4444',
+    divider: '#E5E7EB',
+  },
+  fonts: {
+    family: {
+      base: 'Inter, system-ui, -apple-system, sans-serif',
+      mono: 'Menlo, Monaco, "Courier New", monospace',
+    },
+    size: {
+      xs: '12px',
+      sm: '14px',
+      base: '16px',
+      lg: '18px',
+      xl: '20px',
+      '2xl': '24px',
+      '3xl': '30px',
+      '4xl': '36px',
+      '5xl': '48px',
+    },
+    weight: {
+      light: 300,
+      normal: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
+    },
+  },
+  spacing: {
+    xs: '4px',
+    sm: '8px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+    '2xl': '48px',
+    '3xl': '64px',
+  },
+  radii: {
+    sm: '4px',
+    md: '8px',
+    lg: '12px',
+    xl: '16px',
+    full: '9999px',
+  },
+  shadows: {
+    sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+  },
+  transitions: {
+    fast: '150ms ease-in-out',
+    base: '200ms ease-in-out',
+    slow: '300ms ease-in-out',
+  },
+};
+
+export const corporateTheme = {
+  ...defaultTheme,
+  colors: {
+    ...defaultTheme.colors,
+    primary: '#1E40AF',
+    secondary: '#7C3AED',
+  },
+};
