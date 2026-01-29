@@ -62,8 +62,24 @@ export function Header() {
             ))}
           </nav>
 
+          {/* Desktop Auth Links */}
+          <div className="hidden lg:flex gap-6 items-center ml-auto mr-8">
+            <Link
+              to="#login"
+              className="text-gray-600 text-sm font-normal hover:text-gray-900 transition-colors no-underline"
+            >
+              Login
+            </Link>
+            <Link
+              to="#signup"
+              className="text-gray-600 text-sm font-normal hover:text-gray-900 transition-colors no-underline"
+            >
+              Sign Up
+            </Link>
+          </div>
+
           {/* Desktop CTA Buttons */}
-          <div className="hidden lg:flex gap-3 items-center ml-auto">
+          <div className="hidden lg:flex gap-3 items-center">
             <button className="text-blue-900 bg-transparent border border-blue-900 px-4 py-2 rounded-md text-xs font-semibold cursor-pointer hover:bg-blue-900 hover:text-white transition-colors whitespace-nowrap">
               Talk to Sales
             </button>
