@@ -329,111 +329,41 @@ export function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left: Circular Animation with Central Agent */}
+            {/* Left: Circular Animation with Feature Icons */}
             <div className="flex justify-center h-96">
-              <div className="relative w-96 h-96 flex items-center justify-center">
+              <div className="relative w-80 h-80 flex items-center justify-center">
                 {/* Orbit circle background */}
                 <div className="absolute inset-0 rounded-full border-2 border-blue-200 opacity-30"></div>
+                <div className="absolute inset-12 rounded-full border-1 border-blue-100 opacity-20"></div>
 
-                {/* Central Agent Illustration */}
-                <div className="center-agent relative z-10 w-64 h-64 flex items-center justify-center">
-                  <svg viewBox="0 0 400 400" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                    {/* Desk */}
-                    <rect x="60" y="220" width="280" height="120" fill="#E8D4C8" rx="8"/>
-                    <rect x="60" y="210" width="280" height="20" fill="#D4A574" rx="4"/>
-                    
-                    {/* Left Drawer */}
-                    <rect x="70" y="240" width="60" height="50" fill="#C4956A" rx="4"/>
-                    <circle cx="125" cy="265" r="6" fill="#8B7355"/>
-                    
-                    {/* Right Drawer */}
-                    <rect x="270" y="240" width="60" height="50" fill="#C4956A" rx="4"/>
-                    <circle cx="325" cy="265" r="6" fill="#8B7355"/>
-                    
-                    {/* Monitor */}
-                    <rect x="150" y="100" width="100" height="75" fill="#4A90E2" rx="5"/>
-                    <rect x="155" y="110" width="90" height="55" fill="#87CEEB"/>
-                    <line x1="165" y1="120" x2="225" y2="120" stroke="#FFFFFF" strokeWidth="2"/>
-                    <line x1="165" y1="130" x2="225" y2="130" stroke="#FFFFFF" strokeWidth="2"/>
-                    <line x1="165" y1="140" x2="225" y2="140" stroke="#FFFFFF" strokeWidth="2"/>
-                    <line x1="165" y1="150" x2="215" y2="150" stroke="#FFFFFF" strokeWidth="2"/>
-                    
-                    {/* Monitor Stand */}
-                    <rect x="195" y="175" width="10" height="25" fill="#4A5568"/>
-                    
-                    {/* Chair - Backrest */}
-                    <ellipse cx="120" cy="200" rx="35" ry="45" fill="#E74C3C"/>
-                    
-                    {/* Chair - Seat */}
-                    <ellipse cx="120" cy="210" rx="40" ry="25" fill="#E84C3C"/>
-                    
-                    {/* Chair - Base */}
-                    <circle cx="120" cy="235" r="8" fill="#555"/>
-                    
-                    {/* Head */}
-                    <circle cx="120" cy="140" r="22" fill="#F5A962"/>
-                    
-                    {/* Hair */}
-                    <path d="M 100 130 Q 120 115 140 130" fill="#D97706"/>
-                    
-                    {/* Body */}
-                    <rect x="105" y="165" width="30" height="50" fill="#2C5AA0" rx="5"/>
-                    
-                    {/* Left Arm */}
-                    <rect x="80" y="170" width="25" height="12" fill="#F5A962" rx="6" transform="rotate(-30 92 176)"/>
-                    <circle cx="75" cy="165" r="6" fill="#F5A962"/>
-                    
-                    {/* Right Arm */}
-                    <rect x="140" y="170" width="25" height="12" fill="#F5A962" rx="6" transform="rotate(30 152 176)"/>
-                    <circle cx="165" cy="165" r="6" fill="#F5A962"/>
-                    
-                    {/* Left Leg */}
-                    <rect x="108" y="215" width="10" height="30" fill="#1A1A1A" rx="5"/>
-                    
-                    {/* Right Leg */}
-                    <rect x="122" y="215" width="10" height="30" fill="#1A1A1A" rx="5"/>
-                    
-                    {/* Keyboard */}
-                    <rect x="110" y="190" width="50" height="15" fill="#333333" rx="2"/>
-                    <circle cx="125" cy="197" r="2" fill="#555555"/>
-                    <circle cx="140" cy="197" r="2" fill="#555555"/>
-                    
-                    {/* Mouse */}
-                    <ellipse cx="170" cy="195" rx="8" ry="10" fill="#666666"/>
-                    
-                    {/* Plant Pot */}
-                    <path d="M 310 280 L 320 320 L 300 320 Z" fill="#8B7355"/>
-                    <circle cx="310" cy="280" r="12" fill="#90EE90"/>
-                    <ellipse cx="302" cy="275" rx="6" ry="8" fill="#228B22"/>
-                    <ellipse cx="318" cy="270" rx="6" ry="8" fill="#228B22"/>
-                  </svg>
-                </div>
+                {/* Center dot */}
+                <div className="absolute w-6 h-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full shadow-lg z-20"></div>
 
-                {/* Orbiting Feature Icons */}
-                {/* Real-time Icon - Top */}
+                {/* Orbiting Feature Icons with Better Icons */}
+                {/* Real-time Call Management - Top */}
                 <div className="orbit-item absolute">
-                  <div className="w-20 h-20 bg-gradient-to-br from-red-400 to-red-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
-                    🎯
+                  <div className="w-20 h-20 bg-gradient-to-br from-cyan-400 to-cyan-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
+                    📊
                   </div>
                 </div>
 
                 {/* Advanced Analytics - Right */}
                 <div className="orbit-item absolute">
-                  <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
-                    📊
+                  <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
+                    📈
                   </div>
                 </div>
 
                 {/* Enterprise Security - Bottom */}
                 <div className="orbit-item absolute">
-                  <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
+                  <div className="w-20 h-20 bg-gradient-to-br from-violet-400 to-violet-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
                     🔐
                   </div>
                 </div>
 
                 {/* Infinite Scalability - Left */}
                 <div className="orbit-item absolute">
-                  <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
+                  <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
                     ⚡
                   </div>
                 </div>
