@@ -292,21 +292,21 @@ export function Home() {
         <style>{`
           @keyframes orbitClockwise {
             0% {
-              transform: rotate(0deg) translateX(120px) rotate(0deg);
+              transform: rotate(0deg) translateX(140px) rotate(0deg);
             }
             100% {
-              transform: rotate(360deg) translateX(120px) rotate(-360deg);
+              transform: rotate(360deg) translateX(140px) rotate(-360deg);
             }
           }
 
           .orbit-item {
-            animation: orbitClockwise 8s linear infinite;
+            animation: orbitClockwise 10s linear infinite;
           }
 
-          .orbit-item:nth-child(1) { animation-delay: 0s; }
-          .orbit-item:nth-child(2) { animation-delay: -2s; }
-          .orbit-item:nth-child(3) { animation-delay: -4s; }
-          .orbit-item:nth-child(4) { animation-delay: -6s; }
+          .orbit-item:nth-of-type(4) { animation-delay: 0s; }
+          .orbit-item:nth-of-type(5) { animation-delay: -2.5s; }
+          .orbit-item:nth-of-type(6) { animation-delay: -5s; }
+          .orbit-item:nth-of-type(7) { animation-delay: -7.5s; }
 
           .center-agent {
             animation: float 3s ease-in-out infinite;
