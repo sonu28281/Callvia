@@ -3,6 +3,7 @@ import {
   ArrowRight, Phone, Zap, Cpu, BarChart3, 
   Globe, CreditCard, Building2, TrendingUp, CheckCircle2 
 } from 'lucide-react';
+import { InquiryForm } from '../components/sections/InquiryForm.jsx';
 
 export function Home() {
   return (
@@ -32,36 +33,53 @@ export function Home() {
         `}</style>
 
         {/* Content Layer */}
-        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-          {/* Headline */}
-          <h1 className="text-7xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
-            Enterprise Telecom Infrastructure Built for India
-          </h1>
+        <div className="max-w-6xl mx-auto px-6 relative z-10 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Text Content */}
+            <div className="text-center lg:text-left">
+              {/* Coming Soon Badge */}
+              <div className="inline-block mb-8 px-6 py-3 bg-orange-100 border border-orange-300 rounded-full">
+                <p className="text-orange-900 font-semibold text-sm">🚀 Coming Soon</p>
+              </div>
 
-          {/* Sub-headline */}
-          <p className="text-xl text-gray-700 mb-2 leading-relaxed font-light max-w-3xl mx-auto">
-            Class-B VNO platform powering secure domestic calling, AI-driven automation, and fully white-label telecom services.
-          </p>
+              {/* Headline */}
+              <h1 className="text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
+                Enterprise Telecom Infrastructure Built for India
+              </h1>
 
-          {/* Trust Line */}
-          <p className="text-xs text-gray-500 mb-12 tracking-widest uppercase font-semibold letter-spacing-2">
-            Built for Compliance · Designed for Scale · Controlled by You
-          </p>
+              {/* Sub-headline */}
+              <p className="text-lg lg:text-xl text-gray-700 mb-2 leading-relaxed font-light max-w-3xl">
+                Class-B VNO platform powering secure domestic calling, AI-driven automation, and fully white-label telecom services.
+              </p>
 
-          {/* CTA Buttons */}
-          <div className="flex gap-6 justify-center flex-wrap mb-8">
-            <button className="bg-blue-900 text-white px-10 py-4 rounded-lg font-semibold hover:bg-blue-950 transition-all shadow-md hover:shadow-lg inline-flex items-center gap-3">
-              Book Demo <ArrowRight size={20} />
-            </button>
-            <button className="bg-white text-blue-900 border-2 border-blue-900 px-10 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all">
-              Talk to Sales
-            </button>
+              {/* Trust Line */}
+              <p className="text-xs text-gray-500 mb-8 tracking-widest uppercase font-semibold letter-spacing-2">
+                Built for Compliance · Designed for Scale · Controlled by You
+              </p>
+
+              {/* Coming Soon Message */}
+              <div className="mb-8 p-6 bg-blue-50 border-2 border-blue-200 rounded-lg">
+                <p className="text-2xl font-bold text-blue-900 mb-2">🔄 Coming Soon</p>
+                <p className="text-sm text-blue-800 font-light">
+                  We're building something extraordinary. Stay tuned for updates.
+                </p>
+              </div>
+
+              {/* Micro-trust text */}
+              <p className="text-sm text-gray-500 font-light">
+                No international routes. No grey traffic. India‑only compliance.
+              </p>
+            </div>
+
+            {/* Right: Inquiry Form */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Get Early Access</h2>
+                <p className="text-gray-600 text-sm mb-6">Submit your inquiry and we'll reach out soon.</p>
+                <InquiryForm />
+              </div>
+            </div>
           </div>
-
-          {/* Micro-trust text */}
-          <p className="text-sm text-gray-500 font-light">
-            No international routes. No grey traffic. India‑only compliance.
-          </p>
         </div>
       </section>
 
