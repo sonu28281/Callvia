@@ -181,6 +181,21 @@ export function Home() {
             animation: iconGlow 0.8s ease-out;
             transform: scale(1.15) rotateZ(10deg);
           }
+          
+          @keyframes capabilityGlow {
+            0%, 100% { 
+              color: #3b82f6;
+              text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            }
+            50% { 
+              color: #1e40af;
+              text-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.4);
+            }
+          }
+          
+          .capability-highlight {
+            animation: capabilityGlow 2s ease-in-out infinite;
+          }
         `}</style>
 
         <div className="max-w-7xl mx-auto">
@@ -190,7 +205,7 @@ export function Home() {
               <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold">⚡ CORE FEATURES</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Core Telecom Capabilities
+              Core Telecom <span className="capability-highlight">Capabilities</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Everything you need to build, scale, and manage enterprise voice operations
@@ -278,9 +293,9 @@ export function Home() {
       </section>
 
       {/* ========== SOLUTIONS SECTION ========== */}
-      <section className="bg-gradient-to-b from-gray-50 to-white py-20 px-6 relative">
+      <section className="bg-gradient-to-b from-gray-50 to-white py-12 px-6 relative">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
+          <div className="text-center mb-12">
             <div className="inline-block mb-4">
               <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold">🚀 SOLUTIONS</span>
             </div>
@@ -400,18 +415,18 @@ export function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left: 3D Isometric Elements */}
-            <div className="iso-container h-96 relative">
+            <div className="iso-container h-96 relative flex items-center justify-center">
               {/* Headset/Agent Icon */}
-              <div className="iso-element absolute left-10 top-10">
+              <div className="iso-element absolute left-1/2 top-1/4 -translate-x-1/2">
                 <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-xl transform hover:scale-110 transition-transform duration-300">
                   <span className="text-4xl">🎧</span>
                 </div>
               </div>
 
               {/* Dashboard/Analytics */}
-              <div className="iso-element absolute right-10 top-20">
+              <div className="iso-element absolute -right-4 top-1/3">
                 <div className="w-32 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-2xl flex items-center justify-center overflow-hidden">
                   <svg className="w-full h-full" viewBox="0 0 100 75" fill="none">
                     <rect width="100" height="75" fill="url(#grad)" />
@@ -432,7 +447,7 @@ export function Home() {
               </div>
 
               {/* Server/Infrastructure Stack */}
-              <div className="iso-element absolute left-1/4 bottom-10">
+              <div className="iso-element absolute left-1/2 bottom-1/4 -translate-x-1/2">
                 <div className="space-y-2">
                   {[0, 1, 2].map((i) => (
                     <div key={i} className="w-24 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg shadow-lg flex items-center justify-center text-white text-xs font-bold">
@@ -445,7 +460,7 @@ export function Home() {
               </div>
 
               {/* Call/Network Icon */}
-              <div className="iso-element absolute right-1/4 bottom-20">
+              <div className="iso-element absolute -left-4 bottom-1/4">
                 <div className="relative">
                   <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center shadow-xl" style={{ animation: 'pulse3D 2s ease-in-out infinite' }}>
                     <span className="text-2xl">📱</span>
