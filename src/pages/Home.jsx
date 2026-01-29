@@ -541,7 +541,7 @@ export function Home() {
       </section>
 
       {/* ========== SOLUTIONS SECTION ========== */}
-      <section className="bg-white py-24 px-6 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-16 px-6 relative overflow-hidden">
         <style>{`
           @keyframes slideInUp {
             from {
@@ -553,13 +553,22 @@ export function Home() {
               transform: translateY(0);
             }
           }
+
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+          }
           
           .solution-card {
             animation: slideInUp 0.5s ease-out forwards;
           }
+
+          .solution-header {
+            animation: float 3s ease-in-out infinite;
+          }
         `}</style>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 solution-header">
             <div className="inline-block mb-3">
               <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase">Solutions</span>
             </div>
