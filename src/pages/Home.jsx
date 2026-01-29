@@ -417,56 +417,79 @@ export function Home() {
       </section>
 
       {/* ========== SOLUTIONS SECTION ========== */}
-      <section className="bg-gradient-to-b from-gray-50 to-white py-12 px-6 relative">
+      <section className="bg-gradient-to-b from-blue-50 via-cyan-50 to-white py-24 px-6 relative overflow-hidden">
+        <style>{`
+          @keyframes slideInUp {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          .solution-card {
+            animation: slideInUp 0.5s ease-out forwards;
+          }
+        `}</style>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-block mb-4">
-              <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold">🚀 SOLUTIONS</span>
+          <div className="text-center mb-16">
+            <div className="inline-block mb-3">
+              <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase">Solutions</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
               Built for Every Business
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              From call centers to enterprises, scale your voice operations with our flexible platform
+              Scale your operations with purpose-built solutions
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               {
                 title: 'Call Centers',
-                description: 'Scale campaigns with control and compliance. High-volume calling, agent dashboards, and real-time monitoring.',
-                icon: '📞'
+                description: 'High-volume calling with real-time dashboards and compliance.',
+                Icon: Phone
               },
               {
                 title: 'Enterprises',
-                description: 'Secure API-driven calling infrastructure. Dedicated support, custom integrations, and SLA guarantees.',
-                icon: '🏢'
+                description: 'API-driven infrastructure with dedicated support and SLA.',
+                Icon: Building2
               },
               {
                 title: 'Resellers',
-                description: 'Start your own telecom business. White-label platform, reseller dashboard, and margin optimization.',
-                icon: '📈'
+                description: 'White-label platform to launch your telecom business.',
+                Icon: CreditCard
               },
               {
                 title: 'Small Business',
-                description: 'Never miss a call with AI receptionist. Simple setup, affordable pricing, and professional features.',
-                icon: '🎯'
+                description: 'AI receptionist that never misses a call.',
+                Icon: Zap
               }
-            ].map((solution, index) => (
-              <div key={index} className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-lg"></div>
-                <div className="relative bg-white p-8 rounded-2xl border-2 border-gray-100 group-hover:border-blue-300 group-hover:shadow-xl transition-all duration-300">
-                  <div className="text-5xl mb-6">{solution.icon}</div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">{solution.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{solution.description}</p>
-                  <div className="mt-6 flex items-center text-sm font-semibold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span>Explore</span>
-                    <ArrowRight size={16} className="ml-2" />
+            ].map((solution, index) => {
+              const Icon = solution.Icon;
+              return (
+                <div 
+                  key={index} 
+                  className="solution-card group relative" 
+                  style={{ animationDelay: `${index * 0.08}s` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-300 to-cyan-300 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-lg"></div>
+                  <div className="relative bg-white p-6 rounded-xl border border-gray-200 group-hover:border-cyan-400 group-hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+                    <div className="flex items-start gap-4 mb-3">
+                      <div className="p-2.5 rounded-lg bg-gradient-to-br from-blue-100 to-cyan-100 group-hover:from-blue-200 group-hover:to-cyan-200 transition-all flex-shrink-0">
+                        <Icon size={20} className="text-blue-900 group-hover:scale-110 transition-transform" strokeWidth={2} />
+                      </div>
+                      <h3 className="text-base font-bold text-gray-900 group-hover:text-blue-900 transition-colors leading-tight">{solution.title}</h3>
+                    </div>
+                    <p className="text-xs text-gray-600 group-hover:text-gray-700 transition-colors leading-relaxed flex-grow">{solution.description}</p>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
