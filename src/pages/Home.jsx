@@ -543,7 +543,36 @@ export function Home() {
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left: Illustration */}
+            {/* Left: Services Grid */}
+            <div>
+              <div className="inline-block mb-4">
+                <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold">🔧 OUR SERVICES</span>
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                Development & Integration
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Complete telecom infrastructure development with enterprise-grade APIs, AI voice agents, and custom integrations tailored to your business needs.
+              </p>
+
+              {/* Services Grid */}
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { icon: '📱', title: 'IVR Development', color: 'bg-blue-100 text-blue-600' },
+                  { icon: '🤖', title: 'AI Voice Agents', color: 'bg-purple-100 text-purple-600' },
+                  { icon: '📡', title: 'VoIP Integration', color: 'bg-cyan-100 text-cyan-600' },
+                  { icon: '📊', title: 'Call Analytics', color: 'bg-orange-100 text-orange-600' },
+                  { icon: '🔐', title: 'Compliance Tools', color: 'bg-red-100 text-red-600' },
+                  { icon: '⚙️', title: 'API Development', color: 'bg-green-100 text-green-600' }
+                ].map((service, i) => (
+                  <div key={i} className={`${service.color} p-4 rounded-lg font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer`}>
+                    <span className="text-lg">{service.icon}</span> {service.title}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Illustration */}
             <div className="relative h-96 flex items-center justify-center">
               {/* SVG-based illustration */}
               <svg className="w-full h-full" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -584,35 +613,6 @@ export function Home() {
                 <rect x="150" y="40" width="30" height="20" fill="#60A5FA" rx="2" opacity="0.7" />
                 <rect x="200" y="35" width="35" height="25" fill="#A78BFA" rx="2" opacity="0.7" />
               </svg>
-            </div>
-
-            {/* Right: Services Grid */}
-            <div>
-              <div className="inline-block mb-4">
-                <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold">🔧 OUR SERVICES</span>
-              </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                Development & Integration
-              </h2>
-              <p className="text-lg text-gray-600 mb-8">
-                Complete telecom infrastructure development with enterprise-grade APIs, AI voice agents, and custom integrations tailored to your business needs.
-              </p>
-
-              {/* Services Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: '📱', title: 'IVR Development', color: 'bg-blue-100 text-blue-600' },
-                  { icon: '🤖', title: 'AI Voice Agents', color: 'bg-purple-100 text-purple-600' },
-                  { icon: '📡', title: 'VoIP Integration', color: 'bg-cyan-100 text-cyan-600' },
-                  { icon: '📊', title: 'Call Analytics', color: 'bg-orange-100 text-orange-600' },
-                  { icon: '🔐', title: 'Compliance Tools', color: 'bg-red-100 text-red-600' },
-                  { icon: '⚙️', title: 'API Development', color: 'bg-green-100 text-green-600' }
-                ].map((service, i) => (
-                  <div key={i} className={`${service.color} p-4 rounded-lg font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer`}>
-                    <span className="text-lg">{service.icon}</span> {service.title}
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
