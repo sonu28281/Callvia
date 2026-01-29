@@ -288,65 +288,38 @@ export function Home() {
       </section>
 
       {/* ========== 3D PLATFORM VISUALIZATION SECTION ========== */}
-      <section className="bg-gradient-to-b from-white to-blue-50 py-32 px-6 relative overflow-hidden">
+      <section className="bg-gradient-to-b from-white to-blue-50 py-20 px-6 relative overflow-hidden">
         <style>{`
-          @keyframes float3D {
-            0%, 100% {
-              transform: translateY(0px) translateZ(0);
-            }
-            50% {
-              transform: translateY(-20px) translateZ(20px);
-            }
-          }
-
-          @keyframes rotate3D {
+          @keyframes orbitClockwise {
             0% {
-              transform: rotateX(5deg) rotateY(-10deg) rotateZ(0deg);
+              transform: rotate(0deg) translateX(120px) rotate(0deg);
             }
             100% {
-              transform: rotateX(5deg) rotateY(10deg) rotateZ(0deg);
+              transform: rotate(360deg) translateX(120px) rotate(-360deg);
             }
           }
 
-          @keyframes spin {
-            0% {
-              transform: rotateZ(0deg);
-            }
-            100% {
-              transform: rotateZ(360deg);
-            }
+          .orbit-item {
+            animation: orbitClockwise 8s linear infinite;
           }
 
-          @keyframes pulse3D {
-            0%, 100% {
-              transform: scale(1);
-              opacity: 1;
-            }
-            50% {
-              transform: scale(1.1);
-              opacity: 0.7;
-            }
+          .orbit-item:nth-child(1) { animation-delay: 0s; }
+          .orbit-item:nth-child(2) { animation-delay: -2s; }
+          .orbit-item:nth-child(3) { animation-delay: -4s; }
+          .orbit-item:nth-child(4) { animation-delay: -6s; }
+
+          .center-agent {
+            animation: float 3s ease-in-out infinite;
           }
 
-          .iso-container {
-            perspective: 1200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
           }
-
-          .iso-element {
-            animation: float3D 4s ease-in-out infinite;
-          }
-
-          .iso-element:nth-child(1) { animation-delay: 0s; }
-          .iso-element:nth-child(2) { animation-delay: 0.2s; }
-          .iso-element:nth-child(3) { animation-delay: 0.4s; }
-          .iso-element:nth-child(4) { animation-delay: 0.6s; }
         `}</style>
 
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
+          <div className="text-center mb-12">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               Enterprise-Grade Platform
             </h2>
@@ -356,63 +329,46 @@ export function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left: 3D Isometric Elements */}
-            <div className="iso-container h-96 relative flex items-center justify-center px-4">
-              {/* Headset/Agent Icon - Top Center */}
-              <div className="iso-element absolute left-1/2 top-0 -translate-x-1/2">
-                <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-xl transform hover:scale-110 transition-transform duration-300">
-                  <span className="text-4xl">🎧</span>
-                </div>
-              </div>
+            {/* Left: Circular Animation with Central Agent */}
+            <div className="flex justify-center h-96">
+              <div className="relative w-80 h-80 flex items-center justify-center">
+                {/* Orbit circle background */}
+                <div className="absolute inset-0 rounded-full border-2 border-blue-200 opacity-30"></div>
 
-              {/* Dashboard/Analytics - Right Side */}
-              <div className="iso-element absolute right-0 top-1/3">
-                <div className="w-32 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-2xl flex items-center justify-center overflow-hidden">
-                  <svg className="w-full h-full" viewBox="0 0 100 75" fill="none">
-                    <rect width="100" height="75" fill="url(#grad)" />
-                    <defs>
-                      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#a855f7" />
-                        <stop offset="100%" stopColor="#ec4899" />
-                      </linearGradient>
-                    </defs>
-                    {/* Dashboard bars */}
-                    <rect x="10" y="50" width="8" height="20" fill="white" opacity="0.8" />
-                    <rect x="25" y="40" width="8" height="30" fill="white" opacity="0.9" />
-                    <rect x="40" y="30" width="8" height="40" fill="white" />
-                    <rect x="55" y="45" width="8" height="25" fill="white" opacity="0.8" />
-                    <rect x="70" y="35" width="8" height="35" fill="white" opacity="0.9" />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Server/Infrastructure Stack - Bottom Center */}
-              <div className="iso-element absolute left-1/2 bottom-0 -translate-x-1/2">
-                <div className="space-y-2">
-                  {[0, 1, 2].map((i) => (
-                    <div key={i} className="w-24 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg shadow-lg flex items-center justify-center text-white text-xs font-bold">
-                      <span style={{ animation: 'spin 3s linear infinite', animationDelay: `${i * 0.3}s` }}>
-                        ⚙️
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Call/Network Icon - Left Side */}
-              <div className="iso-element absolute left-0 bottom-1/3">
-                <div className="relative">
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center shadow-xl" style={{ animation: 'pulse3D 2s ease-in-out infinite' }}>
-                    <span className="text-2xl">📱</span>
+                {/* Central Agent Image */}
+                <div className="center-agent relative z-10 w-40 h-40 flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 rounded-full shadow-2xl flex items-center justify-center text-6xl">
+                    👨‍💼
                   </div>
-                  <div className="absolute inset-0 rounded-full border-4 border-green-400" style={{ animation: 'pulse 2s ease-in-out infinite', animationDelay: '0s' }}></div>
                 </div>
-              </div>
 
-              {/* Database/Cloud - Center Middle */}
-              <div className="iso-element absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg shadow-xl flex items-center justify-center">
-                  <span className="text-3xl">☁️</span>
+                {/* Orbiting Feature Icons */}
+                {/* Real-time Icon - Top */}
+                <div className="orbit-item absolute">
+                  <div className="w-20 h-20 bg-gradient-to-br from-red-400 to-red-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
+                    🎯
+                  </div>
+                </div>
+
+                {/* Advanced Analytics - Right */}
+                <div className="orbit-item absolute">
+                  <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
+                    📊
+                  </div>
+                </div>
+
+                {/* Enterprise Security - Bottom */}
+                <div className="orbit-item absolute">
+                  <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
+                    🔐
+                  </div>
+                </div>
+
+                {/* Infinite Scalability - Left */}
+                <div className="orbit-item absolute">
+                  <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl shadow-lg flex items-center justify-center text-3xl hover:scale-110 transition-transform duration-300">
+                    ⚡
+                  </div>
                 </div>
               </div>
             </div>
@@ -420,7 +376,7 @@ export function Home() {
             {/* Right: Features List */}
             <div className="space-y-6">
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
                   <span className="text-xl">🎯</span>
                 </div>
                 <div>
@@ -430,7 +386,7 @@ export function Home() {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                   <span className="text-xl">📊</span>
                 </div>
                 <div>
@@ -440,7 +396,7 @@ export function Home() {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                   <span className="text-xl">🔐</span>
                 </div>
                 <div>
@@ -450,7 +406,7 @@ export function Home() {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <div className="flex-shrink-0 w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
                   <span className="text-xl">⚡</span>
                 </div>
                 <div>
