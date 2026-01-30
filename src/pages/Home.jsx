@@ -6,40 +6,34 @@ export function Home() {
   return (
     <div className="w-full">
       {/* ========== HERO SECTION ========== */}
-      <section className="relative bg-white pt-20 pb-32 px-6 overflow-hidden" style={{
-        background: 'linear-gradient(135deg, #ec4899 0%, #d946ef 25%, #06b6d4 50%, #fbbf24 75%, #10b981 100%)',
-        backgroundSize: '300% 300%',
-        animation: 'gradientShift 12s ease-in-out infinite',
-        borderRadius: '0',
+      <section className="relative pt-32 pb-32 px-6 overflow-hidden" style={{
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0c4a6e 100%)',
         position: 'relative'
       }}>
         <style>{`
-          @keyframes gradientShift {
-            0% { background-position: 50% 0%; }
-            25% { background-position: 100% 50%; }
-            50% { background-position: 50% 100%; }
-            75% { background-position: 0% 50%; }
-            100% { background-position: 50% 0%; }
+          @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; filter: blur(30px); }
+            50% { opacity: 0.8; filter: blur(50px); }
           }
-          @keyframes cloudFloat1 {
-            0%, 100% { transform: translateX(0) scaleX(1); opacity: 0.3; }
-            50% { transform: translateX(30px) scaleX(1.1); opacity: 0.4; }
-          }
-          @keyframes cloudFloat2 {
-            0%, 100% { transform: translateX(0) scaleX(1); opacity: 0.25; }
-            50% { transform: translateX(-25px) scaleX(0.95); opacity: 0.35; }
-          }
-          @keyframes cloudFloat3 {
-            0%, 100% { transform: translateX(0) scaleX(1); opacity: 0.2; }
-            50% { transform: translateX(40px) scaleX(1.05); opacity: 0.3; }
+          @keyframes float-icon {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
           }
         `}</style>
 
-        {/* Cloud overlay effects */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-0 w-96 h-40 bg-white/10 rounded-full blur-3xl" style={{ animation: 'cloudFloat1 8s ease-in-out infinite' }}></div>
-          <div className="absolute top-40 right-20 w-80 h-32 bg-white/5 rounded-full blur-3xl" style={{ animation: 'cloudFloat2 10s ease-in-out infinite' }}></div>
-          <div className="absolute top-10 left-1/2 w-96 h-40 bg-white/8 rounded-full blur-3xl" style={{ animation: 'cloudFloat3 12s ease-in-out infinite' }}></div>
+        {/* Telecom-themed glowing orbs */}
+        <div className="absolute top-10 left-10 w-72 h-72 bg-blue-500 rounded-full blur-3xl opacity-20" style={{ animation: 'pulse-glow 8s ease-in-out infinite' }}></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-400 rounded-full blur-3xl opacity-15" style={{ animation: 'pulse-glow 10s ease-in-out infinite', animationDelay: '2s' }}></div>
+
+        {/* Floating telecom icons background */}
+        <div className="absolute top-20 right-20 opacity-10" style={{ animation: 'float-icon 6s ease-in-out infinite' }}>
+          <Cpu size={60} className="text-cyan-300" />
+        </div>
+        <div className="absolute bottom-40 left-20 opacity-10" style={{ animation: 'float-icon 8s ease-in-out infinite', animationDelay: '1s' }}>
+          <Globe size={50} className="text-blue-300" />
+        </div>
+        <div className="absolute top-1/2 right-1/4 opacity-10" style={{ animation: 'float-icon 7s ease-in-out infinite', animationDelay: '2s' }}>
+          <Phone size={55} className="text-cyan-300" />
         </div>
 
         {/* Curved bottom transition */}
