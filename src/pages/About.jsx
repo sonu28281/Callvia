@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Zap, Users, Globe, Rocket, TrendingUp, Award, MapPin, CheckCircle2, Target, Lightbulb, Code } from 'lucide-react';
+import { Shield, Zap, Users, Globe, Rocket, TrendingUp, Award, MapPin, CheckCircle2, Target, Lightbulb, Code, Phone, Cpu, Radio, Headphones } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { AnimatedBackground } from '../components/sections/AnimatedBackground.jsx';
 
@@ -170,7 +170,7 @@ export function AboutPage() {
                 icon: Shield, 
                 title: 'Trust', 
                 highlight: 'No Hidden Routes',
-                desc: 'Complete transparency. You know exactly what you're getting.' 
+                desc: "Complete transparency. You know exactly what you're getting." 
               },
               { 
                 icon: Zap, 
@@ -182,13 +182,13 @@ export function AboutPage() {
                 icon: Users, 
                 title: 'Partnership', 
                 highlight: 'Your Success',
-                desc: 'We grow when you grow. Long-term relationships matter.' 
+                desc: "We grow when you grow. Long-term relationships matter." 
               },
               { 
                 icon: Globe, 
                 title: 'India First', 
                 highlight: 'Built Locally',
-                desc: 'For India, by India. Compliance and expertise that matters.' 
+                desc: "For India, by India. Compliance and expertise that matters." 
               },
             ].map((item, i) => {
               const Icon = item.icon;
@@ -215,23 +215,28 @@ export function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { name: 'DID Numbers', path: '/products/did-numbers', desc: 'Pan-India virtual numbers for inbound calls' },
-              { name: 'SIP Trunks', path: '/products/sip-trunks', desc: 'VoIP connectivity and trunk management' },
-              { name: 'Cloud Call Center', path: '/products/cloud-call-center', desc: 'Inbound & outbound call center platform' },
-              { name: 'AI Receptionist', path: '/products/ai-receptionist', desc: 'Intelligent call answering and routing' },
-              { name: 'AI Voice Agents', path: '/products/ai-voice-agents', desc: 'Programmable voice agents for automation' },
-              { name: 'IVR Routing', path: '/products/ivr-routing', desc: 'Smart IVR and intelligent call routing' },
-            ].map((product) => (
-              <Link
-                key={product.path}
-                to={product.path}
-                className="bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all no-underline group"
-              >
-                <div className="w-12 h-12 bg-blue-100 rounded-lg mb-4 group-hover:bg-blue-200 transition-all"></div>
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">{product.name}</h3>
-                <p className="text-gray-600 text-sm">{product.desc}</p>
-              </Link>
-            ))}
+              { icon: Phone, name: 'DID Numbers', path: '/products/did-numbers', desc: 'Pan-India virtual numbers for inbound calls' },
+              { icon: Radio, name: 'SIP Trunks', path: '/products/sip-trunks', desc: 'VoIP connectivity and trunk management' },
+              { icon: Headphones, name: 'Cloud Call Center', path: '/products/cloud-call-center', desc: 'Inbound & outbound call center platform' },
+              { icon: Cpu, name: 'AI Receptionist', path: '/products/ai-receptionist', desc: 'Intelligent call answering and routing' },
+              { icon: Zap, name: 'AI Voice Agents', path: '/products/ai-voice-agents', desc: 'Programmable voice agents for automation' },
+              { icon: Rocket, name: 'IVR Routing', path: '/products/ivr-routing', desc: 'Smart IVR and intelligent call routing' },
+            ].map((product) => {
+              const IconComponent = product.icon;
+              return (
+                <Link
+                  key={product.path}
+                  to={product.path}
+                  className="bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all no-underline group"
+                >
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg mb-4 group-hover:bg-blue-200 transition-all flex items-center justify-center">
+                    <IconComponent size={24} className="text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">{product.name}</h3>
+                  <p className="text-gray-600 text-sm">{product.desc}</p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
