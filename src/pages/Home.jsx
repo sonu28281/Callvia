@@ -6,10 +6,11 @@ export function Home() {
   return (
     <div className="w-full">
       {/* ========== HERO SECTION ========== */}
-      <section className="relative pt-32 pb-32 px-6 overflow-hidden" style={{
-        background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 25%, #1e40af 50%, #0c4a6e 75%, #082f49 100%)',
+      <section className="relative bg-white pt-20 pb-32 px-6 overflow-hidden" style={{
+        background: 'linear-gradient(135deg, #ec4899 0%, #d946ef 25%, #06b6d4 50%, #fbbf24 75%, #10b981 100%)',
         backgroundSize: '300% 300%',
-        animation: 'gradientShift 15s ease-in-out infinite',
+        animation: 'gradientShift 12s ease-in-out infinite',
+        borderRadius: '0',
         position: 'relative'
       }}>
         <style>{`
@@ -19,14 +20,6 @@ export function Home() {
             50% { background-position: 50% 100%; }
             75% { background-position: 0% 50%; }
             100% { background-position: 50% 0%; }
-          }
-          @keyframes pulse-glow {
-            0%, 100% { opacity: 0.5; filter: blur(30px); }
-            50% { opacity: 0.8; filter: blur(50px); }
-          }
-          @keyframes float-icon {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
           }
           @keyframes cloudFloat1 {
             0%, 100% { transform: translateX(0) scaleX(1); opacity: 0.3; }
@@ -42,32 +35,15 @@ export function Home() {
           }
         `}</style>
 
-        {/* Animated network grid background */}
-        <div className="absolute inset-0 overflow-hidden opacity-[0.03]">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `linear-gradient(90deg, #06b6d4 1px, transparent 1px), linear-gradient(#06b6d4 1px, transparent 1px)`,
-            backgroundSize: '80px 80px'
-          }}></div>
-        </div>
-
-        {/* Telecom-themed glowing orbs */}
-        <div className="absolute top-10 left-10 w-72 h-72 bg-blue-500 rounded-full blur-3xl opacity-20" style={{ animation: 'pulse-glow 8s ease-in-out infinite' }}></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-400 rounded-full blur-3xl opacity-15" style={{ animation: 'pulse-glow 10s ease-in-out infinite', animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-indigo-500 rounded-full blur-3xl opacity-10" style={{ animation: 'pulse-glow 12s ease-in-out infinite', animationDelay: '4s' }}></div>
-
-        {/* Floating telecom icons background */}
-        <div className="absolute top-20 right-20 opacity-10" style={{ animation: 'float-icon 6s ease-in-out infinite' }}>
-          <Cpu size={60} className="text-cyan-300" />
-        </div>
-        <div className="absolute bottom-40 left-20 opacity-10" style={{ animation: 'float-icon 8s ease-in-out infinite', animationDelay: '1s' }}>
-          <Globe size={50} className="text-blue-300" />
-        </div>
-        <div className="absolute top-1/2 right-1/4 opacity-10" style={{ animation: 'float-icon 7s ease-in-out infinite', animationDelay: '2s' }}>
-          <Phone size={55} className="text-cyan-300" />
+        {/* Cloud overlay effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-0 w-96 h-40 bg-white/10 rounded-full blur-3xl" style={{ animation: 'cloudFloat1 8s ease-in-out infinite' }}></div>
+          <div className="absolute top-40 right-20 w-80 h-32 bg-white/5 rounded-full blur-3xl" style={{ animation: 'cloudFloat2 10s ease-in-out infinite' }}></div>
+          <div className="absolute top-10 left-1/2 w-96 h-40 bg-white/8 rounded-full blur-3xl" style={{ animation: 'cloudFloat3 12s ease-in-out infinite' }}></div>
         </div>
 
         {/* Curved bottom transition */}
-        <svg className="absolute bottom-0 left-0 right-0 w-full h-32 text-white" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ marginBottom: '-1px' }}>
+        <svg className="absolute bottom-0 left-0 right-0 w-full h-24 text-blue-50" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ marginBottom: '-1px' }}>
           <path d="M0,40 Q300,0 600,40 T1200,40 L1200,120 L0,120 Z" fill="currentColor"></path>
         </svg>
 
@@ -77,15 +53,15 @@ export function Home() {
             <div className="space-y-6">
               {/* Badge */}
               <div className="inline-block">
-                <div className="px-4 py-2 bg-cyan-500/20 backdrop-blur-sm rounded-full text-cyan-100 font-semibold text-sm border border-cyan-500/30">
-                  🚀 Coming Soon
+                <div className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white font-semibold text-sm border border-white/30">
+                  Coming Soon
                 </div>
               </div>
 
               {/* Main Heading */}
               <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
                 Enterprise Telecom<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-300">Infrastructure</span>
+                <span className="text-yellow-200">Infrastructure</span>
               </h1>
 
               {/* Subheading */}
