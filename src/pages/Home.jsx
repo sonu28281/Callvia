@@ -440,7 +440,7 @@ export function Home() {
       </section>
 
       {/* ========== DEVELOPMENT & INTEGRATION SECTION ========== */}
-      <section className="bg-gradient-to-b from-purple-50 to-white py-32 px-6 relative overflow-hidden">
+      <section className="bg-gradient-to-b from-purple-50 to-white py-16 px-6 relative overflow-hidden">
         <style>{`
           @keyframes float {
             0%, 100% { transform: translateY(0px); }
@@ -493,7 +493,7 @@ export function Home() {
               <div className="inline-block mb-4">
                 <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold">🔧 OUR SERVICES</span>
               </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 whitespace-nowrap">
                 Development & Integration
               </h2>
               <p className="text-lg text-gray-600 mb-8">
@@ -682,12 +682,25 @@ export function Home() {
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
           }
+
+          @keyframes pulse-question {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+          }
+
+          .animated-question {
+            animation: pulse-question 2s ease-in-out infinite;
+            display: inline-block;
+            margin-left: 0.5rem;
+            color: #2563eb;
+          }
         `}</style>
 
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20 animate-slide-up">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Callvia</span>
+              <span className="animated-question">?</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Built with carrier-grade standards, not startup shortcuts
@@ -739,11 +752,11 @@ export function Home() {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${benefit.color} rounded-2xl opacity-0 group-hover:opacity-20 transition-all duration-500 blur-xl`}></div>
-                <div className="relative bg-white p-8 rounded-2xl border-2 border-gray-100 group-hover:border-blue-300 group-hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                <div className="relative bg-white p-8 rounded-2xl border-2 border-gray-100 group-hover:border-blue-300 group-hover:shadow-2xl transition-all duration-300 h-full flex flex-col bg-white">
                   <div className={`benefit-icon w-16 h-16 bg-gradient-to-br ${benefit.color} rounded-full flex items-center justify-center text-4xl mb-6 group-hover:shadow-lg transition-all duration-300 shadow-md`}>
                     {benefit.emoji}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">{benefit.title}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">{benefit.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed flex-grow group-hover:text-gray-700 transition-colors">{benefit.description}</p>
                   <div className="mt-4 pt-4 border-t border-gray-200 group-hover:border-blue-200 transition-colors">
                     <p className="text-xs font-semibold text-blue-600 group-hover:text-blue-700">Learn more →</p>
