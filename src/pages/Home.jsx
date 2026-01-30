@@ -277,7 +277,7 @@ export function Home() {
                         <Icon className="w-8 h-8 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r transition-all duration-300" style={{ backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))` }}>
+                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-all duration-300">
                           {feature.title}
                         </h3>
                       </div>
@@ -635,7 +635,7 @@ export function Home() {
                       <div className={`p-4 rounded-xl bg-gradient-to-br ${solution.color} group-hover:shadow-lg group-hover:scale-110 transition-all flex-shrink-0 icon-pulse`}>
                         <Icon size={28} className="text-white" strokeWidth={1.5} />
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r transition-all" style={{backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))`}}>{solution.title}</h3>
+                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-all">{solution.title}</h3>
                     </div>
                     <p className="text-gray-600 group-hover:text-gray-700 transition-colors leading-relaxed flex-grow mb-4">{solution.description}</p>
                     
