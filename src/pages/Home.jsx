@@ -200,9 +200,9 @@ export function Home() {
 
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-20 animate-slide-up">
             <div className="inline-block mb-4">
-              <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold">⚡ CORE FEATURES</span>
+              <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold animate-bounce">⚡ CORE FEATURES</span>
             </div>
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               Core Telecom <span className="capability-highlight">Capabilities</span>
@@ -213,71 +213,94 @@ export function Home() {
           </div>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 icon: Phone,
                 title: 'DID Numbers',
                 description: 'Pan-India virtual numbers with TRAI-approved infrastructure. Get dedicated numbers for your contact center with instant activation, geographic flexibility, and carrier-grade reliability for seamless domestic calling.',
-                gradient: 'from-blue-500 to-cyan-500'
+                gradient: 'from-blue-500 to-cyan-500',
+                features: ['Instant Activation', 'Pan-India Coverage', 'TRAI-Approved']
               },
               {
                 icon: Zap,
                 title: 'Cloud Call Center',
                 description: 'Enterprise-grade inbound & outbound calling platform built on our Class-B VNO infrastructure. Handle high-volume calls, automatic call distribution, and comprehensive reporting.',
-                gradient: 'from-purple-500 to-pink-500'
+                gradient: 'from-purple-500 to-pink-500',
+                features: ['Auto-Routing', 'Real-time Analytics', 'Multi-agent']
               },
               {
                 icon: Cpu,
                 title: 'AI Voice Agents',
                 description: 'Intelligent programmable voice agents that handle customer interactions autonomously. Smart IVR routing, conversation analytics, and seamless handoff to live agents for enhanced customer experience.',
-                gradient: 'from-orange-500 to-red-500'
+                gradient: 'from-orange-500 to-red-500',
+                features: ['AI-Powered', 'Smart Routing', 'Auto-Handoff']
               },
               {
                 icon: Globe,
                 title: 'White-Label Platform',
                 description: 'Launch your own branded telecom service on our proven infrastructure. Complete API access, reseller dashboard, billing management, and all backend support included.',
-                gradient: 'from-green-500 to-teal-500'
+                gradient: 'from-green-500 to-teal-500',
+                features: ['Full Branding', 'Custom Billing', 'API Access']
               },
               {
                 icon: CreditCard,
                 title: 'Prepaid Billing',
                 description: 'Real-time balance management with instant recharge capability. Detailed usage analytics, custom pricing tiers, and automated threshold alerts for continuous service availability.',
-                gradient: 'from-indigo-500 to-blue-500'
+                gradient: 'from-indigo-500 to-blue-500',
+                features: ['Real-time Balance', 'Auto Alerts', 'Custom Pricing']
               },
               {
                 icon: Building2,
                 title: 'Enterprise API',
                 description: 'Full REST API access for custom integrations with your existing systems. Real-time call logs, CDR data, webhooks, and comprehensive documentation for seamless integration.',
-                gradient: 'from-rose-500 to-pink-500'
+                gradient: 'from-rose-500 to-pink-500',
+                features: ['REST API', 'Webhooks', 'Full Documentation']
               }
             ].map((feature, index) => {
               const Icon = feature.icon;
               return (
                 <div 
                   key={index} 
-                  className="feature-card relative group cursor-pointer"
+                  className="feature-card relative group cursor-pointer animate-slide-up"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {/* Gradient border effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur`}></div>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-lg`}></div>
                   
                   {/* Card content */}
-                  <div className="relative bg-white p-6 rounded-2xl h-full flex flex-col">
+                  <div className="relative bg-white p-8 rounded-2xl h-full flex flex-col group-hover:shadow-2xl transition-all duration-300">
                     {/* Logo and Title Section */}
                     <div className="flex items-start gap-4 mb-4">
-                      {/* Gradient icon background */}
-                      <div className={`w-12 h-12 bg-gradient-to-br ${feature.gradient} rounded-lg flex items-center justify-center shadow-lg flex-shrink-0`}>
-                        <Icon className="w-6 h-6 text-white" />
+                      {/* Gradient icon background with animation */}
+                      <div className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 group-hover:animate-float group-hover:shadow-xl transition-all duration-300`}>
+                        <Icon className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900">{feature.title}</h3>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r transition-all duration-300" style={{ backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))` }}>
+                          {feature.title}
+                        </h3>
+                      </div>
                     </div>
                     
-                    <p className="text-gray-600 text-xs leading-relaxed flex-grow mb-3">{feature.description}</p>
+                    <p className="text-gray-600 text-sm leading-relaxed flex-grow mb-4">{feature.description}</p>
+                    
+                    {/* Key Features Badges */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {feature.features.map((feat, i) => (
+                        <span 
+                          key={i} 
+                          className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full group-hover:bg-blue-100 transition-all duration-300"
+                        >
+                          {feat}
+                        </span>
+                      ))}
+                    </div>
                     
                     {/* Hover indicator */}
-                    <div className="flex items-center text-xs font-semibold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span>Learn more</span>
-                      <ArrowRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                    <div className="flex items-center text-sm font-semibold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span>Explore</span>
+                      <ArrowRight size={16} className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
                     </div>
                   </div>
                 </div>
@@ -541,66 +564,62 @@ export function Home() {
       </section>
 
       {/* ========== SOLUTIONS SECTION ========== */}
-      <section className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-16 px-6 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-24 px-6 relative overflow-hidden">
         <style>{`
-          @keyframes slideInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-          }
-          
           .solution-card {
-            animation: slideInUp 0.5s ease-out forwards;
+            animation: slideInUp 0.6s ease-out forwards;
           }
 
           .solution-header {
             animation: float 3s ease-in-out infinite;
           }
+
+          .icon-pulse {
+            animation: pulse-glow 2s infinite;
+          }
         `}</style>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 solution-header">
+          <div className="text-center mb-16 solution-header">
             <div className="inline-block mb-3">
-              <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase">Solutions</span>
+              <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase animate-bounce">🎯 Solutions</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
-              Built for Every Business
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Built for Every <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Business</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Scale your operations with purpose-built solutions
+              Scale your operations with purpose-built solutions designed for your industry
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 title: 'Call Centers',
-                description: 'High-volume calling with real-time dashboards and compliance.',
-                Icon: Phone
+                description: 'High-volume calling with real-time dashboards and full compliance.',
+                Icon: Phone,
+                color: 'from-blue-400 to-blue-600',
+                features: ['Real-time Dashboards', 'Auto-routing', 'Quality Monitoring']
               },
               {
                 title: 'Enterprises',
                 description: 'API-driven infrastructure with dedicated support and SLA.',
-                Icon: Building2
+                Icon: Building2,
+                color: 'from-purple-400 to-purple-600',
+                features: ['Full API', 'Dedicated Support', '99.99% SLA']
               },
               {
                 title: 'Resellers',
-                description: 'White-label platform to launch your telecom business.',
-                Icon: CreditCard
+                description: 'White-label platform to launch your own telecom business.',
+                Icon: CreditCard,
+                color: 'from-pink-400 to-pink-600',
+                features: ['White-Label', 'Custom Billing', 'Partner Portal']
               },
               {
                 title: 'Small Business',
                 description: 'AI receptionist that never misses a call.',
-                Icon: Zap
+                Icon: Zap,
+                color: 'from-orange-400 to-orange-600',
+                features: ['AI Receptionist', 'Easy Setup', 'Affordable']
               }
             ].map((solution, index) => {
               const Icon = solution.Icon;
@@ -608,17 +627,33 @@ export function Home() {
                 <div 
                   key={index} 
                   className="solution-card group relative" 
-                  style={{ animationDelay: `${index * 0.08}s` }}
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-300 to-cyan-300 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-lg"></div>
-                  <div className="relative bg-white p-6 rounded-xl border border-gray-200 group-hover:border-cyan-400 group-hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-                    <div className="flex items-start gap-4 mb-3">
-                      <div className="p-2.5 rounded-lg bg-gradient-to-br from-blue-100 to-cyan-100 group-hover:from-blue-200 group-hover:to-cyan-200 transition-all flex-shrink-0">
-                        <Icon size={20} className="text-blue-900 group-hover:scale-110 transition-transform" strokeWidth={2} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${solution.color} rounded-2xl opacity-0 group-hover:opacity-20 transition-all duration-500 blur-xl`}></div>
+                  <div className="relative bg-white p-8 rounded-2xl border border-gray-200 group-hover:border-blue-300 group-hover:shadow-2xl transition-all duration-300 flex flex-col h-full hover:scale-105 transform">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className={`p-4 rounded-xl bg-gradient-to-br ${solution.color} group-hover:shadow-lg group-hover:scale-110 transition-all flex-shrink-0 icon-pulse`}>
+                        <Icon size={28} className="text-white" strokeWidth={1.5} />
                       </div>
-                      <h3 className="text-base font-bold text-gray-900 group-hover:text-blue-900 transition-colors leading-tight">{solution.title}</h3>
+                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r transition-all" style={{backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))`}}>{solution.title}</h3>
                     </div>
-                    <p className="text-xs text-gray-600 group-hover:text-gray-700 transition-colors leading-relaxed flex-grow">{solution.description}</p>
+                    <p className="text-gray-600 group-hover:text-gray-700 transition-colors leading-relaxed flex-grow mb-4">{solution.description}</p>
+                    
+                    {/* Feature Badges */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {solution.features.map((feat, i) => (
+                        <span 
+                          key={i} 
+                          className="px-2 py-1 text-xs font-semibold rounded-full bg-blue-50 text-blue-700 group-hover:bg-blue-100 transition-all"
+                        >
+                          {feat}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="text-sm font-semibold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Explore →
+                    </div>
                   </div>
                 </div>
               );
@@ -642,38 +677,32 @@ export function Home() {
           }
 
           @keyframes scaleIn {
-            from {
-              opacity: 0;
-              transform: scale(0.95);
-            }
-            to {
-              opacity: 1;
-              transform: scale(1);
-            }
-          }
-
-          @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-          }
-
+      {/* ========== WHY CHOOSE SECTION ========== */}
+      <section className="bg-gradient-to-br from-white to-blue-50 py-24 px-6 relative overflow-hidden">
+        <style>{`
           .benefit-card {
             animation: slideInUp 0.6s ease-out forwards;
           }
 
           .benefit-icon {
-            animation: scaleIn 0.5s ease-out forwards;
+            animation: bounceIn 0.6s ease-out forwards;
           }
 
           .benefit-card:hover .benefit-icon {
             animation: float 3s ease-in-out infinite;
           }
+
+          .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
         `}</style>
 
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-20 animate-slide-up">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Why Choose Callvia
+              Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Callvia</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Built with carrier-grade standards, not startup shortcuts
@@ -685,49 +714,49 @@ export function Home() {
               {
                 title: 'Domestic-Only Compliant',
                 description: 'TRAI-approved VNO infrastructure with full compliance. Our domestic-first approach ensures maximum regulatory adherence and peace of mind.',
-                icon: '🛡️',
+                emoji: '🛡️',
                 color: 'from-green-400 to-emerald-500'
               },
               {
                 title: 'Carrier-Grade Backend',
                 description: 'Enterprise-level reliability with proprietary switching. Built to handle millions of concurrent calls with 99.99% uptime SLA.',
-                icon: '⚙️',
+                emoji: '⚙️',
                 color: 'from-blue-400 to-cyan-500'
               },
               {
                 title: 'White-Label Ready',
                 description: 'Launch branded services with your own branding. Complete white-label platform with custom dashboards and reseller controls.',
-                icon: '🎨',
+                emoji: '🎨',
                 color: 'from-purple-400 to-pink-500'
               },
               {
                 title: 'Risk-Controlled Billing',
                 description: 'Never chase unpaid invoices with prepaid billing. Smart billing system that protects your revenue and reduces financial risk.',
-                icon: '💰',
+                emoji: '💰',
                 color: 'from-orange-400 to-red-500'
               },
               {
                 title: 'AI Voice Automation',
                 description: 'Scale operations without hiring with AI agents. Advanced voice AI that handles complex customer interactions seamlessly.',
-                icon: '🤖',
+                emoji: '🤖',
                 color: 'from-indigo-400 to-blue-500'
               },
               {
                 title: 'Operator Mindset',
                 description: 'Built by telecom professionals, not SaaS consultants. Deep industry expertise with 15+ years of telecom operations experience.',
-                icon: '👥',
+                emoji: '👥',
                 color: 'from-rose-400 to-pink-500'
               }
             ].map((benefit, index) => (
               <div 
                 key={index} 
-                className="benefit-card group relative" 
+                className="benefit-card group relative hover:scale-105 transform transition-transform" 
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-2xl opacity-0 group-hover:opacity-30 transition-all duration-500 blur-xl"></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${benefit.color} rounded-2xl opacity-0 group-hover:opacity-20 transition-all duration-500 blur-xl`}></div>
                 <div className="relative bg-white p-8 rounded-2xl border-2 border-gray-100 group-hover:border-blue-300 group-hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                  <div className={`benefit-icon w-16 h-16 bg-gradient-to-br ${benefit.color} rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                    {benefit.icon}
+                  <div className={`benefit-icon w-16 h-16 bg-gradient-to-br ${benefit.color} rounded-full flex items-center justify-center text-4xl mb-6 group-hover:shadow-lg transition-all duration-300 shadow-md`}>
+                    {benefit.emoji}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">{benefit.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed flex-grow group-hover:text-gray-700 transition-colors">{benefit.description}</p>
