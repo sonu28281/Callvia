@@ -752,14 +752,13 @@ export function Home() {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${benefit.color} rounded-2xl opacity-0 group-hover:opacity-20 transition-all duration-500 blur-xl`}></div>
-                <div className="relative bg-white p-8 rounded-2xl border-2 border-gray-100 group-hover:border-blue-300 group-hover:shadow-2xl transition-all duration-300 h-full flex flex-col bg-white">
-                  <div className={`benefit-icon w-16 h-16 bg-gradient-to-br ${benefit.color} rounded-full flex items-center justify-center text-4xl mb-6 group-hover:shadow-lg transition-all duration-300 shadow-md`}>
+                <div className="relative bg-white p-6 rounded-2xl border-2 border-gray-100 group-hover:border-blue-300 group-hover:shadow-2xl transition-all duration-300 h-full flex flex-row items-start gap-4 bg-white">
+                  <div className={`benefit-icon flex-shrink-0 w-14 h-14 bg-gradient-to-br ${benefit.color} rounded-full flex items-center justify-center text-3xl group-hover:shadow-lg transition-all duration-300 shadow-md`}>
                     {benefit.emoji}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">{benefit.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed flex-grow group-hover:text-gray-700 transition-colors">{benefit.description}</p>
-                  <div className="mt-4 pt-4 border-t border-gray-200 group-hover:border-blue-200 transition-colors">
-                    <p className="text-xs font-semibold text-blue-600 group-hover:text-blue-700">Learn more →</p>
+                  <div className="flex flex-col flex-grow min-w-0">
+                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-700 transition-colors">{benefit.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed flex-grow group-hover:text-gray-700 transition-colors mt-1">{benefit.description}</p>
                   </div>
                 </div>
               </div>
