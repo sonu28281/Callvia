@@ -663,21 +663,6 @@ export function Home() {
       </section>
 
       {/* ========== WHY CHOOSE SECTION ========== */}
-      <section className="bg-gradient-to-b from-gray-50 to-white py-32 px-6">
-        <style>{`
-          @keyframes slideInUp {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes scaleIn {
-      {/* ========== WHY CHOOSE SECTION ========== */}
       <section className="bg-gradient-to-br from-white to-blue-50 py-24 px-6 relative overflow-hidden">
         <style>{`
           .benefit-card {
