@@ -19,19 +19,59 @@ export default function Contact() {
 
   return (
     <div className="bg-white">
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes pulseGlow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+          }
+          50% {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+          }
+        }
+        .animate-fade-up {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .animate-slide-up {
+          animation: slideInUp 0.6s ease-out forwards;
+        }
+        .group:hover {
+          transform: translateY(-4px);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+      `}</style>
       {/* Hero Section */}
       <section className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-900 flex flex-col justify-center items-center px-6 text-white relative overflow-hidden">
         <div className="absolute top-20 right-10 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute -bottom-20 left-10 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-20 left-10 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20" style={{animationDelay: '2s'}}></div>
         
         <div className="relative z-10 text-center max-w-3xl">
-          <div className="inline-flex items-center gap-2 bg-cyan-500/20 px-4 py-2 rounded-full mb-6 border border-cyan-400/30">
+          <div className="inline-flex items-center gap-2 bg-cyan-500/20 px-4 py-2 rounded-full mb-6 border border-cyan-400/30 animate-fade-up" style={{animationDelay: '0s'}}>
             <Mail size={16} />
-            <span className="text-sm">Get in Touch</span>
+            <span className="text-sm font-medium">Get in Touch</span>
           </div>
-          <h1 className="text-6xl font-bold mb-6">We're Here to Help</h1>
-          <p className="text-xl text-cyan-100 mb-8 leading-relaxed">
-            Have questions about our products or services? Our team is ready to assist you. Reach out to us through any of these channels.
+          <h1 className="text-6xl font-bold mb-6 animate-fade-up" style={{animationDelay: '0.1s'}}>We're Here to Help</h1>
+          <p className="text-xl text-cyan-100 mb-8 leading-relaxed animate-fade-up" style={{animationDelay: '0.2s'}}>
+            Have questions about our products or services? Our team is ready to assist you. Reach out through any channel below.
           </p>
         </div>
       </section>

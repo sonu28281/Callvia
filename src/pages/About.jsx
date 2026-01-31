@@ -6,19 +6,73 @@ import { AnimatedBackground } from '../components/sections/AnimatedBackground.js
 export function AboutPage() {
   return (
     <div>
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        .animate-fade-up {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .animate-slide-left {
+          animation: slideInLeft 0.8s ease-out forwards;
+        }
+        .animate-slide-right {
+          animation: slideInRight 0.8s ease-out forwards;
+        }
+        .animate-scale-in {
+          animation: scaleIn 0.8s ease-out forwards;
+        }
+      `}</style>
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-32 pb-32">
         <AnimatedBackground />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center">
-            <span className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold mb-6">ABOUT US</span>
-            <h1 className="text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+          <div className="text-center space-y-6">
+            <span className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold mb-6 animate-fade-up" style={{animationDelay: '0s'}}>ABOUT US</span>
+            <h1 className="text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight animate-fade-up" style={{animationDelay: '0.1s'}}>
               Enterprise Telecom Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">India</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed font-light">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed font-light animate-fade-up" style={{animationDelay: '0.2s'}}>
               Founded in 2025, Callvia is a Class-B VNO platform providing carrier-grade, compliant telecom infrastructure and AI-powered voice solutions for enterprises, resellers, and call centers across India.
             </p>
-            <p className="text-sm text-gray-500 max-w-2xl mx-auto tracking-wide uppercase">
+            <p className="text-sm text-gray-500 max-w-2xl mx-auto tracking-wide uppercase animate-fade-up" style={{animationDelay: '0.3s'}}>
               Built by telecom operators. For telecom operators.
             </p>
           </div>
