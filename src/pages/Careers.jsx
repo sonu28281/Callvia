@@ -131,27 +131,53 @@ export default function Careers() {
   return (
     <div className="bg-white">
       <style>{`
-        @keyframes wave {
-          0%, 100% { transform: translateY(0px); opacity: 0.5; }
-          50% { transform: translateY(-10px); opacity: 0.8; }
+        @keyframes oceanicWave1 {
+          0%, 100% { transform: translateX(-100%) translateY(0); }
+          50% { transform: translateX(0) translateY(-15px); }
         }
-        @keyframes oceanicFlow {
-          0% { opacity: 0.2; transform: translateY(20px); }
-          50% { opacity: 0.5; transform: translateY(-15px); }
-          100% { opacity: 0.2; transform: translateY(20px); }
+        @keyframes oceanicWave2 {
+          0%, 100% { transform: translateX(-100%) translateY(0); }
+          50% { transform: translateX(0) translateY(-25px); }
         }
-        .wave-animate { animation: wave 6s ease-in-out infinite; }
-        .oceanic-glow { animation: oceanicFlow 7s ease-in-out infinite; }
+        @keyframes oceanicWave3 {
+          0%, 100% { transform: translateX(-100%) translateY(0); }
+          50% { transform: translateX(0) translateY(-10px); }
+        }
+        @keyframes floatBlob {
+          0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+          50% { transform: translateY(-30px) translateX(20px); opacity: 0.6; }
+        }
+        .wave-1 { animation: oceanicWave1 8s ease-in-out infinite; }
+        .wave-2 { animation: oceanicWave2 10s ease-in-out infinite; animation-delay: 0.5s; }
+        .wave-3 { animation: oceanicWave3 12s ease-in-out infinite; animation-delay: 1s; }
+        .float-blob { animation: floatBlob 6s ease-in-out infinite; }
       `}</style>
       
-      {/* Hero Section - Compact with Oceanic Waves */}
-      <section className="pt-32 pb-16 px-6 bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-900 text-white relative overflow-hidden">
-        {/* Oceanic Wave Animations */}
+      {/* Hero Section - Full Screen Height with Oceanic Waves */}
+      <section className="min-h-screen px-6 bg-gradient-to-b from-blue-900 via-blue-800 to-cyan-900 flex flex-col justify-center items-center text-white relative overflow-hidden">
+        {/* Oceanic Wave Layers */}
+        <div className="absolute bottom-0 left-0 right-0 h-48 overflow-hidden">
+          {/* Wave 1 - Light cyan */}
+          <svg className="wave-1 absolute w-full h-32" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,40 Q300,20 600,40 T1200,40 L1200,120 L0,120 Z" fill="rgba(34, 211, 238, 0.3)"/>
+          </svg>
+          
+          {/* Wave 2 - Medium cyan */}
+          <svg className="wave-2 absolute w-full h-24 top-8" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,60 Q300,30 600,60 T1200,60 L1200,120 L0,120 Z" fill="rgba(6, 182, 212, 0.4)"/>
+          </svg>
+          
+          {/* Wave 3 - Dark blue */}
+          <svg className="wave-3 absolute w-full h-20 top-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,50 Q300,20 600,50 T1200,50 L1200,120 L0,120 Z" fill="rgba(12, 74, 110, 0.5)"/>
+          </svg>
+        </div>
+
+        {/* Floating Oceanic Orbs */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-cyan-400/30 to-transparent wave-animate"></div>
-          <div className="absolute top-12 left-0 right-0 h-24 bg-gradient-to-b from-blue-400/20 to-transparent wave-animate" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-1/2 right-0 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 oceanic-glow"></div>
-          <div className="absolute bottom-0 left-20 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-15 oceanic-glow" style={{animationDelay: '2s'}}></div>
+          <div className="float-blob absolute top-20 right-20 w-64 h-64 bg-cyan-400 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+          <div className="float-blob absolute top-40 left-10 w-80 h-80 bg-blue-400 rounded-full mix-blend-screen filter blur-3xl opacity-15" style={{animationDelay: '2s'}}></div>
+          <div className="float-blob absolute bottom-32 right-32 w-72 h-72 bg-cyan-300 rounded-full mix-blend-screen filter blur-3xl opacity-10" style={{animationDelay: '4s'}}></div>
         </div>
 
         <div className="relative z-10 text-center max-w-3xl mx-auto">
