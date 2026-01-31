@@ -407,3 +407,6 @@ export default function Careers() {
     </div>
   );
 }
+
+
+export default Careers;

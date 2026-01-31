@@ -270,3 +270,6 @@ export default function Contact() {
     </div>
   );
 }
+
+
+export default Contact;
