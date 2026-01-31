@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Handshake, TrendingUp, Globe, Users, ArrowRight, Check } from 'lucide-react';
+import { Users, TrendingUp, Globe, ArrowRight, Check } from 'lucide-react';
 
 export default function Partnership() {
   const [selectedTab, setSelectedTab] = useState('overview');
@@ -79,7 +79,7 @@ export default function Partnership() {
         
         <div className="relative z-10 text-center max-w-3xl">
           <div className="inline-flex items-center gap-2 bg-cyan-500/20 px-4 py-2 rounded-full mb-6 border border-cyan-400/30">
-            <Handshake size={16} />
+            <Users size={16} />
             <span className="text-sm">Strategic Partnerships</span>
           </div>
           <h1 className="text-6xl font-bold mb-6">Grow Together with Callvia</h1>
@@ -286,4 +286,3 @@ export default function Partnership() {
 }
 
 
-export default Partnership;
