@@ -209,5 +209,5 @@ export function DidNumbersPage() {
       </section>
     </div>
   );
+}
 
-export default DidNumbersPage;
