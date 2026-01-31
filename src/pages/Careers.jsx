@@ -131,117 +131,79 @@ export default function Careers() {
   return (
     <div className="bg-white">
       <style>{`
-        @keyframes climbStairs {
-          0% { transform: translateX(-100px) translateY(150px); opacity: 0; }
-          10% { opacity: 1; }
-          25% { transform: translateX(-50px) translateY(100px); }
-          50% { transform: translateX(0) translateY(50px); }
-          75% { transform: translateX(50px) translateY(0); }
-          90% { opacity: 1; }
-          100% { transform: translateX(100px) translateY(-50px); opacity: 0; }
+        @keyframes slideInBanner {
+          0% { transform: translateX(-100%) scaleX(0.8); opacity: 0; }
+          50% { opacity: 1; }
+          100% { transform: translateX(0) scaleX(1); opacity: 1; }
         }
-        @keyframes stairGlow1 {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.8; }
+        @keyframes shimmerWave {
+          0% { background-position: -1000px 0; }
+          100% { background-position: 1000px 0; }
         }
-        @keyframes stairGlow2 {
-          0%, 100% { opacity: 0.2; }
-          50% { opacity: 0.6; }
+        @keyframes floatUp {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
         }
-        @keyframes stairGlow3 {
-          0%, 100% { opacity: 0.15; }
-          50% { opacity: 0.5; }
+        @keyframes pulseGlow {
+          0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.3); }
+          50% { box-shadow: 0 0 40px rgba(34, 211, 238, 0.6); }
         }
-        @keyframes badgeFloat {
-          0%, 100% { transform: translateY(0) rotate(-5deg); opacity: 0; }
-          25% { opacity: 1; }
-          50% { transform: translateY(-20px) rotate(0deg); }
-          75% { opacity: 1; }
-          100% { transform: translateY(20px) rotate(5deg); opacity: 0; }
+        .banner-container {
+          animation: slideInBanner 1s ease-out forwards;
         }
-        .climb-figure { animation: climbStairs 5s ease-in-out infinite; }
-        .stair-glow-1 { animation: stairGlow1 3s ease-in-out infinite; }
-        .stair-glow-2 { animation: stairGlow2 3.5s ease-in-out infinite; animation-delay: 0.3s; }
-        .stair-glow-3 { animation: stairGlow3 4s ease-in-out infinite; animation-delay: 0.6s; }
-        .badge-float { animation: badgeFloat 5s ease-in-out infinite; }
+        .banner-shimmer {
+          background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+          background-size: 1000px 100%;
+          animation: shimmerWave 3s infinite;
+        }
+        .float-element { animation: floatUp 3s ease-in-out infinite; }
+        .pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
       `}</style>
       
-      {/* Hero Section - Full Screen Height with Career Progression Stairs */}
+      {/* Hero Section - Full Screen with Join Us Banner */}
       <section className="min-h-screen px-6 bg-gradient-to-b from-blue-900 via-blue-800 to-cyan-900 flex flex-col justify-center items-center text-white relative overflow-hidden">
-        {/* Career Progression Stairs Visualization */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <svg className="w-full h-full max-w-4xl" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
-            {/* Background gradient definition */}
-            <defs>
-              <linearGradient id="stairGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{stopColor: '#0ea5e9', stopOpacity: 0.4}} />
-                <stop offset="100%" style={{stopColor: '#06b6d4', stopOpacity: 0.2}} />
-              </linearGradient>
-            </defs>
-            
-            {/* Animated Stairs */}
-            {/* Stair 1 */}
-            <rect x="80" y="480" width="100" height="30" fill="#0ea5e9" className="stair-glow-1" opacity="0.5" rx="4"/>
-            <text x="130" y="505" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="bold">Experience</text>
-            
-            {/* Stair 2 */}
-            <rect x="200" y="400" width="100" height="30" fill="#06b6d4" className="stair-glow-2" opacity="0.6" rx="4"/>
-            <text x="250" y="425" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="bold">Interest</text>
-            
-            {/* Stair 3 */}
-            <rect x="320" y="320" width="100" height="30" fill="#0891b2" className="stair-glow-3" opacity="0.7" rx="4"/>
-            <text x="370" y="345" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="bold">Values</text>
-            
-            {/* Stair 4 */}
-            <rect x="440" y="240" width="100" height="30" fill="#0e7490" opacity="0.8" rx="4"/>
-            <text x="490" y="265" textAnchor="middle" fill="#fff" fontSize="12" fontWeight="bold">Skills</text>
-            
-            {/* Stair 5 */}
-            <rect x="560" y="160" width="100" height="30" fill="#164e63" opacity="0.9" rx="4"/>
-            <text x="610" y="185" textAnchor="middle" fill="#fff" fontSize="12" fontWeight="bold">Goals</text>
-            
-            {/* Climbing Figure (Animated) */}
-            <g className="climb-figure">
-              {/* Head */}
-              <circle cx="400" cy="480" r="15" fill="#fbbf24" opacity="0.9"/>
-              {/* Body */}
-              <rect x="390" cy="500" width="20" height="25" fill="#3b82f6" rx="3"/>
-              {/* Arm (reaching) */}
-              <line x1="410" y1="510" x2="440" y2="480" stroke="#fbbf24" strokeWidth="3" strokeLinecap="round"/>
-              {/* Legs */}
-              <line x1="395" y1="525" x2="385" y2="550" stroke="#1f2937" strokeWidth="3" strokeLinecap="round"/>
-              <line x1="405" y1="525" x2="415" y2="550" stroke="#1f2937" strokeWidth="3" strokeLinecap="round"/>
-            </g>
-            
-            {/* Floating Progression Badges */}
-            <g className="badge-float" style={{animationDelay: '0s'}}>
-              <circle cx="680" cy="300" r="20" fill="#fbbf24" opacity="0.3"/>
-              <text x="680" y="310" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="bold">📈</text>
-            </g>
-            <g className="badge-float" style={{animationDelay: '1s'}}>
-              <circle cx="100" cy="200" r="18" fill="#06b6d4" opacity="0.25"/>
-              <text x="100" y="208" textAnchor="middle" fill="#fff" fontSize="9" fontWeight="bold">⭐</text>
-            </g>
-            <g className="badge-float" style={{animationDelay: '2s'}}>
-              <circle cx="700" cy="450" r="16" fill="#0ea5e9" opacity="0.2"/>
-              <text x="700" y="457" textAnchor="middle" fill="#fff" fontSize="9" fontWeight="bold">🎯</text>
-            </g>
-          </svg>
+        
+        {/* Animated Background Orbs */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="float-element absolute top-20 right-10 w-80 h-80 bg-cyan-400 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
+          <div className="float-element absolute bottom-20 left-20 w-96 h-96 bg-blue-400 rounded-full mix-blend-screen filter blur-3xl opacity-15" style={{animationDelay: '1s'}}></div>
         </div>
 
-        <div className="relative z-10 text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-cyan-500/20 px-4 py-2 rounded-full mb-6 border border-cyan-400/30">
-            <Briefcase size={16} />
-            <span className="text-sm font-medium">Build Your Career with Us</span>
+        {/* Main Join Us Banner */}
+        <div className="banner-container relative z-10 text-center max-w-5xl mx-auto">
+          {/* Decorative Top Badge */}
+          <div className="inline-flex items-center gap-2 bg-cyan-500/20 px-4 py-2 rounded-full mb-8 border border-cyan-400/30 pulse-glow">
+            <Briefcase size={18} />
+            <span className="text-sm font-semibold">We're Hiring Now</span>
           </div>
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">Join Our Growing Team</h1>
-          <p className="text-lg text-cyan-100 mb-8 leading-relaxed">
-            At Callvia, we're revolutionizing telecom with AI-powered voice solutions. We're looking for talented individuals to help us grow and scale.
-          </p>
+
+          {/* Main Banner Box */}
+          <div className="relative mb-8">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/20 to-cyan-500/10 rounded-2xl blur-2xl"></div>
+            <div className="relative bg-gradient-to-r from-cyan-600/30 to-blue-600/30 backdrop-blur-sm border border-cyan-400/50 rounded-2xl p-12 overflow-hidden">
+              {/* Shimmer effect */}
+              <div className="banner-shimmer absolute inset-0 rounded-2xl"></div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <h1 className="text-6xl lg:text-7xl font-bold mb-4 leading-tight">
+                  Join Our Team
+                </h1>
+                <p className="text-xl lg:text-2xl text-cyan-100 mb-2">
+                  Build the future of AI-powered telecom
+                </p>
+                <p className="text-lg text-cyan-200 max-w-3xl mx-auto">
+                  Callvia is hiring talented professionals to revolutionize voice communication with cutting-edge AI technology
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action Buttons */}
           <div className="flex gap-4 justify-center flex-wrap">
             <button 
               onClick={() => document.getElementById('openings').scrollIntoView({ behavior: 'smooth' })}
-              className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-lg font-semibold flex items-center gap-2 transition-all"
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-10 py-4 rounded-lg font-bold flex items-center gap-2 transition-all transform hover:scale-105 shadow-lg"
             >
               View Open Positions <ArrowRight size={20} />
             </button>
