@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Logo } from '../ui/Logo.jsx';
 import { MegaMenu } from './MegaMenu.jsx';
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [companyOpen, setCompanyOpen] = useState(false);
 
   const navItems = [
-    { label: 'Products', href: '#', submenu: true },
+    { label: 'Products', href: '#', submenu: true, menuKey: 'products' },
     { label: 'Solutions', href: '/solutions/call-centers' },
     { label: 'Pricing', href: '/pricing' },
     { label: 'Developers', href: '/developers/api' },
     { label: 'Resources', href: '#' },
-    { label: 'Company', href: '/about' },
+    { label: 'Company', href: '#', submenu: true, menuKey: 'company' },
   ];
 
   return (
@@ -32,12 +33,19 @@ export function Header() {
               <div
                 key={item.label}
                 className="relative"
-                onMouseEnter={() => item.submenu && setProductsOpen(true)}
-                onMouseLeave={() => item.submenu && setProductsOpen(false)}
+                onMouseEnter={() => {
+                  if (item.menuKey === 'products') setProductsOpen(true);
+                  if (item.menuKey === 'company') setCompanyOpen(true);
+                }}
+                onMouseLeave={() => {
+                  if (item.menuKey === 'products') setProductsOpen(false);
+                  if (item.menuKey === 'company') setCompanyOpen(false);
+                }}
               >
                 {item.submenu ? (
-                  <button className="text-gray-900 text-sm font-medium bg-transparent border-none cursor-pointer hover:text-blue-900 transition-colors py-2">
+                  <button className="text-gray-900 text-sm font-medium bg-transparent border-none cursor-pointer hover:text-blue-900 transition-colors py-2 flex items-center gap-1">
                     {item.label}
+                    <ChevronDown size={16} className="opacity-60" />
                   </button>
                 ) : (
                   <Link
@@ -49,13 +57,24 @@ export function Header() {
                 )}
 
                 {/* Mega Menu Dropdown */}
-                {item.submenu && productsOpen && (
+                {item.menuKey === 'products' && productsOpen && (
                   <div
                     className="absolute left-0 top-full pt-2"
                     onMouseEnter={() => setProductsOpen(true)}
                     onMouseLeave={() => setProductsOpen(false)}
                   >
                     <MegaMenu />
+                  </div>
+                )}
+                
+                {/* Company Menu Dropdown */}
+                {item.menuKey === 'company' && companyOpen && (
+                  <div
+                    className="absolute left-0 top-full pt-2"
+                    onMouseEnter={() => setCompanyOpen(true)}
+                    onMouseLeave={() => setCompanyOpen(false)}
+                  >
+                    <MegaMenu filterTab="company" />
                   </div>
                 )}
               </div>

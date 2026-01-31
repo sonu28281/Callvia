@@ -16,6 +16,9 @@ import {
   Users,
   CreditCard,
   Code,
+  Info,
+  Briefcase,
+  Mail,
 } from 'lucide-react';
 
 export const megaMenuConfig = {
@@ -161,6 +164,40 @@ export const megaMenuConfig = {
           description: 'Integration & automation',
           icon: Code,
           path: '/developers/api',
+        },
+      ],
+    },
+    {
+      id: 'company',
+      label: 'Company',
+      items: [
+        {
+          id: 'about',
+          label: 'About Us',
+          description: 'Learn about Callvia',
+          icon: Info,
+          path: '/about',
+        },
+        {
+          id: 'careers',
+          label: 'Careers',
+          description: 'Join our growing team',
+          icon: Briefcase,
+          path: '/careers',
+        },
+        {
+          id: 'partnership',
+          label: 'Partnership',
+          description: 'Partner with Callvia',
+          icon: Users,
+          path: '/partnership',
+        },
+        {
+          id: 'contact',
+          label: 'Contact Us',
+          description: 'Get in touch with us',
+          icon: Mail,
+          path: '/contact',
         },
       ],
     },
