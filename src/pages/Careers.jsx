@@ -130,22 +130,40 @@ export default function Careers() {
 
   return (
     <div className="bg-white">
-      {/* Hero Section - Full Page */}
-      <section className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-900 flex flex-col justify-center items-center px-6 text-white relative overflow-hidden">
-        {/* Background elements */}
-        <div className="absolute top-20 right-10 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute -bottom-20 left-10 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        
-        <div className="relative z-10 text-center max-w-3xl">
+      <style>{`
+        @keyframes wave {
+          0%, 100% { transform: translateY(0px); opacity: 0.5; }
+          50% { transform: translateY(-10px); opacity: 0.8; }
+        }
+        @keyframes oceanicFlow {
+          0% { opacity: 0.2; transform: translateY(20px); }
+          50% { opacity: 0.5; transform: translateY(-15px); }
+          100% { opacity: 0.2; transform: translateY(20px); }
+        }
+        .wave-animate { animation: wave 6s ease-in-out infinite; }
+        .oceanic-glow { animation: oceanicFlow 7s ease-in-out infinite; }
+      `}</style>
+      
+      {/* Hero Section - Compact with Oceanic Waves */}
+      <section className="pt-32 pb-16 px-6 bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-900 text-white relative overflow-hidden">
+        {/* Oceanic Wave Animations */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-cyan-400/30 to-transparent wave-animate"></div>
+          <div className="absolute top-12 left-0 right-0 h-24 bg-gradient-to-b from-blue-400/20 to-transparent wave-animate" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 right-0 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 oceanic-glow"></div>
+          <div className="absolute bottom-0 left-20 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-15 oceanic-glow" style={{animationDelay: '2s'}}></div>
+        </div>
+
+        <div className="relative z-10 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-cyan-500/20 px-4 py-2 rounded-full mb-6 border border-cyan-400/30">
             <Briefcase size={16} />
-            <span className="text-sm">Build Your Career with Us</span>
+            <span className="text-sm font-medium">Build Your Career with Us</span>
           </div>
-          <h1 className="text-6xl font-bold mb-6">Join Our Growing Team</h1>
-          <p className="text-xl text-cyan-100 mb-8 leading-relaxed">
+          <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">Join Our Growing Team</h1>
+          <p className="text-lg text-cyan-100 mb-8 leading-relaxed">
             At Callvia, we're revolutionizing telecom with AI-powered voice solutions. We're looking for talented individuals to help us grow and scale.
           </p>
-          <div className="flex gap-4 justify-center">
+          <div className="flex gap-4 justify-center flex-wrap">
             <button 
               onClick={() => document.getElementById('openings').scrollIntoView({ behavior: 'smooth' })}
               className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-lg font-semibold flex items-center gap-2 transition-all"
