@@ -195,5 +195,4 @@ export function AiVoiceAgentsPage() {
       </section>
     </div>
   );
-
-export default AiVoiceAgentsPage;
+}
