@@ -5,8 +5,10 @@ import App from './App.jsx';
 import { Home } from '../pages/Home.jsx';
 import { PricingPage } from '../pages/Pricing.jsx';
 import { SupportPage } from '../pages/Support.jsx';
-import { ContactPage } from '../pages/Contact.jsx';
+import ContactPage from '../pages/Contact.jsx';
 import { AboutPage } from '../pages/About.jsx';
+import CareersPage from '../pages/Careers.jsx';
+import PartnershipPage from '../pages/Partnership.jsx';
 
 // Products
 import { DidNumbersPage } from '../pages/Products/DidNumbers.jsx';
@@ -47,6 +49,8 @@ export const router = createBrowserRouter([
       { path: 'support', element: <SupportPage /> },
       { path: 'contact', element: <ContactPage /> },
       { path: 'about', element: <AboutPage /> },
+      { path: 'careers', element: <CareersPage /> },
+      { path: 'partnership', element: <PartnershipPage /> },
       
       // Products
       { path: 'products/did-numbers', element: <DidNumbersPage /> },
