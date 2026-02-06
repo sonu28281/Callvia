@@ -1,0 +1,41 @@
+{
+  "company": {
+    "name": "Callvia",
+    "tagline": "Enterprise Telecom & AI Platform",
+    "logo": "/logo.png",
+    "description": "Leading provider of cloud communication solutions"
+  },
+  "contact": {
+    "email": "hello@callvia.com",
+    "phone": "+91-XXX-XXX-XXXX",
+    "whatsapp": "https://wa.me/91XXXXXXXXXX",
+    "address": "India"
+  },
+  "social": {
+    "linkedin": "https://linkedin.com/company/callvia",
+    "instagram": "https://instagram.com/callvia",
+    "facebook": "https://facebook.com/callvia",
+    "twitter": "https://twitter.com/callvia"
+  },
+  "theme": {
+    "enableDarkMode": true,
+    "defaultTheme": "light"
+  },
+  "features": {
+    "enableWhatsAppWidget": true,
+    "enableDataLayerRouteEvents": false,
+    "enableGTM": true,
+    "enableMetaPixel": true
+  },
+  "webhooks": {
+    "callFloSuiteLeads": "https://hooks.zapier.com/hooks/catch/XXXXX/callflo-suite/",
+    "aiReceptionistLeads": "https://hooks.zapier.com/hooks/catch/XXXXX/ai-receptionist/",
+    "partnersLeads": "https://hooks.zapier.com/hooks/catch/XXXXX/partners/"
+  },
+  "navigation": {
+    "cta": {
+      "login": "https://portal.callvia.com/login",
+      "signup": "https://portal.callvia.com/signup"
+    }
+  }
+}

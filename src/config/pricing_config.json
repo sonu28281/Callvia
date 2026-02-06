@@ -1,0 +1,130 @@
+{
+  "currency": {
+    "default": "INR",
+    "supported": ["INR", "USD", "EUR", "GBP", "AED"],
+    "rates": {
+      "INR": 1,
+      "USD": 0.012,
+      "EUR": 0.011,
+      "GBP": 0.0095,
+      "AED": 0.044
+    },
+    "symbols": {
+      "INR": "₹",
+      "USD": "$",
+      "EUR": "€",
+      "GBP": "£",
+      "AED": "AED"
+    }
+  },
+  "sliders": {
+    "callMinutes": {
+      "min": 0,
+      "max": 50000000,
+      "step": 1000,
+      "default": 10000,
+      "label": "Call Minutes/Month"
+    },
+    "concurrentChannels": {
+      "min": 0,
+      "max": 3000,
+      "step": 10,
+      "default": 100,
+      "label": "Concurrent Channels"
+    },
+    "predictiveDialerSeats": {
+      "min": 0,
+      "max": 500,
+      "step": 1,
+      "default": 10,
+      "label": "Predictive Dialer Seats"
+    },
+    "whatsappTemplates": {
+      "min": 0,
+      "max": 100000,
+      "step": 100,
+      "default": 1000,
+      "label": "WhatsApp Templates/Month"
+    }
+  },
+  "services": {
+    "sipTrunks": {
+      "label": "SIP Trunks",
+      "description": "Base telephony infrastructure",
+      "isBase": true,
+      "buyCostPerMinute": 0.92,
+      "switchCostPerMinute": 0.03,
+      "enabled": true
+    },
+    "aiAgents": {
+      "label": "AI Agents",
+      "description": "Conversational AI capabilities",
+      "buyCostPerMinute": 3.62,
+      "enabled": false
+    },
+    "aiTranscription": {
+      "label": "AI Transcription",
+      "description": "Real-time call transcription",
+      "buyCostPerMinute": 0.0006,
+      "enabled": false
+    },
+    "callRecording": {
+      "label": "Call Recording",
+      "description": "Store and retrieve call recordings",
+      "buyCostPerMinute": 0.0003,
+      "enabled": false
+    },
+    "predictiveDialer": {
+      "label": "Predictive Dialer",
+      "description": "Automated outbound dialing",
+      "buyCostPerSeat": 3,
+      "buyCostCurrency": "USD",
+      "enabled": false
+    },
+    "aiReceptionist": {
+      "label": "AI Receptionist",
+      "description": "Automated call answering",
+      "buyCostLongCall": 1.36,
+      "buyCostShortCall": 0.027,
+      "longCallThreshold": 60,
+      "shortCallThreshold": 30,
+      "enabled": false,
+      "assumptions": {
+        "avgCallDuration": 45,
+        "percentageLongCalls": 60
+      }
+    },
+    "whatsappAutomation": {
+      "label": "WhatsApp Automation",
+      "description": "Automated WhatsApp messaging",
+      "buyCostPerTemplate": 0.94919,
+      "enabled": false
+    }
+  },
+  "margin": {
+    "minMargin": 0.10,
+    "maxMargin": 0.30,
+    "curveType": "logarithmic"
+  },
+  "plans": {
+    "standard": {
+      "label": "Standard",
+      "description": "[PLAN_STANDARD_DESC]",
+      "multiplier": 1.0,
+      "features": ["[FEATURE_1]", "[FEATURE_2]", "[FEATURE_3]"]
+    },
+    "pro": {
+      "label": "Pro",
+      "description": "[PLAN_PRO_DESC]",
+      "multiplier": 0.95,
+      "features": ["[FEATURE_1]", "[FEATURE_2]", "[FEATURE_3]", "[FEATURE_4]"]
+    },
+    "enterprise": {
+      "label": "Enterprise",
+      "description": "[PLAN_ENTERPRISE_DESC]",
+      "contactSales": true,
+      "features": ["[FEATURE_1]", "[FEATURE_2]", "[FEATURE_3]", "[FEATURE_4]", "[FEATURE_5]"]
+    }
+  },
+  "disclaimer": "[PRICING_DISCLAIMER]"
+}

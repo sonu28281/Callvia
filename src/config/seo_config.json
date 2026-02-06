@@ -1,0 +1,180 @@
+{
+  "defaults": {
+    "titleSuffix": " | Callvia - Enterprise Telecom & AI Platform",
+    "description": "[DEFAULT_META_DESCRIPTION]",
+    "ogImage": "/og-default.jpg",
+    "twitterCard": "summary_large_image",
+    "robots": "index, follow"
+  },
+  "routes": {
+    "/": {
+      "title": "[HOME_PAGE_TITLE]",
+      "description": "[HOME_PAGE_DESCRIPTION]",
+      "canonical": "/",
+      "ogImage": "/og-home.jpg",
+      "robots": "index, follow"
+    },
+    "/solutions": {
+      "title": "[SOLUTIONS_PAGE_TITLE]",
+      "description": "[SOLUTIONS_PAGE_DESCRIPTION]",
+      "canonical": "/solutions",
+      "robots": "index, follow"
+    },
+    "/solutions/callflo-suite": {
+      "title": "[CALLFLO_SUITE_TITLE]",
+      "description": "[CALLFLO_SUITE_DESCRIPTION]",
+      "canonical": "/solutions/callflo-suite",
+      "robots": "index, follow"
+    },
+    "/solutions/ai-receptionist": {
+      "title": "[AI_RECEPTIONIST_TITLE]",
+      "description": "[AI_RECEPTIONIST_DESCRIPTION]",
+      "canonical": "/solutions/ai-receptionist",
+      "robots": "index, follow"
+    },
+    "/solutions/partners": {
+      "title": "[PARTNERS_TITLE]",
+      "description": "[PARTNERS_DESCRIPTION]",
+      "canonical": "/solutions/partners",
+      "robots": "index, follow"
+    },
+    "/products": {
+      "title": "[PRODUCTS_PAGE_TITLE]",
+      "description": "[PRODUCTS_PAGE_DESCRIPTION]",
+      "canonical": "/products",
+      "robots": "index, follow"
+    },
+    "/products/sip-trunks": {
+      "title": "[SIP_TRUNKS_TITLE]",
+      "description": "[SIP_TRUNKS_DESCRIPTION]",
+      "canonical": "/products/sip-trunks",
+      "robots": "index, follow"
+    },
+    "/products/did-numbers": {
+      "title": "[DID_NUMBERS_TITLE]",
+      "description": "[DID_NUMBERS_DESCRIPTION]",
+      "canonical": "/products/did-numbers",
+      "robots": "index, follow"
+    },
+    "/products/ai-agents": {
+      "title": "[AI_AGENTS_TITLE]",
+      "description": "[AI_AGENTS_DESCRIPTION]",
+      "canonical": "/products/ai-agents",
+      "robots": "index, follow"
+    },
+    "/products/ai-transcription": {
+      "title": "[AI_TRANSCRIPTION_TITLE]",
+      "description": "[AI_TRANSCRIPTION_DESCRIPTION]",
+      "canonical": "/products/ai-transcription",
+      "robots": "index, follow"
+    },
+    "/products/call-recording": {
+      "title": "[CALL_RECORDING_TITLE]",
+      "description": "[CALL_RECORDING_DESCRIPTION]",
+      "canonical": "/products/call-recording",
+      "robots": "index, follow"
+    },
+    "/products/predictive-dialer": {
+      "title": "[PREDICTIVE_DIALER_TITLE]",
+      "description": "[PREDICTIVE_DIALER_DESCRIPTION]",
+      "canonical": "/products/predictive-dialer",
+      "robots": "index, follow"
+    },
+    "/products/ai-receptionist": {
+      "title": "[PRODUCT_AI_RECEPTIONIST_TITLE]",
+      "description": "[PRODUCT_AI_RECEPTIONIST_DESCRIPTION]",
+      "canonical": "/products/ai-receptionist",
+      "robots": "index, follow"
+    },
+    "/products/whatsapp-automation": {
+      "title": "[WHATSAPP_AUTOMATION_TITLE]",
+      "description": "[WHATSAPP_AUTOMATION_DESCRIPTION]",
+      "canonical": "/products/whatsapp-automation",
+      "robots": "index, follow"
+    },
+    "/pricing": {
+      "title": "[PRICING_PAGE_TITLE]",
+      "description": "[PRICING_PAGE_DESCRIPTION]",
+      "canonical": "/pricing",
+      "robots": "index, follow"
+    },
+    "/features": {
+      "title": "[FEATURES_PAGE_TITLE]",
+      "description": "[FEATURES_PAGE_DESCRIPTION]",
+      "canonical": "/features",
+      "robots": "index, follow"
+    },
+    "/developers": {
+      "title": "[DEVELOPERS_PAGE_TITLE]",
+      "description": "[DEVELOPERS_PAGE_DESCRIPTION]",
+      "canonical": "/developers",
+      "robots": "index, follow"
+    },
+    "/resources": {
+      "title": "[RESOURCES_PAGE_TITLE]",
+      "description": "[RESOURCES_PAGE_DESCRIPTION]",
+      "canonical": "/resources",
+      "robots": "index, follow"
+    },
+    "/about": {
+      "title": "[ABOUT_PAGE_TITLE]",
+      "description": "[ABOUT_PAGE_DESCRIPTION]",
+      "canonical": "/about",
+      "robots": "index, follow"
+    },
+    "/careers": {
+      "title": "[CAREERS_PAGE_TITLE]",
+      "description": "[CAREERS_PAGE_DESCRIPTION]",
+      "canonical": "/careers",
+      "robots": "index, follow"
+    },
+    "/reseller-program": {
+      "title": "[RESELLER_PROGRAM_TITLE]",
+      "description": "[RESELLER_PROGRAM_DESCRIPTION]",
+      "canonical": "/reseller-program",
+      "robots": "index, follow"
+    },
+    "/contact": {
+      "title": "[CONTACT_PAGE_TITLE]",
+      "description": "[CONTACT_PAGE_DESCRIPTION]",
+      "canonical": "/contact",
+      "robots": "index, follow"
+    },
+    "/terms": {
+      "title": "[TERMS_PAGE_TITLE]",
+      "description": "[TERMS_PAGE_DESCRIPTION]",
+      "canonical": "/terms",
+      "robots": "index, follow"
+    },
+    "/privacy": {
+      "title": "[PRIVACY_PAGE_TITLE]",
+      "description": "[PRIVACY_PAGE_DESCRIPTION]",
+      "canonical": "/privacy",
+      "robots": "index, follow"
+    },
+    "/compliance": {
+      "title": "[COMPLIANCE_PAGE_TITLE]",
+      "description": "[COMPLIANCE_PAGE_DESCRIPTION]",
+      "canonical": "/compliance",
+      "robots": "index, follow"
+    },
+    "/security": {
+      "title": "[SECURITY_PAGE_TITLE]",
+      "description": "[SECURITY_PAGE_DESCRIPTION]",
+      "canonical": "/security",
+      "robots": "index, follow"
+    },
+    "/faq": {
+      "title": "[FAQ_PAGE_TITLE]",
+      "description": "[FAQ_PAGE_DESCRIPTION]",
+      "canonical": "/faq",
+      "robots": "index, follow"
+    },
+    "/status": {
+      "title": "[STATUS_PAGE_TITLE]",
+      "description": "[STATUS_PAGE_DESCRIPTION]",
+      "canonical": "/status",
+      "robots": "noindex, nofollow"
+    }
+  }
+}

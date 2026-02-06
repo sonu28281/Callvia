@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Disallow admin, test, and status pages
+Disallow: /admin
+Disallow: /test
+Disallow: /status
+
+# Sitemap
+Sitemap: https://callvia.com/sitemap.xml
