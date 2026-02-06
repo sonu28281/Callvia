@@ -121,7 +121,6 @@ export default function Careers() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // In a real app, this would send an email
     console.log('Sending CV application:', formData);
     alert(`Thank you! Your application for ${formData.position} has been submitted.`);
     setShowCVForm(false);
@@ -129,94 +128,93 @@ export default function Careers() {
   };
 
   return (
-    <div className="bg-white">
-      <style>{`
-        @keyframes slideInBanner {
-          0% { transform: translateX(-100%) scaleX(0.8); opacity: 0; }
-          50% { opacity: 1; }
-          100% { transform: translateX(0) scaleX(1); opacity: 1; }
-        }
-        @keyframes shimmerWave {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
-        }
-        @keyframes floatUp {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-20px); }
-        }
-        @keyframes pulseGlow {
-          0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.3); }
-          50% { box-shadow: 0 0 40px rgba(34, 211, 238, 0.6); }
-        }
-        .banner-container {
-          animation: slideInBanner 1s ease-out forwards;
-        }
-        .banner-shimmer {
-          background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-          background-size: 1000px 100%;
-          animation: shimmerWave 3s infinite;
-        }
-        .float-element { animation: floatUp 3s ease-in-out infinite; }
-        .pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
-      `}</style>
-      
-      {/* Hero Section - Full Screen with Join Us Banner */}
-      <section className="min-h-screen px-6 bg-gradient-to-b from-blue-900 via-blue-800 to-cyan-900 flex flex-col justify-center items-center text-white relative overflow-hidden">
-        
-        {/* Animated Background Orbs */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="float-element absolute top-20 right-10 w-80 h-80 bg-cyan-400 rounded-full mix-blend-screen filter blur-3xl opacity-20"></div>
-          <div className="float-element absolute bottom-20 left-20 w-96 h-96 bg-blue-400 rounded-full mix-blend-screen filter blur-3xl opacity-15" style={{animationDelay: '1s'}}></div>
+    <div className="bg-brand-dark">
+      {/* Hero Section */}
+      <section className="relative bg-brand-dark-light text-brand-text px-6 py-20 border-b border-brand-border overflow-hidden">
+        {/* Routing lines decoration */}
+        <div className="absolute inset-0 pointer-events-none opacity-20">
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="routing-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                <path d="M0 16h32M16 0v32" stroke="currentColor" strokeWidth="0.5" className="text-brand-accent" fill="none" opacity="0.1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#routing-grid)"/>
+          </svg>
         </div>
 
-        {/* Main Join Us Banner */}
-        <div className="banner-container relative z-10 text-center max-w-5xl mx-auto">
-          {/* Decorative Top Badge */}
-          <div className="inline-flex items-center gap-2 bg-cyan-500/20 px-4 py-2 rounded-full mb-8 border border-cyan-400/30 pulse-glow">
-            <Briefcase size={18} />
-            <span className="text-sm font-semibold">We're Hiring Now</span>
-          </div>
-
-          {/* Main Banner Box */}
-          <div className="relative mb-8">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/20 to-cyan-500/10 rounded-2xl blur-2xl"></div>
-            <div className="relative bg-gradient-to-r from-cyan-600/30 to-blue-600/30 backdrop-blur-sm border border-cyan-400/50 rounded-2xl p-12 overflow-hidden">
-              {/* Shimmer effect */}
-              <div className="banner-shimmer absolute inset-0 rounded-2xl"></div>
-              
-              {/* Content */}
-              <div className="relative z-10">
-                <h1 className="text-6xl lg:text-7xl font-bold mb-4 leading-tight">
-                  Join Our Team
-                </h1>
-                <p className="text-xl lg:text-2xl text-cyan-100 mb-2">
-                  Build the future of AI-powered telecom
-                </p>
-                <p className="text-lg text-cyan-200 max-w-3xl mx-auto">
-                  Callvia is hiring talented professionals to revolutionize voice communication with cutting-edge AI technology
-                </p>
-              </div>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-brand-surface border border-brand-border px-4 py-2 rounded-full mb-6 text-sm">
+              <Briefcase size={16} />
+              Callvia – Enterprise-Grade Telecom
+            </div>
+            <h1 className="text-5xl lg:text-6xl font-heading font-semibold leading-tight mb-6">
+              Reliability-first infrastructure for
+              <span className="text-brand-text-muted"> mission-critical calling</span>
+            </h1>
+            <p className="text-lg text-brand-text-muted leading-relaxed mb-8">
+              Callvia is a B2B telecom and cloud call center SaaS platform built for inbound and outbound operations.
+              Deliver IVR, intelligent routing, monitoring, and compliance at scale with carrier-grade uptime and
+              enterprise-grade security.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button className="bg-brand-accent hover:bg-brand-accent-hover text-brand-dark px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition-colors">
+                Book a Demo <ArrowRight size={18} />
+              </button>
+              <button className="border border-brand-border hover:border-brand-border-light text-brand-text px-6 py-3 rounded-lg font-semibold transition-all duration-200">
+                View Pricing
+              </button>
             </div>
           </div>
-
-          {/* Call to Action Buttons */}
-          <div className="flex gap-4 justify-center flex-wrap">
-            <button 
-              onClick={() => document.getElementById('openings').scrollIntoView({ behavior: 'smooth' })}
-              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-10 py-4 rounded-lg font-bold flex items-center gap-2 transition-all transform hover:scale-105 shadow-lg"
-            >
-              View Open Positions <ArrowRight size={20} />
-            </button>
+          <div className="bg-brand-surface border border-brand-border rounded-2xl p-6 shadow-card">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <div className="text-sm text-brand-text-muted">Network Operations Console</div>
+                <div className="text-lg font-heading font-semibold text-brand-text">Callvia Control Center</div>
+              </div>
+              <div className="text-xs text-brand-text-muted">SLA: 99.99%</div>
+            </div>
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              {[
+                { label: 'Concurrent Calls', value: '3,120' },
+                { label: 'Avg. Wait', value: '6s' },
+                { label: 'Active Agents', value: '486' },
+              ].map((item) => (
+                <div key={item.label} className="bg-brand-dark border border-brand-border rounded-xl p-4">
+                  <div className="text-xs text-brand-text-muted mb-1">{item.label}</div>
+                  <div className="text-lg font-heading font-semibold text-brand-text">{item.value}</div>
+                </div>
+              ))}
+            </div>
+            <div className="bg-brand-dark border border-brand-border rounded-xl p-4 mb-4">
+              <div className="text-xs text-brand-text-muted mb-3">Call Volume (last 24h)</div>
+              <div className="grid grid-cols-12 gap-1 items-end h-20">
+                {[14, 22, 18, 30, 26, 38, 34, 42, 28, 40, 36, 44].map((h, i) => (
+                  <div key={i} className="bg-brand-accent/60 rounded" style={{ height: `${h}px` }} />
+                ))}
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-brand-dark border border-brand-border rounded-xl p-4">
+                <div className="text-xs text-brand-text-muted mb-2">Routing Health</div>
+                <div className="text-sm text-brand-text">Queue SLA: 99.6%</div>
+              </div>
+              <div className="bg-brand-dark border border-brand-border rounded-xl p-4">
+                <div className="text-xs text-brand-text-muted mb-2">Compliance</div>
+                <div className="text-sm text-brand-text">Recording: 100%</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Open Positions Section */}
-      <section id="openings" className="py-20 px-6">
+      <section id="openings" className="py-20 px-6 bg-brand-dark">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Open Positions</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <h2 className="text-4xl font-heading font-bold text-brand-text mb-4">Open Positions</h2>
+            <p className="text-brand-text-muted max-w-2xl mx-auto text-lg">
               We're currently hiring for these exciting roles. Find your perfect fit and grow with us.
             </p>
           </div>
@@ -225,42 +223,42 @@ export default function Careers() {
             {jobs.map((job) => (
               <div
                 key={job.id}
-                className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg hover:border-blue-300 transition-all group cursor-pointer"
+                className="bg-brand-surface border border-brand-border rounded-xl p-8 hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover cursor-pointer"
               >
                 <div className="mb-4">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-2xl font-heading font-bold text-brand-text mb-3">
                     {job.title}
                   </h3>
-                  <div className="space-y-2 text-gray-600 mb-4">
+                  <div className="space-y-2 text-brand-text-muted mb-4">
                     <div className="flex items-center gap-2">
-                      <MapPin size={18} className="text-cyan-500" />
+                      <MapPin size={18} className="text-brand-accent" />
                       <span>{job.location}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Clock size={18} className="text-cyan-500" />
+                      <Clock size={18} className="text-brand-accent" />
                       <span>{job.type}</span>
                     </div>
                   </div>
                 </div>
 
-                <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+                <p className="text-brand-text-muted mb-6 text-sm leading-relaxed">
                   {job.description}
                 </p>
 
                 <div className="mb-6 space-y-3 text-sm">
                   <div>
-                    <span className="text-gray-700 font-semibold">Experience:</span>
-                    <p className="text-gray-600">{job.experience}</p>
+                    <span className="text-brand-text font-semibold">Experience:</span>
+                    <p className="text-brand-text-muted">{job.experience}</p>
                   </div>
                   <div>
-                    <span className="text-gray-700 font-semibold">Salary:</span>
-                    <p className="text-gray-600">{job.salary}</p>
+                    <span className="text-brand-text font-semibold">Salary:</span>
+                    <p className="text-brand-text-muted">{job.salary}</p>
                   </div>
                 </div>
 
                 <button
                   onClick={() => handleApply(job)}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+                  className="w-full bg-brand-accent hover:bg-brand-accent-hover text-brand-dark py-2 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
                 >
                   Apply Now <Send size={18} />
                 </button>
@@ -270,15 +268,15 @@ export default function Careers() {
         </div>
       </section>
 
-      {/* Job Details Drawer */}
+      {/* Job Details Modal */}
       {showCVForm && selectedJob && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-xl max-w-3xl w-full my-8 max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-gray-900">{selectedJob.title}</h2>
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-brand-surface rounded-xl max-w-3xl w-full my-8 max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-brand-surface border-b border-brand-border p-6 flex justify-between items-center">
+              <h2 className="text-2xl font-heading font-bold text-brand-text">{selectedJob.title}</h2>
               <button
                 onClick={() => setShowCVForm(false)}
-                className="text-gray-500 hover:text-gray-700 text-2xl"
+                className="text-brand-text-muted hover:text-brand-text text-2xl"
               >
                 ×
               </button>
@@ -287,66 +285,63 @@ export default function Careers() {
             <div className="p-6 space-y-6">
               {/* Job Details */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="text-gray-600 text-sm mb-1">Location</p>
-                  <p className="text-gray-900 font-semibold">{selectedJob.location}</p>
+                <div className="bg-brand-dark-light p-4 rounded-lg border border-brand-border">
+                  <p className="text-brand-text-muted text-sm mb-1">Location</p>
+                  <p className="text-brand-text font-semibold">{selectedJob.location}</p>
                 </div>
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="text-gray-600 text-sm mb-1">Employment Type</p>
-                  <p className="text-gray-900 font-semibold">{selectedJob.type}</p>
+                <div className="bg-brand-dark-light p-4 rounded-lg border border-brand-border">
+                  <p className="text-brand-text-muted text-sm mb-1">Employment Type</p>
+                  <p className="text-brand-text font-semibold">{selectedJob.type}</p>
                 </div>
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="text-gray-600 text-sm mb-1">Experience</p>
-                  <p className="text-gray-900 font-semibold">{selectedJob.experience}</p>
+                <div className="bg-brand-dark-light p-4 rounded-lg border border-brand-border">
+                  <p className="text-brand-text-muted text-sm mb-1">Experience</p>
+                  <p className="text-brand-text font-semibold">{selectedJob.experience}</p>
                 </div>
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="text-gray-600 text-sm mb-1">Salary Range</p>
-                  <p className="text-gray-900 font-semibold">{selectedJob.salary}</p>
+                <div className="bg-brand-dark-light p-4 rounded-lg border border-brand-border">
+                  <p className="text-brand-text-muted text-sm mb-1">Salary Range</p>
+                  <p className="text-brand-text font-semibold">{selectedJob.salary}</p>
                 </div>
               </div>
 
-              {/* Responsibilities */}
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Key Responsibilities</h3>
+                <h3 className="text-xl font-heading font-bold text-brand-text mb-3">Key Responsibilities</h3>
                 <ul className="space-y-2">
                   {selectedJob.responsibilities.map((resp, idx) => (
                     <li key={idx} className="flex gap-3">
-                      <Check size={20} className="text-cyan-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{resp}</span>
+                      <Check size={20} className="text-brand-accent flex-shrink-0 mt-0.5" />
+                      <span className="text-brand-text-muted">{resp}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Requirements */}
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Requirements</h3>
+                <h3 className="text-xl font-heading font-bold text-brand-text mb-3">Requirements</h3>
                 <ul className="space-y-2">
                   {selectedJob.requirements.map((req, idx) => (
                     <li key={idx} className="flex gap-3">
-                      <Check size={20} className="text-cyan-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{req}</span>
+                      <Check size={20} className="text-brand-accent flex-shrink-0 mt-0.5" />
+                      <span className="text-brand-text-muted">{req}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Benefits */}
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Benefits</h3>
+                <h3 className="text-xl font-heading font-bold text-brand-text mb-3">Benefits</h3>
                 <ul className="space-y-2">
                   {selectedJob.benefits.map((benefit, idx) => (
                     <li key={idx} className="flex gap-3">
-                      <Check size={20} className="text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{benefit}</span>
+                      <Check size={20} className="text-brand-accent flex-shrink-0 mt-0.5" />
+                      <span className="text-brand-text-muted">{benefit}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Application Form */}
-              <div className="bg-blue-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Apply for this position</h3>
+              <div className="bg-brand-dark-light p-6 rounded-lg border border-brand-border">
+                <h3 className="text-xl font-heading font-bold text-brand-text mb-4">Apply for this position</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <input
                     type="text"
@@ -354,7 +349,7 @@ export default function Careers() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                    className="w-full px-4 py-2 bg-brand-dark border border-brand-border text-brand-text rounded-lg focus:outline-none focus:border-brand-accent"
                   />
                   <input
                     type="email"
@@ -362,7 +357,7 @@ export default function Careers() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                    className="w-full px-4 py-2 bg-brand-dark border border-brand-border text-brand-text rounded-lg focus:outline-none focus:border-brand-accent"
                   />
                   <input
                     type="tel"
@@ -370,20 +365,20 @@ export default function Careers() {
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                    className="w-full px-4 py-2 bg-brand-dark border border-brand-border text-brand-text rounded-lg focus:outline-none focus:border-brand-accent"
                   />
-                  <div className="bg-gray-100 p-3 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-2">
+                  <div className="bg-brand-dark p-3 rounded-lg border border-brand-border">
+                    <p className="text-sm text-brand-text-muted mb-2">
                       📧 Send your CV and cover letter to: <br />
-                      <strong>careers@callvia.com</strong>
+                      <strong className="text-brand-text">careers@callvia.com</strong>
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-brand-text-muted">
                       Include your name, the position applied for, and a brief cover letter
                     </p>
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+                    className="w-full bg-brand-accent hover:bg-brand-accent-hover text-brand-dark py-3 rounded-lg font-semibold transition-colors flex items-center justify-center gap-2"
                   >
                     Submit Application <Send size={18} />
                   </button>
@@ -395,11 +390,11 @@ export default function Careers() {
       )}
 
       {/* Why Join Us */}
-      <section className="py-20 px-6 bg-gradient-to-br from-blue-50 to-cyan-50">
+      <section className="py-20 px-6 bg-brand-dark-light">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Join Callvia?</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <h2 className="text-4xl font-heading font-bold text-brand-text mb-4">Why Join Callvia?</h2>
+            <p className="text-brand-text-muted max-w-2xl mx-auto text-lg">
               We're more than just a company - we're a community of innovators
             </p>
           </div>
@@ -433,10 +428,10 @@ export default function Careers() {
             ].map((reason, idx) => (
               <div
                 key={idx}
-                className="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all"
+                className="bg-brand-surface p-6 rounded-xl border border-brand-border hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover"
               >
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{reason.title}</h3>
-                <p className="text-gray-600">{reason.description}</p>
+                <h3 className="text-xl font-heading font-bold text-brand-text mb-2">{reason.title}</h3>
+                <p className="text-brand-text-muted">{reason.description}</p>
               </div>
             ))}
           </div>
@@ -444,15 +439,15 @@ export default function Careers() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-blue-900 to-cyan-900 text-white">
+      <section className="py-20 px-6 bg-brand-dark border-t border-brand-border">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Don't see your perfect role?</h2>
-          <p className="text-xl text-cyan-100 mb-8">
+          <h2 className="text-4xl font-heading font-bold text-brand-text mb-4">Don't see your perfect role?</h2>
+          <p className="text-xl text-brand-text-muted mb-8">
             Send us your CV anyway! We're always looking for talented individuals.
           </p>
           <a
             href="mailto:careers@callvia.com?subject=Career Inquiry - Callvia"
-            className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-lg font-semibold transition-all"
+            className="inline-flex items-center gap-2 bg-brand-accent hover:bg-brand-accent-hover text-brand-dark px-8 py-3 rounded-lg font-semibold transition-colors"
           >
             <Mail size={20} />
             Get in Touch
@@ -462,5 +457,3 @@ export default function Careers() {
     </div>
   );
 }
-
-

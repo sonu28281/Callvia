@@ -45,28 +45,23 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-900 text-gray-100 mt-20">
+    <footer className="bg-brand-dark border-t border-brand-border text-brand-text-muted">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand Info */}
           <div>
             <div className="mb-4">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white font-bold text-lg">
-                  C
-                </div>
-                <span className="text-lg font-semibold text-white">Callvia</span>
-              </div>
+              <Logo size="sm" showText={true} href="/" />
             </div>
-            <p className="text-sm text-gray-400 leading-relaxed mb-6">
+            <p className="text-sm text-brand-text-dim leading-relaxed mb-6">
               Enterprise telecom & AI platform for India.
             </p>
             <div className="space-y-2">
-              <p className="text-xs text-gray-400">
-                <strong className="text-gray-200">Support:</strong>
+              <p className="text-xs text-brand-text-dim">
+                <strong className="text-brand-text-muted">Support:</strong>
               </p>
-              <a href={`mailto:${companyConfig.contact.support}`} className="text-sm text-blue-400 hover:text-blue-300 no-underline">
+              <a href={`mailto:${companyConfig.contact.support}`} className="text-sm text-brand-accent hover:text-brand-accent-hover no-underline transition-colors duration-200">
                 {companyConfig.contact.support}
               </a>
             </div>
@@ -75,7 +70,7 @@ export function Footer() {
           {/* Footer Sections */}
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className="text-sm font-semibold text-white mb-4">
+              <h3 className="text-sm font-heading font-semibold text-brand-text mb-4">
                 {section.title}
               </h3>
               <ul className="space-y-2">
@@ -83,7 +78,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       to={link.href}
-                      className="text-sm text-gray-400 hover:text-blue-400 no-underline transition-colors"
+                      className="text-sm text-brand-text-muted hover:text-brand-accent no-underline transition-colors duration-200"
                     >
                       {link.label}
                     </Link>
@@ -95,22 +90,22 @@ export function Footer() {
         </div>
 
         {/* Contact Info */}
-        <div className="border-t border-gray-700 pt-12 mb-12">
+        <div className="border-t border-brand-border pt-12 mb-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <p className="text-xs font-semibold text-gray-300 mb-2">SALES</p>
-              <a href={`mailto:${companyConfig.contact.sales}`} className="text-sm text-blue-400 hover:text-blue-300 no-underline">
+              <p className="text-xs font-semibold text-brand-text mb-2">SALES</p>
+              <a href={`mailto:${companyConfig.contact.sales}`} className="text-sm text-brand-accent hover:text-brand-accent-hover no-underline transition-colors">
                 {companyConfig.contact.sales}
               </a>
             </div>
             <div>
-              <p className="text-xs font-semibold text-gray-300 mb-2">SUPPORT HOURS</p>
-              <p className="text-sm text-gray-400">{companyConfig.hours.support}</p>
-              <p className="text-xs text-gray-500">{companyConfig.hours.supportDays}</p>
+              <p className="text-xs font-semibold text-brand-text mb-2">SUPPORT HOURS</p>
+              <p className="text-sm text-brand-text-muted">{companyConfig.hours.support}</p>
+              <p className="text-xs text-brand-text-dim">{companyConfig.hours.supportDays}</p>
             </div>
             <div>
-              <p className="text-xs font-semibold text-gray-300 mb-2">OFFICE</p>
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <p className="text-xs font-semibold text-brand-text mb-2">OFFICE</p>
+              <p className="text-sm text-brand-text-muted leading-relaxed">
                 {companyConfig.address.city},<br />
                 {companyConfig.address.state}
               </p>
@@ -119,20 +114,20 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-xs text-gray-400">
+        <div className="border-t border-brand-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-xs text-brand-text-dim">
             © 2024 Callvia. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link
               to="/about"
-              className="text-xs text-gray-400 hover:text-blue-400 no-underline transition-colors"
+              className="text-xs text-brand-text-muted hover:text-brand-accent no-underline transition-colors"
             >
               About
             </Link>
             <Link
               to="/contact"
-              className="text-xs text-gray-400 hover:text-blue-400 no-underline transition-colors"
+              className="text-xs text-brand-text-muted hover:text-brand-accent no-underline transition-colors"
             >
               Contact
             </Link>
@@ -140,7 +135,7 @@ export function Footer() {
               href={`https://wa.me/${companyConfig.contact.whatsapp.replace(/[^0-9]/g, '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-gray-400 hover:text-blue-400 no-underline transition-colors"
+              className="text-xs text-brand-text-muted hover:text-brand-accent no-underline transition-colors"
             >
               WhatsApp
             </a>

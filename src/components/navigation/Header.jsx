@@ -16,10 +16,12 @@ export function Header() {
     { label: 'Developers', href: '/developers/api' },
     { label: 'Resources', href: '#' },
     { label: 'Company', href: '#', submenu: true, menuKey: 'company' },
+    { label: 'Test Page 1', href: '/test-page-1' },
+    { label: 'Test Page 2', href: '/test-page-2' },
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+    <header className="sticky top-0 z-50 bg-brand-dark border-b border-brand-border backdrop-blur-lg bg-opacity-95">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -28,7 +30,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex gap-6 items-center flex-1 ml-12">
+          <nav className="hidden lg:flex gap-8 items-center flex-1 ml-12">
             {navItems.map((item) => (
               <div
                 key={item.label}
@@ -43,14 +45,14 @@ export function Header() {
                 }}
               >
                 {item.submenu ? (
-                  <button className="text-gray-900 text-sm font-medium bg-transparent border-none cursor-pointer hover:text-blue-900 transition-colors py-2 flex items-center gap-1">
+                  <button className="text-brand-text-muted text-sm font-medium bg-transparent border-none cursor-pointer hover:text-brand-text transition-colors duration-200 py-2 flex items-center gap-1">
                     {item.label}
                     <ChevronDown size={16} className="opacity-60" />
                   </button>
                 ) : (
                   <Link
                     to={item.href}
-                    className="text-gray-900 text-sm font-medium no-underline hover:text-blue-900 transition-colors py-2 block"
+                    className="text-brand-text-muted text-sm font-medium no-underline hover:text-brand-text transition-colors duration-200 py-2 block"
                   >
                     {item.label}
                   </Link>
@@ -81,17 +83,17 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Desktop Auth Links - Fancy */}
+          {/* Desktop Auth Links */}
           <div className="hidden lg:flex gap-4 items-center ml-auto">
             <Link
               to="#login"
-              className="text-gray-900 text-sm font-semibold bg-transparent border border-gray-300 px-5 py-2.5 rounded-lg hover:border-blue-900 hover:text-blue-900 transition-all no-underline"
+              className="text-brand-text text-sm font-semibold bg-transparent border border-brand-border px-5 py-2.5 rounded-lg hover:border-brand-accent hover:text-brand-accent transition-all duration-200 no-underline"
             >
               Login
             </Link>
             <Link
               to="#signup"
-              className="text-white text-sm font-semibold bg-gradient-to-r from-blue-900 to-blue-800 px-5 py-2.5 rounded-lg hover:shadow-lg hover:from-blue-950 hover:to-blue-900 transition-all no-underline"
+              className="text-brand-dark text-sm font-semibold bg-brand-accent px-5 py-2.5 rounded-lg hover:bg-brand-accent-hover transition-all duration-200 no-underline"
             >
               Sign Up
             </Link>
@@ -104,34 +106,31 @@ export function Header() {
             aria-label="Toggle menu"
           >
             {mobileOpen ? (
-              <X size={24} className="text-gray-900" strokeWidth={1.5} />
+              <X size={24} className="text-brand-text" strokeWidth={1.5} />
             ) : (
-              <Menu size={24} className="text-gray-900" strokeWidth={1.5} />
+              <Menu size={24} className="text-brand-text" strokeWidth={1.5} />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="lg:hidden flex flex-col gap-4 mt-6 pb-6 border-t border-gray-200 pt-6">
+          <div className="lg:hidden flex flex-col gap-4 mt-6 pb-6 border-t border-brand-border pt-6">
             {navItems.map((item) => (
               <Link
                 key={item.label}
                 to={item.href || '#'}
-                className="text-gray-900 text-base font-medium no-underline hover:text-blue-900"
+                className="text-brand-text-muted text-base font-medium no-underline hover:text-brand-text"
               >
                 {item.label}
               </Link>
             ))}
             <div className="flex flex-col gap-3 mt-4">
-              <button className="text-blue-900 bg-transparent border border-blue-900 px-6 py-2 rounded-md text-base font-semibold cursor-pointer">
+              <button className="text-brand-text bg-transparent border border-brand-border px-6 py-2 rounded-lg text-base font-semibold cursor-pointer hover:border-brand-accent transition-colors">
                 Talk to Sales
               </button>
-              <button className="bg-blue-900 text-white border-none px-6 py-2 rounded-md text-base font-semibold cursor-pointer">
+              <button className="bg-brand-accent text-brand-dark border-none px-6 py-2 rounded-lg text-base font-semibold cursor-pointer hover:bg-brand-accent-hover transition-colors">
                 Book Demo
-              </button>
-              <button className="text-blue-900 bg-white border border-blue-900 px-4 py-2 rounded-md text-sm font-semibold cursor-pointer">
-                Be Your Own Telecom
               </button>
             </div>
           </div>

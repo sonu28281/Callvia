@@ -1,73 +1,135 @@
-import React from 'react';
-import { ArrowRight, Check, Play, Building2, Briefcase, ShoppingCart, Shield, Heart, Zap } from 'lucide-react';
-import { AnimatedBackground } from '../../components/sections/AnimatedBackground.jsx';
+import React, { useState } from 'react';
+import { ArrowRight, Check, Phone, Building2, Briefcase, ShoppingCart, Shield, Heart, Zap } from 'lucide-react';
 
 export function AiVoiceAgentsPage() {
-  return (
-    <div className="bg-white">
-      <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes playPulse {
-          0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-          50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
-        }
-        @keyframes waveAnimation {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        @keyframes slideInRight {
-          from { opacity: 0; transform: translateX(30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        .fade-up { animation: fadeInUp 0.8s ease-out forwards; }
-        .play-pulse { animation: playPulse 2s infinite; }
-        .wave-line { animation: waveAnimation 2s ease-in-out infinite; }
-        .use-case-card {
-          animation: fadeInUp 0.8s ease-out forwards;
-          opacity: 0;
-        }
-        .feature-bar { animation: slideInRight 0.8s ease-out forwards; }
-      `}</style>
+  const [callStatus, setCallStatus] = useState(null); // null, 'ringing', 'connected', 'disconnected'
+  const [currentAgent, setCurrentAgent] = useState(null);
+  const [activeCall, setActiveCall] = useState(null); // Track which agent is currently in call
 
+  /**
+   * 🔥 CONNEXCS WEB CALL INTEGRATION
+   * 
+   * TODO: Replace placeholder endpoint with actual ConnexCS Web Call URL
+   * 
+   * How to find the endpoint:
+   * 1. Open your ConnexCS UI/dialer in browser
+   * 2. Open DevTools → Network tab
+   * 3. Click the "Call" button in ConnexCS
+   * 4. Look for POST request (usually to /webrtc/call or /cp/webcall/start)
+   * 5. Copy that URL and replace the placeholder below
+   * 
+   * Example endpoints:
+   * - https://your-domain.connexcs.com/webrtc/call
+   * - https://your-domain.connexcs.com/cp/webcall/start
+   */
+  const CONNEXCS_ENDPOINT = 'https://YOUR-CONNEXCS-DOMAIN.com/webrtc/call'; // 👈 REPLACE THIS
+
+  const handleCallAgent = async (agentName, destination) => {
+    // If already in call with this agent, disconnect
+    if (activeCall === destination) {
+      handleDisconnect();
+      return;
+    }
+
+    // If in call with another agent, disconnect first
+    if (activeCall) {
+      handleDisconnect();
+    }
+
+    try {
+      setCallStatus('ringing');
+      setCurrentAgent(agentName);
+
+      // Check if endpoint is configured
+      if (CONNEXCS_ENDPOINT.includes('YOUR-CONNEXCS-DOMAIN')) {
+        // Simulate call for demo
+        setTimeout(() => {
+          setCallStatus('connected');
+          setActiveCall(destination);
+        }, 2000);
+        return;
+      }
+
+      // TODO: Replace with actual ConnexCS Web Call API
+      const response = await fetch(CONNEXCS_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          destination: destination,
+          caller_name: 'Website Visitor',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Call failed');
+      }
+
+      // Call initiated successfully
+      setCallStatus('connected');
+      setActiveCall(destination);
+      
+      // Don't auto-reset - user will disconnect manually
+
+    } catch (error) {
+      console.error('Call error:', error);
+      setCallStatus('error');
+      
+      // Reset status after 3 seconds
+      setTimeout(() => {
+        setCallStatus(null);
+        setCurrentAgent(null);
+        setActiveCall(null);
+      }, 3000);
+    }
+  };
+
+  const handleDisconnect = () => {
+    // TODO: Add actual disconnect API call if needed
+    setCallStatus('disconnected');
+    setActiveCall(null);
+    
+    // Reset after 2 seconds
+    setTimeout(() => {
+      setCallStatus(null);
+      setCurrentAgent(null);
+    }, 2000);
+  };
+
+  const useCases = [
+    { icon: Building2, title: 'Real Estate', subtitle: 'Site Visits', destination: 'new-ai' },
+    { icon: Briefcase, title: 'NBFC', subtitle: 'Loan Inquiry', destination: 'AI_NBFC' },
+    { icon: ShoppingCart, title: 'eCommerce', subtitle: 'Order Tracking', destination: 'AI_ECOMMERCE' },
+    { icon: Shield, title: 'Insurance', subtitle: 'Policy Renewals', destination: 'AI_INSURANCE' },
+    { icon: Heart, title: 'Healthcare', subtitle: 'Appointment Booking', destination: 'AI_HEALTHCARE' },
+    { icon: Building2, title: 'Banks', subtitle: 'Card Activation', destination: 'AI_BANKS' },
+  ];
+
+  return (
+    <div className="bg-brand-dark">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-32 pb-32 bg-gradient-to-br from-violet-400 via-fuchsia-400 to-pink-500">
-        <div className="absolute inset-0 opacity-70">
-          <svg className="absolute bottom-0 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none" style={{height: '100%'}}>
-            <path fill="rgba(255, 255, 255, 0.2)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-              <animate attributeName="d" dur="8s" repeatCount="indefinite" values="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
-                M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,186.7C1248,181,1344,139,1392,117.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
-                M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/>
-            </path>
-            <path fill="rgba(255, 255, 255, 0.15)" d="M0,160L48,165.3C96,171,192,181,288,181.3C384,181,480,171,576,165.3C672,160,768,160,864,165.3C960,171,1056,181,1152,181.3C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-              <animate attributeName="d" dur="12s" repeatCount="indefinite" values="M0,160L48,165.3C96,171,192,181,288,181.3C384,181,480,171,576,165.3C672,160,768,160,864,165.3C960,171,1056,181,1152,181.3C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;M0,192L48,186.7C96,181,192,171,288,170.7C384,171,480,181,576,186.7C672,192,768,192,864,186.7C960,181,1056,171,1152,170.7C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;M0,160L48,165.3C96,171,192,181,288,181.3C384,181,480,171,576,165.3C672,160,768,160,864,165.3C960,171,1056,181,1152,181.3C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/>
-            </path>
-            <path fill="rgba(255, 255, 255, 0.1)" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,213.3C672,224,768,224,864,213.3C960,203,1056,181,1152,181.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-              <animate attributeName="d" dur="6s" repeatCount="indefinite" values="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,213.3C672,224,768,224,864,213.3C960,203,1056,181,1152,181.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
-                M0,192L48,202.7C96,213,192,235,288,234.7C384,235,480,213,576,202.7C672,192,768,192,864,202.7C960,213,1056,235,1152,234.7C1248,235,1344,213,1392,202.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
-                M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,213.3C672,224,768,224,864,213.3C960,203,1056,181,1152,181.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/>
-            </path>
-          </svg>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <section className="relative bg-gradient-to-b from-brand-dark to-brand-dark-light pt-32 pb-24 px-6">
+        {/* Subtle routing lines */}
+        <div className="absolute inset-0 routing-lines opacity-30" aria-hidden="true" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 bg-purple-100 px-4 py-2 rounded-full mb-6 fade-up">
-              <Zap size={18} className="text-purple-900" />
-              <span className="text-sm font-semibold text-purple-900">AI Voice Agents</span>
+            <div className="inline-flex items-center gap-2 bg-brand-surface border border-brand-border px-4 py-2 rounded-lg mb-6">
+              <Zap size={18} className="text-brand-accent" />
+              <span className="text-sm font-semibold text-brand-text-muted">AI Voice Agents</span>
             </div>
-            <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight fade-up" style={{animationDelay: '0.1s'}}>
+            <h1 className="text-5xl lg:text-6xl font-heading font-bold text-brand-text mb-6 leading-tight tracking-tight">
               Intelligent Voice Agents for Every Business
             </h1>
-            <p className="text-xl text-purple-100 mb-8 leading-relaxed fade-up" style={{animationDelay: '0.2s'}}>
+            <p className="text-xl text-brand-text-muted mb-10 leading-relaxed">
               Deploy AI-powered voice agents that handle customer interactions, qualify leads, and provide support—24/7, in 24+ languages.
             </p>
-            <div className="flex gap-4 justify-center flex-wrap fade-up" style={{animationDelay: '0.3s'}}>
-              <button className="bg-gradient-to-r from-purple-900 to-purple-800 hover:from-purple-950 hover:to-purple-900 text-white px-10 py-4 rounded-lg font-bold flex items-center gap-2 transition-all transform hover:scale-105 shadow-lg">
+            <div className="flex gap-4 justify-center flex-wrap">
+              <button className="bg-brand-accent hover:bg-brand-accent-hover text-brand-dark px-10 py-4 rounded-lg font-semibold flex items-center gap-2 transition-all duration-200">
                 Book Demo <ArrowRight size={20} />
               </button>
-              <button className="border-2 border-blue-900 text-blue-900 px-10 py-4 rounded-lg font-bold hover:bg-blue-50 transition-colors">
+              <button className="border-2 border-brand-border text-brand-text hover:bg-brand-surface px-10 py-4 rounded-lg font-semibold transition-all duration-200">
                 Explore Features
               </button>
             </div>
@@ -76,64 +138,84 @@ export function AiVoiceAgentsPage() {
       </section>
 
       {/* Experience Our AI Agents Section */}
-      <section className="py-24 px-6 bg-gradient-to-b from-blue-50 to-white">
+      <section className="py-24 px-6 bg-brand-dark-light">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Experience Our Voice AI Agents in Action</h2>
-            <p className="text-xl text-gray-600">See how businesses across industries are using AI voice agents</p>
+            <h2 className="text-4xl font-heading font-bold text-brand-text mb-4 tracking-tight">Experience Our Voice AI Agents in Action</h2>
+            <p className="text-xl text-brand-text-muted">See how businesses across industries are using AI voice agents</p>
           </div>
 
           {/* Use Case Cards - 6 columns */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-12">
-            {[
-              { icon: Building2, title: 'Real Estate', subtitle: 'Site Visits' },
-              { icon: Briefcase, title: 'NBFC', subtitle: 'Loan Inquiry' },
-              { icon: ShoppingCart, title: 'eCommerce', subtitle: 'Order Tracking' },
-              { icon: Shield, title: 'Insurance', subtitle: 'Policy Renewals' },
-              { icon: Heart, title: 'Healthcare', subtitle: 'Appointment Booking' },
-              { icon: Building2, title: 'Banks', subtitle: 'Card Activation' },
-            ].map((useCase, idx) => (
-              <div
-                key={idx}
-                className="use-case-card bg-white rounded-2xl p-6 border border-gray-200 hover:border-blue-400 hover:shadow-xl transition-all group text-center"
-                style={{animationDelay: `${idx * 0.1}s`}}
-              >
-                {/* Icon Circle */}
-                <div className="bg-gradient-to-br from-blue-100 to-cyan-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <useCase.icon size={40} className="text-blue-900" />
-                </div>
-                
-                {/* Title and Subtitle */}
-                <h3 className="text-lg font-bold text-gray-900 mb-1">{useCase.title}</h3>
-                <p className="text-sm text-gray-600 mb-6">{useCase.subtitle}</p>
-                
-                {/* Play Button with Waveform */}
-                <div className="flex items-center justify-center gap-3 mb-0">
-                  <button className="play-pulse bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center transition-colors flex-shrink-0">
-                    <Play size={20} fill="white" />
-                  </button>
-                  <div className="flex items-end justify-center gap-1 h-8 flex-1">
-                    <div className="w-0.5 bg-blue-400 h-3 rounded-full opacity-70"></div>
-                    <div className="w-0.5 bg-blue-400 h-5 rounded-full opacity-80"></div>
-                    <div className="w-0.5 bg-blue-400 h-2 rounded-full opacity-60"></div>
-                    <div className="w-0.5 bg-blue-400 h-6 rounded-full opacity-90"></div>
-                    <div className="w-0.5 bg-blue-400 h-3 rounded-full opacity-70"></div>
+            {useCases.map((useCase, idx) => {
+              const isInCall = activeCall === useCase.destination;
+              const isCurrentCard = currentAgent === useCase.title || isInCall;
+              
+              return (
+                <div
+                  key={idx}
+                  className={`group bg-brand-surface rounded-xl p-6 text-center transition-all duration-200 border flex flex-col ${
+                    isInCall 
+                      ? 'border-green-500 shadow-card-hover' 
+                      : 'border-brand-border hover:border-brand-border-light'
+                  }`}
+                >
+                  {/* Icon Circle */}
+                  <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors duration-200 ${
+                    isInCall 
+                      ? 'bg-green-500/10 border border-green-500/30' 
+                      : 'bg-brand-accent/10 border border-brand-accent/20'
+                  }`}>
+                    <useCase.icon size={32} className={isInCall ? 'text-green-500' : 'text-brand-accent'} />
+                  </div>
+                  
+                  {/* Title and Subtitle */}
+                  <h3 className="text-base font-heading font-semibold text-brand-text mb-1">{useCase.title}</h3>
+                  <p className="text-sm text-brand-text-muted mb-3 flex-grow">{useCase.subtitle}</p>
+                  
+                  {/* Status Display */}
+                  {isCurrentCard && (
+                    <div className="mb-3">
+                      {callStatus === 'ringing' && (
+                        <p className="text-xs font-semibold text-blue-400">Ringing...</p>
+                      )}
+                      {callStatus === 'connected' && (
+                        <p className="text-xs font-semibold text-green-400">Connected</p>
+                      )}
+                      {callStatus === 'disconnected' && (
+                        <p className="text-xs font-semibold text-brand-text-dim">Disconnected</p>
+                      )}
+                    </div>
+                  )}
+                  
+                  {/* Call/Disconnect Button */}
+                  <div className="flex justify-center">
+                    <button 
+                      className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${
+                        isInCall
+                          ? 'bg-red-500 hover:bg-red-600 text-white'
+                          : 'bg-brand-accent hover:bg-brand-accent-hover text-brand-dark'
+                      }`}
+                      onClick={() => handleCallAgent(useCase.title, useCase.destination)}
+                    >
+                      <Phone size={20} className={isInCall ? 'rotate-135 transition-transform' : ''} />
+                    </button>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Feature Bar */}
-          <div className="feature-bar bg-gradient-to-r from-blue-900 to-blue-800 text-white rounded-2xl p-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="bg-brand-surface border border-brand-border rounded-xl p-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {[
               { title: 'Hire Specialized AI Agents', desc: 'Deploy pre-trained or custom agents for your industry' },
               { title: 'Human-like Conversations', desc: 'Natural, context-aware dialogue that feels real' },
               { title: '24 Vernacular Languages', desc: 'Support customers in their preferred language' },
             ].map((feature, idx) => (
-              <div key={idx} style={{animationDelay: `${idx * 0.2}s`}}>
-                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-blue-100 text-sm">{feature.desc}</p>
+              <div key={idx}>
+                <h3 className="text-xl font-heading font-semibold text-brand-text mb-2">{feature.title}</h3>
+                <p className="text-brand-text-muted text-sm">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -141,9 +223,9 @@ export function AiVoiceAgentsPage() {
       </section>
 
       {/* Key Features Section */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-brand-dark-light">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Powerful AI Features</h2>
+          <h2 className="text-4xl font-heading font-bold text-brand-text mb-12 text-center tracking-tight">Powerful AI Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: 'Programmable Conversations', desc: 'Define custom conversation flows and dialogue patterns' },
@@ -155,14 +237,13 @@ export function AiVoiceAgentsPage() {
             ].map((feature, idx) => (
               <div
                 key={idx}
-                className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 border border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all fade-up"
-                style={{animationDelay: `${idx * 0.1}s`, opacity: 0}}
+                className="bg-brand-surface rounded-xl p-8 border border-brand-border hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4">
-                  <Check size={24} className="text-white" />
+                <div className="w-12 h-12 bg-brand-accent/10 border border-brand-accent/20 rounded-lg flex items-center justify-center mb-4">
+                  <Check size={24} className="text-brand-accent" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.desc}</p>
+                <h3 className="text-xl font-heading font-semibold text-brand-text mb-2">{feature.title}</h3>
+                <p className="text-brand-text-muted">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -170,10 +251,10 @@ export function AiVoiceAgentsPage() {
       </section>
 
       {/* Industry Benefits */}
-      <section className="py-24 px-6 bg-gradient-to-br from-blue-900 to-blue-800">
+      <section className="py-24 px-6 bg-brand-dark">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">Transform Your Customer Interactions</h2>
-          <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto">
+          <h2 className="text-4xl font-heading font-bold text-brand-text mb-6 tracking-tight">Transform Your Customer Interactions</h2>
+          <p className="text-xl text-brand-text-muted mb-12 max-w-3xl mx-auto leading-relaxed">
             AI Voice Agents reduce costs by 60%, improve response times by 80%, and increase customer satisfaction
           </p>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -183,9 +264,9 @@ export function AiVoiceAgentsPage() {
               { stat: '80%', label: 'Faster Response' },
               { stat: '24+', label: 'Languages Supported' },
             ].map((item, idx) => (
-              <div key={idx} className="bg-white/10 backdrop-blur rounded-xl p-6 border border-blue-400/30">
-                <div className="text-4xl font-bold text-white mb-2">{item.stat}</div>
-                <div className="text-blue-100">{item.label}</div>
+              <div key={idx} className="bg-brand-surface border border-brand-border rounded-xl p-8 transition-all duration-200 hover:border-brand-border-light hover:-translate-y-0.5 shadow-card hover:shadow-card-hover">
+                <div className="text-5xl font-heading font-bold text-brand-accent mb-3">{item.stat}</div>
+                <div className="text-brand-text-muted">{item.label}</div>
               </div>
             ))}
           </div>
@@ -193,17 +274,17 @@ export function AiVoiceAgentsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-brand-dark-light">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">Ready to Deploy AI Voice Agents?</h2>
-          <p className="text-xl text-gray-600 mb-8">
+          <h2 className="text-4xl font-heading font-bold text-brand-text mb-6 tracking-tight">Ready to Deploy AI Voice Agents?</h2>
+          <p className="text-xl text-brand-text-muted mb-10 leading-relaxed">
             Join leading companies using Callvia's AI voice agents for customer service automation
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <button className="bg-gradient-to-r from-blue-900 to-blue-800 text-white px-12 py-4 rounded-lg font-bold hover:from-blue-950 hover:to-blue-900 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2">
+            <button className="bg-brand-accent hover:bg-brand-accent-hover text-brand-dark px-12 py-4 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2">
               Start Free Trial <ArrowRight size={20} />
             </button>
-            <button className="border-2 border-blue-900 text-blue-900 px-12 py-4 rounded-lg font-bold hover:bg-blue-50 transition-colors">
+            <button className="border-2 border-brand-border text-brand-text hover:bg-brand-surface px-12 py-4 rounded-lg font-semibold transition-all duration-200">
               Schedule Demo
             </button>
           </div>

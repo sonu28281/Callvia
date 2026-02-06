@@ -39,6 +39,16 @@ import { SmallBusinessSolutionPage } from '../pages/Solutions/SmallBusiness.jsx'
 // Developers
 import { ApiPage } from '../pages/Developers/Api.jsx';
 
+// Legal
+import { TermsOfServicePage } from '../pages/Legal/TermsOfService.jsx';
+import { PrivacyPage } from '../pages/Legal/Privacy.jsx';
+import { CompliancePage } from '../pages/Legal/Compliance.jsx';
+import { AUPPage } from '../pages/Legal/AUP.jsx';
+
+// Test Pages
+import { TestPage1 } from '../pages/TestPage1.jsx';
+import { TestPage2 } from '../pages/TestPage2.jsx';
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -80,6 +90,16 @@ export const router = createBrowserRouter([
       
       // Developers
       { path: 'developers/api', element: <ApiPage /> },
+      
+      // Legal
+      { path: 'legal/terms-of-service', element: <TermsOfServicePage /> },
+      { path: 'legal/privacy', element: <PrivacyPage /> },
+      { path: 'legal/compliance', element: <CompliancePage /> },
+      { path: 'legal/aup', element: <AUPPage /> },
+      
+      // Test Pages
+      { path: 'test-page-1', element: <TestPage1 /> },
+      { path: 'test-page-2', element: <TestPage2 /> },
     ],
   },
 ]);

@@ -40,29 +40,33 @@ export function SupportPage() {
   ];
 
   return (
-    <div className="bg-white">
-      <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
-      `}</style>
-
+    <div className="bg-brand-dark">
       {/* Hero */}
-      <section className="py-24 px-6 bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6 fade-up">We're Here to Help</h1>
-          <p className="text-xl text-blue-100 mb-8 fade-up" style={{animationDelay: '0.1s'}}>
+      <section className="relative py-24 px-6 bg-brand-dark-light border-b border-brand-border overflow-hidden">
+        {/* Routing lines decoration */}
+        <div className="absolute inset-0 pointer-events-none opacity-20">
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="routing-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                <path d="M0 16h32M16 0v32" stroke="currentColor" strokeWidth="0.5" className="text-brand-accent" fill="none" opacity="0.1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#routing-grid)"/>
+          </svg>
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h1 className="text-5xl lg:text-6xl font-heading font-bold text-brand-text mb-6">We're Here to Help</h1>
+          <p className="text-xl text-brand-text-muted mb-8">
             Get the support you need, when you need it. Our team is ready to assist you.
           </p>
         </div>
       </section>
 
       {/* Contact Methods */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-brand-dark">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Get in Touch</h2>
+          <h2 className="text-4xl font-heading font-bold text-brand-text mb-12 text-center">Get in Touch</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
@@ -71,7 +75,6 @@ export function SupportPage() {
                 content: 'support@callvia.in',
                 subtext: 'We reply within 4 hours',
                 link: 'mailto:support@callvia.in',
-                color: 'blue'
               },
               {
                 icon: Phone,
@@ -79,7 +82,6 @@ export function SupportPage() {
                 content: 'sales@callvia.in',
                 subtext: 'For new customers',
                 link: 'mailto:sales@callvia.in',
-                color: 'green'
               },
               {
                 icon: MessageCircle,
@@ -87,7 +89,6 @@ export function SupportPage() {
                 content: '+91 8418 828 125',
                 subtext: 'Chat with us directly',
                 link: 'https://wa.me/918418828125',
-                color: 'emerald'
               },
               {
                 icon: Clock,
@@ -95,28 +96,23 @@ export function SupportPage() {
                 content: '9 AM - 6 PM IST',
                 subtext: 'Monday to Friday',
                 link: null,
-                color: 'cyan'
               },
             ].map((item, i) => {
               const Icon = item.icon;
-              const colorClasses = {
-                blue: 'bg-blue-100 text-blue-900 border-blue-200',
-                green: 'bg-green-100 text-green-900 border-green-200',
-                emerald: 'bg-emerald-100 text-emerald-900 border-emerald-200',
-                cyan: 'bg-cyan-100 text-cyan-900 border-cyan-200',
-              };
               return (
                 <a
                   key={i}
                   href={item.link || '#'}
-                  className={`p-8 border-2 rounded-xl text-center hover:shadow-xl transition-all group ${colorClasses[item.color]}`}
+                  className="p-8 bg-brand-surface border border-brand-border rounded-xl text-center hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover"
                   target={item.link && item.link.startsWith('http') ? '_blank' : undefined}
                   rel={item.link && item.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                 >
-                  <Icon size={40} className="mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-lg font-bold mb-2">{item.title}</h3>
-                  <p className="text-sm font-semibold mb-1">{item.content}</p>
-                  <p className="text-xs opacity-75">{item.subtext}</p>
+                  <div className="w-14 h-14 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center mx-auto mb-4">
+                    <Icon size={28} className="text-brand-accent" />
+                  </div>
+                  <h3 className="text-lg font-heading font-bold text-brand-text mb-2">{item.title}</h3>
+                  <p className="text-sm font-semibold text-brand-text mb-1">{item.content}</p>
+                  <p className="text-xs text-brand-text-muted">{item.subtext}</p>
                 </a>
               );
             })}
@@ -125,18 +121,18 @@ export function SupportPage() {
       </section>
 
       {/* Office Location */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section className="py-20 px-6 bg-brand-dark-light">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-lg p-12 border border-gray-200">
+          <div className="bg-brand-surface rounded-2xl shadow-card p-12 border border-brand-border">
             <div className="flex items-start gap-6">
-              <div className="bg-blue-100 p-4 rounded-lg">
-                <MapPin size={32} className="text-blue-900" />
+              <div className="w-14 h-14 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center flex-shrink-0">
+                <MapPin size={28} className="text-brand-accent" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Office</h3>
-                <p className="text-lg text-gray-700 mb-2">582/108, Badali Khera</p>
-                <p className="text-lg text-gray-700 mb-2">Lucknow, Uttar Pradesh</p>
-                <p className="text-lg text-gray-700">India</p>
+                <h3 className="text-2xl font-heading font-bold text-brand-text mb-4">Our Office</h3>
+                <p className="text-lg text-brand-text-muted mb-2">582/108, Badali Khera</p>
+                <p className="text-lg text-brand-text-muted mb-2">Lucknow, Uttar Pradesh</p>
+                <p className="text-lg text-brand-text-muted">India</p>
               </div>
             </div>
           </div>
@@ -144,9 +140,9 @@ export function SupportPage() {
       </section>
 
       {/* Resources */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-brand-dark">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Self-Service Resources</h2>
+          <h2 className="text-4xl font-heading font-bold text-brand-text mb-12 text-center">Self-Service Resources</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { icon: Book, title: 'Documentation', desc: 'Complete guides and tutorials', link: '#' },
@@ -158,11 +154,13 @@ export function SupportPage() {
                 <a
                   key={i}
                   href={resource.link}
-                  className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl border border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all group"
+                  className="bg-brand-surface p-8 rounded-xl border border-brand-border hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover"
                 >
-                  <Icon size={48} className="text-blue-900 mb-6 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{resource.title}</h3>
-                  <p className="text-gray-600">{resource.desc}</p>
+                  <div className="w-14 h-14 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center mb-6">
+                    <Icon size={28} className="text-brand-accent" />
+                  </div>
+                  <h3 className="text-xl font-heading font-bold text-brand-text mb-3">{resource.title}</h3>
+                  <p className="text-brand-text-muted">{resource.desc}</p>
                 </a>
               );
             })}
@@ -171,33 +169,33 @@ export function SupportPage() {
       </section>
 
       {/* FAQs */}
-      <section className="py-20 px-6 bg-gradient-to-b from-white to-blue-50">
+      <section className="py-20 px-6 bg-brand-dark-light">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4 text-center">Frequently Asked Questions</h2>
-          <p className="text-center text-gray-600 mb-12">Quick answers to common questions</p>
+          <h2 className="text-4xl font-heading font-bold text-brand-text mb-4 text-center">Frequently Asked Questions</h2>
+          <p className="text-center text-brand-text-muted mb-12">Quick answers to common questions</p>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
               <div
                 key={i}
-                className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+                className="bg-brand-surface rounded-xl border border-brand-border shadow-card overflow-hidden hover:border-brand-border-light transition-all duration-200"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 hover:bg-blue-50 transition-colors"
+                  className="w-full p-6 text-left flex items-center justify-between gap-4 hover:bg-brand-dark-light transition-colors"
                 >
                   <div className="flex items-start gap-4">
-                    <HelpCircle size={24} className="text-blue-900 flex-shrink-0 mt-1" />
-                    <span className="font-semibold text-gray-900 text-lg">{faq.question}</span>
+                    <HelpCircle size={24} className="text-brand-accent flex-shrink-0 mt-1" />
+                    <span className="font-semibold text-brand-text text-lg">{faq.question}</span>
                   </div>
                   {openFaq === i ? (
-                    <ChevronUp size={24} className="text-blue-900 flex-shrink-0" />
+                    <ChevronUp size={24} className="text-brand-accent flex-shrink-0" />
                   ) : (
-                    <ChevronDown size={24} className="text-gray-400 flex-shrink-0" />
+                    <ChevronDown size={24} className="text-brand-text-muted flex-shrink-0" />
                   )}
                 </button>
                 {openFaq === i && (
                   <div className="px-6 pb-6 pt-2">
-                    <p className="text-gray-700 leading-relaxed pl-10">{faq.answer}</p>
+                    <p className="text-brand-text-muted leading-relaxed pl-10">{faq.answer}</p>
                   </div>
                 )}
               </div>
@@ -206,31 +204,19 @@ export function SupportPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-6 bg-slate-900">
+      {/* Call to Action */}
+      <section className="py-20 px-6 bg-brand-dark border-t border-brand-border">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Still Have Questions?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Our team is ready to help you with any questions or concerns
+          <h2 className="text-4xl font-heading font-semibold text-brand-text mb-6">Still have questions?</h2>
+          <p className="text-lg text-brand-text-muted mb-8">
+            Contact our support team and we'll be happy to help.
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a
-              href="mailto:support@callvia.in"
-              className="bg-white text-blue-900 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
-            >
-              <Mail size={20} />
+          <div className="flex gap-4 justify-center">
+            <a href="mailto:support@callvia.in" className="bg-brand-accent hover:bg-brand-accent-hover text-brand-dark px-8 py-3 rounded-lg font-semibold transition-colors">
               Email Support
             </a>
-            <a
-              href="https://wa.me/918418828125"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-blue-800 transition-colors inline-flex items-center gap-2"
-            >
-              <MessageCircle size={20} />
-              WhatsApp Us
+            <a href="/contact" className="border border-brand-border hover:border-brand-border-light text-brand-text px-8 py-3 rounded-lg font-semibold transition-all duration-200">
+              Contact Form
             </a>
           </div>
         </div>
@@ -238,5 +224,3 @@ export function SupportPage() {
     </div>
   );
 }
-
-export default SupportPage;

@@ -1,133 +1,122 @@
 import React from 'react';
-import { Shield, Zap, Users, Globe, Rocket, TrendingUp, Award, MapPin, CheckCircle2, Target, Lightbulb, Code, Phone, Cpu, Radio, Headphones } from 'lucide-react';
+import { Shield, Users, Globe, Target, Lightbulb, Code, Phone, Cpu, Radio, Headphones, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { AnimatedBackground } from '../components/sections/AnimatedBackground.jsx';
 
 export function AboutPage() {
   return (
-    <div>
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        @keyframes scaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-        .animate-fade-up {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-        .animate-slide-left {
-          animation: slideInLeft 0.8s ease-out forwards;
-        }
-        .animate-slide-right {
-          animation: slideInRight 0.8s ease-out forwards;
-        }
-        .animate-scale-in {
-          animation: scaleIn 0.8s ease-out forwards;
-        }
-      `}</style>
+    <div className="bg-brand-dark">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-32 pb-32">
-        <AnimatedBackground />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center space-y-6">
-            <span className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold mb-6 animate-fade-up" style={{animationDelay: '0s'}}>ABOUT US</span>
-            <h1 className="text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight animate-fade-up" style={{animationDelay: '0.1s'}}>
-              Enterprise Telecom Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">India</span>
+      <section className="relative bg-brand-dark border-b border-brand-border overflow-hidden">
+        {/* Routing lines decoration */}
+        <div className="absolute inset-0 pointer-events-none opacity-20">
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="routing-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                <path d="M0 16h32M16 0v32" stroke="currentColor" strokeWidth="0.5" className="text-brand-accent" fill="none" opacity="0.1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#routing-grid)"/>
+            <line x1="0" y1="20%" x2="100%" y2="20%" stroke="currentColor" strokeWidth="1" className="text-brand-accent" opacity="0.15"/>
+            <line x1="0" y1="50%" x2="100%" y2="50%" stroke="currentColor" strokeWidth="1" className="text-brand-accent" opacity="0.15"/>
+            <line x1="0" y1="80%" x2="100%" y2="80%" stroke="currentColor" strokeWidth="1" className="text-brand-accent" opacity="0.15"/>
+          </svg>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-brand-surface border border-brand-border rounded-full text-sm text-brand-text-muted mb-6">
+              Class-B VNO • Carrier-grade • India-focused
+            </span>
+            <h1 className="text-4xl lg:text-5xl font-heading font-semibold text-brand-text mb-6 leading-tight">
+              Run enterprise telecom operations with infrastructure built to <span className="text-brand-accent">scale</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed font-light animate-fade-up" style={{animationDelay: '0.2s'}}>
-              Founded in 2025, Callvia is a Class-B VNO platform providing carrier-grade, compliant telecom infrastructure and AI-powered voice solutions for enterprises, resellers, and call centers across India.
+            <p className="text-lg text-brand-text-muted leading-relaxed mb-8">
+              Callvia delivers mission-critical calling for inbound and outbound operations with compliant routing,
+              real-time monitoring, and enterprise-grade reliability across India.
             </p>
-            <p className="text-sm text-gray-500 max-w-2xl mx-auto tracking-wide uppercase animate-fade-up" style={{animationDelay: '0.3s'}}>
-              Built by telecom operators. For telecom operators.
-            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+              {[
+                { label: 'Founded', value: '2025' },
+                { label: 'Monthly Calls', value: '10M+' },
+                { label: 'Uptime SLA', value: '99.99%' },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-brand-surface border border-brand-border rounded-xl p-4">
+                  <div className="text-2xl font-heading font-semibold text-brand-text">{stat.value}</div>
+                  <div className="text-xs uppercase tracking-wide text-brand-text-muted">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="relative">
+            <div className="bg-brand-surface border border-brand-border rounded-2xl p-6 shadow-card">
+              <div className="text-sm text-brand-text-muted mb-4">Control Center Preview</div>
+              <div className="bg-brand-dark-light border border-brand-border rounded-xl p-6">
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  {['Routing Health', 'Compliance Coverage'].map((label) => (
+                    <div key={label} className="bg-brand-surface border border-brand-border rounded-lg p-3">
+                      <div className="text-[10px] uppercase tracking-wide text-brand-text-muted">{label}</div>
+                      <div className="text-lg font-heading font-semibold text-brand-text">Stable</div>
+                    </div>
+                  ))}
+                </div>
+                <div className="h-24 rounded-lg border border-brand-border bg-brand-surface" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Story Section */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-brand-dark-light">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <span className="inline-block px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold mb-6">OUR STORY</span>
-              <h2 className="text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                Built by Operators, for Operators
+              <span className="inline-block px-4 py-2 bg-brand-accent/10 border border-brand-accent/20 text-brand-accent rounded-full text-sm font-semibold mb-6">Our Story</span>
+              <h2 className="text-4xl font-heading font-semibold text-brand-text mb-6 leading-tight">
+                Built by operators, for operators
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                Callvia was founded in 2025 by telecom infrastructure professionals who understood one simple truth: **India needed domestic-first telecom infrastructure.**
+              <p className="text-lg text-brand-text-muted leading-relaxed mb-4">
+                Callvia was founded by telecom infrastructure professionals who saw a clear need for domestic-first
+                telecom operations in India.
               </p>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
+              <p className="text-lg text-brand-text-muted leading-relaxed mb-4">
                 For years, businesses relied on international routes, resold capacity, and platforms built by SaaS teams. We changed that.
               </p>
-              <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                Today, Callvia powers 10M+ calls monthly through our TRAI-approved Class-B VNO infrastructure, serving call centers, enterprises, and resellers across India with 99.99% reliability.
+              <p className="text-lg text-brand-text-muted leading-relaxed mb-6">
+                Today, Callvia powers 10M+ calls monthly through TRAI-approved Class-B VNO infrastructure, serving
+                call centers, enterprises, and resellers across India with a 99.99% uptime SLA.
               </p>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 size={24} className="text-green-600 flex-shrink-0" />
-                  <span className="text-gray-700 font-medium">TRAI-Approved VNO Infrastructure</span>
+                  <CheckCircle2 size={20} className="text-brand-accent flex-shrink-0" />
+                  <span className="text-brand-text font-medium">TRAI-approved VNO infrastructure</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 size={24} className="text-green-600 flex-shrink-0" />
-                  <span className="text-gray-700 font-medium">Carrier-Grade Class-5 Switch Backend</span>
+                  <CheckCircle2 size={20} className="text-brand-accent flex-shrink-0" />
+                  <span className="text-brand-text font-medium">Carrier-grade Class-5 switch backend</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 size={24} className="text-green-600 flex-shrink-0" />
-                  <span className="text-gray-700 font-medium">Domestic-Only, Compliant Operations</span>
+                  <CheckCircle2 size={20} className="text-brand-accent flex-shrink-0" />
+                  <span className="text-brand-text font-medium">Domestic-only, compliant operations</span>
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-12 rounded-2xl border border-blue-100">
+            <div className="bg-brand-surface p-12 rounded-2xl border border-brand-border shadow-card">
               <div className="space-y-8">
-                <div className="border-b border-blue-200 pb-8">
-                  <p className="text-5xl font-bold text-blue-600 mb-2">2025</p>
-                  <p className="text-lg text-gray-700 font-semibold">Founded</p>
-                  <p className="text-gray-600 mt-2">Launched as TRAI-approved Class-B VNO</p>
+                <div className="border-b border-brand-border pb-8">
+                  <p className="text-4xl font-heading font-semibold text-brand-text mb-2">2025</p>
+                  <p className="text-lg text-brand-text font-semibold">Founded</p>
+                  <p className="text-brand-text-muted mt-2">Launched as a TRAI-approved Class-B VNO</p>
                 </div>
-                <div className="border-b border-blue-200 pb-8">
-                  <p className="text-5xl font-bold text-blue-600 mb-2">10M+</p>
-                  <p className="text-lg text-gray-700 font-semibold">Calls Managed Monthly</p>
-                  <p className="text-gray-600 mt-2">Enterprise-scale operations, carrier-grade reliability</p>
+                <div className="border-b border-brand-border pb-8">
+                  <p className="text-4xl font-heading font-semibold text-brand-text mb-2">10M+</p>
+                  <p className="text-lg text-brand-text font-semibold">Calls managed monthly</p>
+                  <p className="text-brand-text-muted mt-2">Enterprise-scale operations, carrier-grade reliability</p>
                 </div>
                 <div>
-                  <p className="text-5xl font-bold text-blue-600 mb-2">99.99%</p>
-                  <p className="text-lg text-gray-700 font-semibold">Uptime SLA</p>
-                  <p className="text-gray-600 mt-2">Backed by enterprise infrastructure</p>
+                  <p className="text-4xl font-heading font-semibold text-brand-text mb-2">99.99%</p>
+                  <p className="text-lg text-brand-text font-semibold">Uptime SLA</p>
+                  <p className="text-brand-text-muted mt-2">Backed by enterprise infrastructure</p>
                 </div>
               </div>
             </div>
@@ -136,27 +125,33 @@ export function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-brand-dark">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="bg-white p-10 rounded-2xl border border-gray-100 hover:shadow-xl transition-all">
-              <Target size={40} className="text-blue-600 mb-6" />
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-brand-surface p-10 rounded-2xl border border-brand-border hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover">
+              <div className="w-14 h-14 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center mb-6">
+                <Target size={28} className="text-brand-accent" />
+              </div>
+              <h2 className="text-2xl font-heading font-semibold text-brand-text mb-4">Our Mission</h2>
+              <p className="text-brand-text-muted leading-relaxed">
                 Empower every business in India with enterprise-grade, compliant telecom infrastructure. We believe voice communication should be controlled, secure, and profitable.
               </p>
             </div>
-            <div className="bg-white p-10 rounded-2xl border border-gray-100 hover:shadow-xl transition-all">
-              <Lightbulb size={40} className="text-blue-600 mb-6" />
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h2>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-brand-surface p-10 rounded-2xl border border-brand-border hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover">
+              <div className="w-14 h-14 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center mb-6">
+                <Lightbulb size={28} className="text-brand-accent" />
+              </div>
+              <h2 className="text-2xl font-heading font-semibold text-brand-text mb-4">Our Vision</h2>
+              <p className="text-brand-text-muted leading-relaxed">
                 To become India's trusted foundation for voice infrastructure. A future where control, compliance, and AI-driven intelligence are standard, not premium features.
               </p>
             </div>
-            <div className="bg-white p-10 rounded-2xl border border-gray-100 hover:shadow-xl transition-all">
-              <Code size={40} className="text-blue-600 mb-6" />
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Promise</h2>
-              <p className="text-gray-600 leading-relaxed">
+            <div className="bg-brand-surface p-10 rounded-2xl border border-brand-border hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover">
+              <div className="w-14 h-14 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center mb-6">
+                <Code size={28} className="text-brand-accent" />
+              </div>
+              <h2 className="text-2xl font-heading font-semibold text-brand-text mb-4">Our Promise</h2>
+              <p className="text-brand-text-muted leading-relaxed">
                 Carrier-grade reliability. Transparent pricing. Complete control. No grey routes. No international calling. Just honest, compliant telecom built for Indian businesses.
               </p>
             </div>
@@ -165,44 +160,44 @@ export function AboutPage() {
       </section>
 
       {/* Why Callvia */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section className="py-20 px-6 bg-brand-dark-light">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold mb-6">WHY CALLVIA</span>
-            <h2 className="text-5xl font-bold text-gray-900 mb-4">What Sets Us Apart</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">We're not just another telecom platform. We're a different breed.</p>
+            <span className="inline-block px-4 py-2 bg-brand-accent/10 border border-brand-accent/20 text-brand-accent rounded-full text-sm font-semibold mb-6">Why Callvia</span>
+            <h2 className="text-4xl font-heading font-semibold text-brand-text mb-4">What sets us apart</h2>
+            <p className="text-lg text-brand-text-muted max-w-2xl mx-auto">Built for regulated, high-volume environments with predictable performance.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
               {
-                icon: Rocket,
-                title: 'Built by Operators',
-                desc: 'Founded by telecom professionals with 15+ years of experience. We understand VNO operations, not theory.'
+                icon: Shield,
+                title: 'Regulatory Excellence',
+                desc: 'TRAI-approved VNO with full compliance for DND, CDR retention, and KYC requirements.'
               },
               {
-                icon: TrendingUp,
-                title: 'Proven at Scale',
-                desc: '10M+ calls monthly. 99.99% uptime SLA. Enterprise infrastructure handling real telecom traffic.'
+                icon: Cpu,
+                title: 'Carrier Infrastructure',
+                desc: 'Class-5 softswitch backend with 99.99% uptime SLA and sub-150ms voice latency.'
               },
               {
-                icon: Award,
-                title: 'India-Centric Support',
-                desc: '24/7 support by telecom experts. IST-aligned, understands local regulations and business needs.'
+                icon: Globe,
+                title: 'Domestic Operations',
+                desc: 'India-only operations with no grey routes, ensuring quality and regulatory compliance.'
               },
               {
-                icon: MapPin,
-                title: 'Compliant & Secure',
-                desc: 'TRAI-approved VNO. No international routes. ISO 27001 & GDPR compliant. Data stays in India.'
+                icon: Headphones,
+                title: 'Enterprise Support',
+                desc: 'Dedicated account managers and priority support for mission-critical operations.'
               },
-            ].map((item, i) => {
-              const Icon = item.icon;
+            ].map((feature, idx) => {
+              const Icon = feature.icon;
               return (
-                <div key={i} className="flex gap-6 bg-white p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-all">
-                  <Icon size={48} className="text-blue-600 flex-shrink-0" />
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                <div key={idx} className="bg-brand-surface border border-brand-border rounded-xl p-8 hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover">
+                  <div className="w-14 h-14 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center mb-6">
+                    <Icon size={28} className="text-brand-accent" />
                   </div>
+                  <h3 className="text-xl font-heading font-semibold text-brand-text mb-3">{feature.title}</h3>
+                  <p className="text-brand-text-muted leading-relaxed">{feature.desc}</p>
                 </div>
               );
             })}
@@ -210,121 +205,23 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Core Values as Separate Section */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold mb-6">CORE VALUES</span>
-            <h2 className="text-5xl font-bold text-gray-900 mb-4">How We Operate</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Four principles guide every decision we make</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { 
-                icon: Shield, 
-                title: 'Trust', 
-                highlight: 'No Hidden Routes',
-                desc: "Complete transparency. You know exactly what you're getting." 
-              },
-              { 
-                icon: Zap, 
-                title: 'Control', 
-                highlight: 'You Own It',
-                desc: 'Full control over infrastructure, routing, and billing. Always.' 
-              },
-              { 
-                icon: Users, 
-                title: 'Partnership', 
-                highlight: 'Your Success',
-                desc: "We grow when you grow. Long-term relationships matter." 
-              },
-              { 
-                icon: Globe, 
-                title: 'India First', 
-                highlight: 'Built Locally',
-                desc: "For India, by India. Compliance and expertise that matters." 
-              },
-            ].map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div key={i} className="bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-2xl border border-gray-200 hover:border-blue-300 transition-all">
-                  <Icon size={40} className="text-blue-600 mb-4" />
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm font-semibold text-blue-600 mb-3">{item.highlight}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Explore Our Products */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-bold mb-6">PRODUCT SUITE</span>
-            <h2 className="text-5xl font-bold text-gray-900 mb-4">Everything You Need</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">Enterprise-grade solutions for calls, routing, automation, and more</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Phone, name: 'DID Numbers', path: '/products/did-numbers', desc: 'Pan-India virtual numbers for inbound calls' },
-              { icon: Radio, name: 'SIP Trunks', path: '/products/sip-trunks', desc: 'VoIP connectivity and trunk management' },
-              { icon: Headphones, name: 'Cloud Call Center', path: '/products/cloud-call-center', desc: 'Inbound & outbound call center platform' },
-              { icon: Cpu, name: 'AI Receptionist', path: '/products/ai-receptionist', desc: 'Intelligent call answering and routing' },
-              { icon: Zap, name: 'AI Voice Agents', path: '/products/ai-voice-agents', desc: 'Programmable voice agents for automation' },
-              { icon: Rocket, name: 'IVR Routing', path: '/products/ivr-routing', desc: 'Smart IVR and intelligent call routing' },
-            ].map((product) => {
-              const IconComponent = product.icon;
-              return (
-                <Link
-                  key={product.path}
-                  to={product.path}
-                  className="bg-gradient-to-br from-white to-gray-50 p-8 rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all no-underline group"
-                >
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg mb-4 group-hover:bg-blue-200 transition-all flex items-center justify-center">
-                    <IconComponent size={24} className="text-blue-600" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">{product.name}</h3>
-                  <p className="text-gray-600 text-sm">{product.desc}</p>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Team & Contact Section */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-5xl mx-auto text-center">
-          <span className="inline-block px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-bold mb-6">CONNECT WITH US</span>
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">Ready to Get Started?</h2>
-          <p className="text-xl text-gray-600 mb-12 leading-relaxed max-w-2xl mx-auto">
-            Whether you're a call center, enterprise, reseller, or small business, our team is ready to help you build scalable, compliant telecom infrastructure.
+      {/* Call to Action */}
+      <section className="py-20 px-6 bg-brand-dark border-t border-brand-border">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-heading font-semibold text-brand-text mb-6">Ready to scale your voice operations?</h2>
+          <p className="text-lg text-brand-text-muted mb-8">
+            Join enterprises and call centers running enterprise-grade telecom operations on Callvia.
           </p>
-          <div className="flex gap-4 justify-center flex-wrap mb-8">
-            <Link
-              to="/contact"
-              className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-10 py-4 rounded-lg font-bold hover:shadow-lg transform hover:scale-105 transition-all inline-flex items-center gap-2 no-underline"
-            >
-              Get Started <Rocket size={20} />
+          <div className="flex gap-4 justify-center">
+            <Link to="/contact" className="bg-brand-accent hover:bg-brand-accent-hover text-brand-dark px-8 py-3 rounded-lg font-semibold transition-colors">
+              Get Started
             </Link>
-            <button className="border-2 border-gray-300 text-gray-700 px-10 py-4 rounded-lg font-bold hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 transition-all">
-              Schedule a Demo
-            </button>
+            <Link to="/pricing" className="border border-brand-border hover:border-brand-border-light text-brand-text px-8 py-3 rounded-lg font-semibold transition-all duration-200">
+              View Pricing
+            </Link>
           </div>
-          <p className="text-gray-600 text-sm">
-            📧 <a href="mailto:sales@callvia.in" className="text-blue-600 hover:text-blue-700 font-semibold no-underline">sales@callvia.in</a> | 
-            📧 <a href="mailto:support@callvia.in" className="text-blue-600 hover:text-blue-700 font-semibold no-underline">support@callvia.in</a>
-          </p>
-          <p className="text-gray-500 text-sm mt-4">
-            Support available: Monday to Friday, 9:00 AM – 6:00 PM IST
-          </p>
         </div>
       </section>
     </div>
   );
 }
-
-export default AboutPage;

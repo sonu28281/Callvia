@@ -7,23 +7,23 @@ export function Logo({
   href = '/',
 }) {
   const sizes = {
-    sm: { box: '20px', text: 'text-base', icon: 'text-sm' },
-    md: { box: '24px', text: 'text-lg', icon: 'text-base' },
-    lg: { box: '32px', text: 'text-xl', icon: 'text-lg' },
+    sm: { width: '40px', height: '40px', text: 'text-base' },
+    md: { width: '52px', height: '52px', text: 'text-xl' },
+    lg: { width: '64px', height: '64px', text: 'text-2xl' },
   };
 
   const sizeConfig = sizes[size] || sizes.md;
 
   const content = (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <div
-        className="bg-primary rounded-md flex items-center justify-center text-white font-bold"
-        style={{ width: sizeConfig.box, height: sizeConfig.box }}
-      >
-        <span className={sizeConfig.icon}>C</span>
-      </div>
+    <div className={`flex items-center gap-3 ${className}`}>
+      <img
+        src="/logo.png"
+        alt="Callvia Logo"
+        style={{ width: sizeConfig.width, height: sizeConfig.height }}
+        className="object-contain"
+      />
       {showText && (
-        <span className={`${sizeConfig.text} font-semibold text-text`}>
+        <span className={`${sizeConfig.text} font-bold text-brand-text`}>
           Callvia
         </span>
       )}
@@ -32,7 +32,7 @@ export function Logo({
 
   if (href) {
     return (
-      <a href={href} className="text-decoration-none">
+      <a href={href} className="no-underline">
         {content}
       </a>
     );

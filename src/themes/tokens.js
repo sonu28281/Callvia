@@ -1,28 +1,40 @@
 export const defaultTheme = {
   colors: {
-    primary: '#0F4C81',
-    primaryLight: '#1565A0',
-    primaryDark: '#0A3557',
-    secondary: '#E07A1F',
-    secondaryLight: '#F09D3E',
-    secondaryDark: '#B85C14',
-    background: '#FFFFFF',
-    backgroundAlt: '#F8F9FA',
-    backgroundDim: '#F0F3F7',
-    text: '#1F2937',
-    textMuted: '#6B7280',
-    textLight: '#9CA3AF',
-    border: '#E5E7EB',
-    borderLight: '#F3F4F6',
+    // Premium Dark Base
+    primary: '#070A12',
+    primaryLight: '#0B1220',
+    primaryDark: '#040508',
+    // Saffron Accent (use sparingly - CTAs only)
+    accent: '#FF9F1C',
+    accentSoft: '#FFE2B8',
+    accentHover: '#E68F19',
+    // Surface & Cards
+    surface: '#0F1B33',
+    surfaceHover: '#152140',
+    // Borders & Dividers
+    border: '#223055',
+    borderLight: '#2A3A5F',
+    borderSubtle: '#1A2847',
+    // Text System
+    text: '#EAF0FF',
+    textMuted: '#A7B3CE',
+    textDim: '#7A8AA8',
+    // Status Colors (muted for premium feel)
     success: '#10B981',
     warning: '#F59E0B',
     error: '#EF4444',
-    divider: '#E5E7EB',
+    // Legacy (deprecated - use new system)
+    secondary: '#FF9F1C',
+    background: '#070A12',
+    backgroundAlt: '#0F1B33',
+    backgroundDim: '#0B1220',
+    divider: '#223055',
   },
   fonts: {
     family: {
+      heading: 'Sora, system-ui, -apple-system, sans-serif',
       base: 'Inter, system-ui, -apple-system, sans-serif',
-      mono: 'Menlo, Monaco, "Courier New", monospace',
+      mono: 'JetBrains Mono, Menlo, Monaco, monospace',
     },
     size: {
       xs: '12px',
@@ -31,9 +43,10 @@ export const defaultTheme = {
       lg: '18px',
       xl: '20px',
       '2xl': '24px',
-      '3xl': '30px',
-      '4xl': '36px',
-      '5xl': '48px',
+      '3xl': '28px',
+      '4xl': '40px',
+      '5xl': '56px',
+      '6xl': '64px',
     },
     weight: {
       light: 300,
@@ -41,6 +54,11 @@ export const defaultTheme = {
       medium: 500,
       semibold: 600,
       bold: 700,
+    },
+    letterSpacing: {
+      tight: '-0.02em',
+      normal: '0',
+      wide: '0.01em',
     },
   },
   spacing: {
@@ -53,22 +71,28 @@ export const defaultTheme = {
     '3xl': '64px',
   },
   radii: {
-    sm: '4px',
-    md: '8px',
-    lg: '12px',
-    xl: '16px',
+    sm: '6px',
+    md: '12px',
+    lg: '16px',
+    xl: '20px',
+    '2xl': '24px',
     full: '9999px',
   },
   shadows: {
-    sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+    // Subtle professional shadows
+    sm: '0 1px 3px 0 rgba(0, 0, 0, 0.3)',
+    md: '0 2px 8px 0 rgba(0, 0, 0, 0.4)',
+    lg: '0 4px 16px 0 rgba(0, 0, 0, 0.5)',
+    xl: '0 8px 32px 0 rgba(0, 0, 0, 0.6)',
+    // Card shadows on dark backgrounds
+    card: '0 2px 8px 0 rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(34, 48, 85, 0.5)',
+    cardHover: '0 4px 16px 0 rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(34, 48, 85, 0.8)',
   },
   transitions: {
-    fast: '150ms ease-in-out',
-    base: '200ms ease-in-out',
-    slow: '300ms ease-in-out',
+    // Micro-interactions only
+    fast: '150ms ease-out',
+    base: '200ms ease-out',
+    slow: '250ms ease-out',
   },
 };
 

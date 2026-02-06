@@ -1,6 +1,5 @@
 import React from 'react';
-import { Check, ArrowRight, Phone, Zap, Building2, Globe } from 'lucide-react';
-import { AnimatedBackground } from '../components/sections/AnimatedBackground.jsx';
+import { Check, Phone, Zap, Building2, Globe } from 'lucide-react';
 
 export function PricingPage() {
   const tiers = [
@@ -56,33 +55,36 @@ export function PricingPage() {
   ];
 
   return (
-    <div className="bg-white">
-      <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
-      `}</style>
-
+    <div className="bg-brand-dark">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-32 pb-32">
-        <AnimatedBackground />
+      <section className="relative bg-brand-dark border-b border-brand-border overflow-hidden py-20">
+        {/* Routing lines decoration */}
+        <div className="absolute inset-0 pointer-events-none opacity-20">
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="routing-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                <path d="M0 16h32M16 0v32" stroke="currentColor" strokeWidth="0.5" className="text-brand-accent" fill="none" opacity="0.1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#routing-grid)"/>
+          </svg>
+        </div>
+
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <div className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-bold mb-6 fade-up">
+          <div className="inline-block px-4 py-2 bg-brand-accent/10 border border-brand-accent/20 text-brand-accent rounded-full text-sm font-semibold mb-6">
             PRICING
           </div>
-          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight fade-up" style={{animationDelay: '0.1s'}}>
+          <h1 className="text-5xl lg:text-6xl font-heading font-bold text-brand-text mb-6 leading-tight">
             Transparent, Predictable Pricing
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed fade-up" style={{animationDelay: '0.2s'}}>
+          <p className="text-xl text-brand-text-muted max-w-3xl mx-auto mb-8 leading-relaxed">
             Prepaid, usage-based model. No hidden costs, no surprises. Pay only for what you use.
           </p>
         </div>
       </section>
 
       {/* Pricing Tiers */}
-      <section className="py-24 px-6 bg-gradient-to-b from-white to-blue-50">
+      <section className="py-24 px-6 bg-brand-dark-light">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {tiers.map((tier) => (
@@ -90,26 +92,26 @@ export function PricingPage() {
                 key={tier.name}
                 className={`rounded-2xl p-8 border-2 ${
                   tier.highlighted
-                    ? 'border-blue-900 bg-blue-50 shadow-xl transform scale-105'
-                    : 'border-gray-200 bg-white shadow-lg'
-                }`}
+                    ? 'border-brand-accent bg-brand-surface shadow-card-hover'
+                    : 'border-brand-border bg-brand-surface shadow-card'
+                } hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5`}
               >
                 {tier.highlighted && (
-                  <div className="bg-blue-900 text-white text-sm font-bold px-4 py-1 rounded-full inline-block mb-4">
+                  <div className="bg-brand-accent text-brand-dark text-sm font-bold px-4 py-1 rounded-full inline-block mb-4">
                     MOST POPULAR
                   </div>
                 )}
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{tier.name}</h3>
-                <p className="text-gray-600 mb-6 text-sm">{tier.description}</p>
+                <h3 className="text-2xl font-heading font-bold text-brand-text mb-2">{tier.name}</h3>
+                <p className="text-brand-text-muted mb-6 text-sm">{tier.description}</p>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold text-blue-900">{tier.price}</span>
-                  <span className="text-gray-600 ml-2">{tier.period}</span>
+                  <span className="text-4xl font-heading font-bold text-brand-accent">{tier.price}</span>
+                  <span className="text-brand-text-muted ml-2">{tier.period}</span>
                 </div>
                 <button
-                  className={`w-full py-4 rounded-lg font-bold mb-8 transition-all ${
+                  className={`w-full py-4 rounded-lg font-bold mb-8 transition-all duration-200 ${
                     tier.highlighted
-                      ? 'bg-blue-900 text-white hover:bg-blue-950 shadow-lg'
-                      : 'bg-gray-200 text-gray-900 hover:bg-gray-300'
+                      ? 'bg-brand-accent hover:bg-brand-accent-hover text-brand-dark shadow-card'
+                      : 'bg-brand-dark-light hover:bg-brand-dark text-brand-text border border-brand-border'
                   }`}
                 >
                   Get Quote
@@ -119,9 +121,9 @@ export function PricingPage() {
                     <li key={f} className="flex items-start gap-3">
                       <Check
                         size={20}
-                        className="text-blue-900 flex-shrink-0 mt-1"
+                        className="text-brand-accent flex-shrink-0 mt-1"
                       />
-                      <span className="text-sm text-gray-900">{f}</span>
+                      <span className="text-sm text-brand-text-muted">{f}</span>
                     </li>
                   ))}
                 </ul>
@@ -132,9 +134,9 @@ export function PricingPage() {
       </section>
 
       {/* Usage-Based Pricing Info */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-brand-dark">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">
+          <h2 className="text-4xl font-heading font-bold text-brand-text mb-12 text-center">
             Usage-Based Pricing Components
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -166,14 +168,14 @@ export function PricingPage() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-gradient-to-br from-blue-50 to-white rounded-xl p-8 border border-blue-200 hover:shadow-lg transition-shadow"
+                className="bg-brand-surface rounded-xl p-8 border border-brand-border hover:border-brand-border-light transition-all duration-200 hover:-translate-y-0.5 shadow-card hover:shadow-card-hover"
               >
-                <div className="bg-blue-900 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                  <item.icon size={28} className="text-white" />
+                <div className="w-14 h-14 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center mb-6">
+                  <item.icon size={28} className="text-brand-accent" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-600 mb-4">{item.desc}</p>
-                <p className="text-lg font-semibold text-blue-900">{item.pricing}</p>
+                <h3 className="text-xl font-heading font-bold text-brand-text mb-2">{item.title}</h3>
+                <p className="text-brand-text-muted mb-4">{item.desc}</p>
+                <p className="text-lg font-semibold text-brand-accent">{item.pricing}</p>
               </div>
             ))}
           </div>
@@ -181,14 +183,14 @@ export function PricingPage() {
       </section>
 
       {/* Why Prepaid */}
-      <section className="py-24 px-6 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-24 px-6 bg-brand-dark-light">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl font-heading font-bold text-brand-text mb-6">
                 Why Prepaid Billing?
               </h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              <p className="text-lg text-brand-text-muted mb-8 leading-relaxed">
                 Our prepaid wallet system gives you complete control over spending with no surprise bills.
               </p>
               <div className="space-y-4">
@@ -198,60 +200,52 @@ export function PricingPage() {
                   'Real-time balance visibility and usage alerts',
                   'Instant recharge with multiple payment methods',
                   'Detailed usage reports and invoice generation',
-                  'Auto-recharge options for uninterrupted service',
-                ].map((benefit, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <Check size={24} className="text-blue-900 flex-shrink-0 mt-1" />
-                    <span className="text-lg text-gray-900">{benefit}</span>
+                ].map((benefit) => (
+                  <div key={benefit} className="flex items-start gap-3">
+                    <Check size={20} className="text-brand-accent flex-shrink-0 mt-1" />
+                    <span className="text-brand-text-muted">{benefit}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="bg-white rounded-2xl shadow-xl p-12 border border-gray-200">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Volume Discounts Available</h3>
+            <div className="bg-brand-surface border border-brand-border rounded-2xl p-8 shadow-card">
+              <h3 className="text-2xl font-heading font-semibold text-brand-text mb-6">Prepaid Benefits</h3>
               <div className="space-y-6">
-                <div className="border-l-4 border-blue-900 pl-6">
-                  <div className="text-sm text-gray-600 mb-1">Monthly Spend: ₹50,000+</div>
-                  <div className="text-2xl font-bold text-blue-900">5% Discount</div>
+                <div className="bg-brand-dark-light border border-brand-border rounded-xl p-6">
+                  <div className="text-3xl font-heading font-bold text-brand-accent mb-2">Instant</div>
+                  <div className="text-brand-text-muted">Activation after recharge</div>
                 </div>
-                <div className="border-l-4 border-blue-900 pl-6">
-                  <div className="text-sm text-gray-600 mb-1">Monthly Spend: ₹1,00,000+</div>
-                  <div className="text-2xl font-bold text-blue-900">10% Discount</div>
+                <div className="bg-brand-dark-light border border-brand-border rounded-xl p-6">
+                  <div className="text-3xl font-heading font-bold text-brand-accent mb-2">Real-time</div>
+                  <div className="text-brand-text-muted">Usage tracking and alerts</div>
                 </div>
-                <div className="border-l-4 border-blue-900 pl-6">
-                  <div className="text-sm text-gray-600 mb-1">Monthly Spend: ₹5,00,000+</div>
-                  <div className="text-2xl font-bold text-blue-900">Custom Pricing</div>
+                <div className="bg-brand-dark-light border border-brand-border rounded-xl p-6">
+                  <div className="text-3xl font-heading font-bold text-brand-accent mb-2">Flexible</div>
+                  <div className="text-brand-text-muted">No minimum commitments</div>
                 </div>
               </div>
-              <p className="text-sm text-gray-500 mt-8">
-                *Volume discounts calculated automatically based on monthly usage
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Enterprise Pricing */}
-      <section className="py-24 px-6 bg-slate-900">
+      {/* Call to Action */}
+      <section className="py-20 px-6 bg-brand-dark border-t border-brand-border">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Need Enterprise Pricing?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Custom pricing for high-volume operations, white-label partnerships, and dedicated infrastructure
+          <h2 className="text-4xl font-heading font-semibold text-brand-text mb-6">Ready to get started?</h2>
+          <p className="text-lg text-brand-text-muted mb-8">
+            Contact us for custom pricing tailored to your business needs.
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <button className="bg-white text-blue-900 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors inline-flex items-center gap-2">
-              Talk to Sales <ArrowRight size={20} />
-            </button>
-            <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-blue-800 transition-colors">
-              Request Quote
-            </button>
+          <div className="flex gap-4 justify-center">
+            <a href="/contact" className="bg-brand-accent hover:bg-brand-accent-hover text-brand-dark px-8 py-3 rounded-lg font-semibold transition-colors">
+              Contact Sales
+            </a>
+            <a href="/support" className="border border-brand-border hover:border-brand-border-light text-brand-text px-8 py-3 rounded-lg font-semibold transition-all duration-200">
+              Get Support
+            </a>
           </div>
         </div>
       </section>
     </div>
   );
 }
-
-export default PricingPage;

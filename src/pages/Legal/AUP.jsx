@@ -3,30 +3,44 @@ import { ShieldAlert, XCircle, AlertTriangle, CheckCircle, Phone, MessageSquare 
 
 export function AUPPage() {
   return (
-    <div className="bg-white">
+    <div className="bg-brand-dark">
       {/* Hero */}
-      <section className="py-20 px-6 bg-gradient-to-br from-red-900 to-red-800 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <ShieldAlert size={64} className="mx-auto mb-6 text-red-200" />
-          <h1 className="text-5xl font-bold mb-6">Acceptable Use Policy</h1>
-          <p className="text-xl text-red-100">
+      <section className="relative py-20 px-6 bg-brand-dark-light text-brand-text border-b border-brand-border overflow-hidden">
+        {/* Routing lines decoration */}
+        <div className="absolute inset-0 pointer-events-none opacity-20">
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="routing-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                <path d="M0 16h32M16 0v32" stroke="currentColor" strokeWidth="0.5" className="text-brand-accent" fill="none" opacity="0.1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#routing-grid)"/>
+          </svg>
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="w-16 h-16 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-6">
+            <ShieldAlert size={32} className="text-red-400" />
+          </div>
+          <h1 className="text-5xl font-heading font-bold text-brand-text mb-6">Acceptable Use Policy</h1>
+          <p className="text-xl text-brand-text-muted">
             Guidelines for responsible and lawful use of Callvia services
           </p>
         </div>
       </section>
 
       {/* Content */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-brand-dark">
         <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg max-w-none">
             
             {/* Introduction */}
             <div className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Purpose of This Policy</h2>
-              <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              <h2 className="text-3xl font-heading font-bold text-brand-text mb-4">Purpose of This Policy</h2>
+              <p className="text-lg text-brand-text-muted leading-relaxed mb-4">
                 This Acceptable Use Policy ("AUP") defines prohibited uses of Callvia's telecommunications services. This policy protects Callvia, our customers, and the general Internet and telecom community from unethical, irresponsible, and illegal activities.
               </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="text-lg text-brand-text-muted leading-relaxed">
                 Violation of this AUP may result in service suspension or termination, with or without notice. We reserve the right to report any activity we suspect violates laws or regulations to appropriate law enforcement authorities.
               </p>
             </div>
@@ -34,116 +48,120 @@ export function AUPPage() {
             {/* Prohibited Activities */}
             <div className="mb-12">
               <div className="flex items-center gap-3 mb-6">
-                <XCircle size={32} className="text-red-600" />
-                <h2 className="text-3xl font-bold text-gray-900">Strictly Prohibited Activities</h2>
+                <div className="w-10 h-10 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+                  <XCircle size={24} className="text-red-400" />
+                </div>
+                <h2 className="text-3xl font-heading font-bold text-brand-text">Strictly Prohibited Activities</h2>
               </div>
               
               <div className="space-y-8">
                 {/* Spam & Unsolicited Communications */}
-                <div className="bg-red-50 rounded-xl p-8 border border-red-200">
+                <div className="bg-brand-surface rounded-xl p-8 border border-red-500/50">
                   <div className="flex items-center gap-2 mb-4">
-                    <MessageSquare className="text-red-600" size={24} />
-                    <h3 className="text-2xl font-bold text-gray-900">Spam & Unsolicited Communications</h3>
+                    <MessageSquare className="text-red-400" size={24} />
+                    <h3 className="text-2xl font-heading font-bold text-brand-text">Spam & Unsolicited Communications</h3>
                   </div>
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• <strong>Robocalls:</strong> Automated or pre-recorded calls without recipient consent</li>
-                    <li>• <strong>Telemarketing Spam:</strong> Unsolicited sales or promotional calls to DND-registered numbers</li>
-                    <li>• <strong>SMS Spam:</strong> Bulk unsolicited text messages or promotional SMS</li>
-                    <li>• <strong>Do Not Call Violations:</strong> Calling numbers on TRAI's National Do Not Call (NDNC) registry</li>
-                    <li>• <strong>Opt-out Bypass:</strong> Continuing to contact individuals who have requested no further communication</li>
+                  <ul className="space-y-2 text-brand-text-muted">
+                    <li>• <strong className="text-brand-text">Robocalls:</strong> Automated or pre-recorded calls without recipient consent</li>
+                    <li>• <strong className="text-brand-text">Telemarketing Spam:</strong> Unsolicited sales or promotional calls to DND-registered numbers</li>
+                    <li>• <strong className="text-brand-text">SMS Spam:</strong> Bulk unsolicited text messages or promotional SMS</li>
+                    <li>• <strong className="text-brand-text">Do Not Call Violations:</strong> Calling numbers on TRAI's National Do Not Call (NDNC) registry</li>
+                    <li>• <strong className="text-brand-text">Opt-out Bypass:</strong> Continuing to contact individuals who have requested no further communication</li>
                   </ul>
                 </div>
 
                 {/* Fraud & Illegal Activity */}
-                <div className="bg-red-50 rounded-xl p-8 border border-red-200">
+                <div className="bg-brand-surface rounded-xl p-8 border border-red-500/50">
                   <div className="flex items-center gap-2 mb-4">
-                    <ShieldAlert className="text-red-600" size={24} />
-                    <h3 className="text-2xl font-bold text-gray-900">Fraud & Illegal Activity</h3>
+                    <ShieldAlert className="text-red-400" size={24} />
+                    <h3 className="text-2xl font-heading font-bold text-brand-text">Fraud & Illegal Activity</h3>
                   </div>
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• <strong>Caller ID Spoofing:</strong> Falsifying caller identification information to deceive recipients</li>
-                    <li>• <strong>Phishing:</strong> Impersonating legitimate organizations to obtain sensitive information</li>
-                    <li>• <strong>Scams:</strong> Lottery scams, tech support fraud, IRS/government impersonation</li>
-                    <li>• <strong>Money Laundering:</strong> Using services to facilitate financial crimes</li>
-                    <li>• <strong>Illegal Content:</strong> Promoting illegal drugs, weapons, or other prohibited goods/services</li>
+                  <ul className="space-y-2 text-brand-text-muted">
+                    <li>• <strong className="text-brand-text">Caller ID Spoofing:</strong> Falsifying caller identification information to deceive recipients</li>
+                    <li>• <strong className="text-brand-text">Phishing:</strong> Impersonating legitimate organizations to obtain sensitive information</li>
+                    <li>• <strong className="text-brand-text">Scams:</strong> Lottery scams, tech support fraud, IRS/government impersonation</li>
+                    <li>• <strong className="text-brand-text">Money Laundering:</strong> Using services to facilitate financial crimes</li>
+                    <li>• <strong className="text-brand-text">Illegal Content:</strong> Promoting illegal drugs, weapons, or other prohibited goods/services</li>
                   </ul>
                 </div>
 
                 {/* Harassment & Abuse */}
-                <div className="bg-red-50 rounded-xl p-8 border border-red-200">
+                <div className="bg-brand-surface rounded-xl p-8 border border-red-500/50">
                   <div className="flex items-center gap-2 mb-4">
-                    <AlertTriangle className="text-red-600" size={24} />
-                    <h3 className="text-2xl font-bold text-gray-900">Harassment & Abuse</h3>
+                    <AlertTriangle className="text-red-400" size={24} />
+                    <h3 className="text-2xl font-heading font-bold text-brand-text">Harassment & Abuse</h3>
                   </div>
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• <strong>Threatening Communications:</strong> Threats of violence or harm</li>
-                    <li>• <strong>Harassment:</strong> Repeated unwanted calls or messages intended to annoy or distress</li>
-                    <li>• <strong>Stalking:</strong> Using services to stalk or monitor individuals without consent</li>
-                    <li>• <strong>Hate Speech:</strong> Communications promoting violence or discrimination based on protected characteristics</li>
-                    <li>• <strong>Doxxing:</strong> Sharing private information without consent to cause harm</li>
+                  <ul className="space-y-2 text-brand-text-muted">
+                    <li>• <strong className="text-brand-text">Threatening Communications:</strong> Threats of violence or harm</li>
+                    <li>• <strong className="text-brand-text">Harassment:</strong> Repeated unwanted calls or messages intended to annoy or distress</li>
+                    <li>• <strong className="text-brand-text">Stalking:</strong> Using services to stalk or monitor individuals without consent</li>
+                    <li>• <strong className="text-brand-text">Hate Speech:</strong> Communications promoting violence or discrimination based on protected characteristics</li>
+                    <li>• <strong className="text-brand-text">Doxxing:</strong> Sharing private information without consent to cause harm</li>
                   </ul>
                 </div>
 
                 {/* Technical Abuse */}
-                <div className="bg-red-50 rounded-xl p-8 border border-red-200">
+                <div className="bg-brand-surface rounded-xl p-8 border border-red-500/50">
                   <div className="flex items-center gap-2 mb-4">
-                    <Phone className="text-red-600" size={24} />
-                    <h3 className="text-2xl font-bold text-gray-900">Technical & Network Abuse</h3>
+                    <Phone className="text-red-400" size={24} />
+                    <h3 className="text-2xl font-heading font-bold text-brand-text">Technical & Network Abuse</h3>
                   </div>
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• <strong>Traffic Pumping:</strong> Artificially inflating call volumes to generate revenue</li>
-                    <li>• <strong>Toll Fraud:</strong> Unauthorized use of services to place calls at Callvia's expense</li>
-                    <li>• <strong>Network Attacks:</strong> DDoS attacks, port scanning, or attempts to disrupt services</li>
-                    <li>• <strong>Unauthorized Access:</strong> Hacking, credential theft, or unauthorized system access attempts</li>
-                    <li>• <strong>Resource Abuse:</strong> Excessive usage designed to degrade service for other users</li>
+                  <ul className="space-y-2 text-brand-text-muted">
+                    <li>• <strong className="text-brand-text">Traffic Pumping:</strong> Artificially inflating call volumes to generate revenue</li>
+                    <li>• <strong className="text-brand-text">Toll Fraud:</strong> Unauthorized use of services to place calls at Callvia's expense</li>
+                    <li>• <strong className="text-brand-text">Network Attacks:</strong> DDoS attacks, port scanning, or attempts to disrupt services</li>
+                    <li>• <strong className="text-brand-text">Unauthorized Access:</strong> Hacking, credential theft, or unauthorized system access attempts</li>
+                    <li>• <strong className="text-brand-text">Resource Abuse:</strong> Excessive usage designed to degrade service for other users</li>
                   </ul>
                 </div>
               </div>
             </div>
 
             {/* Compliance Requirements */}
-            <div className="mb-12 bg-blue-50 rounded-xl p-8 border border-blue-200">
+            <div className="mb-12 bg-brand-surface rounded-xl p-8 border border-brand-border">
               <div className="flex items-center gap-3 mb-6">
-                <CheckCircle size={32} className="text-blue-900" />
-                <h2 className="text-3xl font-bold text-gray-900">Required Compliance</h2>
+                <div className="w-10 h-10 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center">
+                  <CheckCircle size={24} className="text-brand-accent" />
+                </div>
+                <h2 className="text-3xl font-heading font-bold text-brand-text">Required Compliance</h2>
               </div>
-              <p className="text-lg text-gray-700 mb-4">
+              <p className="text-lg text-brand-text-muted mb-4">
                 All customers must comply with:
               </p>
-              <ul className="space-y-3 text-gray-700">
+              <ul className="space-y-3 text-brand-text-muted">
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="text-blue-600 flex-shrink-0 mt-1" size={20} />
-                  <span><strong>TRAI Regulations:</strong> All Telecom Regulatory Authority of India regulations, including QoS standards, NDNC compliance, and CDR retention</span>
+                  <CheckCircle className="text-brand-accent flex-shrink-0 mt-1" size={20} />
+                  <span><strong className="text-brand-text">TRAI Regulations:</strong> All Telecom Regulatory Authority of India regulations, including QoS standards, NDNC compliance, and CDR retention</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="text-blue-600 flex-shrink-0 mt-1" size={20} />
-                  <span><strong>Indian Telegraph Act 1885:</strong> Restrictions on message content and lawful use of telecommunications</span>
+                  <CheckCircle className="text-brand-accent flex-shrink-0 mt-1" size={20} />
+                  <span><strong className="text-brand-text">Indian Telegraph Act 1885:</strong> Restrictions on message content and lawful use of telecommunications</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="text-blue-600 flex-shrink-0 mt-1" size={20} />
-                  <span><strong>IT Act 2000:</strong> Cyber law compliance, data protection, and prohibition of harmful content</span>
+                  <CheckCircle className="text-brand-accent flex-shrink-0 mt-1" size={20} />
+                  <span><strong className="text-brand-text">IT Act 2000:</strong> Cyber law compliance, data protection, and prohibition of harmful content</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="text-blue-600 flex-shrink-0 mt-1" size={20} />
-                  <span><strong>Consumer Protection Laws:</strong> Truthful advertising, no deceptive practices</span>
+                  <CheckCircle className="text-brand-accent flex-shrink-0 mt-1" size={20} />
+                  <span><strong className="text-brand-text">Consumer Protection Laws:</strong> Truthful advertising, no deceptive practices</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle className="text-blue-600 flex-shrink-0 mt-1" size={20} />
-                  <span><strong>Data Privacy:</strong> Consent-based data collection, protection of personal information</span>
+                  <CheckCircle className="text-brand-accent flex-shrink-0 mt-1" size={20} />
+                  <span><strong className="text-brand-text">Data Privacy:</strong> Consent-based data collection, protection of personal information</span>
                 </li>
               </ul>
             </div>
 
             {/* Responsible Use Guidelines */}
             <div className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Responsible Use Guidelines</h2>
+              <h2 className="text-3xl font-heading font-bold text-brand-text mb-6">Responsible Use Guidelines</h2>
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-green-50 rounded-lg p-6 border border-green-200">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <CheckCircle className="text-green-600" size={24} />
+                <div className="bg-brand-surface rounded-lg p-6 border border-brand-border">
+                  <h3 className="text-xl font-heading font-bold text-brand-text mb-4 flex items-center gap-2">
+                    <CheckCircle className="text-brand-accent" size={24} />
                     Best Practices
                   </h3>
-                  <ul className="space-y-2 text-gray-700 text-sm">
+                  <ul className="space-y-2 text-brand-text-muted text-sm">
                     <li>✓ Obtain explicit consent before calling or messaging</li>
                     <li>✓ Respect DND preferences and opt-out requests immediately</li>
                     <li>✓ Provide accurate caller ID information</li>
@@ -155,12 +173,12 @@ export function AUPPage() {
                   </ul>
                 </div>
 
-                <div className="bg-yellow-50 rounded-lg p-6 border border-yellow-200">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <AlertTriangle className="text-yellow-600" size={24} />
+                <div className="bg-brand-surface rounded-lg p-6 border border-yellow-500/50">
+                  <h3 className="text-xl font-heading font-bold text-brand-text mb-4 flex items-center gap-2">
+                    <AlertTriangle className="text-yellow-400" size={24} />
                     Avoid Gray Areas
                   </h3>
-                  <ul className="space-y-2 text-gray-700 text-sm">
+                  <ul className="space-y-2 text-brand-text-muted text-sm">
                     <li>⚠ Purchased contact lists (may contain DND numbers)</li>
                     <li>⚠ "Implied consent" without documentation</li>
                     <li>⚠ Excessive call attempts to unreachable numbers</li>
@@ -176,63 +194,63 @@ export function AUPPage() {
 
             {/* Monitoring & Enforcement */}
             <div className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Monitoring & Enforcement</h2>
-              <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              <h2 className="text-3xl font-heading font-bold text-brand-text mb-4">Monitoring & Enforcement</h2>
+              <p className="text-lg text-brand-text-muted leading-relaxed mb-4">
                 Callvia actively monitors services to detect and prevent abuse:
               </p>
-              <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-6">
+              <ul className="list-disc pl-6 text-brand-text-muted space-y-2 mb-6">
                 <li>Automated systems flag suspicious calling patterns or volumes</li>
                 <li>Customer complaints are investigated promptly</li>
                 <li>Regulatory violations trigger immediate review</li>
                 <li>We cooperate with law enforcement and regulatory authorities</li>
               </ul>
               
-              <div className="bg-gray-50 rounded-lg p-6 border border-gray-300">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Enforcement Actions:</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• <strong>Warning:</strong> First-time minor violations may receive a warning and guidance</li>
-                  <li>• <strong>Service Limitation:</strong> Restrictions on usage until compliance is restored</li>
-                  <li>• <strong>Suspension:</strong> Temporary service suspension for serious or repeated violations</li>
-                  <li>• <strong>Termination:</strong> Permanent account closure for severe violations</li>
-                  <li>• <strong>Legal Action:</strong> Pursuit of civil or criminal remedies for illegal activity</li>
+              <div className="bg-brand-surface rounded-lg p-6 border border-brand-border">
+                <h3 className="text-xl font-heading font-bold text-brand-text mb-3">Enforcement Actions:</h3>
+                <ul className="space-y-2 text-brand-text-muted">
+                  <li>• <strong className="text-brand-text">Warning:</strong> First-time minor violations may receive a warning and guidance</li>
+                  <li>• <strong className="text-brand-text">Service Limitation:</strong> Restrictions on usage until compliance is restored</li>
+                  <li>• <strong className="text-brand-text">Suspension:</strong> Temporary service suspension for serious or repeated violations</li>
+                  <li>• <strong className="text-brand-text">Termination:</strong> Permanent account closure for severe violations</li>
+                  <li>• <strong className="text-brand-text">Legal Action:</strong> Pursuit of civil or criminal remedies for illegal activity</li>
                 </ul>
               </div>
             </div>
 
             {/* Reporting Violations */}
-            <div className="mb-12 bg-blue-100 rounded-xl p-8 border border-blue-300">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Report Abuse</h2>
-              <p className="text-lg text-gray-700 leading-relaxed mb-4">
+            <div className="mb-12 bg-brand-surface rounded-xl p-8 border border-brand-border">
+              <h2 className="text-3xl font-heading font-bold text-brand-text mb-4">Report Abuse</h2>
+              <p className="text-lg text-brand-text-muted leading-relaxed mb-4">
                 If you believe someone is violating this AUP or using Callvia services for harmful purposes, please report it immediately:
               </p>
-              <div className="space-y-2 text-gray-700">
-                <p><strong>Abuse Team:</strong> abuse@callvia.in</p>
-                <p><strong>Phone:</strong> +91 8418 828 125</p>
-                <p><strong>Include:</strong> Date/time, phone numbers involved, description of activity, and any supporting evidence</p>
+              <div className="space-y-2 text-brand-text-muted">
+                <p><strong className="text-brand-text">Abuse Team:</strong> abuse@callvia.in</p>
+                <p><strong className="text-brand-text">Phone:</strong> +91 8418 828 125</p>
+                <p><strong className="text-brand-text">Include:</strong> Date/time, phone numbers involved, description of activity, and any supporting evidence</p>
               </div>
-              <p className="text-sm text-gray-600 mt-4">
+              <p className="text-sm text-brand-text-muted mt-4">
                 All reports are reviewed confidentially. We may not be able to share investigation outcomes due to privacy policies.
               </p>
             </div>
 
             {/* Updates to Policy */}
             <div className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Policy Updates</h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <h2 className="text-3xl font-heading font-bold text-brand-text mb-4">Policy Updates</h2>
+              <p className="text-lg text-brand-text-muted leading-relaxed">
                 Callvia reserves the right to modify this AUP at any time. Changes will be posted on this page with an updated effective date. Continued use of services after changes constitutes acceptance of the updated AUP. We recommend reviewing this policy periodically.
               </p>
             </div>
 
             {/* Contact */}
-            <div className="bg-gradient-to-br from-red-900 to-red-800 rounded-xl p-8 text-white">
-              <h2 className="text-3xl font-bold mb-4">Questions About This Policy?</h2>
-              <p className="text-lg text-red-100 mb-4">
+            <div className="bg-brand-dark-light rounded-xl p-8 border border-brand-border">
+              <h2 className="text-3xl font-heading font-bold text-brand-text mb-4">Questions About This Policy?</h2>
+              <p className="text-lg text-brand-text-muted mb-4">
                 For clarification on acceptable use or compliance requirements:
               </p>
-              <div className="space-y-2 text-red-100">
-                <p><strong>Compliance Team:</strong> compliance@callvia.in</p>
-                <p><strong>Support:</strong> support@callvia.in</p>
-                <p><strong>Address:</strong> 582/108, Badali Khera, Lucknow, Uttar Pradesh, India</p>
+              <div className="space-y-2 text-brand-text-muted">
+                <p><strong className="text-brand-text">Compliance Team:</strong> compliance@callvia.in</p>
+                <p><strong className="text-brand-text">Support:</strong> support@callvia.in</p>
+                <p><strong className="text-brand-text">Address:</strong> 582/108, Badali Khera, Lucknow, Uttar Pradesh, India</p>
               </div>
             </div>
 

@@ -7,22 +7,39 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#0F4C81',
-        'primary-light': '#1565A0',
-        'primary-dark': '#0A3557',
-        secondary: '#E07A1F',
+        // Premium Dark Base
+        'brand-dark': '#070A12',
+        'brand-dark-light': '#0B1220',
+        // Saffron Accent
+        'brand-accent': '#FF9F1C',
+        'brand-accent-soft': '#FFE2B8',
+        'brand-accent-hover': '#E68F19',
+        // Surfaces
+        'brand-surface': '#0F1B33',
+        'brand-surface-hover': '#152140',
+        // Borders
+        'brand-border': '#223055',
+        'brand-border-light': '#2A3A5F',
+        'brand-border-subtle': '#1A2847',
+        // Text
+        'brand-text': '#EAF0FF',
+        'brand-text-muted': '#A7B3CE',
+        'brand-text-dim': '#7A8AA8',
+        // Legacy support
+        primary: '#FF9F1C',
+        secondary: '#A7B3CE',
       },
-      animation: {
-        wave: 'waveFlow 8s ease-in-out infinite',
+      fontFamily: {
+        heading: ['Sora', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
-      keyframes: {
-        waveFlow: {
-          '0%': { transform: 'translateX(0%) translateY(0%)', opacity: '0.7' },
-          '25%': { transform: 'translateX(-1%) translateY(1%)', opacity: '0.75' },
-          '50%': { transform: 'translateX(0%) translateY(2%)', opacity: '0.8' },
-          '75%': { transform: 'translateX(1%) translateY(1%)', opacity: '0.75' },
-          '100%': { transform: 'translateX(0%) translateY(0%)', opacity: '0.7' },
-        },
+      letterSpacing: {
+        tighter: '-0.02em',
+      },
+      boxShadow: {
+        'card': '0 2px 8px 0 rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(34, 48, 85, 0.5)',
+        'card-hover': '0 4px 16px 0 rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(34, 48, 85, 0.8)',
       },
     },
   },
