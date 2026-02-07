@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './context/ThemeContext';
@@ -5,18 +6,71 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppWidget from './components/WhatsAppWidget';
 import ScrollToTop from './components/ScrollToTop';
+import EnquiryModal from './components/EnquiryModal';
 import SEO from './components/SEO';
 import Home from './pages/Home.jsx';
 import Pricing from './pages/Pricing';
 import PlaceholderPage from './components/PlaceholderPage';
 
+// Product Pages
+import DidNumbers from './pages/Products/DidNumbers';
+import SipTrunks from './pages/Products/SipTrunks';
+import PredictiveDialer from './pages/Products/PredictiveDialer';
+import CallRecording from './pages/Products/CallRecording';
+
+// Solution Pages
+import CallFloSuite from './pages/Solutions/CallFloSuite';
+import CallfloDeskAI from './pages/Solutions/CallfloDeskAI';
+import Partners from './pages/Solutions/Partners';
+
+// Company Pages
+import About from './pages/About';
+import Careers from './pages/Careers';
+import Contact from './pages/Contact';
+import Developers from './pages/Developers';
+import ResourcesPage from './pages/Resources';
+
+// Legal Pages
+import TermsOfService from './pages/Legal/Terms';
+import PrivacyPolicy from './pages/Legal/Privacy';
+import Compliance from './pages/Legal/Compliance';
+import SecurityPage from './pages/Security';
+
 function App() {
+  const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
+
+  // Capture UTM parameters on load
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const utmParams = {
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_content: params.get('utm_content') || '',
+      utm_term: params.get('utm_term') || '',
+    };
+    
+    // Store UTM params in session storage if any exist
+    if (Object.values(utmParams).some(v => v)) {
+      sessionStorage.setItem('utm_params', JSON.stringify(utmParams));
+    }
+  }, []);
+
+  const handleEnquiryClick = () => {
+    setIsEnquiryModalOpen(true);
+  };
+
   return (
     <HelmetProvider>
       <ThemeProvider>
         <Router>
           <ScrollToTop />
           <SEO />
+          <EnquiryModal
+            isOpen={isEnquiryModalOpen}
+            onClose={() => setIsEnquiryModalOpen(false)}
+            leadSource="footer_enquiry"
+          />
           <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Header />
             <main style={{ flex: 1 }}>
@@ -26,40 +80,43 @@ function App() {
                 
                 {/* Solutions */}
                 <Route path="/solutions" element={<PlaceholderPage title="[SOLUTIONS_PAGE_TITLE]" description="[SOLUTIONS_PAGE_DESCRIPTION]" />} />
-                <Route path="/solutions/callflo-suite" element={<PlaceholderPage title="[CALLFLO_SUITE_TITLE]" description="[CALLFLO_SUITE_DESCRIPTION]" />} />
-                <Route path="/solutions/ai-receptionist" element={<PlaceholderPage title="[AI_RECEPTIONIST_TITLE]" description="[AI_RECEPTIONIST_DESCRIPTION]" />} />
-                <Route path="/solutions/partners" element={<PlaceholderPage title="[PARTNERS_TITLE]" description="[PARTNERS_DESCRIPTION]" />} />
+                <Route path="/solutions/callflo-suite" element={<CallFloSuite />} />
+                <Route path="/solutions/ai-receptionist" element={<CallfloDeskAI />} />
+                <Route path="/solutions/partners" element={<Partners />} />
                 
                 {/* Products */}
                 <Route path="/products" element={<PlaceholderPage title="[PRODUCTS_PAGE_TITLE]" description="[PRODUCTS_PAGE_DESCRIPTION]" />} />
-                <Route path="/products/sip-trunks" element={<PlaceholderPage title="[SIP_TRUNKS_TITLE]" description="[SIP_TRUNKS_DESCRIPTION]" />} />
-                <Route path="/products/did-numbers" element={<PlaceholderPage title="[DID_NUMBERS_TITLE]" description="[DID_NUMBERS_DESCRIPTION]" />} />
+                <Route path="/products/sip-trunks" element={<SipTrunks />} />
+                <Route path="/products/did-numbers" element={<DidNumbers />} />
                 <Route path="/products/ai-agents" element={<PlaceholderPage title="[AI_AGENTS_TITLE]" description="[AI_AGENTS_DESCRIPTION]" />} />
                 <Route path="/products/ai-transcription" element={<PlaceholderPage title="[AI_TRANSCRIPTION_TITLE]" description="[AI_TRANSCRIPTION_DESCRIPTION]" />} />
-                <Route path="/products/call-recording" element={<PlaceholderPage title="[CALL_RECORDING_TITLE]" description="[CALL_RECORDING_DESCRIPTION]" />} />
-                <Route path="/products/predictive-dialer" element={<PlaceholderPage title="[PREDICTIVE_DIALER_TITLE]" description="[PREDICTIVE_DIALER_DESCRIPTION]" />} />
+                <Route path="/products/call-recording" element={<CallRecording />} />
+                <Route path="/products/predictive-dialer" element={<PredictiveDialer />} />
                 <Route path="/products/ai-receptionist" element={<PlaceholderPage title="[PRODUCT_AI_RECEPTIONIST_TITLE]" description="[PRODUCT_AI_RECEPTIONIST_DESCRIPTION]" />} />
                 <Route path="/products/whatsapp-automation" element={<PlaceholderPage title="[WHATSAPP_AUTOMATION_TITLE]" description="[WHATSAPP_AUTOMATION_DESCRIPTION]" />} />
                 
                 {/* Company */}
                 <Route path="/features" element={<PlaceholderPage title="[FEATURES_PAGE_TITLE]" description="[FEATURES_PAGE_DESCRIPTION]" />} />
-                <Route path="/developers" element={<PlaceholderPage title="[DEVELOPERS_PAGE_TITLE]" description="[DEVELOPERS_PAGE_DESCRIPTION]" />} />
-                <Route path="/resources" element={<PlaceholderPage title="[RESOURCES_PAGE_TITLE]" description="[RESOURCES_PAGE_DESCRIPTION]" />} />
-                <Route path="/about" element={<PlaceholderPage title="[ABOUT_PAGE_TITLE]" description="[ABOUT_PAGE_DESCRIPTION]" />} />
-                <Route path="/careers" element={<PlaceholderPage title="[CAREERS_PAGE_TITLE]" description="[CAREERS_PAGE_DESCRIPTION]" />} />
+                <Route path="/developers" element={<Developers />} />
+                <Route path="/resources" element={<ResourcesPage />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/careers" element={<Careers />} />
                 <Route path="/reseller-program" element={<PlaceholderPage title="[RESELLER_PROGRAM_TITLE]" description="[RESELLER_PROGRAM_DESCRIPTION]" />} />
-                <Route path="/contact" element={<PlaceholderPage title="[CONTACT_PAGE_TITLE]" description="[CONTACT_PAGE_DESCRIPTION]" />} />
+                <Route path="/contact" element={<Contact />} />
                 
                 {/* Legal */}
-                <Route path="/terms" element={<PlaceholderPage title="[TERMS_PAGE_TITLE]" description="[TERMS_PAGE_DESCRIPTION]" />} />
-                <Route path="/privacy" element={<PlaceholderPage title="[PRIVACY_PAGE_TITLE]" description="[PRIVACY_PAGE_DESCRIPTION]" />} />
-                <Route path="/compliance" element={<PlaceholderPage title="[COMPLIANCE_PAGE_TITLE]" description="[COMPLIANCE_PAGE_DESCRIPTION]" />} />
-                <Route path="/security" element={<PlaceholderPage title="[SECURITY_PAGE_TITLE]" description="[SECURITY_PAGE_DESCRIPTION]" />} />
+                <Route path="/legal/terms" element={<TermsOfService />} />
+                <Route path="/legal/privacy" element={<PrivacyPolicy />} />
+                <Route path="/legal/compliance" element={<Compliance />} />
+                <Route path="/terms" element={<TermsOfService />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/compliance" element={<Compliance />} />
+                <Route path="/security" element={<SecurityPage />} />
                 <Route path="/faq" element={<PlaceholderPage title="[FAQ_PAGE_TITLE]" description="[FAQ_PAGE_DESCRIPTION]" />} />
                 <Route path="/status" element={<PlaceholderPage title="[STATUS_PAGE_TITLE]" description="[STATUS_PAGE_DESCRIPTION]" />} />
               </Routes>
             </main>
-            <Footer />
+            <Footer onEnquiryClick={handleEnquiryClick} />
             <WhatsAppWidget />
           </div>
         </Router>

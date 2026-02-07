@@ -1,529 +1,376 @@
-Make sure to use the logo.png from public folder.
-Make sure to use content related images on the website. I want you to use the images.
+make changes only on Homepage (/) plus global Header/Footer behavior, and forms/webhook. Do not redesign other pages yet beyond ensuring nav links route correctly.
 
-You are upgrading the Callvia website (React + Node, hardcoded). Rebuild the homepage + site shell + routing + SEO scaffolding + pricing calculator + forms/webhooks.
-DO NOT invent marketing copy. Use short placeholders like [HERO_HEADLINE], [SECTION_SUBTEXT], etc. We will provide content later.
+0) Rules / Constraints
 
-0) NON-NEGOTIABLES
-Branding / UI
+Keep logo and typography (Sora headings, Inter body). No font changes.
 
-Keep existing logo and typography (Sora headings, Inter body). Do not change font choices.
+Default website mode = Light theme.
 
-Implement Theme Toggle in header: Light ↔ Dark.
+Add a Theme Toggle Switch in header (Light ↔ Dark).
 
-No neon glows, no multicolor gradients, no animated blobs. Micro-interactions only.
+No flashy UI: no neon glows, no heavy gradients. Use the “Aurora” gradient only as a subtle accent (5–15% opacity) for borders/hero accents, never as full background.
 
-Use 8px spacing grid, generous whitespace. Cards: 12–16px radius, 1px border, subtle shadow.
+Fix mobile responsiveness: remove excessive padding/margins; ensure consistent spacing and readable layout on phones.
 
-Fix previous issues
+1) HEADER (global)
+Header nav structure
 
-Header and hero background must be visually distinct (avoid same color).
+Top-level items:
 
-Section before footer and footer must be visually distinct (avoid same background).
+Products (Mega menu)
 
-On clicking footer links, navigation must scroll to top (hero). Use ScrollToTop on route change.
+Solutions (Dropdown)
 
-Footer should be smaller (remove extra support hours/office blocks if not needed; keep clean).
+Pricing
 
-WhatsApp floating button remains, but WhatsApp link must come from config.
+Developers
 
-Tracking
+Resources
 
-GTM + Meta Pixel pageview already working. Do not add tracking events now, but make site ready.
+Theme Toggle Switch
 
-However, forms must capture UTMs and lead type and submit to webhook.
+Login / Signup
 
-1) THEMES (TOKENS)
-Dark Mode Tokens (must match)
+Remove any “Test Page” links from header.
 
-bg: #070A12
+Header behavior
 
-nav/footer/deep: #0B1220
+On scroll: header becomes slightly dim/translucent with blur (sticky), looks premium and not harsh.
 
-surface/card: #0F1B33
+Ensure header background is visually distinct from hero section (hero background cannot be identical to header bg).
 
-border: #223055
+Products Mega Menu (3 groups)
 
-text: #EAF0FF
+Create mega menu with these sections + items:
 
-muted: #A7B3CE
-
-accent (CTA/active only ≤5%): #FF9F1C
-
-accent-soft: #FFE2B8
-
-heroGradientEnd: #0B1630 (only subtle single hero gradient allowed)
-
-Primary button: bg #FF9F1C + text #0B1220
-Secondary button: outline #223055 + hover tint
-
-Light Mode Tokens
-
-bg: #FFFFFF
-
-surface: #FFFFFF
-
-border: #E3E9F6
-
-text: #0B1220
-
-muted: #44506A
-
-accent: #FF9F1C (same in both)
-
-accent-soft: #FFF1D9
-
-Single subtle hero gradient only (white to very light neutral)
-
-Implement tokens with CSS variables and a theme provider.
-
-2) ROUTES / PAGES (React Router)
-
-Create these routes/pages (minimal templates now with placeholders):
-
-/ Home
-
-/solutions (overview template)
-
-/solutions/:segment where segment in { callflo-suite, ai-receptionist, partners }
-
-IMPORTANT: In UI do NOT show “B2B/B2C/Reseller”.
-
-Use these labels:
-
-callflo-suite = B2B (Call Centers/Enterprises)
-
-ai-receptionist = B2C (Small businesses)
-
-partners = Reseller
-
-/products overview template
-
-/products/:product where product in:
-
-sip-trunks
-
-did-numbers
-
-ai-agents
-
-ai-transcription
-
-call-recording
-
-predictive-dialer
-
-ai-receptionist
-
-whatsapp-automation
-
-/pricing dynamic pricing calculator (config-driven)
-
-/features
-
-/developers
-
-/resources
-
-/about
-
-/careers
-
-/reseller-program (can map to partners page too)
-
-/contact
-
-/terms
-
-/privacy
-
-Add required “often-missed” pages:
-
-/compliance (placeholder)
-
-/security (placeholder)
-
-/faq (placeholder)
-
-/status (placeholder)
-Remove any “Test Page 1/2” from nav; if routes exist, mark noindex.
-
-3) HEADER / FOOTER
-Header (responsive)
-
-Left: logo + wordmark
-
-Nav: Products, Solutions, Pricing, Developers, Resources, Company
-
-Right: Login + Sign Up (or Portal)
-
-Add Theme Toggle in header (icon button)
-
-Mobile hamburger with same structure
-
-Products Mega Menu (grouped columns)
-
-Mega menu columns:
-CallFlo Suite (B2B)
+Voice & Calling
 
 SIP Trunks
 
 DID Numbers
 
-AI Agents
-
-AI Transcription
-
 Call Recording
 
 Predictive Dialer
 
-AI Receptionist
-
-WhatsApp Automation
-
-AI Receptionist (B2C)
-
-DID Numbers (Inbound Only) (links to did-numbers)
-
-AI Receptionist
-
-WhatsApp Automation
-
-Partners (Reseller)
-
-White-label Platform (placeholder page)
-
-Reseller Panel (placeholder page)
-
-Billing/Wallet (placeholder page)
-
-Controls/Monitoring (placeholder page)
-
-Each product links to /products/:product.
-
-Solutions menu
-
-CallFlo Suite → /solutions/callflo-suite
-
-AI Receptionist → /solutions/ai-receptionist
-
-Partners → /solutions/partners
-
-Footer (smaller)
-
-Columns: Products, Solutions, Developers/Resources, Company, Legal
-
-Remove oversized blocks (support hours/office etc.)
-
-Social icons: LinkedIn/Instagram/Facebook/WhatsApp
-
-All contact/social URLs from config
-
-Dynamic year
-
-Scroll behavior fix
-
-Implement ScrollToTop component: on route/path change scroll to top.
-
-4) HOMEPAGE REDESIGN (placeholders only, modern fancy)
-
-Rebuild homepage sections with strong differentiation between backgrounds:
-
-Hero
-
-[HERO_HEADLINE], [HERO_SUBTEXT]
-
-CTAs: Book a Demo / View Pricing (both open correct form modal)
-
-3 trust bullets placeholders [TRUST_BULLET_1..3]
-
-Hero background uses subtle gradient, but header area must visually differ.
-
-Segment switcher (3 cards/tabs)
-
-CallFlo Suite / AI Receptionist / Partners
-
-Each has 2–3 bullets placeholders and CTA → respective solutions page
-
-Product Stack Diagram (boxes)
-
-Must communicate rules:
-
-SIP Trunk = base for most B2B services
-
-DID can be sold standalone (exception)
-
-B2C AI Receptionist requires DID
-
-Use box diagram style: base layer + add-ons
-
-Capabilities Grid
-List all capabilities (don’t lose old features):
-
-DID, SIP, Manual Dialer, CRM, IVR & routing, Conversational IVR
-
-AI Agents, AI Transcription, Call Recording, Predictive Dialer, AI Receptionist
-
-Monitoring & Controls, Real-time Dashboard, Analytics
-
-Prepaid Wallet & Billing, API & Webhooks
-
-White-label platform
-Each card links to appropriate product/features page.
-
-Stats strip placeholders: [STAT_1..4]
-
-Final CTA section
-
-[CTA_HEADLINE], [CTA_SUBTEXT]
-
-Buttons: Get Started / Talk to Sales (open correct modal form)
-
-5) FORMS + WEBHOOK (MANDATORY NOW)
-Requirement
-
-All CTAs/buttons should work now by opening a modal form.
-Create 3 different lead forms + 3 different thank-you modals:
-
-CallFlo Suite (B2B) lead form
-
-AI Receptionist (B2C) lead form
-
-Partners (Reseller) lead form
-
-Each form fields:
-
-Full Name
-
-Email
-
-Phone Number
-
-Country (default India)
-Hidden fields (auto-capture):
-
-utm_source, utm_medium, utm_campaign, utm_content, utm_term
-
-lead_type = callflo-suite | ai-receptionist | partners
-
-page_path, referrer, timestamp
-
-Webhook submission
-
-On submit, send JSON payload via POST to a webhook URL from config (Zapier/Pabbly).
-
-Create a single API helper (/api/leads or /api/webhook) in Node.
-
-Client submits to Node endpoint, Node forwards to webhook (keeps webhook secret server-side).
-
-Show thank-you modal on success; error state on failure.
-
-All webhook URLs and toggles must be in config.
-
-6) SEO (DO NOT use GTM)
-Use react-helmet-async
-
-Implement per-route SEO using a single file:
-
-seo_config.json controlling title, description, og image, canonical path, robots meta.
-
-Each route reads from seo_config with defaults/fallbacks.
-
-Support noindex for non-public routes (thank-you/admin/test/status optional).
-
-Per page:
-
-<title>
-
-<meta name="description">
-
-<link rel="canonical">
-
-<meta name="robots">
-
-OpenGraph + Twitter tags with fallbacks
-
-robots.txt and sitemap.xml
-
-Generate robots.txt and sitemap.xml
-
-Exclude routes marked noindex and any thank-you/admin/test routes.
-
-JSON-LD schema
-
-Organization + WebSite schema site-wide
-
-Service schema for /solutions/callflo-suite, /solutions/ai-receptionist, /solutions/partners
-
-FAQ schema only where FAQ section exists (later)
-
-7) PERFORMANCE (basic but real)
-
-Responsive images, lazy loading
-
-Code-splitting by route
-
-Caching headers for static assets (Node)
-
-Avoid huge bundles; optimize imports
-
-8) dataLayer route_change hook (READY BUT CONFIG-GATED)
-
-Implement a React Router listener that can push:
-
-window.dataLayer.push({
-  event: "route_change",
-  page_path,
-  page_title,
-  segment: "callflo-suite|ai-receptionist|partners"
-})
-
-
-But keep it behind config flag:
-
-enableDataLayerRouteEvents: false by default.
-
-9) PRICING PAGE (Dynamic calculator, config-driven)
-
-Create /pricing inspired by connexcs pricing UX (sliders + modules). Must be fully driven by config.
-
-Currency
-
-Default currency: INR
-
-Also show selectable currencies: USD, EUR (and a few common)
-
-Currency conversion rates must come from config (manual) for now.
-
-Inputs
-
-Slider: Call minutes/month range 0 → 50M (configurable max)
-
-Slider: Concurrent channels range 0 → 3000 (configurable max)
-
-Service toggles (checkboxes) for:
-
-SIP Trunks (base)
+AI & Automation
 
 AI Agents
 
 AI Transcription
 
-Call Recording
+AI Receptionist
 
-Predictive Dialer (per seat; no channel limitation)
+More
 
-AI Receptionist (call pulse logic)
+WhatsApp Automation
 
-WhatsApp Automation (per template)
+Each links to the appropriate route (create routes if not ready; placeholder pages ok).
 
-DID Numbers (monthly rental optional, if needed later)
+Solutions dropdown
 
-All slider min/max/steps must come from config.
+CallFlo Suite (For Call Centers & Enterprise)
 
-Cost + profit logic (do not expose buy cost)
+Callflo DeskAI (AI Receptionist/Agents for Individual)
 
-Implement pricing model:
+Partners (White-label reseller program)
 
-SIP buy cost = 0.92 INR/min + 0.03 INR/min switch cost (internal only)
+Each links to a route (placeholder ok).
 
-AI Agents buy cost = 3.62 INR/min
+2) FOOTER (global)
 
-AI Transcription buy cost = 0.0006 INR/min
+Footer should be smaller / trimmed (current is too wide and oversized). Keep:
 
-Call Recording buy cost = 0.0003 INR/min
+Column links for header pages + add these pages:
 
-Predictive Dialer buy cost = 3 USD/seat (seat input optional; if not added now, keep placeholder)
+About Us
 
-AI Receptionist pricing (pulse logic):
+Career
 
-If call duration >= 60s: buy = 1.36 INR per call
+Contact Us
 
-If call duration < 30s: buy = 0.027 INR per call
+Submit Enquiry (opens enquiry modal)
 
-(Use slider minutes to estimate calls; implement assumptions in config)
+AI Documentation (Developers Page)
 
-WhatsApp template buy cost = 0.94919 INR per template (add monthly templates input optional or config-based estimate)
+Terms of Service
 
-Margin rules:
+Privacy Policy
 
-At minimum usage: target margin >= 30%
+Compliance
 
-At maximum usage: margin must not drop below 10%
-Margin should gradually decrease as minutes/channels increase.
-Implement margin curve in config (e.g., minMargin, maxMargin, curve type) to avoid hardcoding.
+Security
 
-Plans
+Keep social icons + WhatsApp icon
 
-Show 3 plans:
+Keep copyright
 
-Plan A (e.g., Standard): calculated monthly estimate
+WhatsApp link must come from config so it can be changed later
 
-Plan B (e.g., Pro): calculated monthly estimate with slightly better inclusions (config-driven multipliers)
+Footer background must be visually distinct from the section above it
 
-Plan C (Ultra/Enterprise): no price, show “Contact Sales” CTA (opens relevant form)
+Fix scroll-to-top issue
 
-All plan labels, multipliers, included toggles, and assumptions must be in config.
+Currently clicking footer links loads page mid-section. Implement ScrollToTop on route change so every navigation starts at top.
 
-Output
+3) HOMEPAGE SECTION FIXES (keep structure, improve layout + backgrounds)
+3.1 Hero Section
 
-Show:
+Keep these elements (with improvements):
 
-Estimated monthly total
+Badge “TRAI-Approved Platform” is good.
 
-Breakdown by selected services (still not revealing buy cost)
+Heading “Enterprise Telecom Infrastructure” is good — make it more impactful (can adjust wording slightly but keep intent).
 
-Clear disclaimer placeholder text [PRICING_DISCLAIMER]
+Replace this line (do NOT mention “Class-B” anywhere):
+OLD: “Class-B VNO platform powering secure domestic calling, AI-driven automation, and fully white-label telecom services.”
+NEW: rewrite to something like “VNO-approved platform powering secure domestic calling, AI automation, and white-label telecom services.” (better copy allowed, but no Class-B)
 
-10) CONFIG FILES (future-proof)
+CTAs:
 
-Create:
+“Book a Demo” → opens enquiry modal form (see forms spec)
 
-site_config.json (theme flags, contacts, social URLs, WhatsApp link, webhook endpoints, toggles)
+“View Pricing” → navigates to /pricing
 
-pricing_config.json (cost inputs, sliders, margins, currency rates, plan definitions)
+Right-side “Get Early Access” form
 
-seo_config.json (route-based SEO meta + og images + canonical paths + robots/noindex)
+Add a form card on the right side of hero (desktop), and place it below hero text on mobile:
+Fields:
 
-Anything likely to change later must be in config.
+Company Name
 
-11) CODE STRUCTURE
+Email
 
-Use clean structure:
+Contact Number (+91 default, validate)
+On submit:
 
-src/pages/*
+send payload to webhook via Node API forwarder
 
-src/components/* (Header, Footer, ModalForm, etc.)
+show thank-you modal message
+Hidden field: lead_source = "earlyaccess_home"
+Also capture UTM fields.
 
-src/components/home/* sections
+Hero trust bullets under CTA (can edit slightly)
 
-src/config/* for configs
+Keep 3 bullets but can reword.
+Examples:
 
-src/seo/* for SEO helpers
+TRAI-approved VNO infrastructure
 
-server/api/* for webhook forwarding
+Carrier-grade backend built in-house
 
-Componentize homepage: HomeHero, SegmentSwitcher, StackDiagram, CapabilityGrid, StatsStrip, FinalCTA.
+White-label ready for partners
+(You may adjust 3rd line as requested.)
 
-Ensure accessibility and responsive design.
+3.2 Core Features section
 
-DELIVERABLE
+Keep content, but improve card layout:
 
-Updated homepage + global header/footer with mega menus
+Reduce awkward whitespace caused by icon layout.
 
-Full page routing scaffolds
+Ensure cards look balanced and consistent.
 
-Theme toggle
+Use 2–4 column responsive grid (2 columns tablet, 1 column mobile).
 
-Modal forms (3) + thank-you modals (3) + webhook integration with hidden UTM fields
+Maintain section separation using alternate background/surface.
 
-Pricing calculator page with config-driven sliders + services + margin rules + currency switch
+3.3 Enterprise-Grade Platform section (4 items grid)
 
-SEO scaffolding using react-helmet-async with seo_config.json
+Must be 2x2 layout on desktop:
 
-robots.txt + sitemap.xml generation excluding noindex routes
+Real-time Call Management
 
-ScrollToTop fix for all navigations
+Advanced Analytics
 
-DO NOT write final marketing content. Use placeholders.
+Enterprise Security
+
+Infinite Scalability
+Fix layout so it’s never 3+1 uneven. Use responsive behavior:
+
+Desktop: 2 columns
+
+Tablet: 2 columns
+
+Mobile: 1 column
+
+3.4 Built for Every Business section
+
+Improve design:
+
+Keep heading and intent.
+
+Change layout to 3 cards per row on desktop.
+
+Replace weak icons: prefer better icon set or use images; keep it attractive but not heavy animation.
+
+Buttons:
+
+“Get Started” opens enquiry form modal (lead_source = "getstarted_home")
+
+“Talk to Sales” navigates to /contact
+
+3.5 Stats strip (10M+ Calls Managed etc.)
+
+Keep as is (looks perfect).
+
+3.6 Final CTA section (“Ready to Scale…”)
+
+Keep as is, but ensure section above footer has different background than footer.
+
+4) FORMS (Modal Enquiry) + Webhook (Must work now)
+One enquiry modal form used by CTAs (Book a Demo / Get Started / Submit Enquiry)
+
+Fields:
+
+Full Name (required)
+
+Email (required, validate)
+
+Phone Number (required, validate, include country code selector with default India)
+
+Country (dropdown, default India)
+
+On submit:
+
+POST JSON to Node endpoint /api/leads which forwards to a webhook URL (Zapier/Pabbly).
+
+Show success modal: “Thank you for submitting your enquiry” + short line.
+
+Reject obvious junk: basic validation, no scraping defenses needed.
+
+Hidden fields to always include
+
+utm_source
+
+utm_medium
+
+utm_campaign
+
+utm_content
+
+utm_term
+
+page_path
+
+referrer
+
+timestamp
+
+lead_source (string set by CTA):
+
+"homeenquiry" for Book a Demo
+
+"getstarted_home" for Get Started
+
+"earlyaccess_home" for early access form
+
+UTMs: parse from querystring and store once (session/local storage) so it persists across navigation.
+
+Webhook
+
+Keep webhook URL in config.
+
+Client calls Node API; Node forwards to webhook (do not expose webhook directly in frontend).
+
+Handle errors gracefully.
+
+5) SEO Meta (Homepage only) controlled by config (head, not body)
+
+Meta tags must be set in <head> using react-helmet-async and loaded from config (seo_config.json or config.json). Do NOT treat H1/H2 as meta.
+
+For homepage defaults:
+
+titleSuffix: " | Callvia - Enterprise Telecom & AI Platform"
+
+description: "Carrier-grade cloud telephony for India—SIP trunks, DID numbers, predictive dialer, call recording, AI transcription, AI agents and AI receptionist. TRAI-compliant infrastructure."
+
+ogImage: "/og-default.jpg"
+
+twitterCard: "summary_large_image"
+
+robots: "index, follow"
+
+Ensure headings/content remain independent from meta config.
+
+6) THEME SYSTEM (replace old theme; implement these tokens)
+
+Implement full theme tokens and apply consistently across:
+buttons, nav, forms, cards, modals, alerts.
+
+Light Theme (default)
+
+Background: #FFFFFF
+Surface/Cards: #F7F9FC
+Elevated Surface: #FFFFFF
+Text Primary: #0B1220
+Text Muted: #475569
+Borders: #E2E8F0
+Strong Borders: #CBD5E1
+Primary CTA: #1D6CF4 (hover #1A5FD7, active #1652B9, text #FFFFFF)
+Secondary accent: #DF0C82
+Premium accent: #FC962A (use dark text #0B1220)
+Info: #06ACFD
+Success: #1DBE7A
+Warning: #FC962A
+Danger: #FC4448
+Usage rule: mostly whites; blue 8–15%; magenta/gold/gradients ≤5%
+
+Dark Theme
+
+Background: #070B12
+Surface: #0B1220
+Elevated: #111B2D
+Text Primary: #E6EDF8
+Text Muted: #A6B0C3
+Borders: #22304A
+Strong Borders: #2F3D5B
+Primary Button: #1D6CF4 (hover #347BF5, active #1A5FD7)
+Links on dark: #347BF5
+Secondary: #DF0C82
+Premium: #FC962A
+
+Aurora gradient:
+linear-gradient(135deg, #06ACFD 0%, #7041D9 35%, #DF0C82 70%, #FC962A 100%)
+Rules: never full-page background; only subtle accents/borders/hero highlights.
+
+7) CONFIG FILE REQUIREMENTS
+
+Add/update site_config.json (or TS equivalent) to store:
+
+whatsappLink
+
+webhookUrl
+
+supportEmail (optional)
+
+social URLs
+
+feature flags
+
+defaultCountry = India
+
+enableDataLayerRouteEvents (future, default false)
+
+No hardcoded WhatsApp URLs or webhook URLs in components.
+
+8) Acceptance checks
+
+Home loads in Light theme by default.
+
+Theme toggle works and persists (localStorage).
+
+Header dims/translucent on scroll.
+
+Header/hero and section/footer backgrounds are visibly distinct.
+
+Footer is smaller/trimmed and links work.
+
+Footer navigation + any link scrolls to top.
+
+Book a Demo/Get Started/Submit Enquiry open modal form and submit to webhook via Node API.
+
+Early access form works separately with its own lead_source.
+
+Mobile spacing is clean.
+
+Deliver only homepage + header/footer + theme + forms/webhook + homepage SEO wiring. Do not build other pages content now.

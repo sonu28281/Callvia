@@ -1,21 +1,21 @@
 {
   "company": {
     "name": "Callvia",
-    "tagline": "Enterprise Telecom & AI Platform",
+    "tagline": "Callvia — Telecom-first. AI-powered.",
     "logo": "/logo.png",
-    "description": "Leading provider of cloud communication solutions"
+    "description": "Carrier-grade cloud telephony for India—SIP trunks, DID numbers, predictive dialer, call recording, AI transcription, AI agents and AI receptionist. TRAI-compliant infrastructure."
   },
   "contact": {
-    "email": "hello@callvia.com",
-    "phone": "+91-XXX-XXX-XXXX",
-    "whatsapp": "https://wa.me/91XXXXXXXXXX",
+    "support": "enquiry@callvia.in",
+    "sales": "enquiry@callvia.in",
+    "phone": "+91-9310515691",
+    "whatsapp": "https://wa.me/919310515691",
     "address": "India"
   },
   "social": {
-    "linkedin": "https://linkedin.com/company/callvia",
-    "instagram": "https://instagram.com/callvia",
-    "facebook": "https://facebook.com/callvia",
-    "twitter": "https://twitter.com/callvia"
+    "linkedin": "https://www.linkedin.com/company/callvia-cloud-solutions",
+    "instagram": "https://www.instagram.com/callvia.cloud.solutions/",
+    "facebook": "https://facebook.com/callvia.cloud.solutions"
   },
   "theme": {
     "enableDarkMode": true,
@@ -28,9 +28,14 @@
     "enableMetaPixel": true
   },
   "webhooks": {
-    "callFloSuiteLeads": "https://hooks.zapier.com/hooks/catch/XXXXX/callflo-suite/",
-    "aiReceptionistLeads": "https://hooks.zapier.com/hooks/catch/XXXXX/ai-receptionist/",
-    "partnersLeads": "https://hooks.zapier.com/hooks/catch/XXXXX/partners/"
+    "mainLeads": "https://hooks.zapier.com/hooks/catch/XXXXX/main-leads/",
+    "callflosuiteEnquiry": "https://hooks.zapier.com/hooks/catch/XXXXX/callflosuite-enquiry/",
+    "callflodeskaiEnquiry": "https://hooks.zapier.com/hooks/catch/XXXXX/callflodeskai-enquiry/",
+    "resellerEnquiry": "https://hooks.zapier.com/hooks/catch/XXXXX/reseller-enquiry/"
+  },
+  "defaults": {
+    "country": "India",
+    "countryCode": "+91"
   },
   "navigation": {
     "cta": {

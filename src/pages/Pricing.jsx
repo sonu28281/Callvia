@@ -71,7 +71,7 @@ const Pricing = () => {
   const currencySymbol = pricingConfig.currency.symbols[currency];
 
   return (
-    <div style={{ padding: '80px 0' }}>
+    <div style={{ padding: '80px 0 0 0' }}>
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
           <h1

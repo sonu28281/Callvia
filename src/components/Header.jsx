@@ -1,69 +1,76 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Sun, Moon, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import siteConfig from '../config/site_config.json';
+import MegaMenu from './MegaMenu';
 
 const Header = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const { theme, toggleTheme } = useTheme();
 
-  const productsMenu = {
-    'CallFlo Suite (B2B)': [
-      { name: 'SIP Trunks', path: '/products/sip-trunks' },
-      { name: 'DID Numbers', path: '/products/did-numbers' },
-      { name: 'AI Agents', path: '/products/ai-agents' },
-      { name: 'AI Transcription', path: '/products/ai-transcription' },
-      { name: 'Call Recording', path: '/products/call-recording' },
-      { name: 'Predictive Dialer', path: '/products/predictive-dialer' },
-      { name: 'AI Receptionist', path: '/products/ai-receptionist' },
-      { name: 'WhatsApp Automation', path: '/products/whatsapp-automation' },
-    ],
-    'AI Receptionist (B2C)': [
-      { name: 'DID Numbers (Inbound Only)', path: '/products/did-numbers' },
-      { name: 'AI Receptionist', path: '/products/ai-receptionist' },
-      { name: 'WhatsApp Automation', path: '/products/whatsapp-automation' },
-    ],
-    'Partners (Reseller)': [
-      { name: 'White-label Platform', path: '/reseller-program' },
-      { name: 'Reseller Panel', path: '/reseller-program' },
-      { name: 'Billing/Wallet', path: '/reseller-program' },
-      { name: 'Controls/Monitoring', path: '/reseller-program' },
-    ],
-  };
-
-  const solutionsMenu = [
-    { name: 'CallFlo Suite', path: '/solutions/callflo-suite' },
-    { name: 'AI Receptionist', path: '/solutions/ai-receptionist' },
-    { name: 'Partners', path: '/solutions/partners' },
-  ];
+  // Handle scroll effect with hide/show behavior
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      setScrolled(currentScrollY > 20);
+      
+      // Hide header when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   return (
     <header
       style={{
-        backgroundColor: theme === 'dark' ? 'var(--color-nav-footer)' : 'var(--color-bg)',
-        borderBottom: `1px solid var(--color-border)`,
         position: 'sticky',
         top: 0,
-        zIndex: 50,
-        transition: 'background-color 0.3s ease',
+        zIndex: 1000,
+        backgroundColor: scrolled
+          ? theme === 'dark'
+            ? 'rgba(11, 18, 32, 0.9)'
+            : 'rgba(255, 255, 255, 0.9)'
+          : theme === 'dark'
+          ? 'var(--color-nav-footer)'
+          : 'var(--color-bg)',
+        borderBottom: '1px solid var(--color-border)',
+        backdropFilter: scrolled ? 'blur(12px)' : 'blur(8px)',
+        transition: 'all 0.3s ease',
+        transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
       }}
     >
-      <nav className="container" style={{ padding: '16px 24px' }}>
+      <div className="container" style={{ padding: '0.75rem 1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {/* Logo */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
             <img
-              src={siteConfig.company.logo}
+              src="/logo.svg"
               alt={siteConfig.company.name}
-              style={{ height: '40px' }}
+              style={{ height: '48px' }}
+              onError={(e) => {
+                e.target.src = siteConfig.company.logo;
+              }}
             />
             <span
               style={{
                 fontFamily: 'Sora, sans-serif',
                 fontSize: '1.5rem',
-                fontWeight: 600,
+                fontWeight: 700,
                 color: 'var(--color-text)',
               }}
             >
@@ -72,165 +79,271 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div style={{ display: 'none', gap: '32px', alignItems: 'center' }} className="desktop-nav">
-            {/* Products Dropdown */}
+          <nav
+            style={{
+              display: 'flex',
+              gap: '32px',
+              alignItems: 'center',
+            }}
+            className="desktop-nav"
+          >
+            {/* Products */}
             <div
-              onMouseEnter={() => setActiveDropdown('products')}
-              onMouseLeave={() => setActiveDropdown(null)}
               style={{ position: 'relative' }}
+              onMouseEnter={() => setProductsOpen(true)}
+              onMouseLeave={() => setProductsOpen(false)}
             >
               <button
                 style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--color-text-muted)',
+                  fontSize: '0.9375rem',
+                  fontWeight: 500,
+                  cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '4px',
-                  background: 'none',
-                  border: 'none',
-                  color: 'var(--color-text)',
-                  fontWeight: 500,
-                  cursor: 'pointer',
+                  padding: '8px 4px',
+                  transition: 'color 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.color = 'var(--color-text)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = 'var(--color-text-muted)';
                 }}
               >
-                Products <ChevronDown size={16} />
+                Products
+                <ChevronDown size={16} />
               </button>
-              {activeDropdown === 'products' && (
+
+              {productsOpen && (
                 <div
                   style={{
                     position: 'absolute',
                     top: '100%',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    marginTop: '8px',
-                    backgroundColor: 'var(--color-surface)',
-                    border: '1px solid var(--color-border)',
-                    borderRadius: '12px',
-                    padding: '24px',
-                    minWidth: '800px',
-                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '24px',
+                    left: '-16px',
+                    paddingTop: '12px',
                   }}
+                  onMouseEnter={() => setProductsOpen(true)}
+                  onMouseLeave={() => setProductsOpen(false)}
                 >
-                  {Object.entries(productsMenu).map(([category, items]) => (
-                    <div key={category}>
-                      <h4 style={{ fontSize: '0.875rem', fontWeight: 600, marginBottom: '12px', color: 'var(--color-text-muted)' }}>
-                        {category}
-                      </h4>
-                      {items.map((item) => (
-                        <Link
-                          key={item.path}
-                          to={item.path}
-                          style={{
-                            display: 'block',
-                            padding: '8px 12px',
-                            borderRadius: '6px',
-                            color: 'var(--color-text)',
-                            transition: 'all 0.2s ease',
-                            fontSize: '0.9375rem',
-                          }}
-                          onMouseEnter={(e) => {
-                            e.target.style.backgroundColor = 'var(--color-accent-soft)';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.target.style.backgroundColor = 'transparent';
-                          }}
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
-                  ))}
+                  <MegaMenu type="products" />
                 </div>
               )}
             </div>
 
-            {/* Solutions Dropdown */}
+            {/* Solutions */}
             <div
-              onMouseEnter={() => setActiveDropdown('solutions')}
-              onMouseLeave={() => setActiveDropdown(null)}
               style={{ position: 'relative' }}
+              onMouseEnter={() => setSolutionsOpen(true)}
+              onMouseLeave={() => setSolutionsOpen(false)}
             >
               <button
                 style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--color-text-muted)',
+                  fontSize: '0.9375rem',
+                  fontWeight: 500,
+                  cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '4px',
-                  background: 'none',
-                  border: 'none',
-                  color: 'var(--color-text)',
-                  fontWeight: 500,
-                  cursor: 'pointer',
+                  padding: '8px 4px',
+                  transition: 'color 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.color = 'var(--color-text)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = 'var(--color-text-muted)';
                 }}
               >
-                Solutions <ChevronDown size={16} />
+                Solutions
+                <ChevronDown size={16} />
               </button>
-              {activeDropdown === 'solutions' && (
+
+              {solutionsOpen && (
                 <div
                   style={{
                     position: 'absolute',
                     top: '100%',
-                    left: '0',
-                    marginTop: '8px',
-                    backgroundColor: 'var(--color-surface)',
-                    border: '1px solid var(--color-border)',
-                    borderRadius: '12px',
-                    padding: '16px',
-                    minWidth: '220px',
-                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
+                    left: '-16px',
+                    paddingTop: '12px',
                   }}
+                  onMouseEnter={() => setSolutionsOpen(true)}
+                  onMouseLeave={() => setSolutionsOpen(false)}
                 >
-                  {solutionsMenu.map((item) => (
-                    <Link
-                      key={item.path}
-                      to={item.path}
-                      style={{
-                        display: 'block',
-                        padding: '8px 12px',
-                        borderRadius: '6px',
-                        color: 'var(--color-text)',
-                        transition: 'all 0.2s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.backgroundColor = 'var(--color-accent-soft)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.backgroundColor = 'transparent';
-                      }}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
+                  <MegaMenu type="solutions" />
                 </div>
               )}
             </div>
 
-            <Link to="/pricing" style={{ color: 'var(--color-text)', fontWeight: 500 }}>
+            {/* Regular Links */}
+            <Link
+              to="/pricing"
+              style={{
+                color: 'var(--color-text-muted)',
+                fontSize: '0.9375rem',
+                fontWeight: 500,
+                textDecoration: 'none',
+                padding: '8px 4px',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = 'var(--color-text)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = 'var(--color-text-muted)';
+              }}
+            >
               Pricing
             </Link>
-            <Link to="/developers" style={{ color: 'var(--color-text)', fontWeight: 500 }}>
+
+            <Link
+              to="/developers"
+              style={{
+                color: 'var(--color-text-muted)',
+                fontSize: '0.9375rem',
+                fontWeight: 500,
+                textDecoration: 'none',
+                padding: '8px 4px',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = 'var(--color-text)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = 'var(--color-text-muted)';
+              }}
+            >
               Developers
             </Link>
-            <Link to="/resources" style={{ color: 'var(--color-text)', fontWeight: 500 }}>
+
+            <Link
+              to="/resources"
+              style={{
+                color: 'var(--color-text-muted)',
+                fontSize: '0.9375rem',
+                fontWeight: 500,
+                textDecoration: 'none',
+                padding: '8px 4px',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.color = 'var(--color-text)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.color = 'var(--color-text-muted)';
+              }}
+            >
               Resources
             </Link>
-            <Link to="/about" style={{ color: 'var(--color-text)', fontWeight: 500 }}>
-              Company
-            </Link>
-          </div>
+          </nav>
 
-          {/* Right Side Actions */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          {/* Right Side: Theme Toggle + Auth */}
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }} className="desktop-auth">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '8px',
+                width: '40px',
+                height: '40px',
+                borderRadius: '8px',
+                border: '1px solid var(--color-border)',
+                backgroundColor: 'var(--color-bg)',
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-accent)';
+                e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border)';
+                e.currentTarget.style.backgroundColor = 'var(--color-bg)';
+              }}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun size={20} style={{ color: 'var(--color-primary)' }} />
+              ) : (
+                <Moon size={20} style={{ color: 'var(--color-primary)' }} />
+              )}
+            </button>
+
+            <a
+              href={siteConfig.navigation.cta.login}
+              style={{
+                color: 'var(--color-text)',
+                fontSize: '0.9375rem',
+                fontWeight: 600,
+                textDecoration: 'none',
+                padding: '10px 20px',
+                border: '1px solid var(--color-border)',
+                borderRadius: '8px',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.borderColor = 'var(--color-primary)';
+                e.target.style.color = 'var(--color-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.borderColor = 'var(--color-border)';
+                e.target.style.color = 'var(--color-text)';
+              }}
+            >
+              Login
+            </a>
+
+            <a
+              href={siteConfig.navigation.cta.signup}
+              style={{
+                backgroundColor: 'var(--color-primary)',
+                color: 'var(--color-primary-text)',
+                fontSize: '0.9375rem',
+                fontWeight: 600,
+                textDecoration: 'none',
+                padding: '10px 20px',
+                borderRadius: '8px',
+                border: 'none',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'translateY(-1px)';
+                e.target.style.backgroundColor = 'var(--color-primary-hover)';
+                e.target.style.boxShadow = '0 4px 12px rgba(29, 108, 244, 0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.backgroundColor = 'var(--color-primary)';
+                e.target.style.boxShadow = 'none';
+              }}
+            >
+              Sign Up
+            </a>
+          </div>
+
+          {/* Mobile Right Side: Theme Toggle + Menu Button */}
+          <div style={{ display: 'none', gap: '12px', alignItems: 'center' }} className="mobile-right">
+            {/* Theme Toggle for Mobile */}
+            <button
+              onClick={toggleTheme}
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '8px',
+                border: '1px solid var(--color-border)',
+                backgroundColor: 'var(--color-bg)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
                 color: 'var(--color-text)',
               }}
               aria-label="Toggle theme"
@@ -238,96 +351,166 @@ const Header = () => {
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
             </button>
 
-            {/* Desktop CTA Buttons */}
-            <div style={{ display: 'none', gap: '12px' }} className="desktop-nav">
-              <a
-                href={siteConfig.navigation.cta.login}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary"
-              >
-                Login
-              </a>
-              <a
-                href={siteConfig.navigation.cta.signup}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                Sign Up
-              </a>
-            </div>
-
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileOpen(!mobileOpen)}
               style={{
-                display: 'none',
-                background: 'none',
-                border: 'none',
+                width: '40px',
+                height: '40px',
+                border: '1px solid var(--color-border)',
+                borderRadius: '8px',
+                backgroundColor: 'var(--color-bg)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 cursor: 'pointer',
                 color: 'var(--color-text)',
               }}
-              className="mobile-menu-btn"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
+        {mobileOpen && (
           <div
             style={{
-              marginTop: '16px',
-              padding: '16px',
-              backgroundColor: 'var(--color-surface)',
-              borderRadius: '12px',
-              border: '1px solid var(--color-border)',
+              display: 'none',
+              paddingTop: '16px',
+              paddingBottom: '16px',
+              backgroundColor: 'var(--color-bg)',
+              borderTop: '1px solid var(--color-border)',
             }}
             className="mobile-menu"
           >
-            <Link to="/solutions" style={{ display: 'block', padding: '12px', color: 'var(--color-text)' }}>
-              Solutions
-            </Link>
-            <Link to="/products" style={{ display: 'block', padding: '12px', color: 'var(--color-text)' }}>
-              Products
-            </Link>
-            <Link to="/pricing" style={{ display: 'block', padding: '12px', color: 'var(--color-text)' }}>
-              Pricing
-            </Link>
-            <Link to="/developers" style={{ display: 'block', padding: '12px', color: 'var(--color-text)' }}>
-              Developers
-            </Link>
-            <Link to="/resources" style={{ display: 'block', padding: '12px', color: 'var(--color-text)' }}>
-              Resources
-            </Link>
-            <Link to="/about" style={{ display: 'block', padding: '12px', color: 'var(--color-text)' }}>
-              About
-            </Link>
-            <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <a href={siteConfig.navigation.cta.login} className="btn-secondary" style={{ textAlign: 'center' }}>
-                Login
-              </a>
-              <a href={siteConfig.navigation.cta.signup} className="btn-primary" style={{ textAlign: 'center' }}>
-                Sign Up
-              </a>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <Link 
+                to="/solutions" 
+                style={{ 
+                  padding: '12px 16px', 
+                  color: 'var(--color-text)', 
+                  textDecoration: 'none',
+                  borderRadius: '8px',
+                  transition: 'background-color 0.2s ease',
+                }}
+                onClick={() => setMobileOpen(false)}
+                onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--color-surface)'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+              >
+                Solutions
+              </Link>
+              <Link 
+                to="/products" 
+                style={{ 
+                  padding: '12px 16px', 
+                  color: 'var(--color-text)', 
+                  textDecoration: 'none',
+                  borderRadius: '8px',
+                  transition: 'background-color 0.2s ease',
+                }}
+                onClick={() => setMobileOpen(false)}
+                onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--color-surface)'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+              >
+                Products
+              </Link>
+              <Link 
+                to="/pricing" 
+                style={{ 
+                  padding: '12px 16px', 
+                  color: 'var(--color-text)', 
+                  textDecoration: 'none',
+                  borderRadius: '8px',
+                  transition: 'background-color 0.2s ease',
+                }}
+                onClick={() => setMobileOpen(false)}
+                onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--color-surface)'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+              >
+                Pricing
+              </Link>
+              <Link 
+                to="/developers" 
+                style={{ 
+                  padding: '12px 16px', 
+                  color: 'var(--color-text)', 
+                  textDecoration: 'none',
+                  borderRadius: '8px',
+                  transition: 'background-color 0.2s ease',
+                }}
+                onClick={() => setMobileOpen(false)}
+                onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--color-surface)'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+              >
+                Developers
+              </Link>
+              <Link 
+                to="/resources" 
+                style={{ 
+                  padding: '12px 16px', 
+                  color: 'var(--color-text)', 
+                  textDecoration: 'none',
+                  borderRadius: '8px',
+                  transition: 'background-color 0.2s ease',
+                }}
+                onClick={() => setMobileOpen(false)}
+                onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--color-surface)'}
+                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+              >
+                Resources
+              </Link>
+
+              {/* Mobile Auth Buttons */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px', paddingTop: '12px', borderTop: '1px solid var(--color-border)' }}>
+                <a
+                  href={siteConfig.navigation.cta.login}
+                  style={{
+                    padding: '12px 16px',
+                    textAlign: 'center',
+                    color: 'var(--color-text)',
+                    fontSize: '0.9375rem',
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: '8px',
+                  }}
+                >
+                  Login
+                </a>
+                <a
+                  href={siteConfig.navigation.cta.signup}
+                  style={{
+                    padding: '12px 16px',
+                    textAlign: 'center',
+                    backgroundColor: 'var(--color-primary)',
+                    color: 'var(--color-primary-text)',
+                    fontSize: '0.9375rem',
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                    borderRadius: '8px',
+                  }}
+                >
+                  Sign Up
+                </a>
+              </div>
             </div>
           </div>
         )}
-      </nav>
+      </div>
 
       <style>{`
-        @media (min-width: 768px) {
+        @media (max-width: 1024px) {
           .desktop-nav {
-            display: flex !important;
-          }
-          .mobile-menu-btn {
             display: none !important;
           }
-        }
-        @media (max-width: 767px) {
-          .mobile-menu-btn {
+          .desktop-auth {
+            display: none !important;
+          }
+          .mobile-right {
+            display: flex !important;
+          }
+          .mobile-menu {
             display: block !important;
           }
         }

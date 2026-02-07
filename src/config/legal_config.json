@@ -1,0 +1,196 @@
+{
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "January 15, 2026",
+    "effectiveDate": "January 1, 2026",
+    "sections": [
+      {
+        "title": "Acceptance of Terms",
+        "content": ["By accessing and using Callvia's services, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services."]
+      },
+      {
+        "title": "Service Description",
+        "content": ["Callvia provides cloud-based telecom infrastructure including voice calling, SMS, SIP trunks, DID numbers, and related services. We operate as a TRAI-approved Class-B VNO (Virtual Network Operator) in India."]
+      },
+      {
+        "title": "Account Registration",
+        "content": ["You must register for an account to use our services. You agree to provide accurate, current, and complete information during registration and to update such information to keep it accurate, current, and complete. You are responsible for safeguarding your account credentials and for all activities that occur under your account."]
+      },
+      {
+        "title": "Acceptable Use",
+        "content": ["You agree to use our services only for lawful purposes and in accordance with applicable TRAI regulations and Indian telecommunications laws. Prohibited activities include but are not limited to: spam calls, robocalls, fraudulent activities, harassment, violation of DND regulations, unauthorized international calling, and any activity that violates Indian law."]
+      },
+      {
+        "title": "Payment Terms",
+        "content": ["Services are billed based on usage as outlined in our pricing page. Payment is due according to the billing cycle selected (prepaid or postpaid). We reserve the right to suspend services for non-payment. All prices are in Indian Rupees (INR) and exclude applicable taxes."]
+      },
+      {
+        "title": "Service Level Agreement (SLA)",
+        "content": ["We provide a 99.99% uptime SLA for carrier-grade services. Details of SLA credits and eligibility are available in your service agreement. SLA does not cover outages caused by third-party networks, scheduled maintenance, or force majeure events."]
+      },
+      {
+        "title": "Data Privacy",
+        "content": ["We collect and process call detail records (CDRs), account information, and usage data as required by TRAI regulations. All data is stored in India. We do not share your data with third parties except as required by law or regulatory authorities."]
+      },
+      {
+        "title": "Intellectual Property",
+        "content": ["All intellectual property rights in our platform, API, documentation, and services remain the property of Callvia. You retain ownership of your content and data processed through our services."]
+      },
+      {
+        "title": "Service Modifications",
+        "content": ["We reserve the right to modify, suspend, or discontinue any aspect of our services with 30 days' notice for material changes. We may make immediate changes for security, legal compliance, or operational reasons."]
+      },
+      {
+        "title": "Termination",
+        "content": ["Either party may terminate services with 30 days' written notice. We may immediately terminate or suspend services for violation of these terms, non-payment, or illegal activities. Upon termination, you remain liable for all charges incurred."]
+      },
+      {
+        "title": "Limitation of Liability",
+        "content": ["Our liability is limited to the amount paid by you in the 3 months preceding the claim. We are not liable for indirect, incidental, consequential, or punitive damages. This limitation applies to the fullest extent permitted by Indian law."]
+      },
+      {
+        "title": "Indemnification",
+        "content": ["You agree to indemnify and hold Callvia harmless from any claims, damages, or expenses arising from your use of services, violation of these terms, or infringement of any rights of third parties."]
+      },
+      {
+        "title": "Dispute Resolution",
+        "content": ["Any disputes arising from these terms shall be resolved through arbitration in Lucknow, Uttar Pradesh, under the Indian Arbitration and Conciliation Act, 1996. The arbitration shall be conducted in English."]
+      },
+      {
+        "title": "Governing Law",
+        "content": ["These Terms are governed by the laws of India. Any legal proceedings shall be subject to the exclusive jurisdiction of courts in Lucknow, Uttar Pradesh."]
+      },
+      {
+        "title": "Changes to Terms",
+        "content": ["We may update these Terms periodically. Significant changes will be communicated via email 30 days in advance. Continued use of services after changes constitutes acceptance."]
+      }
+    ],
+    "contact": {
+      "email": "enquiry@callvia.in",
+      "phone": "+91 8418 828 125",
+      "address": "Lucknow, Uttar Pradesh, India - 226301"
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "January 15, 2026",
+    "effectiveDate": "January 1, 2026",
+    "sections": [
+      {
+        "title": "Information We Collect",
+        "content": ["We collect information necessary to provide telecommunications services including: account information (name, email, phone, company details), call detail records (CDRs) including phone numbers, call duration, timestamps, billing and payment information, API usage logs, and technical information such as IP addresses."]
+      },
+      {
+        "title": "How We Use Your Information",
+        "content": ["We use your information to: provide and maintain our services, process billing and payments, comply with TRAI regulations and legal requirements, detect and prevent fraud, improve our services, communicate service updates and support, maintain CDR records as required by law (minimum 2 years)."]
+      },
+      {
+        "title": "Data Storage and Security",
+        "content": ["All data is stored exclusively in India on secure servers. We implement industry-standard security measures including encryption in transit (TLS 1.3), encryption at rest for sensitive data, regular security audits, access controls and monitoring, and DDoS protection."]
+      },
+      {
+        "title": "TRAI Compliance",
+        "content": ["As a TRAI-approved VNO, we maintain CDR records for the mandated period, implement DND (Do Not Disturb) filtering, provide regulatory reports as required, and comply with KYC requirements for customers."]
+      },
+      {
+        "title": "Data Sharing",
+        "content": ["We do not sell your personal data. We may share data only with: regulatory authorities (TRAI, DoT) as required by law, law enforcement when legally required, payment processors for billing, and cloud infrastructure providers (all India-based)."]
+      },
+      {
+        "title": "Your Rights",
+        "content": ["You have the right to: access your personal data, request correction of inaccurate data, request deletion of data (subject to legal retention requirements), export your data, opt-out of marketing communications, and withdraw consent where applicable."]
+      },
+      {
+        "title": "Cookies and Tracking",
+        "content": ["We use essential cookies for authentication and functionality, analytics cookies to improve our services (which you can opt-out of), and do not use third-party advertising cookies."]
+      },
+      {
+        "title": "Data Retention",
+        "content": ["CDR records: Minimum 2 years as per TRAI regulations. Account information: Duration of account plus 7 years. Billing records: 7 years for tax compliance. API logs: 90 days. After retention periods, data is securely deleted."]
+      },
+      {
+        "title": "International Data Transfers",
+        "content": ["We do not transfer data outside India. All infrastructure and data processing occurs within India."]
+      },
+      {
+        "title": "Children's Privacy",
+        "content": ["Our services are not directed to individuals under 18. We do not knowingly collect data from minors."]
+      },
+      {
+        "title": "Changes to Privacy Policy",
+        "content": ["We may update this policy periodically. Material changes will be notified via email 30 days in advance. Continued use constitutes acceptance of changes."]
+      }
+    ],
+    "contact": {
+      "email": "enquiry@callvia.in",
+      "dpo": "Data Protection Officer",
+      "address": "Lucknow, Uttar Pradesh, India - 226301"
+    }
+  },
+  "compliance": {
+    "title": "Compliance & Regulatory",
+    "lastUpdated": "January 15, 2026",
+    "sections": [
+      {
+        "title": "TRAI Licensing",
+        "content": ["Callvia operates as a TRAI-approved Class-B Virtual Network Operator (VNO) in India. Our license number and regulatory details are available upon request. We maintain full compliance with all TRAI regulations and Department of Telecommunications (DoT) guidelines."]
+      },
+      {
+        "title": "Service Coverage",
+        "content": ["We provide services exclusively within India. We do not offer international calling services. All voice traffic is routed through licensed operators within India. We do not use grey routes or unauthorized international gateways."]
+      },
+      {
+        "title": "DND Compliance",
+        "content": ["We implement TRAI's Do Not Disturb (DND) regulations. All outbound calls are filtered against the NCPR (National Customer Preference Register). Customers must not use our services to contact numbers registered on DND lists. Violations may result in service termination and regulatory penalties."]
+      },
+      {
+        "title": "CDR Retention",
+        "content": ["We maintain Call Detail Records (CDRs) for a minimum of 2 years as mandated by TRAI. CDRs include: calling and called numbers, call start and end time, call duration, call type, and routing information. CDRs are made available to regulatory authorities upon request."]
+      },
+      {
+        "title": "KYC Requirements",
+        "content": ["All customers must complete KYC (Know Your Customer) verification. Required documents include: valid government-issued ID, proof of address, company registration (for businesses), and authorized signatory details. We verify all documents before service activation."]
+      },
+      {
+        "title": "Number Management",
+        "content": ["DID numbers are allocated in compliance with the National Numbering Plan. We maintain accurate records of number allocation and usage. Customers must not use numbers for illegal activities or impersonation. Numbers may be reclaimed if not used within 90 days."]
+      },
+      {
+        "title": "Quality of Service",
+        "content": ["We maintain QoS standards as per TRAI benchmarks: Voice latency: < 150ms, Packet loss: < 1%, Call Setup Success Rate: > 99%, Mean Time to Repair: < 4 hours. Monthly QoS reports are generated and available in your dashboard."]
+      },
+      {
+        "title": "Security Standards",
+        "content": ["We implement: ISO 27001 compliant information security, Regular security audits and penetration testing, 24/7 network monitoring, Incident response procedures, and Employee background verificication and security training."]
+      },
+      {
+        "title": "Data Protection",
+        "content": ["All data is stored in India-based data centers. We comply with IT Act, 2000 and amendments. Personal data is processed only for service delivery. We have a designated Data Protection Officer (DPO)."]
+      },
+      {
+        "title": "Fraud Prevention",
+        "content": ["We actively monitor for: CLI manipulation and spoofing, Spam and robocalls, Unusual call patterns, Suspicious traffic volumes. Suspected fraud is reported to authorities and services may be immediately suspended."]
+      },
+      {
+        "title": "Lawful Interception",
+        "content": ["We comply with lawful interception requirements under Indian Telegraph Act. Authorized law enforcement agencies may request call records and interception. All requests are verified and logged."]
+      },
+      {
+        "title": "Reporting and Audits",
+        "content": ["We submit regular reports to TRAI and DoT. We undergo annual compliance audits. Audit reports are available to regulatory authorities."]
+      }
+    ],
+    "certifications": [
+      "TRAI-approved Class-B VNO",
+      "ISO 27001:2013 (Information Security)",
+      "DoT Licensed Operator",
+      "NCPR DND Compliant"
+    ],
+    "contact": {
+      "email": "enquiry@callvia.in",
+      "officer": "Chief Compliance Officer",
+      "phone": "+91 8418 828 125",
+      "address": "Lucknow, Uttar Pradesh, India - 226301"
+    }
+  }
+}

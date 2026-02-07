@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors());
@@ -20,25 +20,57 @@ const siteConfig = JSON.parse(
   fs.readFileSync(path.join(__dirname, '../src/config/site_config.json'), 'utf-8')
 );
 
-// Webhook endpoint
+// Leads endpoint - forwards to main webhook
+app.post('/api/leads', async (req, res) => {
+  const leadData = req.body;
+
+  try {
+    // Use the main webhook URL from config
+    const webhookUrl = siteConfig.webhooks.mainLeads;
+
+    if (!webhookUrl || webhookUrl.includes('XXXXX')) {
+      console.warn('Webhook URL not configured properly');
+      // In development, just log and return success
+      console.log('Lead data (dev mode):', leadData);
+      return res.json({ success: true, message: 'Lead submitted successfully (dev mode)' });
+    }
+
+    // Forward to webhook
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(leadData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Webhook request failed');
+    }
+
+    const result = await response.json().catch(() => ({}));
+
+    res.json({ success: true, message: 'Lead submitted successfully', data: result });
+  } catch (error) {
+    console.error('Webhook error:', error);
+    // Log the lead data even if webhook fails
+    console.log('Failed lead data:', leadData);
+    res.status(500).json({ error: 'Failed to submit lead' });
+  }
+});
+
+// Legacy webhook endpoint (keep for backward compatibility)
 app.post('/api/webhook', async (req, res) => {
   const { lead_type, ...leadData } = req.body;
 
   try {
-    // Determine webhook URL based on lead type
-    let webhookUrl;
-    switch (lead_type) {
-      case 'callflo-suite':
-        webhookUrl = siteConfig.webhooks.callFloSuiteLeads;
-        break;
-      case 'ai-receptionist':
-        webhookUrl = siteConfig.webhooks.aiReceptionistLeads;
-        break;
-      case 'partners':
-        webhookUrl = siteConfig.webhooks.partnersLeads;
-        break;
-      default:
-        return res.status(400).json({ error: 'Invalid lead type' });
+    // Use main webhook
+    const webhookUrl = siteConfig.webhooks.mainLeads;
+
+    if (!webhookUrl || webhookUrl.includes('XXXXX')) {
+      console.warn('Webhook URL not configured properly');
+      console.log('Lead data (dev mode):', { ...leadData, lead_type });
+      return res.json({ success: true, message: 'Lead submitted successfully (dev mode)' });
     }
 
     // Forward to webhook
@@ -61,9 +93,14 @@ app.post('/api/webhook', async (req, res) => {
   }
 });
 
-// Serve React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/index.html'));
+// Serve React app - catch all other routes
+app.use((req, res) => {
+  const indexPath = path.join(__dirname, '../dist/index.html');
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).json({ error: 'Application not built. Run npm run build first.' });
+  }
 });
 
 app.listen(PORT, () => {

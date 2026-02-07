@@ -1,0 +1,71 @@
+{
+  "baseURL": "https://api.callvia.com",
+  "version": "v1",
+  "endpoints": {
+    "auth": {
+      "login": "/auth/login",
+      "signup": "/auth/signup",
+      "refresh": "/auth/refresh",
+      "logout": "/auth/logout"
+    },
+    "calls": {
+      "makeCall": "/calls/make",
+      "endCall": "/calls/:callId/end",
+      "getCallDetails": "/calls/:callId",
+      "listCalls": "/calls",
+      "getCallRecording": "/calls/:callId/recording"
+    },
+    "sms": {
+      "send": "/sms/send",
+      "getSmsDetails": "/sms/:messageId",
+      "listSms": "/sms"
+    },
+    "numbers": {
+      "listAvailable": "/numbers/available",
+      "purchase": "/numbers/purchase",
+      "release": "/numbers/:numberId/release",
+      "listOwned": "/numbers/owned",
+      "configure": "/numbers/:numberId/configure"
+    },
+    "sipTrunks": {
+      "list": "/sip-trunks",
+      "create": "/sip-trunks/create",
+      "configure": "/sip-trunks/:trunkId/configure",
+      "delete": "/sip-trunks/:trunkId"
+    },
+    "ivr": {
+      "create": "/ivr/create",
+      "update": "/ivr/:ivrId",
+      "delete": "/ivr/:ivrId",
+      "list": "/ivr"
+    },
+    "recordings": {
+      "list": "/recordings",
+      "download": "/recordings/:recordingId/download",
+      "delete": "/recordings/:recordingId"
+    },
+    "analytics": {
+      "cdr": "/analytics/cdr",
+      "usage": "/analytics/usage",
+      "quality": "/analytics/quality"
+    },
+    "webhooks": {
+      "list": "/webhooks",
+      "create": "/webhooks/create",
+      "update": "/webhooks/:webhookId",
+      "delete": "/webhooks/:webhookId"
+    },
+    "account": {
+      "balance": "/account/balance",
+      "recharge": "/account/recharge",
+      "billing": "/account/billing",
+      "usage": "/account/usage"
+    }
+  },
+  "timeout": 30000,
+  "retryAttempts": 3,
+  "headers": {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  }
+}

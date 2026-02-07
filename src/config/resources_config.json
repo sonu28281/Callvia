@@ -1,0 +1,272 @@
+{
+  "hero": {
+    "title": "Developer Resources",
+    "subtitle": "Everything you need to build with Callvia",
+    "description": "Documentation, guides, tools, and community resources to help you integrate and scale voice infrastructure."
+  },
+  "categories": [
+    {
+      "id": "documentation",
+      "title": "Documentation",
+      "description": "Comprehensive guides and API references",
+      "icon": "Book",
+      "color": "var(--color-primary)",
+      "resources": [
+        {
+          "title": "API Documentation",
+          "description": "Complete API reference for all Callvia endpoints",
+          "link": "#",
+          "type": "External",
+          "tags": ["API", "Reference", "REST"]
+        },
+        {
+          "title": "Getting Started Guide",
+          "description": "Quick start guide to make your first API call in minutes",
+          "link": "/developers#quickstart",
+          "type": "Guide",
+          "tags": ["Beginner", "Tutorial"]
+        },
+        {
+          "title": "Authentication Guide",
+          "description": "Learn how to authenticate API requests securely",
+          "link": "#",
+          "type": "Guide",
+          "tags": ["Security", "API Keys"]
+        },
+        {
+          "title": "Webhook Integration",
+          "description": "Set up real-time event notifications for your application",
+          "link": "#",
+          "type": "Guide",
+          "tags": ["Webhooks", "Events"]
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "Developer Tools",
+      "description": "Tools to test and debug your integration",
+      "icon": "Terminal",
+      "color": "var(--color-secondary)",
+      "resources": [
+        {
+          "title": "API Playground",
+          "description": "Test API endpoints directly from your browser",
+          "link": "#",
+          "type": "Tool",
+          "tags": ["Testing", "Interactive"]
+        },
+        {
+          "title": "Postman Collection",
+          "description": "Pre-configured Postman collection for all Callvia APIs",
+          "link": "#",
+          "type": "Download",
+          "tags": ["Postman", "Testing"]
+        },
+        {
+          "title": "CDR Analyzer",
+          "description": "Analyze and visualize your call detail records",
+          "link": "#",
+          "type": "Tool",
+          "tags": ["Analytics", "CDR"]
+        },
+        {
+          "title": "Number Validator",
+          "description": "Validate phone numbers before making calls",
+          "link": "#",
+          "type": "Tool",
+          "tags": ["Validation", "Utility"]
+        }
+      ]
+    },
+    {
+      "id": "guides",
+      "title": "Integration Guides",
+      "description": "Step-by-step tutorials for common use cases",
+      "icon": "Code",
+      "color": "var(--color-info)",
+      "resources": [
+        {
+          "title": "Build a Click-to-Call Widget",
+          "description": "Add voice calling to your website in 15 minutes",
+          "link": "#",
+          "type": "Tutorial",
+          "tags": ["Click-to-Call", "JavaScript"]
+        },
+        {
+          "title": "IVR System Setup",
+          "description": "Create an interactive voice response system",
+          "link": "#",
+          "type": "Tutorial",
+          "tags": ["IVR", "Voice"]
+        },
+        {
+          "title": "SMS OTP Integration",
+          "description": "Implement SMS-based authentication",
+          "link": "#",
+          "type": "Tutorial",
+          "tags": ["SMS", "Authentication"]
+        },
+        {
+          "title": "Call Recording Setup",
+          "description": "Enable and manage call recordings",
+          "link": "#",
+          "type": "Tutorial",
+          "tags": ["Recording", "Compliance"]
+        },
+        {
+          "title": "Predictive Dialer Implementation",
+          "description": "Build an outbound calling campaign",
+          "link": "#",
+          "type": "Tutorial",
+          "tags": ["Dialer", "Campaigns"]
+        }
+      ]
+    },
+    {
+      "id": "samples",
+      "title": "Code Samples",
+      "description": "Ready-to-use code examples",
+      "icon": "FileCode",
+      "color": "var(--color-success)",
+      "resources": [
+        {
+          "title": "Node.js Examples",
+          "description": "Express.js integration with Callvia APIs",
+          "link": "#",
+          "type": "GitHub",
+          "tags": ["Node.js", "Express"]
+        },
+        {
+          "title": "Python Examples",
+          "description": "Flask and Django integration samples",
+          "link": "#",
+          "type": "GitHub",
+          "tags": ["Python", "Flask", "Django"]
+        },
+        {
+          "title": "PHP Examples",
+          "description": "Laravel and vanilla PHP samples",
+          "link": "#",
+          "type": "GitHub",
+          "tags": ["PHP", "Laravel"]
+        },
+        {
+          "title": "React Components",
+          "description": "Pre-built React components for voice features",
+          "link": "#",
+          "type": "GitHub",
+          "tags": ["React", "Components"]
+        }
+      ]
+    },
+    {
+      "id": "compliance",
+      "title": "Compliance Resources",
+      "description": "Regulatory compliance documentation",
+      "icon": "Shield",
+      "color": "var(--color-premium)",
+      "resources": [
+        {
+          "title": "TRAI Guidelines",
+          "description": "Understand TRAI regulations for voice services",
+          "link": "/legal/compliance",
+          "type": "Documentation",
+          "tags": ["TRAI", "Regulations"]
+        },
+        {
+          "title": "DND Compliance",
+          "description": "Do Not Disturb registry compliance guide",
+          "link": "/legal/compliance",
+          "type": "Guide",
+          "tags": ["DND", "Compliance"]
+        },
+        {
+          "title": "CDR Management",
+          "description": "Call detail record retention requirements",
+          "link": "/legal/compliance",
+          "type": "Guide",
+          "tags": ["CDR", "Data Retention"]
+        },
+        {
+          "title": "KYC Requirements",
+          "description": "Know Your Customer documentation",
+          "link": "/legal/compliance",
+          "type": "Guide",
+          "tags": ["KYC", "Verification"]
+        }
+      ]
+    },
+    {
+      "id": "support",
+      "title": "Support & Community",
+      "description": "Get help and connect with other developers",
+      "icon": "Users",
+      "color": "var(--color-warning)",
+      "resources": [
+        {
+          "title": "Developer Forum",
+          "description": "Ask questions and share knowledge",
+          "link": "#",
+          "type": "Community",
+          "tags": ["Forum", "Q&A"]
+        },
+        {
+          "title": "Technical Support",
+          "description": "Get help from our engineering team",
+          "link": "/contact",
+          "type": "Support",
+          "tags": ["Support", "Help"]
+        },
+        {
+          "title": "Status Page",
+          "description": "Check API and service status",
+          "link": "#",
+          "type": "Status",
+          "tags": ["Status", "Uptime"]
+        },
+        {
+          "title": "Changelog",
+          "description": "Stay updated with latest API changes",
+          "link": "#",
+          "type": "Updates",
+          "tags": ["Updates", "Changelog"]
+        }
+      ]
+    }
+  ],
+  "popularResources": [
+    {
+      "title": "API Documentation",
+      "link": "#",
+      "icon": "Book"
+    },
+    {
+      "title": "Getting Started",
+      "link": "/developers#quickstart",
+      "icon": "Rocket"
+    },
+    {
+      "title": "Code Samples",
+      "link": "#samples",
+      "icon": "Code"
+    },
+    {
+      "title": "Contact Support",
+      "link": "/contact",
+      "icon": "Headphones"
+    }
+  ],
+  "cta": {
+    "title": "Need help getting started?",
+    "description": "Our developer support team is here to help you build and scale.",
+    "primaryButton": {
+      "text": "Contact Support",
+      "link": "/contact"
+    },
+    "secondaryButton": {
+      "text": "View Documentation",
+      "link": "#"
+    }
+  }
+}

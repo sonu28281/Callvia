@@ -1,178 +1,178 @@
 {
   "defaults": {
     "titleSuffix": " | Callvia - Enterprise Telecom & AI Platform",
-    "description": "[DEFAULT_META_DESCRIPTION]",
+    "description": "Carrier-grade cloud telephony for India—SIP trunks, DID numbers, predictive dialer, call recording, AI transcription, AI agents and AI receptionist. TRAI-compliant infrastructure.",
     "ogImage": "/og-default.jpg",
     "twitterCard": "summary_large_image",
     "robots": "index, follow"
   },
   "routes": {
     "/": {
-      "title": "[HOME_PAGE_TITLE]",
-      "description": "[HOME_PAGE_DESCRIPTION]",
+      "title": "Cloud Telephony & AI Calling Platform for India",
+      "description": "Callvia powers SIP trunks, DID numbers, dialer, recording and AI calling—built for call centers, enterprises and partners with compliant India-ready infrastructure.",
       "canonical": "/",
       "ogImage": "/og-home.jpg",
       "robots": "index, follow"
     },
     "/solutions": {
-      "title": "[SOLUTIONS_PAGE_TITLE]",
-      "description": "[SOLUTIONS_PAGE_DESCRIPTION]",
+      "title": "Solutions for Call Centers, Small Businesses & Partners",
+      "description": "Choose the right setup for your team—CallFlo Suite for call centers, AI Receptionist for inbound enquiries, and Partner tools for white-label telecom services.",
       "canonical": "/solutions",
       "robots": "index, follow"
     },
     "/solutions/callflo-suite": {
-      "title": "[CALLFLO_SUITE_TITLE]",
-      "description": "[CALLFLO_SUITE_DESCRIPTION]",
+      "title": "CallFlo Suite for Call Centers & Enterprises",
+      "description": "High-volume calling stack: SIP trunks + DID numbers + predictive dialer + recording + transcription + AI agents—built for performance, monitoring and scale.",
       "canonical": "/solutions/callflo-suite",
       "robots": "index, follow"
     },
     "/solutions/ai-receptionist": {
-      "title": "[AI_RECEPTIONIST_TITLE]",
-      "description": "[AI_RECEPTIONIST_DESCRIPTION]",
+      "title": "AI Receptionist for Small Businesses in India",
+      "description": "Never miss inbound calls. Callvia AI Receptionist answers enquiries, captures details and routes intelligently—ideal for clinics, salons, hotels and local services.",
       "canonical": "/solutions/ai-receptionist",
       "robots": "index, follow"
     },
     "/solutions/partners": {
-      "title": "[PARTNERS_TITLE]",
-      "description": "[PARTNERS_DESCRIPTION]",
+      "title": "Partner Program for White-Label Telecom Services",
+      "description": "Launch your own telecom offering with a reseller panel, wallet & billing, controls, APIs and white-label capabilities—built on compliant calling infrastructure.",
       "canonical": "/solutions/partners",
       "robots": "index, follow"
     },
     "/products": {
-      "title": "[PRODUCTS_PAGE_TITLE]",
-      "description": "[PRODUCTS_PAGE_DESCRIPTION]",
+      "title": "Products: SIP, DID, Dialer, Recording & AI Calling",
+      "description": "Explore Callvia products—SIP trunks, DID numbers, predictive dialer, call recording, AI transcription, AI agents, AI receptionist and WhatsApp automation.",
       "canonical": "/products",
       "robots": "index, follow"
     },
     "/products/sip-trunks": {
-      "title": "[SIP_TRUNKS_TITLE]",
-      "description": "[SIP_TRUNKS_DESCRIPTION]",
+      "title": "SIP Trunks in India for Call Centers & Enterprises",
+      "description": "Carrier-grade SIP trunking for inbound/outbound calling. Scale concurrent channels, integrate with your stack, and run reliable voice operations in India.",
       "canonical": "/products/sip-trunks",
       "robots": "index, follow"
     },
     "/products/did-numbers": {
-      "title": "[DID_NUMBERS_TITLE]",
-      "description": "[DID_NUMBERS_DESCRIPTION]",
+      "title": "DID Numbers in India (Virtual Numbers)",
+      "description": "Pan-India DID numbers for inbound calling—fast activation, routing and control. Ideal for businesses that want a dedicated business number in India.",
       "canonical": "/products/did-numbers",
       "robots": "index, follow"
     },
     "/products/ai-agents": {
-      "title": "[AI_AGENTS_TITLE]",
-      "description": "[AI_AGENTS_DESCRIPTION]",
+      "title": "AI Voice Agents for Calling & Automation",
+      "description": "Programmable AI voice agents for repetitive inbound queries and workflows. Automate conversations, qualify leads and handoff to humans when needed.",
       "canonical": "/products/ai-agents",
       "robots": "index, follow"
     },
     "/products/ai-transcription": {
-      "title": "[AI_TRANSCRIPTION_TITLE]",
-      "description": "[AI_TRANSCRIPTION_DESCRIPTION]",
+      "title": "AI Call Transcription for QA & Monitoring",
+      "description": "Transcribe calls for quality, compliance and insights. Track keywords, agent performance and conversation outcomes across your calling operations.",
       "canonical": "/products/ai-transcription",
       "robots": "index, follow"
     },
     "/products/call-recording": {
-      "title": "[CALL_RECORDING_TITLE]",
-      "description": "[CALL_RECORDING_DESCRIPTION]",
+      "title": "Call Recording for Compliance & Quality",
+      "description": "Record inbound and outbound calls with secure storage and easy access for audits, dispute resolution and agent coaching—built for call center workflows.",
       "canonical": "/products/call-recording",
       "robots": "index, follow"
     },
     "/products/predictive-dialer": {
-      "title": "[PREDICTIVE_DIALER_TITLE]",
-      "description": "[PREDICTIVE_DIALER_DESCRIPTION]",
+      "title": "Predictive Dialer for Call Centers in India",
+      "description": "Boost agent productivity with a predictive dialer—reduce idle time, improve connect efficiency and scale outbound campaigns with monitoring and controls.",
       "canonical": "/products/predictive-dialer",
       "robots": "index, follow"
     },
     "/products/ai-receptionist": {
-      "title": "[PRODUCT_AI_RECEPTIONIST_TITLE]",
-      "description": "[PRODUCT_AI_RECEPTIONIST_DESCRIPTION]",
+      "title": "AI Receptionist for Inbound Calls & Lead Capture",
+      "description": "An AI receptionist that answers calls 24×7, understands intent, captures details and routes intelligently—perfect for enquiry-heavy businesses in India.",
       "canonical": "/products/ai-receptionist",
       "robots": "index, follow"
     },
     "/products/whatsapp-automation": {
-      "title": "[WHATSAPP_AUTOMATION_TITLE]",
-      "description": "[WHATSAPP_AUTOMATION_DESCRIPTION]",
+      "title": "WhatsApp Automation for Enquiries & Follow-ups",
+      "description": "Automate WhatsApp templates and workflows for lead follow-ups, confirmations and notifications—designed to connect calling and messaging operations.",
       "canonical": "/products/whatsapp-automation",
       "robots": "index, follow"
     },
     "/pricing": {
-      "title": "[PRICING_PAGE_TITLE]",
-      "description": "[PRICING_PAGE_DESCRIPTION]",
+      "title": "Pricing Calculator for SIP, Dialer & AI Calling",
+      "description": "Estimate monthly cost based on call minutes and channels. Compare plans for SIP trunks, AI agents, transcription, recording, dialer and receptionist.",
       "canonical": "/pricing",
       "robots": "index, follow"
     },
     "/features": {
-      "title": "[FEATURES_PAGE_TITLE]",
-      "description": "[FEATURES_PAGE_DESCRIPTION]",
+      "title": "Features: Routing, Monitoring, Billing, APIs & More",
+      "description": "IVR & call routing, real-time dashboards, monitoring  & controls, prepaid wallet & billing, webhooks, integrations and white-label capabilities.",
       "canonical": "/features",
       "robots": "index, follow"
     },
     "/developers": {
-      "title": "[DEVELOPERS_PAGE_TITLE]",
-      "description": "[DEVELOPERS_PAGE_DESCRIPTION]",
+      "title": "Developers: APIs, Webhooks & Integration Docs",
+      "description": "Build on Callvia with REST APIs and webhooks for call logs, routing, automation and billing. Integrate calling into your CRM and workflows.",
       "canonical": "/developers",
       "robots": "index, follow"
     },
     "/resources": {
-      "title": "[RESOURCES_PAGE_TITLE]",
-      "description": "[RESOURCES_PAGE_DESCRIPTION]",
+      "title": "Resources: Guides, Playbooks & Updates",
+      "description": "Learn about SIP trunking, DIDs, dialers, call monitoring, AI receptionist workflows and compliance in India with practical implementation guides.",
       "canonical": "/resources",
       "robots": "index, follow"
     },
     "/about": {
-      "title": "[ABOUT_PAGE_TITLE]",
-      "description": "[ABOUT_PAGE_DESCRIPTION]",
+      "title": "About Callvia",
+      "description": "Callvia builds infrastructure-first calling with automation—helping call centers, businesses and partners run reliable, compliant voice operations in India.",
       "canonical": "/about",
       "robots": "index, follow"
     },
     "/careers": {
-      "title": "[CAREERS_PAGE_TITLE]",
-      "description": "[CAREERS_PAGE_DESCRIPTION]",
+      "title": "Careers at Callvia",
+      "description": "Join Callvia to build calling infrastructure and AI automation for India. Explore open roles across engineering, operations, sales and partnerships.",
       "canonical": "/careers",
       "robots": "index, follow"
     },
     "/reseller-program": {
-      "title": "[RESELLER_PROGRAM_TITLE]",
-      "description": "[RESELLER_PROGRAM_DESCRIPTION]",
+      "title": "Reseller Program: Start Your White-Label Calling Business",
+      "description": "Become a Callvia partner to resell SIP, DID and AI calling solutions with a reseller panel, billing tools and white-label support.",
       "canonical": "/reseller-program",
       "robots": "index, follow"
     },
     "/contact": {
-      "title": "[CONTACT_PAGE_TITLE]",
-      "description": "[CONTACT_PAGE_DESCRIPTION]",
+      "title": "Contact Sales & Support",
+      "description": "Talk to Callvia for demos, onboarding and partnerships. Tell us your use case—call center, small business AI receptionist, or reseller program.",
       "canonical": "/contact",
       "robots": "index, follow"
     },
     "/terms": {
-      "title": "[TERMS_PAGE_TITLE]",
-      "description": "[TERMS_PAGE_DESCRIPTION]",
+      "title": "Terms of Service",
+      "description": "Review Callvia terms for using our calling platform, APIs and services, including acceptable use, billing terms and service limitations.",
       "canonical": "/terms",
       "robots": "index, follow"
     },
     "/privacy": {
-      "title": "[PRIVACY_PAGE_TITLE]",
-      "description": "[PRIVACY_PAGE_DESCRIPTION]",
+      "title": "Privacy Policy",
+      "description": "Learn how Callvia collects, uses and protects data across calling services, recordings, transcripts and platform usage—privacy and security first.",
       "canonical": "/privacy",
       "robots": "index, follow"
     },
     "/compliance": {
-      "title": "[COMPLIANCE_PAGE_TITLE]",
-      "description": "[COMPLIANCE_PAGE_DESCRIPTION]",
+      "title": "Compliance: KYC, DND & Telecom Regulations",
+      "description": "Understand Callvia's compliance approach for KYC, call recording, DND and India telecom guidelines—built for regulated, high-volume operations.",
       "canonical": "/compliance",
       "robots": "index, follow"
     },
     "/security": {
-      "title": "[SECURITY_PAGE_TITLE]",
-      "description": "[SECURITY_PAGE_DESCRIPTION]",
+      "title": "Security & Data Handling",
+      "description": "How Callvia secures calls, recordings and platform data—access controls, operational safeguards and best practices for enterprise-grade reliability.",
       "canonical": "/security",
       "robots": "index, follow"
     },
     "/faq": {
-      "title": "[FAQ_PAGE_TITLE]",
-      "description": "[FAQ_PAGE_DESCRIPTION]",
+      "title": "FAQ: SIP, DID, AI Receptionist & Platform Setup",
+      "description": "Answers to common questions about SIP trunks, DID numbers, predictive dialer, AI receptionist setup, onboarding, integrations and platform controls.",
       "canonical": "/faq",
       "robots": "index, follow"
     },
     "/status": {
-      "title": "[STATUS_PAGE_TITLE]",
-      "description": "[STATUS_PAGE_DESCRIPTION]",
+      "title": "System Status",
+      "description": "Check current system availability and incident updates for Callvia services.",
       "canonical": "/status",
       "robots": "noindex, nofollow"
     }
