@@ -29,9 +29,9 @@
   },
   "webhooks": {
     "mainLeads": "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMDA0MzU1MjZlNTUzYzUxMzUi_pc",
-    "callflosuiteEnquiry": "https://hooks.zapier.com/hooks/catch/XXXXX/callflosuite-enquiry/",
-    "callflodeskaiEnquiry": "https://hooks.zapier.com/hooks/catch/XXXXX/callflodeskai-enquiry/",
-    "resellerEnquiry": "https://hooks.zapier.com/hooks/catch/XXXXX/reseller-enquiry/"
+    "callflosuiteEnquiry": "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMDA0MzU1MjZlNTUzYzUxMzUi_pc",
+    "callflodeskaiEnquiry": "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMDA0MzU1MjZlNTUzYzUxMzUi_pc",
+    "resellerEnquiry": "https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZjMDYzMDA0MzU1MjZlNTUzYzUxMzUi_pc"
   },
   "defaults": {
     "country": "India",
