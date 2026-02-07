@@ -128,7 +128,7 @@ const EnquiryModal = ({ isOpen, onClose, leadSource = 'homeenquiry' }) => {
         timestamp: new Date().toISOString(),
       };
 
-      const response = await fetch('/api/leads', {
+      const response = await fetch(siteConfig.webhook, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
