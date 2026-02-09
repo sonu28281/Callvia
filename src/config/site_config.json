@@ -39,7 +39,7 @@
   },
   "navigation": {
     "cta": {
-      "login": "https://portal.callvia.com/login",
+      "login": "https://portal.voip.garden/#/",
       "signup": "https://portal.callvia.com/signup"
     }
   }
