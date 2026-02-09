@@ -13,15 +13,28 @@ export const useSip = () => {
   const registererRef = useRef(null);
   const sessionRef = useRef(null);
   const remoteAudioRef = useRef(null);
+  const dialToneRef = useRef(null);
+  const audioContextRef = useRef(null);
+  const gainNodeRef = useRef(null);
 
   // Setup remote audio element
   useEffect(() => {
     if (!remoteAudioRef.current) {
       const audio = document.createElement('audio');
       audio.autoplay = true;
+      audio.volume = 1.5; // Increase volume (max is 1.0, but we'll use gain node for boost)
       audio.style.display = 'none';
       document.body.appendChild(audio);
       remoteAudioRef.current = audio;
+    }
+
+    // Setup audio context for volume boost
+    if (!audioContextRef.current) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioContextRef.current = new AudioContext();
+      gainNodeRef.current = audioContextRef.current.createGain();
+      gainNodeRef.current.gain.value = 2.5; // Boost volume by 2.5x
+      gainNodeRef.current.connect(audioContextRef.current.destination);
     }
 
     return () => {
@@ -30,7 +43,77 @@ export const useSip = () => {
         remoteAudioRef.current.remove();
         remoteAudioRef.current = null;
       }
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+        audioContextRef.current = null;
+      }
     };
+  }, []);
+
+  // Play dialing tone
+  const playDialTone = useCallback(() => {
+    try {
+      if (!audioContextRef.current) return;
+      
+      // Stop any existing dial tone
+      if (dialToneRef.current) {
+        dialToneRef.current.stop();
+      }
+
+      const oscillator = audioContextRef.current.createOscillator();
+      const gainNode = audioContextRef.current.createGain();
+      
+      oscillator.type = 'sine';
+      oscillator.frequency.value = 440; // A4 note
+      gainNode.gain.value = 0.3;
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContextRef.current.destination);
+      
+      oscillator.start();
+      dialToneRef.current = oscillator;
+      
+      console.log('[SIP] Playing dial tone');
+    } catch (err) {
+      console.error('[SIP] Failed to play dial tone:', err);
+    }
+  }, []);
+
+  // Stop dialing tone
+  const stopDialTone = useCallback(() => {
+    try {
+      if (dialToneRef.current) {
+        dialToneRef.current.stop();
+        dialToneRef.current = null;
+        console.log('[SIP] Stopped dial tone');
+      }
+    } catch (err) {
+      console.error('[SIP] Failed to stop dial tone:', err);
+    }
+  }, []);
+
+  // Play hangup tone
+  const playHangupTone = useCallback(() => {
+    try {
+      if (!audioContextRef.current) return;
+
+      const oscillator = audioContextRef.current.createOscillator();
+      const gainNode = audioContextRef.current.createGain();
+      
+      oscillator.type = 'sine';
+      oscillator.frequency.value = 480; // Busy tone frequency
+      gainNode.gain.value = 0.3;
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContextRef.current.destination);
+      
+      oscillator.start();
+      oscillator.stop(audioContextRef.current.currentTime + 0.5); // 500ms beep
+      
+      console.log('[SIP] Playing hangup tone');
+    } catch (err) {
+      console.error('[SIP] Failed to play hangup tone:', err);
+    }
   }, []);
 
   // Initialize SIP User Agent
@@ -173,9 +256,21 @@ export const useSip = () => {
         }
       });
 
-      // Attach to audio element
+      // Attach to audio element with volume boost
       if (remoteAudioRef.current && remoteStream.getTracks().length > 0) {
         remoteAudioRef.current.srcObject = remoteStream;
+        
+        // Route through gain node for volume boost
+        if (audioContextRef.current && gainNodeRef.current) {
+          try {
+            const source = audioContextRef.current.createMediaStreamSource(remoteStream);
+            source.connect(gainNodeRef.current);
+            console.log('[SIP] Remote audio routed through gain node (2.5x boost)');
+          } catch (gainErr) {
+            console.warn('[SIP] Could not apply gain boost:', gainErr);
+          }
+        }
+        
         remoteAudioRef.current.play().catch((err) => {
           console.error('[SIP] Failed to play remote audio:', err);
           logSipError('Play Remote Audio', err);
@@ -224,9 +319,11 @@ export const useSip = () => {
         switch (newState) {
           case SessionState.Establishing:
             setCallStatus('calling');
+            playDialTone(); // Play dialing tone
             break;
           case SessionState.Established:
             setCallStatus('connected');
+            stopDialTone(); // Stop dialing tone
             // Setup remote audio stream for playback
             setupRemoteAudio(inviter);
             break;
@@ -234,6 +331,8 @@ export const useSip = () => {
             setCallStatus('disconnected');
             setActiveCall(null);
             sessionRef.current = null;
+            stopDialTone(); // Stop dialing tone if still playing
+            playHangupTone(); // Play hangup tone
             // Clean up remote audio
             if (remoteAudioRef.current) {
               remoteAudioRef.current.srcObject = null;
@@ -257,15 +356,20 @@ export const useSip = () => {
       console.error('[SIP] Call failed:', err);
       return false;
     }
-  }, [isRegistered, activeCall]);
+  }, [isRegistered, activeCall, playDialTone, stopDialTone, playHangupTone]);
 
   // Hang up call
   const hangUp = useCallback(async () => {
     try {
+      stopDialTone(); // Stop dialing tone if playing
+      
       if (sessionRef.current) {
         await sessionRef.current.bye();
         sessionRef.current = null;
       }
+      
+      playHangupTone(); // Play hangup tone
+      
       // Clean up remote audio
       if (remoteAudioRef.current) {
         remoteAudioRef.current.srcObject = null;
@@ -276,7 +380,7 @@ export const useSip = () => {
       logSipError('Hang Up', err);
       console.error('[SIP] Hang up failed:', err);
     }
-  }, []);
+  }, [stopDialTone, playHangupTone]);
 
   // Initialize on mount
   useEffect(() => {
