@@ -22,7 +22,7 @@ export const useSip = () => {
     if (!remoteAudioRef.current) {
       const audio = document.createElement('audio');
       audio.autoplay = true;
-      audio.volume = 1.5; // Increase volume (max is 1.0, but we'll use gain node for boost)
+      audio.volume = 1.0; // Max volume (gain node will boost further)
       audio.style.display = 'none';
       document.body.appendChild(audio);
       remoteAudioRef.current = audio;
