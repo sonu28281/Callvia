@@ -175,6 +175,18 @@
       "description": "Check current system availability and incident updates for Callvia services.",
       "canonical": "/status",
       "robots": "noindex, nofollow"
+    },
+    "/404": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist. Return to Callvia homepage or explore our cloud telephony solutions.",
+      "canonical": "/404",
+      "robots": "noindex, nofollow"
+    },
+    "/500": {
+      "title": "Server Error",
+      "description": "Something went wrong on our end. Our team is working to fix it. Please try again later.",
+      "canonical": "/500",
+      "robots": "noindex, nofollow"
     }
   }
 }

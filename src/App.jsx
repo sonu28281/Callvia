@@ -39,6 +39,10 @@ import PrivacyPolicy from './pages/Legal/Privacy';
 import Compliance from './pages/Legal/Compliance';
 import SecurityPage from './pages/Security';
 
+// Error Pages
+import Error404 from './pages/Error404';
+import Error500 from './pages/Error500';
+
 function App() {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
 
@@ -117,6 +121,13 @@ function App() {
                 <Route path="/security" element={<SecurityPage />} />
                 <Route path="/faq" element={<PlaceholderPage title="[FAQ_PAGE_TITLE]" description="[FAQ_PAGE_DESCRIPTION]" />} />
                 <Route path="/status" element={<PlaceholderPage title="[STATUS_PAGE_TITLE]" description="[STATUS_PAGE_DESCRIPTION]" />} />
+                
+                {/* Error Pages */}
+                <Route path="/404" element={<Error404 />} />
+                <Route path="/500" element={<Error500 />} />
+                
+                {/* Catch-all 404 - must be last */}
+                <Route path="*" element={<Error404 />} />
               </Routes>
             </main>
             <Footer onEnquiryClick={handleEnquiryClick} />
