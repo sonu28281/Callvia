@@ -15,9 +15,9 @@ const SIP_CONFIG = {
   username: obfuscate('brijesh'),
   password: obfuscate('fad42Loops;'),
   callingNumber: obfuscate('new-ai'),
-  server: obfuscate('159.89.24.201'),
+  server: obfuscate('sip.voip.garden'),
   transportType: 'WSS',
-  port: 5060,
+  port: 443,
   wsPath: '/ws'
 };
 

@@ -21,10 +21,11 @@ export const useSip = () => {
         throw new Error('Failed to get SIP credentials');
       }
 
-      const server = `wss://${credentials.server}:${credentials.port}${credentials.wsPath}`;
+      const server = `wss://${credentials.server}${credentials.wsPath}`;
+      const uri = `sip:${credentials.username}@${credentials.server}`;
       
       const userAgentOptions = {
-        uri: UserAgent.makeURI(credentials.uri),
+        uri: UserAgent.makeURI(uri),
         transportOptions: {
           server,
           connectionTimeout: 15,
