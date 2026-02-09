@@ -22,15 +22,25 @@ const SIP_CONFIG = {
   wsPath: ''
 };
 
-// Agent calling numbers configuration
-// Each agent type maps to a specific calling number for different AI models
+// Agent calling numbers configuration by language
+// Each agent type maps to specific calling numbers for different languages
 const AGENT_CALLING_NUMBERS = {
-  'real-estate': 'new-ai',
-  'nbfc-loan': 'new-ai',
-  'ecom-tracking': 'new-ai',
-  'insurance-renewal': 'new-ai',
-  'healthcare-booking': 'new-ai',
-  'bank-card': 'new-ai'
+  english: {
+    'real-estate': 'new-ai',
+    'nbfc-loan': 'new-ai',
+    'ecom-tracking': 'new-ai',
+    'insurance-renewal': 'new-ai',
+    'healthcare-booking': 'new-ai',
+    'bank-card': 'new-ai'
+  },
+  hindi: {
+    'real-estate': 'new-ai-hindi',
+    'nbfc-loan': 'new-ai-hindi',
+    'ecom-tracking': 'new-ai-hindi',
+    'insurance-renewal': 'new-ai-hindi',
+    'healthcare-booking': 'new-ai-hindi',
+    'bank-card': 'new-ai-hindi'
+  }
 };
 
 // Function to get decrypted SIP credentials
@@ -53,18 +63,33 @@ export const getSipCredentials = () => {
   }
 };
 
-// Function to get calling number for a specific agent type
-export const getAgentCallingNumber = (agentType) => {
-  return AGENT_CALLING_NUMBERS[agentType] || 'new-ai'; // fallback to default
+// Function to get calling number for a specific agent type and language
+export const getAgentCallingNumber = (agentType, language = 'english') => {
+  const languageNumbers = AGENT_CALLING_NUMBERS[language];
+  if (!languageNumbers) {
+    console.warn(`[SIP Config] Language '${language}' not found, falling back to English`);
+    return AGENT_CALLING_NUMBERS.english[agentType] || 'new-ai';
+  }
+  return languageNumbers[agentType] || AGENT_CALLING_NUMBERS.english[agentType] || 'new-ai';
 };
 
-// Function to update agent calling number (for future use)
-export const updateAgentCallingNumber = (agentType, newNumber) => {
-  if (AGENT_CALLING_NUMBERS.hasOwnProperty(agentType)) {
-    AGENT_CALLING_NUMBERS[agentType] = newNumber;
+// Function to update agent calling number for a specific language (for future use)
+export const updateAgentCallingNumber = (agentType, newNumber, language = 'english') => {
+  if (AGENT_CALLING_NUMBERS[language] && AGENT_CALLING_NUMBERS[language].hasOwnProperty(agentType)) {
+    AGENT_CALLING_NUMBERS[language][agentType] = newNumber;
     return true;
   }
   return false;
+};
+
+// Function to get all available languages
+export const getAvailableLanguages = () => {
+  return Object.keys(AGENT_CALLING_NUMBERS);
+};
+
+// Function to get all calling numbers for a specific language
+export const getLanguageCallingNumbers = (language = 'english') => {
+  return AGENT_CALLING_NUMBERS[language] || AGENT_CALLING_NUMBERS.english;
 };
 
 // SIP Error Logger

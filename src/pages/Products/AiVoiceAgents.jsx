@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, Check, Bot, Phone, Cpu, Zap, Globe, Shield, BarChart3, Clock, Users, Smartphone, CreditCard, PhoneCall, PhoneOff, AlertCircle, CheckCircle } from 'lucide-react';
+import { ArrowRight, Check, Bot, Phone, Cpu, Zap, Globe, Shield, BarChart3, Clock, Users, Smartphone, CreditCard, PhoneCall, PhoneOff, AlertCircle, CheckCircle, Languages } from 'lucide-react';
 import EnquiryModal from '../../components/EnquiryModal';
 import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
 import SEO from '../../components/SEO';
@@ -8,6 +8,7 @@ import { getAgentCallingNumber } from '../../config/sip_config';
 
 const AiVoiceAgents = () => {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('english');
   const { isRegistered, isConnecting, activeCall, callStatus, error, makeCall, hangUp } = useSip();
 
   // Add CSS for pulse animation
@@ -403,6 +404,69 @@ const AiVoiceAgents = () => {
                 Experience our AI agents in action. Click to call and interact with different agent scenarios.
               </p>
               
+              {/* Language Selector */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.75rem',
+                marginBottom: '1.5rem',
+              }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  color: 'var(--color-text-muted)',
+                  fontSize: '0.9375rem',
+                  fontWeight: 500,
+                }}>
+                  <Languages size={20} />
+                  <span>Language:</span>
+                </div>
+                <div style={{
+                  display: 'inline-flex',
+                  backgroundColor: 'var(--color-surface)',
+                  border: '2px solid var(--color-border)',
+                  borderRadius: '0.5rem',
+                  padding: '0.25rem',
+                }}>
+                  {[
+                    { value: 'english', label: 'English' },
+                    { value: 'hindi', label: 'हिंदी' },
+                  ].map((lang) => (
+                    <button
+                      key={lang.value}
+                      onClick={() => setSelectedLanguage(lang.value)}
+                      disabled={activeCall !== null}
+                      style={{
+                        padding: '0.5rem 1.25rem',
+                        borderRadius: '0.375rem',
+                        border: 'none',
+                        backgroundColor: selectedLanguage === lang.value ? 'var(--color-primary)' : 'transparent',
+                        color: selectedLanguage === lang.value ? '#FFFFFF' : 'var(--color-text)',
+                        fontWeight: 600,
+                        fontSize: '0.9375rem',
+                        cursor: activeCall !== null ? 'not-allowed' : 'pointer',
+                        transition: 'all 0.2s ease',
+                        opacity: activeCall !== null ? 0.6 : 1,
+                      }}
+                      onMouseEnter={(e) => {
+                        if (activeCall === null && selectedLanguage !== lang.value) {
+                          e.target.style.backgroundColor = 'var(--color-bg)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (selectedLanguage !== lang.value) {
+                          e.target.style.backgroundColor = 'transparent';
+                        }
+                      }}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              
               {/* Status Indicator */}
               <div style={{
                 display: 'inline-flex',
@@ -587,7 +651,7 @@ const AiVoiceAgents = () => {
                         if (isActive) {
                           hangUp();
                         } else if (canCall) {
-                          makeCall(getAgentCallingNumber(agent.type), agent.type);
+                          makeCall(getAgentCallingNumber(agent.type, selectedLanguage), agent.type);
                         }
                       }}
                       disabled={!canCall && !isActive}
