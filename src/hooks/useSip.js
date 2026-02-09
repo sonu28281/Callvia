@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Registerer, Inviter, SessionState } from 'sip.js';
-import { Web } from 'sip.js/lib/platform/web';
+import { Registerer, Inviter, SessionState, UserAgent } from 'sip.js';
 import { getSipCredentials, logSipError } from '../config/sip_config';
 
 export const useSip = () => {
@@ -25,7 +24,7 @@ export const useSip = () => {
       const server = `wss://${credentials.server}:${credentials.port}/ws`;
       
       const userAgentOptions = {
-        uri: Web.UserAgent.makeURI(credentials.uri),
+        uri: UserAgent.makeURI(credentials.uri),
         transportOptions: {
           server,
           connectionTimeout: 10
@@ -55,7 +54,7 @@ export const useSip = () => {
         }
       };
 
-      const userAgent = new Web.UserAgent(userAgentOptions);
+      const userAgent = new UserAgent(userAgentOptions);
       userAgentRef.current = userAgent;
 
       await userAgent.start();
@@ -126,7 +125,7 @@ export const useSip = () => {
       }
 
       const credentials = getSipCredentials();
-      const target = Web.UserAgent.makeURI(`sip:${targetNumber}@${credentials.server}`);
+      const target = UserAgent.makeURI(`sip:${targetNumber}@${credentials.server}`);
       
       if (!target) {
         throw new Error('Invalid target URI');
