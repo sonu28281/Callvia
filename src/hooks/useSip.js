@@ -21,13 +21,18 @@ export const useSip = () => {
         throw new Error('Failed to get SIP credentials');
       }
 
-      const server = `wss://${credentials.server}:${credentials.port}/ws`;
+      const server = `wss://${credentials.server}:${credentials.port}${credentials.wsPath}`;
       
       const userAgentOptions = {
         uri: UserAgent.makeURI(credentials.uri),
         transportOptions: {
           server,
-          connectionTimeout: 10
+          connectionTimeout: 15,
+          keepAliveInterval: 30,
+          keepAliveDebounce: 10,
+          traceSip: false,
+          maxReconnectionAttempts: 5,
+          reconnectionDelay: 4
         },
         authorizationUsername: credentials.username,
         authorizationPassword: credentials.password,
@@ -35,20 +40,29 @@ export const useSip = () => {
           constraints: {
             audio: true,
             video: false
+          },
+          peerConnectionConfiguration: {
+            iceServers: [
+              { urls: 'stun:stun.l.google.com:19302' },
+              { urls: 'stun:stun1.l.google.com:19302' }
+            ]
           }
         },
         displayName: credentials.username,
         logLevel: 'warn',
         delegate: {
           onConnect: () => {
-            console.log('[SIP] Connected to server');
+            console.log('[SIP] Connected to WSS server');
+            setIsConnecting(false);
             register();
           },
           onDisconnect: (error) => {
-            console.log('[SIP] Disconnected from server');
+            console.log('[SIP] Disconnected from WSS server', error ? `Error: ${error.message}` : '');
             setIsRegistered(false);
+            setIsConnecting(false);
             if (error) {
-              logSipError('UserAgent Disconnect', error);
+              const errorLog = logSipError('UserAgent Disconnect', error);
+              setError(`Connection lost: ${error.message}`);
             }
           }
         }
@@ -57,12 +71,16 @@ export const useSip = () => {
       const userAgent = new UserAgent(userAgentOptions);
       userAgentRef.current = userAgent;
 
+      console.log(`[SIP] Starting UserAgent with WSS server: ${server}`);
       await userAgent.start();
+      console.log('[SIP] UserAgent started successfully');
       
       return userAgent;
     } catch (err) {
       const errorLog = logSipError('Initialize UserAgent', err);
-      setError(errorLog.error.message);
+      const errorMessage = `Failed to connect to SIP server: ${err.message}. Please check your network connection.`;
+      setError(errorMessage);
+      setIsConnecting(false);
       console.error('[SIP] Failed to initialize:', err);
       return null;
     }

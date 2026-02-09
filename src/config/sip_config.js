@@ -16,8 +16,9 @@ const SIP_CONFIG = {
   password: obfuscate('fad42Loops;'),
   callingNumber: obfuscate('new-ai'),
   server: obfuscate('159.89.24.201'),
-  transportType: 'UDP',
-  port: 5060
+  transportType: 'WSS',
+  port: 5060,
+  wsPath: '/ws'
 };
 
 // Agent calling numbers configuration
@@ -41,6 +42,7 @@ export const getSipCredentials = () => {
       server: deobfuscate(SIP_CONFIG.server),
       transportType: SIP_CONFIG.transportType,
       port: SIP_CONFIG.port,
+      wsPath: SIP_CONFIG.wsPath,
       uri: `sip:${deobfuscate(SIP_CONFIG.username)}@${deobfuscate(SIP_CONFIG.server)}`
     };
   } catch (error) {
