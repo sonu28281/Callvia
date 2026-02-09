@@ -56,10 +56,10 @@ const PredictiveDialer = () => {
         <TelecomPacketAnimation
           nodeCount={40}
           maxConnectionsPerNode={3}
-          packetSpawnRate={1.2}
-          maxActivePackets={10}
-          packetSpeedMin={50}
-          packetSpeedMax={120}
+          packetSpawnRate={0.5}
+          maxActivePackets={6}
+          packetSpeedMin={20}
+          packetSpeedMax={60}
           tailLengthMin={40}
           tailLengthMax={90}
           dropProbability={0.12}

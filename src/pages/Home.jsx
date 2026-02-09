@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { ArrowRight, CheckCircle2, Phone, Zap, Cpu, Globe, CreditCard, Building2 } from 'lucide-react';
 import EnquiryModal from '../components/EnquiryModal';
+import TelecomPacketAnimation from '../components/TelecomPacketAnimation';
 import siteConfig from '../config/site_config.json';
 
 // Counter animation hook
@@ -238,6 +239,28 @@ const Home = () => {
           overflow: 'hidden',
         }}
       >
+        <TelecomPacketAnimation
+          nodeCount={35}
+          maxConnectionsPerNode={3}
+          packetSpawnRate={0.5}
+          maxActivePackets={6}
+          packetSpeedMin={20}
+          packetSpeedMax={60}
+          tailLengthMin={40}
+          tailLengthMax={90}
+          dropProbability={0.15}
+          nodeGlowDuration={600}
+          nodeGlowIntensity={1.0}
+          edgeColor="rgba(29, 108, 244, 0.06)"
+          nodeColor="rgba(29, 108, 244, 0.25)"
+          packetColor="rgba(29, 108, 244, 0.8)"
+          glowColor="rgba(29, 108, 244, 1)"
+          darkModeEdgeColor="rgba(99, 102, 241, 0.1)"
+          darkModeNodeColor="rgba(99, 102, 241, 0.35)"
+          darkModePacketColor="rgba(99, 102, 241, 0.9)"
+          darkModeGlowColor="rgba(99, 102, 241, 1)"
+          zIndex={1}
+        />
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div
             style={{

@@ -1,12 +1,35 @@
 import React from 'react';
 import { Shield, Zap, Users, Globe, Rocket, TrendingUp, Award, MapPin, CheckCircle2, Target, Lightbulb, Code, Phone, Cpu, Radio, Headphones } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import TelecomPacketAnimation from '../components/TelecomPacketAnimation';
 
 export function AboutPage() {
   return (
     <div>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-slate-50 via-slate-50 to-white border-b border-slate-200 overflow-hidden">
+        <TelecomPacketAnimation
+          nodeCount={35}
+          maxConnectionsPerNode={3}
+          packetSpawnRate={0.5}
+          maxActivePackets={6}
+          packetSpeedMin={20}
+          packetSpeedMax={60}
+          tailLengthMin={40}
+          tailLengthMax={90}
+          dropProbability={0.15}
+          nodeGlowDuration={600}
+          nodeGlowIntensity={1.0}
+          edgeColor="rgba(29, 108, 244, 0.06)"
+          nodeColor="rgba(29, 108, 244, 0.25)"
+          packetColor="rgba(29, 108, 244, 0.8)"
+          glowColor="rgba(29, 108, 244, 1)"
+          darkModeEdgeColor="rgba(99, 102, 241, 0.1)"
+          darkModeNodeColor="rgba(99, 102, 241, 0.35)"
+          darkModePacketColor="rgba(99, 102, 241, 0.9)"
+          darkModeGlowColor="rgba(99, 102, 241, 1)"
+          zIndex={1}
+        />
         <svg
           className="absolute inset-0 w-full h-full pointer-events-none"
           viewBox="0 0 1200 600"

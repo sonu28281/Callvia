@@ -4,6 +4,7 @@ import {
   Headphones, Building2, Code, Users, ArrowRight, Zap, Shield,
   FileText, DollarSign, HelpCircle, Rocket
 } from 'lucide-react';
+import TelecomPacketAnimation from '../components/TelecomPacketAnimation';
 import siteConfig from '../config/site_config.json';
 
 export function ContactPage() {
@@ -180,8 +181,30 @@ export function ContactPage() {
   return (
     <div style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)', minHeight: '100vh' }}>
       {/* Hero Section */}
-      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-surface)', padding: '6rem 1.5rem 4rem 1.5rem', borderBottom: '1px solid var(--color-border)' }}>
-        <div className="container" style={{ maxWidth: '80rem', margin: '0 auto' }}>
+      <section className="animate-on-scroll" style={{ position: 'relative', backgroundColor: 'var(--color-surface)', padding: '6rem 1.5rem 4rem 1.5rem', borderBottom: '1px solid var(--color-border)', overflow: 'hidden' }}>
+        <TelecomPacketAnimation
+          nodeCount={35}
+          maxConnectionsPerNode={3}
+          packetSpawnRate={0.5}
+          maxActivePackets={6}
+          packetSpeedMin={20}
+          packetSpeedMax={60}
+          tailLengthMin={40}
+          tailLengthMax={90}
+          dropProbability={0.15}
+          nodeGlowDuration={600}
+          nodeGlowIntensity={1.0}
+          edgeColor="rgba(29, 108, 244, 0.06)"
+          nodeColor="rgba(29, 108, 244, 0.25)"
+          packetColor="rgba(29, 108, 244, 0.8)"
+          glowColor="rgba(29, 108, 244, 1)"
+          darkModeEdgeColor="rgba(99, 102, 241, 0.1)"
+          darkModeNodeColor="rgba(99, 102, 241, 0.35)"
+          darkModePacketColor="rgba(99, 102, 241, 0.9)"
+          darkModeGlowColor="rgba(99, 102, 241, 1)"
+          zIndex={1}
+        />
+        <div className="container" style={{ maxWidth: '80rem', margin: '0 auto', position: 'relative', zIndex: 10 }}>
           <div style={{ textAlign: 'center', maxWidth: '42rem', margin: '0 auto' }}>
             <h1 style={{
               fontSize: 'clamp(2.5rem, 5vw, 4rem)',

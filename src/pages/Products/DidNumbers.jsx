@@ -55,7 +55,7 @@ const DidNumbers = () => {
         {/* Network Grid Animation Background */}
         <NetworkGridAnimation 
           spacing={100}
-          lineColor="rgba(29, 108, 244, 0.1)"
+          lineColor="rgba(29, 108, 244, 0.18)"
           nodeColor="rgba(29, 108, 244, 0.7)"
           glowColor="rgba(29, 108, 244, 1)"
           nodeRadius={3}
@@ -66,7 +66,7 @@ const DidNumbers = () => {
           pulseDurationMax={2000}
           activationRate={900}
           irregularity={0.18}
-          darkModeLineColor="rgba(99, 102, 241, 0.15)"
+          darkModeLineColor="rgba(99, 102, 241, 0.25)"
           darkModeNodeColor="rgba(99, 102, 241, 0.8)"
           darkModeGlowColor="rgba(99, 102, 241, 1)"
           zIndex={1}
