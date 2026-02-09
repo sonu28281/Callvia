@@ -40,7 +40,7 @@
   "navigation": {
     "cta": {
       "login": "https://portal.voip.garden/#/",
-      "signup": "https://portal.callvia.in/#/signup/"
+      "signup": "https://portal.callvia.in/#/"
     }
   }
 }
