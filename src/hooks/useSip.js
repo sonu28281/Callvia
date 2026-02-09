@@ -14,6 +14,7 @@ export const useSip = () => {
   const sessionRef = useRef(null);
   const remoteAudioRef = useRef(null);
   const dialToneRef = useRef(null);
+  const ringIntervalRef = useRef(null);
   const audioContextRef = useRef(null);
   const gainNodeRef = useRef(null);
 
@@ -43,6 +44,10 @@ export const useSip = () => {
         remoteAudioRef.current.remove();
         remoteAudioRef.current = null;
       }
+      if (ringIntervalRef.current) {
+        clearInterval(ringIntervalRef.current);
+        ringIntervalRef.current = null;
+      }
       if (audioContextRef.current) {
         audioContextRef.current.close();
         audioContextRef.current = null;
@@ -50,43 +55,86 @@ export const useSip = () => {
     };
   }, []);
 
-  // Play dialing tone
+  // Play ring tone (tring tring pattern)
   const playDialTone = useCallback(() => {
     try {
       if (!audioContextRef.current) return;
       
-      // Stop any existing dial tone
-      if (dialToneRef.current) {
-        dialToneRef.current.stop();
-      }
+      // Stop any existing ring
+      stopDialTone();
 
-      const oscillator = audioContextRef.current.createOscillator();
-      const gainNode = audioContextRef.current.createGain();
+      // Function to play a single ring burst
+      const playRingBurst = () => {
+        const oscillator1 = audioContextRef.current.createOscillator();
+        const oscillator2 = audioContextRef.current.createOscillator();
+        const gainNode = audioContextRef.current.createGain();
+        
+        // Mix two frequencies for realistic ring sound
+        oscillator1.type = 'sine';
+        oscillator1.frequency.value = 440; // A4
+        oscillator2.type = 'sine';
+        oscillator2.frequency.value = 480; // Close harmony for ring effect
+        
+        gainNode.gain.value = 0.3;
+        
+        oscillator1.connect(gainNode);
+        oscillator2.connect(gainNode);
+        gainNode.connect(audioContextRef.current.destination);
+        
+        const now = audioContextRef.current.currentTime;
+        oscillator1.start(now);
+        oscillator2.start(now);
+        oscillator1.stop(now + 0.4); // Ring for 400ms
+        oscillator2.stop(now + 0.4);
+        
+        // Play second ring after short pause
+        setTimeout(() => {
+          const osc1 = audioContextRef.current.createOscillator();
+          const osc2 = audioContextRef.current.createOscillator();
+          const gain = audioContextRef.current.createGain();
+          
+          osc1.type = 'sine';
+          osc1.frequency.value = 440;
+          osc2.type = 'sine';
+          osc2.frequency.value = 480;
+          gain.gain.value = 0.3;
+          
+          osc1.connect(gain);
+          osc2.connect(gain);
+          gain.connect(audioContextRef.current.destination);
+          
+          const now2 = audioContextRef.current.currentTime;
+          osc1.start(now2);
+          osc2.start(now2);
+          osc1.stop(now2 + 0.4);
+          osc2.stop(now2 + 0.4);
+        }, 600); // 200ms pause between rings
+      };
       
-      oscillator.type = 'sine';
-      oscillator.frequency.value = 440; // A4 note
-      gainNode.gain.value = 0.3;
+      // Play first ring immediately
+      playRingBurst();
       
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContextRef.current.destination);
+      // Repeat every 4 seconds (tring-tring... pause... tring-tring)
+      ringIntervalRef.current = setInterval(playRingBurst, 4000);
       
-      oscillator.start();
-      dialToneRef.current = oscillator;
-      
-      console.log('[SIP] Playing dial tone');
+      console.log('[SIP] Playing ring tone (tring tring pattern)');
     } catch (err) {
-      console.error('[SIP] Failed to play dial tone:', err);
+      console.error('[SIP] Failed to play ring tone:', err);
     }
   }, []);
 
-  // Stop dialing tone
+  // Stop ring tone
   const stopDialTone = useCallback(() => {
     try {
+      if (ringIntervalRef.current) {
+        clearInterval(ringIntervalRef.current);
+        ringIntervalRef.current = null;
+      }
       if (dialToneRef.current) {
         dialToneRef.current.stop();
         dialToneRef.current = null;
-        console.log('[SIP] Stopped dial tone');
       }
+      console.log('[SIP] Stopped ring tone');
     } catch (err) {
       console.error('[SIP] Failed to stop dial tone:', err);
     }
