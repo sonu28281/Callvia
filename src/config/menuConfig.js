@@ -67,7 +67,7 @@ export const megaMenuConfig = {
           label: 'Callflo DeskAI',
           description: 'Answer calls 24×7 with AI automation',
           icon: Bot,
-          path: '/products/ai-receptionist',
+          path: '/solutions/ai-receptionist',
         },
         {
           id: 'ai-agents',

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowRight, CheckCircle2, Phone, Zap, Cpu, Globe, CreditCard, Building2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Phone, Zap, Cpu, Globe, CreditCard, Building2, MessageSquare, FileText } from 'lucide-react';
 import EnquiryModal from '../components/EnquiryModal';
 import TelecomPacketAnimation from '../components/TelecomPacketAnimation';
 import siteConfig from '../config/site_config.json';
@@ -1056,6 +1056,122 @@ const Home = () => {
                       View Product →
                     </span>
                   </a>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== ADDITIONAL SERVICES SECTION ========== */}
+      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem' }}>
+        <div className="container">
+          <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+            <h3 style={{
+              fontSize: '2rem',
+              fontFamily: 'Sora, sans-serif',
+              fontWeight: 600,
+              color: 'var(--color-text)',
+              marginBottom: '1rem',
+              textAlign: 'center',
+            }}>
+              Additional Services
+            </h3>
+            <p style={{
+              fontSize: '1.125rem',
+              color: 'var(--color-text-muted)',
+              marginBottom: '2.5rem',
+              textAlign: 'center',
+              maxWidth: '42rem',
+              margin: '0 auto 2.5rem',
+            }}>
+              Enhance your communication infrastructure with our advanced automation and AI-powered solutions
+            </p>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '1.5rem',
+              }}
+            >
+              {[
+                {
+                  name: 'WhatsApp Automation',
+                  description: 'Automate WhatsApp messages, notifications, and customer follow-ups with our API',
+                  icon: MessageSquare,
+                  badge: 'Coming Soon',
+                },
+                {
+                  name: 'AI Voice Agents',
+                  description: 'Programmable AI agents for intelligent calling workflows and automation',
+                  icon: Cpu,
+                  badge: 'Coming Soon',
+                },
+                {
+                  name: 'AI Transcription',
+                  description: 'Real-time call transcription with AI-powered insights for quality assurance',
+                  icon: FileText,
+                  badge: 'Coming Soon',
+                },
+              ].map((service, index) => {
+                const Icon = service.icon;
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      backgroundColor: 'var(--color-surface)',
+                      border: '2px solid var(--color-border)',
+                      borderRadius: '0.75rem',
+                      padding: '1.75rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      position: 'relative',
+                      transition: 'all 0.3s ease',
+                      cursor: 'default',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-primary)';
+                      e.currentTarget.style.transform = 'translateY(-4px)';
+                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(29, 108, 244, 0.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-border)';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                      <div style={{
+                        width: '3rem',
+                        height: '3rem',
+                        backgroundColor: 'rgba(29, 108, 244, 0.1)',
+                        border: '1px solid rgba(29, 108, 244, 0.2)',
+                        borderRadius: '0.5rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                        <Icon size={24} style={{ color: 'var(--color-primary)' }} />
+                      </div>
+                      <span style={{
+                        backgroundColor: 'rgba(29, 108, 244, 0.1)',
+                        color: 'var(--color-primary)',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        padding: '0.25rem 0.75rem',
+                        borderRadius: '0.375rem',
+                        border: '1px solid rgba(29, 108, 244, 0.2)',
+                      }}>
+                        {service.badge}
+                      </span>
+                    </div>
+                    <h4 style={{ fontSize: '1.125rem', fontFamily: 'Sora, sans-serif', fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.5rem' }}>
+                      {service.name}
+                    </h4>
+                    <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.6 }}>
+                      {service.description}
+                    </p>
+                  </div>
                 );
               })}
             </div>
