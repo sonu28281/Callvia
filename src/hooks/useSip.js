@@ -12,6 +12,26 @@ export const useSip = () => {
   const userAgentRef = useRef(null);
   const registererRef = useRef(null);
   const sessionRef = useRef(null);
+  const remoteAudioRef = useRef(null);
+
+  // Setup remote audio element
+  useEffect(() => {
+    if (!remoteAudioRef.current) {
+      const audio = document.createElement('audio');
+      audio.autoplay = true;
+      audio.style.display = 'none';
+      document.body.appendChild(audio);
+      remoteAudioRef.current = audio;
+    }
+
+    return () => {
+      if (remoteAudioRef.current) {
+        remoteAudioRef.current.srcObject = null;
+        remoteAudioRef.current.remove();
+        remoteAudioRef.current = null;
+      }
+    };
+  }, []);
 
   // Initialize SIP User Agent
   const initializeUserAgent = useCallback(async () => {
@@ -130,6 +150,46 @@ export const useSip = () => {
     }
   }, []);
 
+  // Setup remote audio stream for speaker playback
+  const setupRemoteAudio = useCallback((session) => {
+    try {
+      const sessionDescriptionHandler = session.sessionDescriptionHandler;
+      if (!sessionDescriptionHandler) {
+        console.error('[SIP] No session description handler found');
+        return;
+      }
+
+      const peerConnection = sessionDescriptionHandler.peerConnection;
+      if (!peerConnection) {
+        console.error('[SIP] No peer connection found');
+        return;
+      }
+
+      // Get remote stream from peer connection
+      const remoteStream = new MediaStream();
+      peerConnection.getReceivers().forEach((receiver) => {
+        if (receiver.track) {
+          remoteStream.addTrack(receiver.track);
+        }
+      });
+
+      // Attach to audio element
+      if (remoteAudioRef.current && remoteStream.getTracks().length > 0) {
+        remoteAudioRef.current.srcObject = remoteStream;
+        remoteAudioRef.current.play().catch((err) => {
+          console.error('[SIP] Failed to play remote audio:', err);
+          logSipError('Play Remote Audio', err);
+        });
+        console.log('[SIP] Remote audio stream attached and playing');
+      } else {
+        console.error('[SIP] No remote audio element or no tracks in stream');
+      }
+    } catch (err) {
+      console.error('[SIP] Failed to setup remote audio:', err);
+      logSipError('Setup Remote Audio', err);
+    }
+  }, []);
+
   // Make outgoing call
   const makeCall = useCallback(async (targetNumber, agentName) => {
     try {
@@ -167,11 +227,17 @@ export const useSip = () => {
             break;
           case SessionState.Established:
             setCallStatus('connected');
+            // Setup remote audio stream for playback
+            setupRemoteAudio(inviter);
             break;
           case SessionState.Terminated:
             setCallStatus('disconnected');
             setActiveCall(null);
             sessionRef.current = null;
+            // Clean up remote audio
+            if (remoteAudioRef.current) {
+              remoteAudioRef.current.srcObject = null;
+            }
             setTimeout(() => setCallStatus('idle'), 2000);
             break;
           default:
@@ -199,6 +265,10 @@ export const useSip = () => {
       if (sessionRef.current) {
         await sessionRef.current.bye();
         sessionRef.current = null;
+      }
+      // Clean up remote audio
+      if (remoteAudioRef.current) {
+        remoteAudioRef.current.srcObject = null;
       }
       setCallStatus('idle');
       setActiveCall(null);
