@@ -4,6 +4,7 @@ import EnquiryModal from '../../components/EnquiryModal';
 import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
 import SEO from '../../components/SEO';
 import { useSip } from '../../hooks/useSip';
+import { getAgentCallingNumber } from '../../config/sip_config';
 
 const AiVoiceAgents = () => {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
@@ -586,7 +587,7 @@ const AiVoiceAgents = () => {
                         if (isActive) {
                           hangUp();
                         } else if (canCall) {
-                          makeCall('new-ai', agent.type);
+                          makeCall(getAgentCallingNumber(agent.type), agent.type);
                         }
                       }}
                       disabled={!canCall && !isActive}

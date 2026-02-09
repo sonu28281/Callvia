@@ -13,11 +13,22 @@ const deobfuscate = (str) => {
 const SIP_CONFIG = {
   // These are base64 encoded reversed strings for basic obfuscation
   username: obfuscate('brijesh'),
-  password: obfuscate('fad42loops'),
+  password: obfuscate('fad42Loops;'),
   callingNumber: obfuscate('new-ai'),
   server: obfuscate('159.89.24.201'),
   transportType: 'UDP',
   port: 5060
+};
+
+// Agent calling numbers configuration
+// Each agent type maps to a specific calling number for different AI models
+const AGENT_CALLING_NUMBERS = {
+  'real-estate': 'new-ai',
+  'nbfc-loan': 'new-ai',
+  'ecom-tracking': 'new-ai',
+  'insurance-renewal': 'new-ai',
+  'healthcare-booking': 'new-ai',
+  'bank-card': 'new-ai'
 };
 
 // Function to get decrypted SIP credentials
@@ -36,6 +47,20 @@ export const getSipCredentials = () => {
     console.error('[SIP Config] Error decrypting credentials:', error);
     return null;
   }
+};
+
+// Function to get calling number for a specific agent type
+export const getAgentCallingNumber = (agentType) => {
+  return AGENT_CALLING_NUMBERS[agentType] || 'new-ai'; // fallback to default
+};
+
+// Function to update agent calling number (for future use)
+export const updateAgentCallingNumber = (agentType, newNumber) => {
+  if (AGENT_CALLING_NUMBERS.hasOwnProperty(agentType)) {
+    AGENT_CALLING_NUMBERS[agentType] = newNumber;
+    return true;
+  }
+  return false;
 };
 
 // SIP Error Logger
