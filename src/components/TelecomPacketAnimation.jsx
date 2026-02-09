@@ -93,7 +93,12 @@ const TelecomPacketAnimation = ({
 
     // Resize canvas with high DPI support
     const resizeCanvas = () => {
+      if (!canvas) return;
+      
       const rect = canvas.getBoundingClientRect();
+      // Skip if canvas has no dimensions (can happen during DOM manipulation)
+      if (rect.width === 0 || rect.height === 0) return;
+      
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
       canvas.style.width = `${rect.width}px`;
@@ -192,9 +197,14 @@ const TelecomPacketAnimation = ({
 
     // Generate network graph
     const generateNetwork = () => {
+      if (!canvas) return;
+      
       const rect = canvas.getBoundingClientRect();
       const width = rect.width;
       const height = rect.height;
+      
+      // Skip if canvas has no dimensions
+      if (width === 0 || height === 0) return;
 
       // Calculate node count based on area
       const area = width * height;
@@ -369,7 +379,12 @@ const TelecomPacketAnimation = ({
 
     // Draw network
     const draw = () => {
+      if (!canvas || !ctx) return;
+      
       const rect = canvas.getBoundingClientRect();
+      // Skip if canvas has no dimensions
+      if (rect.width === 0 || rect.height === 0) return;
+      
       const colors = getActiveColors();
       
       ctx.clearRect(0, 0, rect.width, rect.height);
@@ -460,12 +475,22 @@ const TelecomPacketAnimation = ({
     // Animation loop
     let lastTime = 0;
     const animate = (timestamp) => {
-      const deltaTime = lastTime ? Math.min((timestamp - lastTime) / 1000, 0.1) : 0;
-      lastTime = timestamp;
+      // Check if canvas is still valid
+      if (!canvasRef.current) {
+        if (animationId) cancelAnimationFrame(animationId);
+        return;
+      }
+      
+      try {
+        const deltaTime = lastTime ? Math.min((timestamp - lastTime) / 1000, 0.1) : 0;
+        lastTime = timestamp;
 
-      updatePackets(deltaTime);
-      updateNodeGlows();
-      draw();
+        updatePackets(deltaTime);
+        updateNodeGlows();
+        draw();
+      } catch (error) {
+        console.error('TelecomPacketAnimation error:', error);
+      }
 
       animationId = requestAnimationFrame(animate);
     };
@@ -474,8 +499,14 @@ const TelecomPacketAnimation = ({
     resizeCanvas();
     animate(0);
 
-    // Handle resize
-    const resizeObserver = new ResizeObserver(resizeCanvas);
+    // Handle resize with error handling
+    const resizeObserver = new ResizeObserver(() => {
+      try {
+        resizeCanvas();
+      } catch (error) {
+        console.error('TelecomPacketAnimation resize error:', error);
+      }
+    });
     resizeObserver.observe(canvas);
 
     return () => {
