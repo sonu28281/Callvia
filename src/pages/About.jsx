@@ -7,14 +7,14 @@ export function AboutPage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-slate-50 via-slate-50 to-white overflow-hidden" style={{ borderBottom: '1px solid var(--color-border)' }}>
+      <section className="relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, var(--color-surface), var(--color-bg))', borderBottom: '1px solid var(--color-border)' }}>
         <TelecomPacketAnimation
           nodeCount={35}
           maxConnectionsPerNode={3}
           packetSpawnRate={0.5}
           maxActivePackets={6}
-          packetSpeedMin={20}
-          packetSpeedMax={60}
+          packetSpeedMin={30}
+          packetSpeedMax={70}
           tailLengthMin={40}
           tailLengthMax={90}
           dropProbability={0.15}

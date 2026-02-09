@@ -177,13 +177,16 @@ const Home = () => {
     setEarlyAccessSubmitting(true);
 
     try {
-      const utmParams = {};
-      try {
-        const stored = sessionStorage.getItem('utm_params');
-        if (stored) Object.assign(utmParams, JSON.parse(stored));
-      } catch (e) {
-        console.error('Error parsing UTM params:', e);
-      }
+      // Capture UTM and src from current URL at submission time
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmParams = {
+        utm_source: urlParams.get('utm_source') || '',
+        utm_medium: urlParams.get('utm_medium') || '',
+        utm_campaign: urlParams.get('utm_campaign') || '',
+        utm_content: urlParams.get('utm_content') || '',
+        utm_term: urlParams.get('utm_term') || '',
+      };
+      const srcParam = urlParams.get('src') || '';
 
       const payload = {
         fullName: earlyAccessForm.companyName,
@@ -191,6 +194,7 @@ const Home = () => {
         phone: earlyAccessForm.contactNumber,
         country: siteConfig.defaults.country,
         lead_source: 'earlyaccess_home',
+        src: srcParam,
         ...utmParams,
         page_path: window.location.pathname,
         referrer: document.referrer,
@@ -244,8 +248,8 @@ const Home = () => {
           maxConnectionsPerNode={3}
           packetSpawnRate={0.5}
           maxActivePackets={6}
-          packetSpeedMin={20}
-          packetSpeedMax={60}
+          packetSpeedMin={30}
+          packetSpeedMax={70}
           tailLengthMin={40}
           tailLengthMax={90}
           dropProbability={0.15}

@@ -23,20 +23,6 @@ const EnquiryModal = ({ isOpen, onClose, leadSource = 'homeenquiry' }) => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  // Get UTM parameters from session storage
-  const getUTMParams = () => {
-    const utmParams = {};
-    try {
-      const stored = sessionStorage.getItem('utm_params');
-      if (stored) {
-        Object.assign(utmParams, JSON.parse(stored));
-      }
-    } catch (e) {
-      console.error('Error parsing UTM params:', e);
-    }
-    return utmParams;
-  };
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -118,10 +104,21 @@ const EnquiryModal = ({ isOpen, onClose, leadSource = 'homeenquiry' }) => {
     setIsSubmitting(true);
 
     try {
-      const utmParams = getUTMParams();
+      // Capture UTM and src from current URL at submission time
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmParams = {
+        utm_source: urlParams.get('utm_source') || '',
+        utm_medium: urlParams.get('utm_medium') || '',
+        utm_campaign: urlParams.get('utm_campaign') || '',
+        utm_content: urlParams.get('utm_content') || '',
+        utm_term: urlParams.get('utm_term') || '',
+      };
+      const srcParam = urlParams.get('src') || '';
+
       const payload = {
         ...formData,
         lead_source: leadSource,
+        src: srcParam,
         ...utmParams,
         page_path: window.location.pathname,
         referrer: document.referrer,

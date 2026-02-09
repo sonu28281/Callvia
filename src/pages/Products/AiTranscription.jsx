@@ -54,24 +54,24 @@ const AiTranscription = () => {
         }}
       >
         <TelecomPacketAnimation
-          nodeCount={40}
+          nodeCount={35}
           maxConnectionsPerNode={3}
           packetSpawnRate={0.5}
           maxActivePackets={6}
-          packetSpeedMin={20}
-          packetSpeedMax={60}
+          packetSpeedMin={30}
+          packetSpeedMax={70}
           tailLengthMin={40}
           tailLengthMax={90}
-          dropProbability={0.12}
+          dropProbability={0.15}
           nodeGlowDuration={600}
-          nodeGlowIntensity={1.2}
-          edgeColor="rgba(29, 108, 244, 0.08)"
-          nodeColor="rgba(29, 108, 244, 0.3)"
-          packetColor="rgba(29, 108, 244, 0.9)"
+          nodeGlowIntensity={1.0}
+          edgeColor="rgba(29, 108, 244, 0.06)"
+          nodeColor="rgba(29, 108, 244, 0.25)"
+          packetColor="rgba(29, 108, 244, 0.8)"
           glowColor="rgba(29, 108, 244, 1)"
-          darkModeEdgeColor="rgba(99, 102, 241, 0.12)"
-          darkModeNodeColor="rgba(99, 102, 241, 0.4)"
-          darkModePacketColor="rgba(99, 102, 241, 1)"
+          darkModeEdgeColor="rgba(99, 102, 241, 0.1)"
+          darkModeNodeColor="rgba(99, 102, 241, 0.35)"
+          darkModePacketColor="rgba(99, 102, 241, 0.9)"
           darkModeGlowColor="rgba(99, 102, 241, 1)"
           zIndex={1}
         />

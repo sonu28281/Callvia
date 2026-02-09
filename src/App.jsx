@@ -46,22 +46,8 @@ import Error500 from './pages/Error500';
 function App() {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
 
-  // Capture UTM parameters on load
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const utmParams = {
-      utm_source: params.get('utm_source') || '',
-      utm_medium: params.get('utm_medium') || '',
-      utm_campaign: params.get('utm_campaign') || '',
-      utm_content: params.get('utm_content') || '',
-      utm_term: params.get('utm_term') || '',
-    };
-    
-    // Store UTM params in session storage if any exist
-    if (Object.values(utmParams).some(v => v)) {
-      sessionStorage.setItem('utm_params', JSON.stringify(utmParams));
-    }
-  }, []);
+  // Note: UTM and src parameters are now captured directly from URL at form submission time
+  // This ensures accurate tracking per ad/source without cross-contamination between users
 
   const handleEnquiryClick = () => {
     setIsEnquiryModalOpen(true);

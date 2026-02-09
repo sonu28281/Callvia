@@ -98,6 +98,19 @@ const CallFloSuite = () => {
     };
   }, []);
 
+  const handlePhoneChange = (value) => {
+    // Always start with +91
+    if (!value.startsWith('+91')) {
+      setHeroForm({ ...heroForm, contactNumber: '+91' });
+      return;
+    }
+    // Only allow digits after +91, max 10 digits
+    const digitsOnly = value.slice(3).replace(/\D/g, '');
+    if (digitsOnly.length <= 10) {
+      setHeroForm({ ...heroForm, contactNumber: '+91' + digitsOnly });
+    }
+  };
+
   const handleHeroFormSubmit = async (e) => {
     e.preventDefault();
     setHeroFormError('');
@@ -122,13 +135,16 @@ const CallFloSuite = () => {
     setHeroFormSubmitting(true);
 
     try {
-      const utmParams = {};
-      try {
-        const stored = sessionStorage.getItem('utm_params');
-        if (stored) Object.assign(utmParams, JSON.parse(stored));
-      } catch (e) {
-        console.error('Error parsing UTM params:', e);
-      }
+      // Capture UTM and src from current URL at submission time
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmParams = {
+        utm_source: urlParams.get('utm_source') || '',
+        utm_medium: urlParams.get('utm_medium') || '',
+        utm_campaign: urlParams.get('utm_campaign') || '',
+        utm_content: urlParams.get('utm_content') || '',
+        utm_term: urlParams.get('utm_term') || '',
+      };
+      const srcParam = urlParams.get('src') || '';
 
       const payload = {
         fullName: heroForm.companyName,
@@ -136,6 +152,7 @@ const CallFloSuite = () => {
         phone: heroForm.contactNumber,
         country: siteConfig.defaults.country,
         lead_source: 'callflosuite-enquiry',
+        src: srcParam,
         ...utmParams,
         page_path: window.location.pathname,
         referrer: document.referrer,
@@ -198,7 +215,28 @@ const CallFloSuite = () => {
           overflow: 'hidden',
         }}
       >
-        <TelecomPacketAnimation />
+        <TelecomPacketAnimation
+          nodeCount={35}
+          maxConnectionsPerNode={3}
+          packetSpawnRate={0.5}
+          maxActivePackets={6}
+          packetSpeedMin={30}
+          packetSpeedMax={70}
+          tailLengthMin={40}
+          tailLengthMax={90}
+          dropProbability={0.15}
+          nodeGlowDuration={600}
+          nodeGlowIntensity={1.0}
+          edgeColor="rgba(29, 108, 244, 0.06)"
+          nodeColor="rgba(29, 108, 244, 0.25)"
+          packetColor="rgba(29, 108, 244, 0.8)"
+          glowColor="rgba(29, 108, 244, 1)"
+          darkModeEdgeColor="rgba(99, 102, 241, 0.1)"
+          darkModeNodeColor="rgba(99, 102, 241, 0.35)"
+          darkModePacketColor="rgba(99, 102, 241, 0.9)"
+          darkModeGlowColor="rgba(99, 102, 241, 1)"
+          zIndex={1}
+        />
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -437,7 +475,7 @@ const CallFloSuite = () => {
                         type="tel"
                         id="phone"
                         value={heroForm.contactNumber}
-                        onChange={(e) => setHeroForm({ ...heroForm, contactNumber: e.target.value })}
+                        onChange={(e) => handlePhoneChange(e.target.value)}
                         required
                         placeholder="+91XXXXXXXXXX"
                         style={{
@@ -805,4 +843,3 @@ const CallFloSuite = () => {
 };
 
 export default CallFloSuite;
-<TelecomPacketAnimation />

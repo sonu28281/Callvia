@@ -38,11 +38,59 @@ export function ContactPage() {
     return () => observer.disconnect();
   }, []);
 
+  const handlePhoneChange = (value) => {
+    // Always start with +91
+    if (!value.startsWith('+91')) {
+      setContactForm({ ...contactForm, phone: '+91' });
+      return;
+    }
+    // Only allow digits after +91, max 10 digits
+    const digitsOnly = value.slice(3).replace(/\D/g, '');
+    if (digitsOnly.length <= 10) {
+      setContactForm({ ...contactForm, phone: '+91' + digitsOnly });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
 
+    // Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!contactForm.fullName.trim()) {
+      alert('Full name is required');
+      setSubmitting(false);
+      return;
+    }
+    if (!contactForm.email || !emailRegex.test(contactForm.email)) {
+      alert('Please enter a valid email address');
+      setSubmitting(false);
+      return;
+    }
+    const phoneDigits = contactForm.phone.replace(/\D/g, '');
+    if (!contactForm.phone.startsWith('+91') || phoneDigits.length !== 12) {
+      alert('Please enter a valid 10-digit Indian mobile number');
+      setSubmitting(false);
+      return;
+    }
+    if (!contactForm.message.trim()) {
+      alert('Message is required');
+      setSubmitting(false);
+      return;
+    }
+
     try {
+      // Capture UTM and src from current URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmParams = {
+        utm_source: urlParams.get('utm_source') || '',
+        utm_medium: urlParams.get('utm_medium') || '',
+        utm_campaign: urlParams.get('utm_campaign') || '',
+        utm_content: urlParams.get('utm_content') || '',
+        utm_term: urlParams.get('utm_term') || '',
+      };
+      const srcParam = urlParams.get('src') || '';
+
       const webhookUrl = siteConfig.webhooks.mainLeads;
       const payload = {
         fullName: contactForm.fullName,
@@ -54,6 +102,10 @@ export function ContactPage() {
         inquiryType: contactForm.inquiryType,
         timestamp: new Date().toISOString(),
         source: 'contact-page',
+        src: srcParam,
+        ...utmParams,
+        page_path: window.location.pathname,
+        referrer: document.referrer,
       };
 
       await fetch(webhookUrl, {
@@ -187,8 +239,8 @@ export function ContactPage() {
           maxConnectionsPerNode={3}
           packetSpawnRate={0.5}
           maxActivePackets={6}
-          packetSpeedMin={20}
-          packetSpeedMax={60}
+          packetSpeedMin={30}
+          packetSpeedMax={70}
           tailLengthMin={40}
           tailLengthMax={90}
           dropProbability={0.15}
@@ -399,7 +451,8 @@ export function ContactPage() {
                       type="tel"
                       required
                       value={contactForm.phone}
-                      onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
+                      onChange={(e) => handlePhoneChange(e.target.value)}
+                      placeholder="+91XXXXXXXXXX"
                       style={{
                         width: '100%',
                         padding: '0.875rem',
@@ -537,7 +590,7 @@ export function ContactPage() {
               </form>
             </div>
 
-            {/* Support Categories Sidebar */}
+            {/* Quick Contact Cards */}
             <div>
               <h3 style={{
                 fontSize: '1.25rem',
@@ -546,11 +599,11 @@ export function ContactPage() {
                 color: 'var(--color-text)',
                 marginBottom: '1.5rem',
               }}>
-                Direct Contact
+                Quick Connect
               </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {supportCategories.map((cat, i) => {
-                  const Icon = cat.icon;
+                {contactMethods.map((method, i) => {
+                  const Icon = method.icon;
                   return (
                     <div
                       key={i}
@@ -558,11 +611,11 @@ export function ContactPage() {
                         backgroundColor: 'var(--color-bg)',
                         border: '1px solid var(--color-border)',
                         borderRadius: '0.75rem',
-                        padding: '1.25rem',
+                        padding: '1.5rem',
                         transition: 'all 0.2s ease',
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = cat.color;
+                        e.currentTarget.style.borderColor = method.color;
                         e.currentTarget.style.backgroundColor = 'var(--color-surface)';
                       }}
                       onMouseLeave={(e) => {
@@ -572,39 +625,28 @@ export function ContactPage() {
                     >
                       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
                         <div style={{
-                          width: '2.5rem',
-                          height: '2.5rem',
+                          width: '3rem',
+                          height: '3rem',
                           borderRadius: '0.5rem',
-                          backgroundColor: `${cat.color}15`,
-                          border: `1px solid ${cat.color}30`,
+                          backgroundColor: `${method.color}15`,
+                          border: `1px solid ${method.color}30`,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           flexShrink: 0,
                         }}>
-                          <Icon size={20} style={{ color: cat.color }} />
+                          <Icon size={24} style={{ color: method.color }} />
                         </div>
                         <div style={{ flex: 1 }}>
-                          <h4 style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.25rem' }}>
-                            {cat.title}
+                          <h4 style={{ fontSize: '1.125rem', fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.25rem' }}>
+                            {method.title}
                           </h4>
-                          <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>
-                            {cat.desc}
+                          <p style={{ fontSize: '1rem', color: method.color, fontWeight: 600, marginBottom: '0.25rem' }}>
+                            {method.primary}
                           </p>
-                          <a
-                            href={`mailto:${cat.email}`}
-                            style={{
-                              fontSize: '0.875rem',
-                              color: cat.color,
-                              fontWeight: 600,
-                              textDecoration: 'none',
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '0.25rem',
-                            }}
-                          >
-                            {cat.email} <ArrowRight size={14} />
-                          </a>
+                          <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)' }}>
+                            {method.secondary}
+                          </p>
                         </div>
                       </div>
                     </div>

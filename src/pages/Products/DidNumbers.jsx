@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { ArrowRight, Check, Phone, Globe, Zap, Shield, BarChart3, Settings, MapPin, Clock } from 'lucide-react';
 import EnquiryModal from '../../components/EnquiryModal';
 import SEO from '../../components/SEO';
-import NetworkGridAnimation from '../../components/NetworkGridAnimation';
 import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
 
 const DidNumbers = () => {
@@ -53,48 +52,28 @@ const DidNumbers = () => {
           overflow: 'hidden',
         }}
       >
-        {/* Network Grid Animation Background */}
-        <NetworkGridAnimation 
-          spacing={100}
-          lineColor="rgba(29, 108, 244, 0.18)"
-          nodeColor="rgba(29, 108, 244, 0.7)"
+        {/* Telecom Packet Animation */}
+        <TelecomPacketAnimation
+          nodeCount={35}
+          maxConnectionsPerNode={3}
+          packetSpawnRate={0.5}
+          maxActivePackets={6}
+          packetSpeedMin={30}
+          packetSpeedMax={70}
+          tailLengthMin={40}
+          tailLengthMax={90}
+          dropProbability={0.15}
+          nodeGlowDuration={600}
+          nodeGlowIntensity={1.0}
+          edgeColor="rgba(29, 108, 244, 0.06)"
+          nodeColor="rgba(29, 108, 244, 0.25)"
+          packetColor="rgba(29, 108, 244, 0.8)"
           glowColor="rgba(29, 108, 244, 1)"
-          nodeRadius={3}
-          glowRadius={15}
-          activeNodesMin={3}
-          activeNodesMax={7}
-          pulseDurationMin={1000}
-          pulseDurationMax={2000}
-          activationRate={900}
-          irregularity={0.18}
-          darkModeLineColor="rgba(99, 102, 241, 0.25)"
-          darkModeNodeColor="rgba(99, 102, 241, 0.8)"
+          darkModeEdgeColor="rgba(99, 102, 241, 0.1)"
+          darkModeNodeColor="rgba(99, 102, 241, 0.35)"
+          darkModePacketColor="rgba(99, 102, 241, 0.9)"
           darkModeGlowColor="rgba(99, 102, 241, 1)"
           zIndex={1}
-        />
-        
-        {/* Packet Animation Layer - Moving data packets */}
-        <TelecomPacketAnimation
-          nodeCount={30}
-          maxConnectionsPerNode={2}
-          packetSpawnRate={0.4}
-          maxActivePackets={5}
-          packetSpeedMin={15}
-          packetSpeedMax={45}
-          tailLengthMin={30}
-          tailLengthMax={70}
-          dropProbability={0.1}
-          nodeGlowDuration={500}
-          nodeGlowIntensity={0.8}
-          edgeColor="rgba(29, 108, 244, 0.05)"
-          nodeColor="rgba(29, 108, 244, 0.2)"
-          packetColor="rgba(29, 108, 244, 1)"
-          glowColor="rgba(29, 108, 244, 1)"
-          darkModeEdgeColor="rgba(99, 102, 241, 0.08)"
-          darkModeNodeColor="rgba(99, 102, 241, 0.25)"
-          darkModePacketColor="rgba(99, 102, 241, 1)"
-          darkModeGlowColor="rgba(99, 102, 241, 1)"
-          zIndex={2}
         />
         
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
