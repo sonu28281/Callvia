@@ -521,7 +521,7 @@ const CallfloDeskAI = () => {
                     fontFamily: 'Sora, sans-serif',
                     fontWeight: 700,
                     margin: '0 auto 1.5rem',
-                    boxShadow: `0 4px 20px ${item.color}40`,
+                    boxShadow: `0 4px 20px ${item.color}60`,
                   }}>
                     {item.step}
                   </div>

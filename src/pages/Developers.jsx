@@ -716,7 +716,7 @@ console.log(call.sid);`}
       </section>
 
       {/* CTA */}
-      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-surface)', padding: '6rem 1.5rem', marginBottom: 0 }}>
+      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem', marginBottom: 0 }}>
         <div className="container" style={{ maxWidth: '50rem', margin: '0 auto', textAlign: 'center' }}>
           <Sparkles size={48} style={{ color: 'var(--color-primary)', margin: '0 auto 1.5rem', display: 'block' }} />
           <h2 style={{

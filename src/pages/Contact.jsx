@@ -673,28 +673,6 @@ export function ContactPage() {
         </div>
       </section>
 
-      {/* Office Hours */}
-      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '4rem 1.5rem', marginBottom: 0 }}>
-        <div className="container" style={{ maxWidth: '48rem', margin: '0 auto', textAlign: 'center' }}>
-          <Clock size={48} style={{ color: 'var(--color-primary)', margin: '0 auto 1.5rem', display: 'block' }} />
-          <h2 style={{
-            fontSize: '1.75rem',
-            fontFamily: 'Sora, sans-serif',
-            fontWeight: 600,
-            color: 'var(--color-text)',
-            marginBottom: '1rem',
-          }}>
-            Business Hours
-          </h2>
-          <p style={{ fontSize: '1.125rem', color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>
-            Monday to Friday: <strong style={{ color: 'var(--color-text)' }}>9:00 AM - 6:00 PM IST</strong>
-          </p>
-          <p style={{ fontSize: '1rem', color: 'var(--color-text-muted)' }}>
-            Enterprise customers have 24/7 priority support access
-          </p>
-        </div>
-      </section>
-
       <style>{`
         @media (max-width: 1024px) {
           .contact-section {

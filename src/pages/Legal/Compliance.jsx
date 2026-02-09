@@ -328,7 +328,7 @@ export function Compliance() {
       </section>
 
       {/* Related Pages */}
-      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-surface)', padding: '6rem 1.5rem', marginBottom: 0 }}>
+      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem', marginBottom: 0 }}>
         <div className="container" style={{ maxWidth: '56rem', margin: '0 auto' }}>
           <h2 style={{
             fontSize: '2rem',
