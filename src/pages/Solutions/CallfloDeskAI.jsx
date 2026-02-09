@@ -140,6 +140,7 @@ const CallfloDeskAI = () => {
           overflow: 'hidden',
         }}
       >
+        <TelecomPacketAnimation />
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
