@@ -1099,25 +1099,26 @@ const Home = () => {
                   name: 'WhatsApp Automation',
                   description: 'Automate WhatsApp messages, notifications, and customer follow-ups with our API',
                   icon: MessageSquare,
-                  badge: 'Coming Soon',
+                  link: '/products/whatsapp-automation',
                 },
                 {
                   name: 'AI Voice Agents',
                   description: 'Programmable AI agents for intelligent calling workflows and automation',
                   icon: Cpu,
-                  badge: 'Coming Soon',
+                  link: '/products/ai-agents',
                 },
                 {
                   name: 'AI Transcription',
                   description: 'Real-time call transcription with AI-powered insights for quality assurance',
                   icon: FileText,
-                  badge: 'Coming Soon',
+                  link: '/products/ai-transcription',
                 },
               ].map((service, index) => {
                 const Icon = service.icon;
                 return (
-                  <div
+                  <a
                     key={index}
+                    href={service.link}
                     style={{
                       backgroundColor: 'var(--color-surface)',
                       border: '2px solid var(--color-border)',
@@ -1127,17 +1128,20 @@ const Home = () => {
                       flexDirection: 'column',
                       position: 'relative',
                       transition: 'all 0.3s ease',
-                      cursor: 'default',
+                      cursor: 'pointer',
+                      textDecoration: 'none',
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor = 'var(--color-primary)';
                       e.currentTarget.style.transform = 'translateY(-4px)';
-                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(29, 108, 244, 0.15)';
+                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(29, 108, 244, 0.2)';
+                      e.currentTarget.querySelector('.service-arrow').style.transform = 'translateX(4px)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.borderColor = 'var(--color-border)';
                       e.currentTarget.style.transform = 'translateY(0)';
                       e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.querySelector('.service-arrow').style.transform = 'translateX(0)';
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1rem' }}>
@@ -1153,17 +1157,15 @@ const Home = () => {
                       }}>
                         <Icon size={24} style={{ color: 'var(--color-primary)' }} />
                       </div>
-                      <span style={{
-                        backgroundColor: 'rgba(29, 108, 244, 0.1)',
-                        color: 'var(--color-primary)',
-                        fontSize: '0.75rem',
-                        fontWeight: 600,
-                        padding: '0.25rem 0.75rem',
-                        borderRadius: '0.375rem',
-                        border: '1px solid rgba(29, 108, 244, 0.2)',
-                      }}>
-                        {service.badge}
-                      </span>
+                      <ArrowRight 
+                        className="service-arrow" 
+                        size={20} 
+                        style={{ 
+                          color: 'var(--color-primary)', 
+                          transition: 'transform 0.2s ease',
+                          flexShrink: 0,
+                        }} 
+                      />
                     </div>
                     <h4 style={{ fontSize: '1.125rem', fontFamily: 'Sora, sans-serif', fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.5rem' }}>
                       {service.name}
@@ -1171,7 +1173,7 @@ const Home = () => {
                     <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.6 }}>
                       {service.description}
                     </p>
-                  </div>
+                  </a>
                 );
               })}
             </div>

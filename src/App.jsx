@@ -17,6 +17,9 @@ import DidNumbers from './pages/Products/DidNumbers';
 import SipTrunks from './pages/Products/SipTrunks';
 import PredictiveDialer from './pages/Products/PredictiveDialer';
 import CallRecording from './pages/Products/CallRecording';
+import WhatsAppAutomation from './pages/Products/WhatsAppAutomation';
+import AiTranscription from './pages/Products/AiTranscription';
+import AiVoiceAgents from './pages/Products/AiVoiceAgents';
 
 // Solution Pages
 import CallFloSuite from './pages/Solutions/CallFloSuite';
@@ -88,12 +91,12 @@ function App() {
                 <Route path="/products" element={<PlaceholderPage title="[PRODUCTS_PAGE_TITLE]" description="[PRODUCTS_PAGE_DESCRIPTION]" />} />
                 <Route path="/products/sip-trunks" element={<SipTrunks />} />
                 <Route path="/products/did-numbers" element={<DidNumbers />} />
-                <Route path="/products/ai-agents" element={<PlaceholderPage title="[AI_AGENTS_TITLE]" description="[AI_AGENTS_DESCRIPTION]" />} />
-                <Route path="/products/ai-transcription" element={<PlaceholderPage title="[AI_TRANSCRIPTION_TITLE]" description="[AI_TRANSCRIPTION_DESCRIPTION]" />} />
+                <Route path="/products/ai-agents" element={<AiVoiceAgents />} />
+                <Route path="/products/ai-transcription" element={<AiTranscription />} />
                 <Route path="/products/call-recording" element={<CallRecording />} />
                 <Route path="/products/predictive-dialer" element={<PredictiveDialer />} />
                 <Route path="/products/ai-receptionist" element={<PlaceholderPage title="[PRODUCT_AI_RECEPTIONIST_TITLE]" description="[PRODUCT_AI_RECEPTIONIST_DESCRIPTION]" />} />
-                <Route path="/products/whatsapp-automation" element={<PlaceholderPage title="[WHATSAPP_AUTOMATION_TITLE]" description="[WHATSAPP_AUTOMATION_DESCRIPTION]" />} />
+                <Route path="/products/whatsapp-automation" element={<WhatsAppAutomation />} />
                 
                 {/* Company */}
                 <Route path="/features" element={<PlaceholderPage title="[FEATURES_PAGE_TITLE]" description="[FEATURES_PAGE_DESCRIPTION]" />} />
