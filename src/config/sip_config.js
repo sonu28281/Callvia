@@ -26,20 +26,20 @@ const SIP_CONFIG = {
 // Each agent type maps to specific calling numbers for different languages
 const AGENT_CALLING_NUMBERS = {
   english: {
-    'real-estate': 'new-ai',
-    'nbfc-loan': 'new-ai',
-    'ecom-tracking': 'new-ai',
-    'insurance-renewal': 'new-ai',
-    'healthcare-booking': 'new-ai',
-    'bank-card': 'new-ai'
+    'real-estate': 'realestate-eg',
+    'nbfc-loan': 'nbfc-eg',
+    'ecom-tracking': 'ecom-track-eg',
+    'insurance-renewal': 'insurance-ren-eg',
+    'healthcare-booking': 'healthcare-eg',
+    'bank-card': 'bankcard-eg'
   },
   hindi: {
-    'real-estate': 'new-ai-hindi',
-    'nbfc-loan': 'new-ai-hindi',
-    'ecom-tracking': 'new-ai-hindi',
-    'insurance-renewal': 'new-ai-hindi',
-    'healthcare-booking': 'new-ai-hindi',
-    'bank-card': 'new-ai-hindi'
+    'real-estate': 'realestate-hnd',
+    'nbfc-loan': 'nbfc-hnd',
+    'ecom-tracking': 'ecom-track-hnd',
+    'insurance-renewal': 'insurance-ren-hnd',
+    'healthcare-booking': 'healthcare-hnd',
+    'bank-card': 'bankcard-hnd'
   }
 };
 
