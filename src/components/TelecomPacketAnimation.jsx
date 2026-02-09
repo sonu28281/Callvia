@@ -44,20 +44,22 @@ const TelecomPacketAnimation = ({
   const packetsRef = useRef([]);
   const nodeGlowsRef = useRef(new Map());
   const lastSpawnRef = useRef(0);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const prefersReducedMotionRef = useRef(false);
+  const isDarkModeRef = useRef(false);
 
   // Check for reduced motion and dark mode
   useEffect(() => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(motionQuery.matches);
+    prefersReducedMotionRef.current = motionQuery.matches;
     
-    const handleMotionChange = (e) => setPrefersReducedMotion(e.matches);
+    const handleMotionChange = (e) => {
+      prefersReducedMotionRef.current = e.matches;
+    };
     motionQuery.addEventListener('change', handleMotionChange);
 
     const checkDarkMode = () => {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      setIsDarkMode(isDark);
+      isDarkModeRef.current = isDark;
     };
     
     checkDarkMode();
@@ -83,10 +85,10 @@ const TelecomPacketAnimation = ({
 
     // Get active colors
     const getActiveColors = () => ({
-      edge: isDarkMode ? darkModeEdgeColor : edgeColor,
-      node: isDarkMode ? darkModeNodeColor : nodeColor,
-      packet: isDarkMode ? darkModePacketColor : packetColor,
-      glow: isDarkMode ? darkModeGlowColor : glowColor,
+      edge: isDarkModeRef.current ? darkModeEdgeColor : edgeColor,
+      node: isDarkModeRef.current ? darkModeNodeColor : nodeColor,
+      packet: isDarkModeRef.current ? darkModePacketColor : packetColor,
+      glow: isDarkModeRef.current ? darkModeGlowColor : glowColor,
     });
 
     // Resize canvas with high DPI support
@@ -279,7 +281,7 @@ const TelecomPacketAnimation = ({
 
     // Update packets
     const updatePackets = (deltaTime) => {
-      if (prefersReducedMotion) return;
+      if (prefersReducedMotionRef.current) return;
 
       const { nodes, edges } = networkRef.current;
 
@@ -430,7 +432,7 @@ const TelecomPacketAnimation = ({
       nodes.forEach(node => {
         const glow = nodeGlowsRef.current.get(node.id);
         
-        if (glow && !prefersReducedMotion) {
+        if (glow && !prefersReducedMotionRef.current) {
           const elapsed = now - glow.startTime;
           const progress = elapsed / nodeGlowDuration;
           const intensity = glow.intensity * (1 - Math.pow(progress, 2));
@@ -503,8 +505,6 @@ const TelecomPacketAnimation = ({
     darkModeNodeColor,
     darkModePacketColor,
     darkModeGlowColor,
-    prefersReducedMotion,
-    isDarkMode,
   ]);
 
   return (
