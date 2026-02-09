@@ -3,6 +3,7 @@ import { ArrowRight, Check, Users, TrendingUp, Shield, Zap, DollarSign, Globe, H
 import EnquiryModal from '../../components/EnquiryModal';
 import SEO from '../../components/SEO';
 import siteConfig from '../../config/site_config.json';
+import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
 
 const Partners = () => {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);

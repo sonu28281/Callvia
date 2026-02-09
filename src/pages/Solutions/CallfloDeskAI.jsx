@@ -4,6 +4,7 @@ import EnquiryModal from '../../components/EnquiryModal';
 import LeadForm from '../../components/LeadForm';
 import SEO from '../../components/SEO';
 import siteConfig from '../../config/site_config.json';
+import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
 
 const CallfloDeskAI = () => {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
@@ -803,3 +804,4 @@ const CallfloDeskAI = () => {
 };
 
 export default CallfloDeskAI;
+<TelecomPacketAnimation />
