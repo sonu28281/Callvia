@@ -3,6 +3,7 @@ import { ArrowRight, Check, Phone, Globe, Zap, Shield, BarChart3, Settings, MapP
 import EnquiryModal from '../../components/EnquiryModal';
 import SEO from '../../components/SEO';
 import NetworkGridAnimation from '../../components/NetworkGridAnimation';
+import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
 
 const DidNumbers = () => {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
@@ -70,6 +71,30 @@ const DidNumbers = () => {
           darkModeNodeColor="rgba(99, 102, 241, 0.8)"
           darkModeGlowColor="rgba(99, 102, 241, 1)"
           zIndex={1}
+        />
+        
+        {/* Packet Animation Layer - Moving data packets */}
+        <TelecomPacketAnimation
+          nodeCount={30}
+          maxConnectionsPerNode={2}
+          packetSpawnRate={0.4}
+          maxActivePackets={5}
+          packetSpeedMin={15}
+          packetSpeedMax={45}
+          tailLengthMin={30}
+          tailLengthMax={70}
+          dropProbability={0.1}
+          nodeGlowDuration={500}
+          nodeGlowIntensity={0.8}
+          edgeColor="rgba(29, 108, 244, 0.05)"
+          nodeColor="rgba(29, 108, 244, 0.2)"
+          packetColor="rgba(29, 108, 244, 1)"
+          glowColor="rgba(29, 108, 244, 1)"
+          darkModeEdgeColor="rgba(99, 102, 241, 0.08)"
+          darkModeNodeColor="rgba(99, 102, 241, 0.25)"
+          darkModePacketColor="rgba(99, 102, 241, 1)"
+          darkModeGlowColor="rgba(99, 102, 241, 1)"
+          zIndex={2}
         />
         
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>

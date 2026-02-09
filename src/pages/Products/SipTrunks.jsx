@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Check, Network, Cloud, Zap, Shield, TrendingUp, Globe2, PhoneCall, Activity } from 'lucide-react';
 import EnquiryModal from '../../components/EnquiryModal';
+import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
 import SEO from '../../components/SEO';
 
 const SipTrunks = () => {
@@ -43,14 +44,37 @@ const SipTrunks = () => {
         className="hero-section animate-on-scroll"
         style={{
           position: 'relative',
-          background: 'linear-gradient(135deg, #F7F9FC 0%, #EEF2F7 100%)',
+          background: 'var(--color-surface)',
           paddingTop: '8rem',
           paddingBottom: '6rem',
           paddingLeft: '1.5rem',
           paddingRight: '1.5rem',
           overflow: 'hidden',
+          borderBottom: '1px solid var(--color-border)',
         }}
       >
+        <TelecomPacketAnimation
+          nodeCount={40}
+          maxConnectionsPerNode={3}
+          packetSpawnRate={0.5}
+          maxActivePackets={6}
+          packetSpeedMin={20}
+          packetSpeedMax={60}
+          tailLengthMin={40}
+          tailLengthMax={90}
+          dropProbability={0.12}
+          nodeGlowDuration={600}
+          nodeGlowIntensity={1.2}
+          edgeColor="rgba(29, 108, 244, 0.08)"
+          nodeColor="rgba(29, 108, 244, 0.3)"
+          packetColor="rgba(29, 108, 244, 0.9)"
+          glowColor="rgba(29, 108, 244, 1)"
+          darkModeEdgeColor="rgba(99, 102, 241, 0.12)"
+          darkModeNodeColor="rgba(99, 102, 241, 0.4)"
+          darkModePacketColor="rgba(99, 102, 241, 1)"
+          darkModeGlowColor="rgba(99, 102, 241, 1)"
+          zIndex={1}
+        />
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
