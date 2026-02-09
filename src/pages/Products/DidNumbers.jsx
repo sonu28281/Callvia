@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ArrowRight, Check, Phone, Globe, Zap, Shield, BarChart3, Settings, MapPin, Clock } from 'lucide-react';
 import EnquiryModal from '../../components/EnquiryModal';
 import SEO from '../../components/SEO';
+import NetworkGridAnimation from '../../components/NetworkGridAnimation';
 
 const DidNumbers = () => {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
@@ -51,6 +52,26 @@ const DidNumbers = () => {
           overflow: 'hidden',
         }}
       >
+        {/* Network Grid Animation Background */}
+        <NetworkGridAnimation 
+          spacing={100}
+          lineColor="rgba(29, 108, 244, 0.1)"
+          nodeColor="rgba(29, 108, 244, 0.7)"
+          glowColor="rgba(29, 108, 244, 1)"
+          nodeRadius={3}
+          glowRadius={15}
+          activeNodesMin={3}
+          activeNodesMax={7}
+          pulseDurationMin={1000}
+          pulseDurationMax={2000}
+          activationRate={900}
+          irregularity={0.18}
+          darkModeLineColor="rgba(99, 102, 241, 0.15)"
+          darkModeNodeColor="rgba(99, 102, 241, 0.8)"
+          darkModeGlowColor="rgba(99, 102, 241, 1)"
+          zIndex={1}
+        />
+        
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

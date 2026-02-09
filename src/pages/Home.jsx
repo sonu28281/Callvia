@@ -622,10 +622,120 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ========== FEATURES SECTION ========== */}
+      {/* ========== WHO WE ARE SECTION ========== */}
+      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-surface)', padding: '6rem 1.5rem' }}>
+        <div className="container">
+          <div style={{ maxWidth: '64rem', margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <div style={{ marginBottom: '1.5rem' }}>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '0.5rem 1rem',
+                    backgroundColor: 'var(--color-bg)',
+                    border: '1px solid var(--color-border)',
+                    color: 'var(--color-accent)',
+                    borderRadius: '0.5rem',
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                  }}
+                >
+                  WHO WE ARE
+                </span>
+              </div>
+              <h2
+                style={{
+                  fontSize: 'clamp(2rem, 4vw, 3rem)',
+                  fontFamily: 'Sora, sans-serif',
+                  fontWeight: 700,
+                  color: 'var(--color-text)',
+                  marginBottom: '1.5rem',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                India's <span style={{ color: 'var(--color-primary)' }}>Telecom-First</span> Cloud Platform
+              </h2>
+              <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', maxWidth: '48rem', margin: '0 auto', lineHeight: 1.7 }}>
+                Callvia is a <strong style={{ color: 'var(--color-text)' }}>VNO-approved</strong> and <strong style={{ color: 'var(--color-text)' }}>TRAI-compliant</strong> telecom infrastructure provider built exclusively for the Indian market. We power <strong style={{ color: 'var(--color-text)' }}>domestic voice operations</strong>, <strong style={{ color: 'var(--color-text)' }}>AI-driven automation</strong>, and <strong style={{ color: 'var(--color-text)' }}>white-label telecom services</strong> for enterprises, resellers, and call centers.
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', marginTop: '3rem', maxWidth: '56rem', margin: '3rem auto 0' }} className="who-we-are-grid">
+              {[
+                {
+                  icon: '🏛️',
+                  title: 'VNO-Approved',
+                  description: 'Licensed virtual network operator with full regulatory compliance',
+                  highlight: 'TRAI Certified'
+                },
+                {
+                  icon: '🇮🇳',
+                  title: 'India-First',
+                  description: 'Built specifically for Indian telecom ecosystem and regulations',
+                  highlight: 'Pan-India Coverage'
+                },
+                {
+                  icon: '🤖',
+                  title: 'AI-Powered',
+                  description: 'Advanced AI voice agents and automation for call operations',
+                  highlight: 'Next-Gen Technology'
+                },
+                {
+                  icon: '🏷️',
+                  title: 'White-Label Ready',
+                  description: 'Launch your own branded telecom service in minutes',
+                  highlight: 'Fully Customizable'
+                },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  style={{
+                    backgroundColor: 'var(--color-bg)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: '1rem',
+                    padding: '1.75rem',
+                    textAlign: 'center',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                    e.currentTarget.style.borderColor = 'var(--color-primary)';
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(29, 108, 244, 0.15)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.borderColor = 'var(--color-border)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{item.icon}</div>
+                  <h3 style={{ fontSize: '1.125rem', fontFamily: 'Sora, sans-serif', fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.5rem' }}>
+                    {item.title}
+                  </h3>
+                  <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '0.75rem' }}>
+                    {item.description}
+                  </p>
+                  <span style={{
+                    display: 'inline-block',
+                    padding: '0.25rem 0.75rem',
+                    backgroundColor: 'rgba(29, 108, 244, 0.1)',
+                    color: 'var(--color-primary)',
+                    borderRadius: '0.375rem',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                  }}>
+                    {item.highlight}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== PRODUCTS SECTION ========== */}
       <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem' }}>
         <div className="container">
-          {/* Section Header */}
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <div style={{ marginBottom: '1.5rem' }}>
               <span
@@ -640,7 +750,7 @@ const Home = () => {
                   fontWeight: 600,
                 }}
               >
-                CORE FEATURES
+                OUR PRODUCTS
               </span>
             </div>
             <h2
@@ -653,10 +763,318 @@ const Home = () => {
                 letterSpacing: '-0.02em',
               }}
             >
-              Core Telecom Capabilities
+              Complete <span style={{ color: 'var(--color-primary)' }}>Telecom Suite</span>
             </h2>
             <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', maxWidth: '42rem', margin: '0 auto' }}>
-              Everything you need to build, scale, and manage enterprise voice operations
+              Powerful products designed for enterprise communication needs
+            </p>
+          </div>
+
+          {/* Featured Products - Hero Layout */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', marginBottom: '4rem' }}>
+            {[
+              {
+                name: 'CallFlo Suite',
+                tagline: 'Complete Call Center Platform',
+                description: 'Enterprise-grade cloud call center with inbound/outbound capabilities, IVR, call routing, recording, and real-time analytics. Power your entire customer communication from a single unified platform.',
+                icon: '📞',
+                color: '#1D6CF4',
+                features: ['Multi-agent Dashboard', 'Call Recording', 'Real-time Analytics', 'IVR & Routing'],
+                link: '/solutions/callflo-suite',
+              },
+              {
+                name: 'CallFlo DeskAI',
+                tagline: 'AI Receptionist & Automation',
+                description: 'Intelligent AI receptionist that answers calls 24/7, handles customer queries, books appointments, and seamlessly transfers to human agents. Never miss a call again with AI-powered automation.',
+                icon: '🤖',
+                color: '#10B981',
+                features: ['24/7 Availability', 'Smart Call Handling', 'Appointment Booking', 'Live Agent Handoff'],
+                link: '/solutions/ai-receptionist',
+              },
+              {
+                name: 'Partners',
+                tagline: 'Reseller Program',
+                description: 'Launch your own white-label telecom service with our comprehensive reseller program. Complete infrastructure, billing system, and technical support included. Build your telecom business without any upfront investment.',
+                icon: '🤝',
+                color: '#8B5CF6',
+                features: ['White-Label Platform', 'Custom Pricing', 'Full API Access', 'Dedicated Support'],
+                link: '/solutions/partners',
+              },
+            ].map((product, index) => (
+              <div
+                key={index}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '300px 1fr',
+                  gap: '3rem',
+                  backgroundColor: 'var(--color-surface)',
+                  border: '2px solid var(--color-border)',
+                  borderRadius: '1.25rem',
+                  padding: '2.5rem',
+                  alignItems: 'center',
+                  transition: 'all 0.3s ease',
+                }}
+                className="product-hero-card"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = product.color;
+                  e.currentTarget.style.boxShadow = `0 12px 40px ${product.color}25`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--color-border)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                {/* Image Placeholder */}
+                <div
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    backgroundColor: `${product.color}15`,
+                    border: `2px solid ${product.color}40`,
+                    borderRadius: '1rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '5rem',
+                    flexShrink: 0,
+                  }}
+                >
+                  {product.icon}
+                </div>
+
+                {/* Product Content */}
+                <div>
+                  {/* Tagline */}
+                  <p
+                    style={{
+                      fontSize: '0.875rem',
+                      color: product.color,
+                      fontWeight: 600,
+                      marginBottom: '0.75rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
+                    {product.tagline}
+                  </p>
+
+                  {/* Product Name */}
+                  <h3
+                    style={{
+                      fontSize: '2rem',
+                      fontFamily: 'Sora, sans-serif',
+                      fontWeight: 700,
+                      color: 'var(--color-text)',
+                      marginBottom: '1rem',
+                    }}
+                  >
+                    {product.name}
+                  </h3>
+
+                  {/* Description */}
+                  <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: '1rem' }}>
+                    {product.description}
+                  </p>
+
+                  {/* Features List */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                    {product.features.map((feature, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <CheckCircle2 size={16} style={{ color: product.color, flexShrink: 0 }} />
+                        <span style={{ fontSize: '0.875rem', color: 'var(--color-text)', fontWeight: 500 }}>
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <a
+                    href={product.link}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      backgroundColor: product.color,
+                      color: '#FFFFFF',
+                      padding: '0.875rem 1.75rem',
+                      borderRadius: '0.5rem',
+                      fontWeight: 600,
+                      fontSize: '0.9375rem',
+                      textDecoration: 'none',
+                      transition: 'all 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateX(4px)';
+                      e.currentTarget.style.boxShadow = `0 4px 20px ${product.color}50`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateX(0)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    Explore {product.name} <ArrowRight size={18} />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Sub-Products */}
+          <div style={{ marginTop: '3rem' }}>
+            <h3 style={{
+              fontSize: '1.5rem',
+              fontFamily: 'Sora, sans-serif',
+              fontWeight: 600,
+              color: 'var(--color-text)',
+              marginBottom: '1.5rem',
+              textAlign: 'center',
+            }}>
+              Essential Products
+            </h3>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gap: '1.5rem',
+              }}
+            >
+              {[
+                {
+                  name: 'DID Numbers',
+                  description: 'Pan-India virtual numbers with instant activation',
+                  icon: Phone,
+                  link: '/products/did-numbers',
+                },
+                {
+                  name: 'SIP Trunks',
+                  description: 'Carrier-grade SIP connectivity for enterprises',
+                  icon: Zap,
+                  link: '/products/sip-trunks',
+                },
+                {
+                  name: 'Call Recording',
+                  description: 'Secure, compliant call recording & storage',
+                  icon: Cpu,
+                  link: '/products/call-recording',
+                },
+                {
+                  name: 'Predictive Dialer',
+                  description: 'Automated dialing for outbound campaigns',
+                  icon: Phone,
+                  link: '/products/predictive-dialer',
+                },
+              ].map((product, index) => {
+                const Icon = product.icon;
+                return (
+                  <a
+                    key={index}
+                    href={product.link}
+                    style={{
+                      backgroundColor: 'var(--color-surface)',
+                      border: '2px solid var(--color-border)',
+                      borderRadius: '0.75rem',
+                      padding: '1.75rem',
+                      textDecoration: 'none',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      position: 'relative',
+                      transition: 'all 0.3s ease',
+                      cursor: 'pointer',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-primary)';
+                      e.currentTarget.style.transform = 'translateY(-4px)';
+                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(29, 108, 244, 0.2)';
+                      e.currentTarget.querySelector('.product-arrow').style.transform = 'translateX(4px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--color-border)';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.querySelector('.product-arrow').style.transform = 'translateX(0)';
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                      <div style={{
+                        width: '3rem',
+                        height: '3rem',
+                        backgroundColor: 'rgba(29, 108, 244, 0.1)',
+                        border: '1px solid rgba(29, 108, 244, 0.2)',
+                        borderRadius: '0.5rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                        <Icon size={24} style={{ color: 'var(--color-primary)' }} />
+                      </div>
+                      <ArrowRight 
+                        className="product-arrow" 
+                        size={20} 
+                        style={{ 
+                          color: 'var(--color-primary)', 
+                          transition: 'transform 0.2s ease',
+                          flexShrink: 0,
+                        }} 
+                      />
+                    </div>
+                    <h4 style={{ fontSize: '1.125rem', fontFamily: 'Sora, sans-serif', fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.5rem' }}>
+                      {product.name}
+                    </h4>
+                    <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '0.75rem' }}>
+                      {product.description}
+                    </p>
+                    <span style={{
+                      color: 'var(--color-primary)',
+                      fontSize: '0.875rem',
+                      fontWeight: 600,
+                      marginTop: 'auto',
+                    }}>
+                      View Product →
+                    </span>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== FEATURES SECTION ========== */}
+      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-surface)', padding: '6rem 1.5rem' }}>
+        <div className="container">
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <div style={{ marginBottom: '1.5rem' }}>
+              <span
+                style={{
+                  display: 'inline-block',
+                  padding: '0.5rem 1rem',
+                  backgroundColor: 'var(--color-bg)',
+                  border: '1px solid var(--color-border)',
+                  color: 'var(--color-accent)',
+                  borderRadius: '0.5rem',
+                  fontSize: '0.875rem',
+                  fontWeight: 600,
+                }}
+              >
+                PLATFORM FEATURES
+              </span>
+            </div>
+            <h2
+              style={{
+                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontFamily: 'Sora, sans-serif',
+                fontWeight: 700,
+                color: 'var(--color-text)',
+                marginBottom: '1.5rem',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              Core <span style={{ color: 'var(--color-primary)' }}>Telecom Capabilities</span>
+            </h2>
+            <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', maxWidth: '42rem', margin: '0 auto' }}>
+              Enterprise-grade infrastructure with powerful features for every calling need
             </p>
           </div>
 
@@ -798,7 +1216,7 @@ const Home = () => {
       </section>
 
       {/* ========== PLATFORM CAPABILITIES ========== */}
-      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-surface)', padding: '6rem 1.5rem' }}>
+      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2
@@ -811,10 +1229,10 @@ const Home = () => {
                 letterSpacing: '-0.02em',
               }}
             >
-              Enterprise-Grade Platform
+              <span style={{ color: 'var(--color-primary)' }}>Enterprise-Grade</span> Infrastructure
             </h2>
             <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', maxWidth: '42rem', margin: '0 auto' }}>
-              Powerful infrastructure built to scale your call center operations
+              Built for scale with <strong style={{ color: 'var(--color-text)' }}>carrier-grade reliability</strong> and <strong style={{ color: 'var(--color-text)' }}>telecom-first</strong> architecture
             </p>
           </div>
 
@@ -890,7 +1308,7 @@ const Home = () => {
       </section>
 
       {/* ========== BENEFITS SECTION ========== */}
-      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem' }}>
+      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-surface)', padding: '6rem 1.5rem' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2
@@ -903,104 +1321,99 @@ const Home = () => {
                 letterSpacing: '-0.02em',
               }}
             >
-              Built for Every Business
+              Why Choose <span style={{ color: 'var(--color-primary)' }}>Callvia</span>
             </h2>
             <p style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', maxWidth: '42rem', margin: '0 auto' }}>
-              From startups to enterprises, our platform scales with your needs
+              Trusted by <strong style={{ color: 'var(--color-text)' }}>startups</strong> and <strong style={{ color: 'var(--color-text)' }}>enterprises</strong> for scalable telecom infrastructure
             </p>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '2rem',
-            }}
-            className="benefits-grid"
-          >
-            {[
-              {
-                title: 'White-Label Ready',
-                description: 'Launch your own branded telecom service instantly. Complete customization with your logo, colors, and domain.',
-                emoji: '🏷️',
-              },
-              {
-                title: 'Instant Deployment',
-                description: 'Go live in minutes, not months. No complex setup or infrastructure investment required.',
-                emoji: '⚡',
-              },
-              {
-                title: 'API-First Design',
-                description: 'Integrate seamlessly with existing systems. RESTful API with comprehensive documentation.',
-                emoji: '🔌',
-              },
-              {
-                title: 'Cost Effective',
-                description: 'Pay only for what you use. Transparent pricing with no hidden fees or long-term commitments.',
-                emoji: '💰',
-              },
-              {
-                title: 'AI Automation',
-                description: 'Scale operations without hiring. Advanced voice AI handles complex customer interactions.',
-                emoji: '🤖',
-              },
-              {
-                title: 'Operator Mindset',
-                description: 'Built by telecom professionals. Deep industry expertise with 15+ years of operations experience.',
-                emoji: '👥',
-              },
-            ].map((benefit, index) => (
-              <div
-                key={index}
-                style={{
-                  backgroundColor: 'var(--color-surface)',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: '1rem',
-                  padding: '2rem',
-                  transition: 'all 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-border)';
-                }}
-              >
+          {/* Checkbox-style Benefits List */}
+          <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: '1.5rem',
+              }}
+              className="benefits-list"
+            >
+              {[
+                {
+                  title: 'White-Label Ready',
+                  description: 'Launch your own branded telecom service instantly with complete customization',
+                },
+                {
+                  title: 'Instant Deployment',
+                  description: 'Go live in minutes with no complex setup or infrastructure investment required',
+                },
+                {
+                  title: 'API-First Design',
+                  description: 'Seamless integration with RESTful API and comprehensive documentation',
+                },
+                {
+                  title: 'Cost Effective',
+                  description: 'Pay only for what you use with transparent pricing and no hidden fees',
+                },
+                {
+                  title: 'AI Automation',
+                  description: 'Scale operations with advanced voice AI handling complex interactions',
+                },
+                {
+                  title: 'Operator Mindset',
+                  description: 'Built by telecom professionals with 15+ years of operations experience',
+                },
+                {
+                  title: '99.99% Uptime SLA',
+                  description: 'Carrier-grade infrastructure ensuring maximum reliability and performance',
+                },
+                {
+                  title: 'TRAI Compliance',
+                  description: 'Fully compliant with Indian telecom regulations and guidelines',
+                },
+              ].map((benefit, index) => (
                 <div
+                  key={index}
                   style={{
-                    width: '3.5rem',
-                    height: '3.5rem',
-                    background: 'rgba(29, 108, 244, 0.1)',
-                    border: '1px solid rgba(29, 108, 244, 0.2)',
-                    borderRadius: '50%',
                     display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '1.875rem',
-                    marginBottom: '1.5rem',
+                    gap: '1rem',
+                    padding: '1.5rem',
+                    backgroundColor: 'var(--color-bg)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: '0.75rem',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-primary)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-bg)';
                   }}
                 >
-                  {benefit.emoji}
+                  <div style={{ flexShrink: 0, paddingTop: '0.125rem' }}>
+                    <CheckCircle2 size={24} style={{ color: 'var(--color-success)', strokeWidth: 2.5 }} />
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '1.125rem', fontFamily: 'Sora, sans-serif', fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.375rem' }}>
+                      {benefit.title}
+                    </h3>
+                    <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9375rem', lineHeight: 1.6, margin: 0 }}>
+                      {benefit.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontFamily: 'Sora, sans-serif', fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.75rem' }}>
-                  {benefit.title}
-                </h3>
-                <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.6 }}>{benefit.description}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
 
         </div>
 
         <style>{`
-          @media (max-width: 1024px) {
-            .benefits-grid {
-              grid-template-columns: repeat(2, 1fr) !important;
-            }
-          }
-          @media (max-width: 640px) {
-            .benefits-grid {
+          @media (max-width: 768px) {
+            .benefits-list {
               grid-template-columns: 1fr !important;
             }
           }
@@ -1103,6 +1516,32 @@ const Home = () => {
 
         [data-theme="dark"] .hero-section {
           background: linear-gradient(135deg, #070B12 0%, #0B1220 100%) !important;
+        }
+
+        /* WHO WE ARE Grid Responsive */
+        @media (max-width: 768px) {
+          .who-we-are-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        /* Product Hero Cards Responsive */
+        .product-hero-card {
+          grid-template-columns: 300px 1fr !important;
+        }
+
+        @media (max-width: 1024px) {
+          .product-hero-card {
+            grid-template-columns: 250px 1fr !important;
+            gap: 2rem !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .product-hero-card {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
+          }
         }
 
         /* Animated background elements */
