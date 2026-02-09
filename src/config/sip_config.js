@@ -15,10 +15,11 @@ const SIP_CONFIG = {
   username: obfuscate('brijesh'),
   password: obfuscate('fad42Loops;'),
   callingNumber: obfuscate('new-ai'),
-  server: obfuscate('sip.voip.garden'),
+  server: obfuscate('sip.voip.garden'), // SIP domain for URI
+  wsServer: obfuscate('voipgardende1.host.connexcs.net'), // WebSocket server
   transportType: 'WSS',
   port: 443,
-  wsPath: '/ws'
+  wsPath: ''
 };
 
 // Agent calling numbers configuration
@@ -40,6 +41,7 @@ export const getSipCredentials = () => {
       password: deobfuscate(SIP_CONFIG.password),
       callingNumber: deobfuscate(SIP_CONFIG.callingNumber),
       server: deobfuscate(SIP_CONFIG.server),
+      wsServer: deobfuscate(SIP_CONFIG.wsServer),
       transportType: SIP_CONFIG.transportType,
       port: SIP_CONFIG.port,
       wsPath: SIP_CONFIG.wsPath,

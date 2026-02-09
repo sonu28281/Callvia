@@ -21,7 +21,9 @@ export const useSip = () => {
         throw new Error('Failed to get SIP credentials');
       }
 
-      const server = `wss://${credentials.server}${credentials.wsPath}`;
+      // WebSocket server for connection (can be different from SIP domain)
+      const server = `wss://${credentials.wsServer}${credentials.wsPath}`;
+      // SIP URI uses the SIP domain
       const uri = `sip:${credentials.username}@${credentials.server}`;
       
       const userAgentOptions = {
