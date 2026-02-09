@@ -1,11 +1,32 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, Check, Bot, Phone, Cpu, Zap, Globe, Shield, BarChart3, Clock, Users, Smartphone } from 'lucide-react';
+import { ArrowRight, Check, Bot, Phone, Cpu, Zap, Globe, Shield, BarChart3, Clock, Users, Smartphone, CreditCard, PhoneCall, PhoneOff, AlertCircle, CheckCircle } from 'lucide-react';
 import EnquiryModal from '../../components/EnquiryModal';
 import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
 import SEO from '../../components/SEO';
+import { useSip } from '../../hooks/useSip';
 
 const AiVoiceAgents = () => {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
+  const { isRegistered, isConnecting, activeCall, callStatus, error, makeCall, hangUp } = useSip();
+
+  // Add CSS for pulse animation
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   // Intersection observer for animations
   useEffect(() => {
@@ -358,6 +379,274 @@ const AiVoiceAgents = () => {
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Try Live AI Agents Section */}
+      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem' }}>
+        <div className="container">
+          <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+              <h2 style={{
+                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontFamily: 'Sora, sans-serif',
+                fontWeight: 700,
+                color: 'var(--color-text)',
+                marginBottom: '1rem',
+              }}>
+                Try Live AI Voice Agents
+              </h2>
+              <p style={{ fontSize: '1.125rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>
+                Experience our AI agents in action. Click to call and interact with different agent scenarios.
+              </p>
+              
+              {/* Status Indicator */}
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.5rem 1rem',
+                backgroundColor: isRegistered ? 'rgba(34, 197, 94, 0.1)' : isConnecting ? 'rgba(234, 179, 8, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                border: `1px solid ${isRegistered ? 'rgba(34, 197, 94, 0.3)' : isConnecting ? 'rgba(234, 179, 8, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
+                borderRadius: '0.5rem',
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                color: isRegistered ? 'rgb(22, 163, 74)' : isConnecting ? 'rgb(202, 138, 4)' : 'rgb(220, 38, 38)',
+              }}>
+                {isRegistered ? (
+                  <>
+                    <CheckCircle size={16} />
+                    <span>Agents Ready</span>
+                  </>
+                ) : isConnecting ? (
+                  <>
+                    <Clock size={16} />
+                    <span>Connecting...</span>
+                  </>
+                ) : (
+                  <>
+                    <AlertCircle size={16} />
+                    <span>Agents Not Available</span>
+                  </>
+                )}
+              </div>
+
+              {error && (
+                <div style={{
+                  marginTop: '1rem',
+                  padding: '0.75rem',
+                  backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                  border: '1px solid rgba(239, 68, 68, 0.3)',
+                  borderRadius: '0.5rem',
+                  color: 'rgb(220, 38, 38)',
+                  fontSize: '0.875rem',
+                  maxWidth: '32rem',
+                  margin: '1rem auto 0',
+                }}>
+                  {error}
+                </div>
+              )}
+            </div>
+
+            {/* Agent Cards */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '1.5rem',
+            }}>
+              {[
+                {
+                  name: 'Real Estate Agent',
+                  type: 'real-estate',
+                  icon: Globe,
+                  description: 'Schedule property site visits and get location details',
+                  color: '#3B82F6',
+                },
+                {
+                  name: 'NBFC Loan Officer',
+                  type: 'nbfc-loan',
+                  icon: BarChart3,
+                  description: 'Inquire about loan products and eligibility',
+                  color: '#8B5CF6',
+                },
+                {
+                  name: 'E-Commerce Assistant',
+                  type: 'ecom-tracking',
+                  icon: Smartphone,
+                  description: 'Track your order status and delivery updates',
+                  color: '#EC4899',
+                },
+                {
+                  name: 'Insurance Advisor',
+                  type: 'insurance-renewal',
+                  icon: Shield,
+                  description: 'Renew policies and check coverage details',
+                  color: '#10B981',
+                },
+                {
+                  name: 'Healthcare Receptionist',
+                  type: 'healthcare-booking',
+                  icon: Users,
+                  description: 'Book appointments and check doctor availability',
+                  color: '#F59E0B',
+                },
+                {
+                  name: 'Banking Assistant',
+                  type: 'bank-card',
+                  icon: CreditCard,
+                  description: 'Activate credit/debit cards and check benefits',
+                  color: '#06B6D4',
+                },
+              ].map((agent, index) => {
+                const Icon = agent.icon;
+                const isActive = activeCall === agent.type;
+                const isOtherActive = activeCall && activeCall !== agent.type;
+                const canCall = isRegistered && !isOtherActive;
+                
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      backgroundColor: 'var(--color-surface)',
+                      border: `2px solid ${isActive ? agent.color : 'var(--color-border)'}`,
+                      borderRadius: '0.75rem',
+                      padding: '1.75rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      position: 'relative',
+                      transition: 'all 0.3s ease',
+                      opacity: isOtherActive ? 0.5 : 1,
+                      cursor: canCall ? 'pointer' : 'default',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (canCall) {
+                        e.currentTarget.style.borderColor = agent.color;
+                        e.currentTarget.style.transform = 'translateY(-4px)';
+                        e.currentTarget.style.boxShadow = `0 8px 24px ${agent.color}40`;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.borderColor = 'var(--color-border)';
+                      }
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                      <div style={{
+                        width: '3rem',
+                        height: '3rem',
+                        backgroundColor: `${agent.color}15`,
+                        border: `1px solid ${agent.color}30`,
+                        borderRadius: '0.5rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                        <Icon size={24} style={{ color: agent.color }} />
+                      </div>
+                      
+                      {isActive && callStatus === 'connected' && (
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.25rem',
+                          padding: '0.25rem 0.5rem',
+                          backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                          border: '1px solid rgba(34, 197, 94, 0.3)',
+                          borderRadius: '0.375rem',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                          color: 'rgb(22, 163, 74)',
+                        }}>
+                          <div style={{
+                            width: '6px',
+                            height: '6px',
+                            backgroundColor: 'rgb(34, 197, 94)',
+                            borderRadius: '50%',
+                            animation: 'pulse 2s ease-in-out infinite',
+                          }} />
+                          Live
+                        </div>
+                      )}
+                    </div>
+                    
+                    <h4 style={{ fontSize: '1.125rem', fontFamily: 'Sora, sans-serif', fontWeight: 600, color: 'var(--color-text)', marginBottom: '0.5rem' }}>
+                      {agent.name}
+                    </h4>
+                    <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '1.25rem', flex: 1 }}>
+                      {agent.description}
+                    </p>
+                    
+                    <button
+                      onClick={() => {
+                        if (isActive) {
+                          hangUp();
+                        } else if (canCall) {
+                          makeCall('new-ai', agent.type);
+                        }
+                      }}
+                      disabled={!canCall && !isActive}
+                      style={{
+                        backgroundColor: isActive ? 'rgb(220, 38, 38)' : agent.color,
+                        color: '#FFFFFF',
+                        padding: '0.75rem 1.5rem',
+                        borderRadius: '0.5rem',
+                        fontWeight: 600,
+                        fontSize: '0.9375rem',
+                        border: 'none',
+                        cursor: !canCall && !isActive ? 'not-allowed' : 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        transition: 'all 0.3s ease',
+                        width: '100%',
+                        opacity: !canCall && !isActive ? 0.5 : 1,
+                      }}
+                      onMouseEnter={(e) => {
+                        if (canCall || isActive) {
+                          e.target.style.transform = 'translateY(-2px)';
+                          e.target.style.boxShadow = `0 8px 20px ${isActive ? 'rgba(220, 38, 38, 0.4)' : agent.color}66`;
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = 'none';
+                      }}
+                    >
+                      {isActive ? (
+                        <>
+                          <PhoneOff size={18} />
+                          {callStatus === 'calling' ? 'Connecting...' : callStatus === 'connected' ? 'Hang Up' : 'Ending...'}
+                        </>
+                      ) : (
+                        <>
+                          <PhoneCall size={18} />
+                          Call Agent
+                        </>
+                      )}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div style={{
+              marginTop: '2rem',
+              padding: '1rem',
+              backgroundColor: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
+              borderRadius: '0.5rem',
+              fontSize: '0.875rem',
+              color: 'var(--color-text-muted)',
+              textAlign: 'center',
+            }}>
+              <strong>Note:</strong> This is a live demo. By clicking "Call Agent", you'll be connected to a real AI voice agent. 
+              Please allow microphone access when prompted.
             </div>
           </div>
         </div>
