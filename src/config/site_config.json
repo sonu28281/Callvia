@@ -22,6 +22,7 @@
     "defaultTheme": "light"
   },
   "animation": {
+    "_comment": "Available types: 'organic' (natural network), 'cellular' (hexagonal cells), 'spiderweb' (radial web)",
     "type": "organic"
   },
   "features": {
