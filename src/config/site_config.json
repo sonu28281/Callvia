@@ -22,8 +22,8 @@
     "defaultTheme": "light"
   },
   "animation": {
-    "_comment": "Available types: 'organic' (natural network), 'cellular' (hexagonal cells), 'spiderweb' (radial web), 'neural' (AI brain), 'grid' (power grid)",
-    "type": "organic"
+    "_comment": "Available types: 'organic' (natural network), 'cellular' (hexagonal cells), 'spiderweb' (radial web), 'neural' (AI brain), 'grid' (power grid), 'mesh' (dense mesh)",
+    "type": "grid"
   },
   "features": {
     "enableWhatsAppWidget": true,

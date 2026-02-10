@@ -11,7 +11,7 @@ const TelecomPacketAnimation = ({
   nodeCount = null, // null = auto-calculate based on size
   maxConnectionsPerNode = 3,
   edgeOpacity = 0.12,
-  networkType = 'organic', // 'organic', 'cellular', 'spiderweb', 'neural', or 'grid'
+  networkType = 'organic', // 'organic', 'cellular', 'spiderweb', 'neural', 'grid', or 'mesh'
   cellSize = 80, // Size of hexagonal cells for cellular network
   spiderWebRings = 6, // Number of concentric rings for spider web
   spiderWebSpokes = 12, // Number of radial spokes for spider web
@@ -19,6 +19,8 @@ const TelecomPacketAnimation = ({
   neuralNodesPerLayer = [8, 12, 16, 12, 8], // Nodes in each layer
   gridSpacingX = 100, // Horizontal spacing for grid network
   gridSpacingY = 80, // Vertical spacing for grid network
+  meshNodeCount = 40, // Number of nodes for mesh network
+  meshConnectionRadius = 150, // Max connection distance for mesh
   
   // Packet behavior
   packetSpawnRate = 0.8, // packets per second
@@ -201,6 +203,56 @@ const TelecomPacketAnimation = ({
       }
 
       return points;
+    };
+
+    // Generate mesh network (dense interconnected network)
+    const generateMeshNetwork = (width, height, nodeCount, connectionRadius) => {
+      const nodes = [];
+      const edges = [];
+      let nodeId = 0;
+
+      // Use Poisson disk sampling for even distribution
+      const minDist = Math.sqrt((width * height) / nodeCount) * 0.8;
+      const nodePositions = poissonDiskSampling(width, height, minDist);
+      
+      // Create nodes
+      nodePositions.slice(0, nodeCount).forEach((pos) => {
+        nodes.push({
+          id: nodeId++,
+          x: pos.x,
+          y: pos.y,
+          connections: [],
+        });
+      });
+
+      // Connect nearby nodes (mesh topology - high connectivity)
+      nodes.forEach(node => {
+        // Find all nodes within connection radius
+        const nearbyNodes = nodes
+          .filter(n => n.id !== node.id && !node.connections.includes(n.id))
+          .map(n => ({
+            node: n,
+            dist: Math.hypot(n.x - node.x, n.y - node.y),
+          }))
+          .filter(n => n.dist < connectionRadius)
+          .sort((a, b) => a.dist - b.dist);
+
+        // Connect to multiple nearby nodes (creating mesh redundancy)
+        nearbyNodes.forEach(({ node: targetNode, dist }) => {
+          if (!node.connections.includes(targetNode.id) && 
+              !targetNode.connections.includes(node.id)) {
+            edges.push({
+              from: node.id,
+              to: targetNode.id,
+              length: dist,
+            });
+            node.connections.push(targetNode.id);
+            targetNode.connections.push(node.id);
+          }
+        });
+      });
+
+      return { nodes, edges };
     };
 
     // Generate grid network (power grid / circuit board style)
@@ -497,6 +549,50 @@ const TelecomPacketAnimation = ({
           // Inner highlight
           ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
           ctx.fillRect(node.x - junctionSize * 0.5, node.y - junctionSize * 0.5, junctionSize, junctionSize);
+        } else if (networkType === 'mesh') {
+          // Draw mesh network nodes (showing redundancy)
+          const nodeSize = glow ? 4 : 3;
+          const connectionCount = node.connections.length;
+          
+          // Size varies by number of connections (more connected = larger)
+          const sizeFactor = 1 + (connectionCount / 10) * 0.5;
+          const finalSize = nodeSize * sizeFactor;
+          
+          // Draw glow for active nodes
+          if (glow) {
+            const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, finalSize * 5);
+            gradient.addColorStop(0, colors.glow.replace(/[\d.]+\)$/g, '0.8)'));
+            gradient.addColorStop(0.5, colors.glow.replace(/[\d.]+\)$/g, '0.4)'));
+            gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, finalSize * 5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Pulsing rings showing mesh connections
+            ctx.strokeStyle = colors.glow.replace(/[\d.]+\)$/g, '0.5)');
+            ctx.lineWidth = 1.5;
+            for (let i = 1; i <= 2; i++) {
+              ctx.beginPath();
+              ctx.arc(node.x, node.y, finalSize + i * 3, 0, Math.PI * 2);
+              ctx.stroke();
+            }
+          }
+          
+          // Draw node (circle)
+          ctx.fillStyle = glow ? colors.glow : colors.node;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, finalSize, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Draw connection count indicator for highly connected nodes
+          if (connectionCount > 5 && !glow) {
+            ctx.strokeStyle = colors.node.replace(/[\d.]+\)$/g, '0.6)');
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, finalSize + 2, 0, Math.PI * 2);
+            ctx.stroke();
+          }
         } else {
           // Ring nodes: connect radially inward and circularly
           const currentRingStartId = 1 + spokes * (node.ring - 1);
@@ -638,7 +734,11 @@ const TelecomPacketAnimation = ({
       // Skip if canvas has no dimensions
       if (width === 0 || height === 0) return;
 
-      if (networkType === 'grid') {
+      if (networkType === 'mesh') {
+        // Generate mesh network
+        const { nodes, edges } = generateMeshNetwork(width, height, meshNodeCount, meshConnectionRadius);
+        networkRef.current = { nodes, edges };
+      } else if (networkType === 'grid') {
         // Generate grid network
         const { nodes, edges } = generateGridNetwork(width, height, gridSpacingX, gridSpacingY);
         networkRef.current = { nodes, edges };
@@ -867,8 +967,30 @@ const TelecomPacketAnimation = ({
 
       const { nodes, edges } = networkRef.current;
 
+      // Draw mesh network
+      if (networkType === 'mesh') {
+        // Draw edges with opacity based on length
+        ctx.lineWidth = 1;
+        edges.forEach(edge => {
+          const fromNode = nodes.find(n => n.id === edge.from);
+          const toNode = nodes.find(n => n.id === edge.to);
+          if (!fromNode || !toNode) return;
+
+          // Vary opacity based on connection length (closer = more opaque)
+          const maxDist = meshConnectionRadius;
+          const opacity = 0.15 * (1 - edge.length / maxDist * 0.5);
+          const edgeColorWithOpacity = colors.edge.replace(/[\d.]+\)$/g, `${opacity})`);
+
+          ctx.strokeStyle = edgeColorWithOpacity;
+          ctx.beginPath();
+          ctx.moveTo(fromNode.x, fromNode.y);
+          ctx.lineTo(toNode.x, toNode.y);
+          ctx.stroke();
+        });
+      }
+
       // Draw grid network
-      if (networkType === 'grid') {
+      else if (networkType === 'grid') {
         // Draw grid lines
         ctx.lineWidth = 1.5;
         edges.forEach(edge => {
@@ -1154,6 +1276,8 @@ const TelecomPacketAnimation = ({
     neuralNodesPerLayer,
     gridSpacingX,
     gridSpacingY,
+    meshNodeCount,
+    meshConnectionRadius,
     packetSpawnRate,
     maxActivePackets,
     packetSpeedMin,

@@ -120,6 +120,30 @@ const animationPresets = {
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
+
+  // Mesh network / dense interconnected network animation
+  mesh: {
+    networkType: 'mesh',
+    meshNodeCount: 45,
+    meshConnectionRadius: 180,
+    packetSpawnRate: 0.85,
+    maxActivePackets: 14,
+    packetSpeedMin: 45,
+    packetSpeedMax: 95,
+    tailLengthMin: 35,
+    tailLengthMax: 80,
+    dropProbability: 0.08,
+    nodeGlowDuration: 600,
+    nodeGlowIntensity: 1.4,
+    edgeColor: 'rgba(29, 108, 244, 0.10)',
+    nodeColor: 'rgba(29, 108, 244, 0.38)',
+    packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
+    glowColor: 'rgba(252, 150, 42, 1)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.13)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.42)',
+    darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
+    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+  },
 };
 
 // Get current animation configuration from site config
