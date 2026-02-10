@@ -11,8 +11,10 @@ const TelecomPacketAnimation = ({
   nodeCount = null, // null = auto-calculate based on size
   maxConnectionsPerNode = 3,
   edgeOpacity = 0.12,
-  networkType = 'organic', // 'organic' or 'cellular'
+  networkType = 'organic', // 'organic', 'cellular', or 'spiderweb'
   cellSize = 80, // Size of hexagonal cells for cellular network
+  spiderWebRings = 6, // Number of concentric rings for spider web
+  spiderWebSpokes = 12, // Number of radial spokes for spider web
   
   // Packet behavior
   packetSpawnRate = 0.8, // packets per second
@@ -197,6 +199,110 @@ const TelecomPacketAnimation = ({
       return points;
     };
 
+    // Generate spider web network
+    const generateSpiderWebNetwork = (width, height, rings, spokes) => {
+      const nodes = [];
+      const edges = [];
+      let nodeId = 0;
+
+      // Calculate center and maximum radius
+      const centerX = width / 2;
+      const centerY = height / 2;
+      // Use diagonal distance to ensure full coverage of entire hero section
+      const maxRadius = Math.sqrt(width * width + height * height) / 2;
+      const radiusStep = maxRadius / rings;
+
+      // Create center node
+      nodes.push({
+        id: nodeId++,
+        x: centerX,
+        y: centerY,
+        connections: [],
+        ring: 0,
+        spoke: -1,
+      });
+
+      // Create nodes in concentric rings
+      for (let ring = 1; ring <= rings; ring++) {
+        const radius = ring * radiusStep;
+        const angleStep = (2 * Math.PI) / spokes;
+
+        for (let spoke = 0; spoke < spokes; spoke++) {
+          const angle = spoke * angleStep;
+          const x = centerX + radius * Math.cos(angle);
+          const y = centerY + radius * Math.sin(angle);
+
+          nodes.push({
+            id: nodeId++,
+            x: x,
+            y: y,
+            connections: [],
+            ring: ring,
+            spoke: spoke,
+          });
+        }
+      }
+
+      // Connect nodes to form spider web pattern
+      nodes.forEach(node => {
+        if (node.ring === 0) {
+          // Center node: connect to all inner ring nodes
+          for (let spoke = 0; spoke < spokes; spoke++) {
+            const targetId = 1 + spoke; // Ring 1 nodes start at id 1
+            const targetNode = nodes[targetId];
+            if (targetNode) {
+              const distance = Math.hypot(targetNode.x - node.x, targetNode.y - node.y);
+              edges.push({
+                from: node.id,
+                to: targetId,
+                length: distance,
+              });
+              node.connections.push(targetId);
+              targetNode.connections.push(node.id);
+            }
+          }
+        } else {
+          // Ring nodes: connect radially inward and circularly
+          const currentRingStartId = 1 + spokes * (node.ring - 1);
+          const prevRingStartId = node.ring === 1 ? 0 : 1 + spokes * (node.ring - 2);
+
+          // Radial connection to inner ring
+          if (node.ring > 1) {
+            const innerNodeId = prevRingStartId + node.spoke;
+            const innerNode = nodes[innerNodeId];
+            if (innerNode && !node.connections.includes(innerNodeId)) {
+              const distance = Math.hypot(innerNode.x - node.x, innerNode.y - node.y);
+              edges.push({
+                from: node.id,
+                to: innerNodeId,
+                length: distance,
+              });
+              node.connections.push(innerNodeId);
+              innerNode.connections.push(node.id);
+            }
+          }
+
+          // Circular connections (to adjacent spokes on same ring)
+          const nextSpoke = (node.spoke + 1) % spokes;
+          const nextNodeId = currentRingStartId + nextSpoke;
+          const nextNode = nodes[nextNodeId];
+          
+          if (nextNode && !node.connections.includes(nextNodeId)) {
+            const distance = Math.hypot(nextNode.x - node.x, nextNode.y - node.y);
+            edges.push({
+              from: node.id,
+              to: nextNodeId,
+              length: distance,
+            });
+            node.connections.push(nextNodeId);
+            nextNode.connections.push(node.id);
+          }
+        }
+      });
+
+      return { nodes, edges };
+    };
+
     // Generate hexagonal cellular network
     const generateCellularNetwork = (width, height, cellSize) => {
       const nodes = [];
@@ -296,7 +402,11 @@ const TelecomPacketAnimation = ({
       // Skip if canvas has no dimensions
       if (width === 0 || height === 0) return;
 
-      if (networkType === 'cellular') {
+      if (networkType === 'spiderweb') {
+        // Generate spider web network
+        const { nodes, edges } = generateSpiderWebNetwork(width, height, spiderWebRings, spiderWebSpokes);
+        networkRef.current = { nodes, edges };
+      } else if (networkType === 'cellular') {
         // Generate hexagonal cellular network
         const { nodes, edges } = generateCellularNetwork(width, height, cellSize);
         networkRef.current = { nodes, edges };
@@ -513,8 +623,34 @@ const TelecomPacketAnimation = ({
 
       const { nodes, edges } = networkRef.current;
 
+      // Draw spider web pattern
+      if (networkType === 'spiderweb') {
+        // Draw edges with varying thickness (thicker toward center)
+        edges.forEach(edge => {
+          const fromNode = nodes.find(n => n.id === edge.from);
+          const toNode = nodes.find(n => n.id === edge.to);
+          if (!fromNode || !toNode) return;
+
+          // Calculate line thickness based on rings (thicker closer to center)
+          const avgRing = (fromNode.ring + toNode.ring) / 2;
+          const maxRing = spiderWebRings;
+          const thickness = 2.5 - (avgRing / maxRing) * 1.5; // 2.5px to 1px
+          
+          // Vary opacity (more opaque toward center)
+          const opacity = 0.15 - (avgRing / maxRing) * 0.05;
+          const edgeColorWithOpacity = colors.edge.replace(/[\d.]+\)$/g, `${opacity})`);
+
+          ctx.strokeStyle = edgeColorWithOpacity;
+          ctx.lineWidth = thickness;
+          ctx.beginPath();
+          ctx.moveTo(fromNode.x, fromNode.y);
+          ctx.lineTo(toNode.x, toNode.y);
+          ctx.stroke();
+        });
+      }
+
       // Draw hexagonal cells if cellular network
-      if (networkType === 'cellular') {
+      else if (networkType === 'cellular') {
         ctx.lineWidth = 1.5;
         nodes.forEach(node => {
           drawHexagon(node.x, node.y, cellSize * 0.87, colors.edge);
@@ -642,6 +778,36 @@ const TelecomPacketAnimation = ({
               ctx.stroke();
             }
           }
+        } else if (networkType === 'spiderweb') {
+          // Draw spider web nodes
+          const isCenter = node.ring === 0;
+          const nodeSize = isCenter ? (glow ? 6 : 5) : (glow ? 3.5 : 2.5);
+          
+          // Draw node with gradient if center
+          if (isCenter) {
+            const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, nodeSize * 2);
+            gradient.addColorStop(0, glow ? colors.glow : colors.node);
+            gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, nodeSize * 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          
+          // Draw node circle
+          ctx.fillStyle = glow ? colors.glow.replace(/[\d.]+\)$/g, '0.9)') : colors.node;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, nodeSize, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Add ring around glowing nodes
+          if (glow && !isCenter) {
+            ctx.strokeStyle = colors.glow.replace(/[\d.]+\)$/g, '0.5)');
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, nodeSize + 2, 0, Math.PI * 2);
+            ctx.stroke();
+          }
         } else {
           // Draw regular node
           ctx.fillStyle = glow ? colors.glow.replace(/[\d.]+\)$/g, '0.8)') : colors.node;
@@ -699,6 +865,8 @@ const TelecomPacketAnimation = ({
     edgeOpacity,
     networkType,
     cellSize,
+    spiderWebRings,
+    spiderWebSpokes,
     packetSpawnRate,
     maxActivePackets,
     packetSpeedMin,

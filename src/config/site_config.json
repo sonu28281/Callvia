@@ -22,7 +22,7 @@
     "defaultTheme": "light"
   },
   "animation": {
-    "type": "organic"
+    "type": "spiderweb"
   },
   "features": {
     "enableWhatsAppWidget": true,

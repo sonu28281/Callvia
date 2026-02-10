@@ -48,6 +48,30 @@ const animationPresets = {
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
+
+  // Spider web radial network animation
+  spiderweb: {
+    networkType: 'spiderweb',
+    spiderWebRings: 6,
+    spiderWebSpokes: 16,
+    packetSpawnRate: 0.8,
+    maxActivePackets: 12,
+    packetSpeedMin: 40,
+    packetSpeedMax: 85,
+    tailLengthMin: 40,
+    tailLengthMax: 85,
+    dropProbability: 0.12,
+    nodeGlowDuration: 650,
+    nodeGlowIntensity: 1.4,
+    edgeColor: 'rgba(29, 108, 244, 0.12)',
+    nodeColor: 'rgba(29, 108, 244, 0.4)',
+    packetColor: 'rgba(252, 150, 42, 0.85)', // Saffron color
+    glowColor: 'rgba(252, 150, 42, 1)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.15)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.45)',
+    darkModePacketColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
+    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+  },
 };
 
 // Get current animation configuration from site config
