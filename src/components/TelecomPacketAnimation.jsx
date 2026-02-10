@@ -1193,15 +1193,32 @@ const TelecomPacketAnimation = ({
 
       // Draw hexagonal cells if cellular network
       else if (networkType === 'cellular') {
-        ctx.lineWidth = 1.5;
+        // Draw cell coverage areas with gradient
         nodes.forEach(node => {
-          drawHexagon(node.x, node.y, cellSize * 0.87, colors.edge);
+          // Draw coverage circle with gradient fade
+          const coverageRadius = cellSize * 0.95;
+          const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, coverageRadius);
+          gradient.addColorStop(0, colors.edge.replace(/[\d.]+\)$/g, '0.08)'));
+          gradient.addColorStop(0.5, colors.edge.replace(/[\d.]+\)$/g, '0.04)'));
+          gradient.addColorStop(1, 'transparent');
+          
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, coverageRadius, 0, Math.PI * 2);
+          ctx.fill();
         });
         
-        // Draw tower interconnections (lighter lines)
-        ctx.strokeStyle = colors.edge.replace(/[\d.]+\)$/g, '0.05)');
+        // Draw hexagon cell boundaries
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = colors.edge.replace(/[\d.]+\)$/g, '0.20)');
+        nodes.forEach(node => {
+          drawHexagon(node.x, node.y, cellSize * 0.87, colors.edge.replace(/[\d.]+\)$/g, '0.20)'));
+        });
+        
+        // Draw tower interconnections (lighter dashed lines)
+        ctx.strokeStyle = colors.edge.replace(/[\d.]+\)$/g, '0.08)');
         ctx.lineWidth = 1;
-        ctx.setLineDash([4, 4]);
+        ctx.setLineDash([5, 5]);
         edges.forEach(edge => {
           const fromNode = nodes.find(n => n.id === edge.from);
           const toNode = nodes.find(n => n.id === edge.to);
@@ -1294,31 +1311,68 @@ const TelecomPacketAnimation = ({
         // Draw node (cell tower)
         if (networkType === 'cellular') {
           // Draw cell tower symbol
-          const towerHeight = glow ? 10 : 8;
-          const towerWidth = glow ? 6 : 5;
+          const towerHeight = glow ? 12 : 10;
+          const towerWidth = glow ? 7 : 6;
+          const towerBase = glow ? 4 : 3;
           
-          ctx.fillStyle = glow ? colors.glow.replace(/[\d.]+\)$/g, '0.9)') : colors.node;
+          // Tower mast (vertical line)
           ctx.strokeStyle = glow ? colors.glow : colors.node;
-          ctx.lineWidth = 1.5;
-          
-          // Tower base (triangle)
+          ctx.lineWidth = glow ? 2.5 : 2;
+          ctx.lineCap = 'round';
           ctx.beginPath();
-          ctx.moveTo(node.x, node.y - towerHeight);
-          ctx.lineTo(node.x - towerWidth / 2, node.y);
-          ctx.lineTo(node.x + towerWidth / 2, node.y);
-          ctx.closePath();
-          ctx.fill();
+          ctx.moveTo(node.x, node.y + towerBase);
+          ctx.lineTo(node.x, node.y - towerHeight);
           ctx.stroke();
           
-          // Signal rings
+          // Tower base (small rectangle)
+          ctx.fillStyle = glow ? colors.glow.replace(/[\d.]+\)$/g, '0.9)') : colors.node;
+          ctx.fillRect(node.x - towerBase, node.y, towerBase * 2, towerBase);
+          
+          // Antenna triangles (left and right)
+          ctx.fillStyle = glow ? colors.glow.replace(/[\d.]+\)$/g, '0.8)') : colors.node.replace(/[\d.]+\)$/g, '0.7)');
+          
+          // Left antenna
+          ctx.beginPath();
+          ctx.moveTo(node.x, node.y - towerHeight + 2);
+          ctx.lineTo(node.x - towerWidth / 2, node.y - towerHeight / 2);
+          ctx.lineTo(node.x, node.y - towerHeight / 2 + 1);
+          ctx.closePath();
+          ctx.fill();
+          
+          // Right antenna
+          ctx.beginPath();
+          ctx.moveTo(node.x, node.y - towerHeight + 2);
+          ctx.lineTo(node.x + towerWidth / 2, node.y - towerHeight / 2);
+          ctx.lineTo(node.x, node.y - towerHeight / 2 + 1);
+          ctx.closePath();
+          ctx.fill();
+          
+          // Signal waves when active
           if (glow) {
-            ctx.strokeStyle = colors.glow.replace(/[\d.]+\)$/g, '0.4)');
-            ctx.lineWidth = 1;
-            for (let i = 1; i <= 2; i++) {
+            ctx.strokeStyle = colors.glow.replace(/[\d.]+\)$/g, '0.5)');
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([]);
+            
+            // Draw 3 signal arcs
+            for (let i = 1; i <= 3; i++) {
+              const radius = towerWidth + i * 4;
+              const startAngle = -Math.PI * 0.6;
+              const endAngle = -Math.PI * 0.4;
+              
+              ctx.globalAlpha = 0.6 - (i * 0.15);
               ctx.beginPath();
-              ctx.arc(node.x, node.y - towerHeight / 2, towerWidth + i * 3, 0, Math.PI * 2);
+              ctx.arc(node.x, node.y - towerHeight / 2, radius, startAngle, endAngle);
               ctx.stroke();
             }
+            ctx.globalAlpha = 1;
+          }
+          
+          // Top light
+          if (glow) {
+            ctx.fillStyle = colors.glow;
+            ctx.beginPath();
+            ctx.arc(node.x, node.y - towerHeight, 2, 0, Math.PI * 2);
+            ctx.fill();
           }
         } else if (networkType === 'spiderweb') {
           // Draw spider web nodes
