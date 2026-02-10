@@ -96,6 +96,30 @@ const animationPresets = {
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
+
+  // Grid network / power grid / circuit board animation
+  grid: {
+    networkType: 'grid',
+    gridSpacingX: 90,
+    gridSpacingY: 75,
+    packetSpawnRate: 0.7,
+    maxActivePackets: 12,
+    packetSpeedMin: 45,
+    packetSpeedMax: 90,
+    tailLengthMin: 35,
+    tailLengthMax: 75,
+    dropProbability: 0.1,
+    nodeGlowDuration: 550,
+    nodeGlowIntensity: 1.3,
+    edgeColor: 'rgba(29, 108, 244, 0.12)',
+    nodeColor: 'rgba(29, 108, 244, 0.4)',
+    packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
+    glowColor: 'rgba(252, 150, 42, 1)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.15)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.45)',
+    darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
+    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+  },
 };
 
 // Get current animation configuration from site config

@@ -11,12 +11,14 @@ const TelecomPacketAnimation = ({
   nodeCount = null, // null = auto-calculate based on size
   maxConnectionsPerNode = 3,
   edgeOpacity = 0.12,
-  networkType = 'organic', // 'organic', 'cellular', 'spiderweb', or 'neural'
+  networkType = 'organic', // 'organic', 'cellular', 'spiderweb', 'neural', or 'grid'
   cellSize = 80, // Size of hexagonal cells for cellular network
   spiderWebRings = 6, // Number of concentric rings for spider web
   spiderWebSpokes = 12, // Number of radial spokes for spider web
   neuralLayers = 5, // Number of layers for neural network
   neuralNodesPerLayer = [8, 12, 16, 12, 8], // Nodes in each layer
+  gridSpacingX = 100, // Horizontal spacing for grid network
+  gridSpacingY = 80, // Vertical spacing for grid network
   
   // Packet behavior
   packetSpawnRate = 0.8, // packets per second
@@ -199,6 +201,81 @@ const TelecomPacketAnimation = ({
       }
 
       return points;
+    };
+
+    // Generate grid network (power grid / circuit board style)
+    const generateGridNetwork = (width, height, spacingX, spacingY) => {
+      const nodes = [];
+      const edges = [];
+      let nodeId = 0;
+
+      // Calculate number of rows and columns
+      const cols = Math.ceil(width / spacingX) + 1;
+      const rows = Math.ceil(height / spacingY) + 1;
+
+      // Calculate offsets to center the grid
+      const totalWidth = (cols - 1) * spacingX;
+      const totalHeight = (rows - 1) * spacingY;
+      const offsetX = (width - totalWidth) / 2;
+      const offsetY = (height - totalHeight) / 2;
+
+      // Create grid nodes
+      const nodeMap = new Map(); // key: "col,row" -> nodeId
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const x = offsetX + col * spacingX;
+          const y = offsetY + row * spacingY;
+
+          nodes.push({
+            id: nodeId,
+            x: x,
+            y: y,
+            connections: [],
+            gridPos: { col, row },
+          });
+
+          nodeMap.set(`${col},${row}`, nodeId);
+          nodeId++;
+        }
+      }
+
+      // Connect grid nodes (horizontal and vertical connections)
+      nodes.forEach(node => {
+        const { col, row } = node.gridPos;
+
+        // Connect to right neighbor
+        const rightId = nodeMap.get(`${col + 1},${row}`);
+        if (rightId !== undefined) {
+          const rightNode = nodes[rightId];
+          const distance = Math.hypot(rightNode.x - node.x, rightNode.y - node.y);
+          edges.push({
+            from: node.id,
+            to: rightId,
+            length: distance,
+            type: 'horizontal',
+          });
+          node.connections.push(rightId);
+          rightNode.connections.push(node.id);
+        }
+
+        // Connect to bottom neighbor
+        const bottomId = nodeMap.get(`${col},${row + 1}`);
+        if (bottomId !== undefined) {
+          const bottomNode = nodes[bottomId];
+          const distance = Math.hypot(bottomNode.x - node.x, bottomNode.y - node.y);
+          edges.push({
+            from: node.id,
+            to: bottomId,
+            length: distance,
+            type: 'vertical',
+          });
+          node.connections.push(bottomId);
+          bottomNode.connections.push(node.id);
+        }
+      });
+
+      return { nodes, edges };
     };
 
     // Generate neural network
@@ -392,6 +469,34 @@ const TelecomPacketAnimation = ({
           ctx.beginPath();
           ctx.arc(node.x - nodeSize * 0.3, node.y - nodeSize * 0.3, nodeSize * 0.4, 0, Math.PI * 2);
           ctx.fill();
+        } else if (networkType === 'grid') {
+          // Draw grid junction nodes
+          const junctionSize = glow ? 4 : 3;
+          
+          // Draw glow for active junctions
+          if (glow) {
+            const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, junctionSize * 4);
+            gradient.addColorStop(0, colors.glow.replace(/[\d.]+\)$/g, '0.8)'));
+            gradient.addColorStop(0.5, colors.glow.replace(/[\d.]+\)$/g, '0.4)'));
+            gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, junctionSize * 4, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Pulsing square around junction
+            ctx.strokeStyle = colors.glow.replace(/[\d.]+\)$/g, '0.6)');
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(node.x - junctionSize - 2, node.y - junctionSize - 2, (junctionSize + 2) * 2, (junctionSize + 2) * 2);
+          }
+          
+          // Draw junction point (square for grid aesthetic)
+          ctx.fillStyle = glow ? colors.glow : colors.node;
+          ctx.fillRect(node.x - junctionSize, node.y - junctionSize, junctionSize * 2, junctionSize * 2);
+          
+          // Inner highlight
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+          ctx.fillRect(node.x - junctionSize * 0.5, node.y - junctionSize * 0.5, junctionSize, junctionSize);
         } else {
           // Ring nodes: connect radially inward and circularly
           const currentRingStartId = 1 + spokes * (node.ring - 1);
@@ -533,7 +638,11 @@ const TelecomPacketAnimation = ({
       // Skip if canvas has no dimensions
       if (width === 0 || height === 0) return;
 
-      if (networkType === 'neural') {
+      if (networkType === 'grid') {
+        // Generate grid network
+        const { nodes, edges } = generateGridNetwork(width, height, gridSpacingX, gridSpacingY);
+        networkRef.current = { nodes, edges };
+      } else if (networkType === 'neural') {
         // Generate neural network
         const { nodes, edges } = generateNeuralNetwork(width, height, neuralLayers, neuralNodesPerLayer);
         networkRef.current = { nodes, edges };
@@ -758,8 +867,25 @@ const TelecomPacketAnimation = ({
 
       const { nodes, edges } = networkRef.current;
 
+      // Draw grid network
+      if (networkType === 'grid') {
+        // Draw grid lines
+        ctx.lineWidth = 1.5;
+        edges.forEach(edge => {
+          const fromNode = nodes.find(n => n.id === edge.from);
+          const toNode = nodes.find(n => n.id === edge.to);
+          if (!fromNode || !toNode) return;
+
+          ctx.strokeStyle = colors.edge;
+          ctx.beginPath();
+          ctx.moveTo(fromNode.x, fromNode.y);
+          ctx.lineTo(toNode.x, toNode.y);
+          ctx.stroke();
+        });
+      }
+
       // Draw neural network
-      if (networkType === 'neural') {
+      else if (networkType === 'neural') {
         // Draw edges with gradient and varying opacity
         edges.forEach(edge => {
           const fromNode = nodes.find(n => n.id === edge.from);
@@ -1026,6 +1152,8 @@ const TelecomPacketAnimation = ({
     spiderWebSpokes,
     neuralLayers,
     neuralNodesPerLayer,
+    gridSpacingX,
+    gridSpacingY,
     packetSpawnRate,
     maxActivePackets,
     packetSpeedMin,
