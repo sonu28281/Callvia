@@ -16,11 +16,11 @@ const animationPresets = {
     dropProbability: 0.15,
     nodeGlowDuration: 600,
     nodeGlowIntensity: 1.0,
-    edgeColor: 'rgba(29, 108, 244, 0.06)',
+    edgeColor: 'rgba(29, 108, 244, 0.02)',
     nodeColor: 'rgba(29, 108, 244, 0.25)',
     packetColor: 'rgba(29, 108, 244, 0.8)',
     glowColor: 'rgba(29, 108, 244, 1)',
-    darkModeEdgeColor: 'rgba(99, 102, 241, 0.1)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.03)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.35)',
     darkModePacketColor: 'rgba(99, 102, 241, 0.9)',
     darkModeGlowColor: 'rgba(99, 102, 241, 1)',
@@ -39,11 +39,11 @@ const animationPresets = {
     dropProbability: 0.1,
     nodeGlowDuration: 750,
     nodeGlowIntensity: 1.4,
-    edgeColor: 'rgba(29, 108, 244, 0.18)',
+    edgeColor: 'rgba(29, 108, 244, 0.04)',
     nodeColor: 'rgba(29, 108, 244, 0.5)',
     packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
-    darkModeEdgeColor: 'rgba(99, 102, 241, 0.22)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.05)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.55)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
@@ -63,11 +63,11 @@ const animationPresets = {
     dropProbability: 0.12,
     nodeGlowDuration: 650,
     nodeGlowIntensity: 1.4,
-    edgeColor: 'rgba(29, 108, 244, 0.12)',
+    edgeColor: 'rgba(29, 108, 244, 0.03)',
     nodeColor: 'rgba(29, 108, 244, 0.4)',
     packetColor: 'rgba(252, 150, 42, 0.85)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
-    darkModeEdgeColor: 'rgba(99, 102, 241, 0.15)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.04)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.45)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
@@ -87,11 +87,11 @@ const animationPresets = {
     dropProbability: 0.05,
     nodeGlowDuration: 600,
     nodeGlowIntensity: 1.5,
-    edgeColor: 'rgba(29, 108, 244, 0.08)',
+    edgeColor: 'rgba(29, 108, 244, 0.02)',
     nodeColor: 'rgba(29, 108, 244, 0.35)',
     packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
-    darkModeEdgeColor: 'rgba(99, 102, 241, 0.12)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.03)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.4)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
@@ -111,11 +111,11 @@ const animationPresets = {
     dropProbability: 0.1,
     nodeGlowDuration: 550,
     nodeGlowIntensity: 1.3,
-    edgeColor: 'rgba(29, 108, 244, 0.12)',
+    edgeColor: 'rgba(29, 108, 244, 0.03)',
     nodeColor: 'rgba(29, 108, 244, 0.4)',
     packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
-    darkModeEdgeColor: 'rgba(99, 102, 241, 0.15)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.04)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.45)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
@@ -135,11 +135,11 @@ const animationPresets = {
     dropProbability: 0.08,
     nodeGlowDuration: 600,
     nodeGlowIntensity: 1.4,
-    edgeColor: 'rgba(29, 108, 244, 0.10)',
+    edgeColor: 'rgba(29, 108, 244, 0.03)',
     nodeColor: 'rgba(29, 108, 244, 0.38)',
     packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
-    darkModeEdgeColor: 'rgba(99, 102, 241, 0.13)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.04)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.42)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
@@ -159,11 +159,11 @@ const animationPresets = {
     dropProbability: 0.18,
     nodeGlowDuration: 800,
     nodeGlowIntensity: 1.6,
-    edgeColor: 'rgba(29, 108, 244, 0.06)',
+    edgeColor: 'rgba(29, 108, 244, 0.02)',
     nodeColor: 'rgba(29, 108, 244, 0.3)',
     packetColor: 'rgba(252, 150, 42, 0.85)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
-    darkModeEdgeColor: 'rgba(99, 102, 241, 0.08)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.03)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.35)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',

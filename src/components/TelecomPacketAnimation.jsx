@@ -1092,9 +1092,9 @@ const TelecomPacketAnimation = ({
 
           // Elegant thin lines with subtle opacity
           const gradient = ctx.createLinearGradient(fromNode.x, fromNode.y, toNode.x, toNode.y);
-          gradient.addColorStop(0, colors.edge.replace(/[\d.]+\)$/g, `${fromNode.brightness * 0.15})`));
-          gradient.addColorStop(0.5, colors.edge.replace(/[\d.]+\)$/g, '0.12)'));
-          gradient.addColorStop(1, colors.edge.replace(/[\d.]+\)$/g, `${toNode.brightness * 0.15})`));
+          gradient.addColorStop(0, colors.edge.replace(/[\d.]+\)$/g, `${fromNode.brightness * 0.05})`));
+          gradient.addColorStop(0.5, colors.edge.replace(/[\d.]+\)$/g, '0.03)'));
+          gradient.addColorStop(1, colors.edge.replace(/[\d.]+\)$/g, `${toNode.brightness * 0.05})`));
 
           ctx.strokeStyle = gradient;
           ctx.beginPath();
@@ -1154,7 +1154,7 @@ const TelecomPacketAnimation = ({
           // Create gradient for synaptic connection
           const gradient = ctx.createLinearGradient(fromNode.x, fromNode.y, toNode.x, toNode.y);
           gradient.addColorStop(0, colors.edge);
-          gradient.addColorStop(1, colors.edge.replace(/[\d.]+\)$/g, '0.05)'));
+          gradient.addColorStop(1, colors.edge.replace(/[\d.]+\)$/g, '0.01)'));
 
           ctx.strokeStyle = gradient;
           ctx.lineWidth = 1.5;
@@ -1179,7 +1179,7 @@ const TelecomPacketAnimation = ({
           const thickness = 2.5 - (avgRing / maxRing) * 1.5; // 2.5px to 1px
           
           // Vary opacity (more opaque toward center)
-          const opacity = 0.15 - (avgRing / maxRing) * 0.05;
+          const opacity = 0.04 - (avgRing / maxRing) * 0.015;
           const edgeColorWithOpacity = colors.edge.replace(/[\d.]+\)$/g, `${opacity})`);
 
           ctx.strokeStyle = edgeColorWithOpacity;
@@ -1198,8 +1198,8 @@ const TelecomPacketAnimation = ({
           // Draw coverage circle with gradient fade
           const coverageRadius = cellSize * 0.95;
           const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, coverageRadius);
-          gradient.addColorStop(0, colors.edge.replace(/[\d.]+\)$/g, '0.08)'));
-          gradient.addColorStop(0.5, colors.edge.replace(/[\d.]+\)$/g, '0.04)'));
+          gradient.addColorStop(0, colors.edge.replace(/[\d.]+\)$/g, '0.02)'));
+          gradient.addColorStop(0.5, colors.edge.replace(/[\d.]+\)$/g, '0.01)'));
           gradient.addColorStop(1, 'transparent');
           
           ctx.fillStyle = gradient;
@@ -1210,13 +1210,13 @@ const TelecomPacketAnimation = ({
         
         // Draw hexagon cell boundaries
         ctx.lineWidth = 1.5;
-        ctx.strokeStyle = colors.edge.replace(/[\d.]+\)$/g, '0.20)');
+        ctx.strokeStyle = colors.edge.replace(/[\d.]+\)$/g, '0.05)');
         nodes.forEach(node => {
-          drawHexagon(node.x, node.y, cellSize * 0.87, colors.edge.replace(/[\d.]+\)$/g, '0.20)'));
+          drawHexagon(node.x, node.y, cellSize * 0.87, colors.edge.replace(/[\d.]+\)$/g, '0.05)'));
         });
         
         // Draw tower interconnections (lighter dashed lines)
-        ctx.strokeStyle = colors.edge.replace(/[\d.]+\)$/g, '0.08)');
+        ctx.strokeStyle = colors.edge.replace(/[\d.]+\)$/g, '0.02)');
         ctx.lineWidth = 1;
         ctx.setLineDash([5, 5]);
         edges.forEach(edge => {
