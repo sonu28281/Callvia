@@ -21,6 +21,9 @@
     "enableDarkMode": true,
     "defaultTheme": "light"
   },
+  "animation": {
+    "type": "organic"
+  },
   "features": {
     "enableWhatsAppWidget": true,
     "enableDataLayerRouteEvents": false,

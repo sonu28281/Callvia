@@ -11,6 +11,8 @@ const TelecomPacketAnimation = ({
   nodeCount = null, // null = auto-calculate based on size
   maxConnectionsPerNode = 3,
   edgeOpacity = 0.12,
+  networkType = 'organic', // 'organic' or 'cellular'
+  cellSize = 80, // Size of hexagonal cells for cellular network
   
   // Packet behavior
   packetSpawnRate = 0.8, // packets per second
@@ -195,6 +197,94 @@ const TelecomPacketAnimation = ({
       return points;
     };
 
+    // Generate hexagonal cellular network
+    const generateCellularNetwork = (width, height, cellSize) => {
+      const nodes = [];
+      const edges = [];
+      let nodeId = 0;
+
+      // Calculate hexagon dimensions
+      const hexWidth = cellSize * Math.sqrt(3);
+      const hexHeight = cellSize * 2;
+      const vertSpacing = hexHeight * 0.75;
+
+      // Calculate how many hexagons we need
+      const cols = Math.ceil(width / hexWidth) + 2;
+      const rows = Math.ceil(height / vertSpacing) + 2;
+
+      // Create hexagonal grid
+      const nodeMap = new Map(); // key: "col,row" -> nodeId
+
+      for (let row = -1; row < rows; row++) {
+        for (let col = -1; col < cols; col++) {
+          // Offset every other row for hexagonal packing
+          const xOffset = (row % 2) * (hexWidth / 2);
+          const x = col * hexWidth + xOffset;
+          const y = row * vertSpacing;
+
+          nodes.push({
+            id: nodeId,
+            x: x,
+            y: y,
+            connections: [],
+            gridPos: { col, row }
+          });
+
+          nodeMap.set(`${col},${row}`, nodeId);
+          nodeId++;
+        }
+      }
+
+      // Connect hexagonal neighbors
+      nodes.forEach(node => {
+        const { col, row } = node.gridPos;
+        
+        // Six possible neighbors in a hexagonal grid
+        const neighbors = [];
+        
+        if (row % 2 === 0) {
+          // Even row
+          neighbors.push(
+            { col: col + 1, row: row },     // Right
+            { col: col - 1, row: row },     // Left
+            { col: col, row: row - 1 },     // Top-left
+            { col: col + 1, row: row - 1 }, // Top-right
+            { col: col, row: row + 1 },     // Bottom-left
+            { col: col + 1, row: row + 1 }  // Bottom-right
+          );
+        } else {
+          // Odd row
+          neighbors.push(
+            { col: col + 1, row: row },     // Right
+            { col: col - 1, row: row },     // Left
+            { col: col - 1, row: row - 1 }, // Top-left
+            { col: col, row: row - 1 },     // Top-right
+            { col: col - 1, row: row + 1 }, // Bottom-left
+            { col: col, row: row + 1 }      // Bottom-right
+          );
+        }
+
+        neighbors.forEach(neighbor => {
+          const neighborId = nodeMap.get(`${neighbor.col},${neighbor.row}`);
+          if (neighborId !== undefined && neighborId > node.id) {
+            const neighborNode = nodes[neighborId];
+            const distance = Math.hypot(neighborNode.x - node.x, neighborNode.y - node.y);
+            
+            edges.push({
+              from: node.id,
+              to: neighborId,
+              length: distance,
+            });
+            
+            node.connections.push(neighborId);
+            neighborNode.connections.push(node.id);
+          }
+        });
+      });
+
+      return { nodes, edges };
+    };
+
     // Generate network graph
     const generateNetwork = () => {
       if (!canvas) return;
@@ -206,58 +296,66 @@ const TelecomPacketAnimation = ({
       // Skip if canvas has no dimensions
       if (width === 0 || height === 0) return;
 
-      // Calculate node count based on area
-      const area = width * height;
-      const calculatedNodeCount = nodeCount || Math.floor(area / 8000) + 20;
-      const minDist = Math.sqrt(area / calculatedNodeCount) * 0.8;
+      if (networkType === 'cellular') {
+        // Generate hexagonal cellular network
+        const { nodes, edges } = generateCellularNetwork(width, height, cellSize);
+        networkRef.current = { nodes, edges };
+      } else {
+        // Original organic network generation
+        // Calculate node count based on area
+        const area = width * height;
+        const calculatedNodeCount = nodeCount || Math.floor(area / 8000) + 20;
+        const minDist = Math.sqrt(area / calculatedNodeCount) * 0.8;
 
-      // Generate nodes with Poisson distribution
-      const nodePositions = poissonDiskSampling(width, height, minDist);
-      
-      const nodes = nodePositions.slice(0, calculatedNodeCount).map((pos, i) => ({
-        id: i,
-        x: pos.x,
-        y: pos.y,
-        connections: [],
-      }));
+        // Generate nodes with Poisson distribution
+        const nodePositions = poissonDiskSampling(width, height, minDist);
+        
+        const nodes = nodePositions.slice(0, calculatedNodeCount).map((pos, i) => ({
+          id: i,
+          x: pos.x,
+          y: pos.y,
+          connections: [],
+        }));
 
-      // Connect nodes to nearest neighbors
-      const edges = [];
-      nodes.forEach(node => {
-        // Find nearest neighbors
-        const distances = nodes
-          .filter(n => n.id !== node.id && !node.connections.includes(n.id))
-          .map(n => ({
-            node: n,
-            dist: Math.hypot(n.x - node.x, n.y - node.y),
-          }))
-          .sort((a, b) => a.dist - b.dist);
+        // Connect nodes to nearest neighbors
+        const edges = [];
+        nodes.forEach(node => {
+          // Find nearest neighbors
+          const distances = nodes
+            .filter(n => n.id !== node.id && !node.connections.includes(n.id))
+            .map(n => ({
+              node: n,
+              dist: Math.hypot(n.x - node.x, n.y - node.y),
+            }))
+            .sort((a, b) => a.dist - b.dist);
 
-        // Connect to 1-3 nearest neighbors
-        const numConnections = Math.min(
-          Math.floor(Math.random() * maxConnectionsPerNode) + 1,
-          maxConnectionsPerNode
-        );
+          // Connect to 1-3 nearest neighbors
+          const numConnections = Math.min(
+            Math.floor(Math.random() * maxConnectionsPerNode) + 1,
+            maxConnectionsPerNode
+          );
 
-        for (let i = 0; i < Math.min(numConnections, distances.length); i++) {
-          const target = distances[i].node;
-          const maxDist = minDist * 3;
-          
-          if (distances[i].dist < maxDist && target.connections.length < maxConnectionsPerNode) {
-            // Create edge
-            const edge = {
-              from: node.id,
-              to: target.id,
-              length: distances[i].dist,
-            };
-            edges.push(edge);
-            node.connections.push(target.id);
-            target.connections.push(node.id);
+          for (let i = 0; i < Math.min(numConnections, distances.length); i++) {
+            const target = distances[i].node;
+            const maxDist = minDist * 3;
+            
+            if (distances[i].dist < maxDist && target.connections.length < maxConnectionsPerNode) {
+              // Create edge
+              const edge = {
+                from: node.id,
+                to: target.id,
+                length: distances[i].dist,
+              };
+              edges.push(edge);
+              node.connections.push(target.id);
+              target.connections.push(node.id);
+            }
           }
-        }
-      });
+        });
 
-      networkRef.current = { nodes, edges };
+        networkRef.current = { nodes, edges };
+      }
+      
       packetsRef.current = [];
       nodeGlowsRef.current.clear();
     };
@@ -377,6 +475,30 @@ const TelecomPacketAnimation = ({
       });
     };
 
+    // Draw hexagon cell
+    const drawHexagon = (x, y, size, strokeColor, fillColor = null) => {
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 3) * i - Math.PI / 6;
+        const hx = x + size * Math.cos(angle);
+        const hy = y + size * Math.sin(angle);
+        if (i === 0) {
+          ctx.moveTo(hx, hy);
+        } else {
+          ctx.lineTo(hx, hy);
+        }
+      }
+      ctx.closePath();
+      
+      if (fillColor) {
+        ctx.fillStyle = fillColor;
+        ctx.fill();
+      }
+      
+      ctx.strokeStyle = strokeColor;
+      ctx.stroke();
+    };
+
     // Draw network
     const draw = () => {
       if (!canvas || !ctx) return;
@@ -391,19 +513,45 @@ const TelecomPacketAnimation = ({
 
       const { nodes, edges } = networkRef.current;
 
-      // Draw edges
-      ctx.strokeStyle = colors.edge;
-      ctx.lineWidth = 1;
-      edges.forEach(edge => {
-        const fromNode = nodes.find(n => n.id === edge.from);
-        const toNode = nodes.find(n => n.id === edge.to);
-        if (!fromNode || !toNode) return;
+      // Draw hexagonal cells if cellular network
+      if (networkType === 'cellular') {
+        ctx.lineWidth = 1.5;
+        nodes.forEach(node => {
+          drawHexagon(node.x, node.y, cellSize * 0.87, colors.edge);
+        });
+        
+        // Draw tower interconnections (lighter lines)
+        ctx.strokeStyle = colors.edge.replace(/[\d.]+\)$/g, '0.05)');
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 4]);
+        edges.forEach(edge => {
+          const fromNode = nodes.find(n => n.id === edge.from);
+          const toNode = nodes.find(n => n.id === edge.to);
+          if (!fromNode || !toNode) return;
 
-        ctx.beginPath();
-        ctx.moveTo(fromNode.x, fromNode.y);
-        ctx.lineTo(toNode.x, toNode.y);
-        ctx.stroke();
-      });
+          ctx.beginPath();
+          ctx.moveTo(fromNode.x, fromNode.y);
+          ctx.lineTo(toNode.x, toNode.y);
+          ctx.stroke();
+        });
+        ctx.setLineDash([]);
+      }
+
+      // Draw edges (connections between towers)
+      if (networkType !== 'cellular') {
+        ctx.strokeStyle = colors.edge;
+        ctx.lineWidth = 1;
+        edges.forEach(edge => {
+          const fromNode = nodes.find(n => n.id === edge.from);
+          const toNode = nodes.find(n => n.id === edge.to);
+          if (!fromNode || !toNode) return;
+
+          ctx.beginPath();
+          ctx.moveTo(fromNode.x, fromNode.y);
+          ctx.lineTo(toNode.x, toNode.y);
+          ctx.stroke();
+        });
+      }
 
       // Draw packets with trails
       packetsRef.current.forEach(packet => {
@@ -453,22 +601,54 @@ const TelecomPacketAnimation = ({
           const intensity = glow.intensity * (1 - Math.pow(progress, 2));
 
           // Draw glow
-          const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 15 * intensity);
+          const glowRadius = networkType === 'cellular' ? 20 : 15;
+          const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, glowRadius * intensity);
           gradient.addColorStop(0, colors.glow.replace(/[\d.]+\)$/g, `${intensity * 0.8})`));
           gradient.addColorStop(0.5, colors.glow.replace(/[\d.]+\)$/g, `${intensity * 0.4})`));
           gradient.addColorStop(1, 'transparent');
 
           ctx.fillStyle = gradient;
           ctx.beginPath();
-          ctx.arc(node.x, node.y, 15 * intensity, 0, Math.PI * 2);
+          ctx.arc(node.x, node.y, glowRadius * intensity, 0, Math.PI * 2);
           ctx.fill();
         }
 
-        // Draw node
-        ctx.fillStyle = glow ? colors.glow.replace(/[\d.]+\)$/g, '0.8)') : colors.node;
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, glow ? 3 : 2, 0, Math.PI * 2);
-        ctx.fill();
+        // Draw node (cell tower)
+        if (networkType === 'cellular') {
+          // Draw cell tower symbol
+          const towerHeight = glow ? 10 : 8;
+          const towerWidth = glow ? 6 : 5;
+          
+          ctx.fillStyle = glow ? colors.glow.replace(/[\d.]+\)$/g, '0.9)') : colors.node;
+          ctx.strokeStyle = glow ? colors.glow : colors.node;
+          ctx.lineWidth = 1.5;
+          
+          // Tower base (triangle)
+          ctx.beginPath();
+          ctx.moveTo(node.x, node.y - towerHeight);
+          ctx.lineTo(node.x - towerWidth / 2, node.y);
+          ctx.lineTo(node.x + towerWidth / 2, node.y);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+          
+          // Signal rings
+          if (glow) {
+            ctx.strokeStyle = colors.glow.replace(/[\d.]+\)$/g, '0.4)');
+            ctx.lineWidth = 1;
+            for (let i = 1; i <= 2; i++) {
+              ctx.beginPath();
+              ctx.arc(node.x, node.y - towerHeight / 2, towerWidth + i * 3, 0, Math.PI * 2);
+              ctx.stroke();
+            }
+          }
+        } else {
+          // Draw regular node
+          ctx.fillStyle = glow ? colors.glow.replace(/[\d.]+\)$/g, '0.8)') : colors.node;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, glow ? 3 : 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
       });
     };
 
@@ -517,6 +697,8 @@ const TelecomPacketAnimation = ({
     nodeCount,
     maxConnectionsPerNode,
     edgeOpacity,
+    networkType,
+    cellSize,
     packetSpawnRate,
     maxActivePackets,
     packetSpeedMin,

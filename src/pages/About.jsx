@@ -1,35 +1,12 @@
 import React from 'react';
 import { Shield, Zap, Users, Globe, Rocket, TrendingUp, Award, MapPin, CheckCircle2, Target, Lightbulb, Code, Phone, Cpu, Radio, Headphones } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import TelecomPacketAnimation from '../components/TelecomPacketAnimation';
 
 export function AboutPage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative overflow-hidden" style={{ background: 'linear-gradient(to bottom, var(--color-surface), var(--color-bg))', borderBottom: '1px solid var(--color-border)' }}>
-        <TelecomPacketAnimation
-          nodeCount={35}
-          maxConnectionsPerNode={3}
-          packetSpawnRate={0.5}
-          maxActivePackets={6}
-          packetSpeedMin={30}
-          packetSpeedMax={70}
-          tailLengthMin={40}
-          tailLengthMax={90}
-          dropProbability={0.15}
-          nodeGlowDuration={600}
-          nodeGlowIntensity={1.0}
-          edgeColor="rgba(29, 108, 244, 0.06)"
-          nodeColor="rgba(29, 108, 244, 0.25)"
-          packetColor="rgba(29, 108, 244, 0.8)"
-          glowColor="rgba(29, 108, 244, 1)"
-          darkModeEdgeColor="rgba(99, 102, 241, 0.1)"
-          darkModeNodeColor="rgba(99, 102, 241, 0.35)"
-          darkModePacketColor="rgba(99, 102, 241, 0.9)"
-          darkModeGlowColor="rgba(99, 102, 241, 1)"
-          zIndex={1}
-        />
+      <section className="relative bg-gradient-to-b from-slate-50 via-slate-50 to-white border-b border-slate-200 overflow-hidden">
         <svg
           className="absolute inset-0 w-full h-full pointer-events-none"
           viewBox="0 0 1200 600"
@@ -83,13 +60,13 @@ export function AboutPage() {
         </svg>
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm mb-6" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text-muted)' }}>
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-full text-sm text-slate-600 mb-6">
               Class-B VNO • Carrier-grade • India-focused
             </span>
-            <h1 className="text-4xl lg:text-5xl font-semibold mb-6 leading-tight" style={{ color: 'var(--color-text)' }}>
-              Run enterprise telecom operations with infrastructure built to <span style={{ color: 'var(--color-primary)' }}>scale</span>
+            <h1 className="text-4xl lg:text-5xl font-semibold text-slate-900 mb-6 leading-tight">
+              Run enterprise telecom operations with infrastructure built to <span className="text-indigo-600">scale</span>
             </h1>
-            <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--color-text-muted)' }}>
+            <p className="text-lg text-slate-600 leading-relaxed mb-8">
               Callvia delivers mission-critical calling for inbound and outbound operations with compliant routing,
               real-time monitoring, and enterprise-grade reliability across India.
             </p>
@@ -99,26 +76,26 @@ export function AboutPage() {
                 { label: 'Monthly Calls', value: '10M+' },
                 { label: 'Uptime SLA', value: '99.99%' },
               ].map((stat) => (
-                <div key={stat.label} className="rounded-xl p-4" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
-                  <div className="text-2xl font-semibold" style={{ color: 'var(--color-text)' }}>{stat.value}</div>
-                  <div className="text-xs uppercase tracking-wide" style={{ color: 'var(--color-text-muted)' }}>{stat.label}</div>
+                <div key={stat.label} className="bg-white border border-slate-200 rounded-xl p-4">
+                  <div className="text-2xl font-semibold text-slate-900">{stat.value}</div>
+                  <div className="text-xs uppercase tracking-wide text-slate-500">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
           <div className="relative">
-            <div className="rounded-2xl p-6 shadow-sm" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
-              <div className="text-sm mb-4" style={{ color: 'var(--color-text-muted)' }}>Control Center Preview</div>
-              <div className="rounded-xl p-6" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+              <div className="text-sm text-slate-500 mb-4">Control Center Preview</div>
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   {['Routing Health', 'Compliance Coverage'].map((label) => (
-                    <div key={label} className="rounded-lg p-3" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
-                      <div className="text-[10px] uppercase tracking-wide" style={{ color: 'var(--color-text-muted)' }}>{label}</div>
-                      <div className="text-lg font-semibold" style={{ color: 'var(--color-text)' }}>Stable</div>
+                    <div key={label} className="bg-white border border-slate-200 rounded-lg p-3">
+                      <div className="text-[10px] uppercase tracking-wide text-slate-400">{label}</div>
+                      <div className="text-lg font-semibold text-slate-800">Stable</div>
                     </div>
                   ))}
                 </div>
-                <div className="h-24 rounded-lg" style={{ border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg)' }} />
+                <div className="h-24 rounded-lg border border-slate-200 bg-white" />
               </div>
             </div>
           </div>
@@ -126,56 +103,56 @@ export function AboutPage() {
       </section>
 
       {/* Story Section */}
-      <section className="py-20 px-6" style={{ backgroundColor: 'var(--color-bg)' }}>
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text-muted)' }}>Our Story</span>
-              <h2 className="text-4xl font-semibold mb-6 leading-tight" style={{ color: 'var(--color-text)' }}>
+              <span className="inline-block px-4 py-2 bg-slate-100 text-slate-600 rounded-full text-sm font-semibold mb-6">Our Story</span>
+              <h2 className="text-4xl font-semibold text-slate-900 mb-6 leading-tight">
                 Built by operators, for operators
               </h2>
-              <p className="text-lg leading-relaxed mb-4" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-lg text-slate-600 leading-relaxed mb-4">
                 Callvia was founded by telecom infrastructure professionals who saw a clear need for domestic-first
                 telecom operations in India.
               </p>
-              <p className="text-lg leading-relaxed mb-4" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-lg text-slate-600 leading-relaxed mb-4">
                 For years, businesses relied on international routes, resold capacity, and platforms built by SaaS teams. We changed that.
               </p>
-              <p className="text-lg leading-relaxed mb-6" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-lg text-slate-600 leading-relaxed mb-6">
                 Today, Callvia powers 10M+ calls monthly through TRAI-approved Class-B VNO infrastructure, serving
                 call centers, enterprises, and resellers across India with a 99.99% uptime SLA.
               </p>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 size={20} className="flex-shrink-0" style={{ color: 'var(--color-primary)' }} />
-                  <span className="font-medium" style={{ color: 'var(--color-text-muted)' }}>TRAI-approved VNO infrastructure</span>
+                  <CheckCircle2 size={20} className="text-indigo-600 flex-shrink-0" />
+                  <span className="text-slate-700 font-medium">TRAI-approved VNO infrastructure</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 size={20} className="flex-shrink-0" style={{ color: 'var(--color-primary)' }} />
-                  <span className="font-medium" style={{ color: 'var(--color-text-muted)' }}>Carrier-grade Class-5 switch backend</span>
+                  <CheckCircle2 size={20} className="text-indigo-600 flex-shrink-0" />
+                  <span className="text-slate-700 font-medium">Carrier-grade Class-5 switch backend</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 size={20} className="flex-shrink-0" style={{ color: 'var(--color-primary)' }} />
-                  <span className="font-medium" style={{ color: 'var(--color-text-muted)' }}>Domestic-only, compliant operations</span>
+                  <CheckCircle2 size={20} className="text-indigo-600 flex-shrink-0" />
+                  <span className="text-slate-700 font-medium">Domestic-only, compliant operations</span>
                 </div>
               </div>
             </div>
-            <div className="p-12 rounded-2xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+            <div className="bg-slate-50 p-12 rounded-2xl border border-slate-200">
               <div className="space-y-8">
-                <div className="pb-8" style={{ borderBottom: '1px solid var(--color-border)' }}>
-                  <p className="text-4xl font-semibold mb-2" style={{ color: 'var(--color-text)' }}>2025</p>
-                  <p className="text-lg font-semibold" style={{ color: 'var(--color-text-muted)' }}>Founded</p>
-                  <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>Launched as a TRAI-approved Class-B VNO</p>
+                <div className="border-b border-slate-200 pb-8">
+                  <p className="text-4xl font-semibold text-slate-900 mb-2">2025</p>
+                  <p className="text-lg text-slate-700 font-semibold">Founded</p>
+                  <p className="text-slate-600 mt-2">Launched as a TRAI-approved Class-B VNO</p>
                 </div>
-                <div className="pb-8" style={{ borderBottom: '1px solid var(--color-border)' }}>
-                  <p className="text-4xl font-semibold mb-2" style={{ color: 'var(--color-text)' }}>10M+</p>
-                  <p className="text-lg font-semibold" style={{ color: 'var(--color-text-muted)' }}>Calls managed monthly</p>
-                  <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>Enterprise-scale operations, carrier-grade reliability</p>
+                <div className="border-b border-slate-200 pb-8">
+                  <p className="text-4xl font-semibold text-slate-900 mb-2">10M+</p>
+                  <p className="text-lg text-slate-700 font-semibold">Calls managed monthly</p>
+                  <p className="text-slate-600 mt-2">Enterprise-scale operations, carrier-grade reliability</p>
                 </div>
                 <div>
-                  <p className="text-4xl font-semibold mb-2" style={{ color: 'var(--color-text)' }}>99.99%</p>
-                  <p className="text-lg font-semibold" style={{ color: 'var(--color-text-muted)' }}>Uptime SLA</p>
-                  <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>Backed by enterprise infrastructure</p>
+                  <p className="text-4xl font-semibold text-slate-900 mb-2">99.99%</p>
+                  <p className="text-lg text-slate-700 font-semibold">Uptime SLA</p>
+                  <p className="text-slate-600 mt-2">Backed by enterprise infrastructure</p>
                 </div>
               </div>
             </div>
@@ -184,27 +161,27 @@ export function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 px-6" style={{ backgroundColor: 'var(--color-surface)' }}>
+      <section className="py-20 px-6 bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="p-10 rounded-2xl" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
-              <Target size={28} className="mb-6" style={{ color: 'var(--color-primary)' }} />
-              <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--color-text)' }}>Our Mission</h2>
-              <p className="leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+            <div className="bg-white p-10 rounded-2xl border border-slate-200">
+              <Target size={28} className="text-indigo-600 mb-6" />
+              <h2 className="text-2xl font-semibold text-slate-900 mb-4">Our Mission</h2>
+              <p className="text-slate-600 leading-relaxed">
                 Empower every business in India with enterprise-grade, compliant telecom infrastructure. We believe voice communication should be controlled, secure, and profitable.
               </p>
             </div>
-            <div className="p-10 rounded-2xl" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
-              <Lightbulb size={28} className="mb-6" style={{ color: 'var(--color-primary)' }} />
-              <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--color-text)' }}>Our Vision</h2>
-              <p className="leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+            <div className="bg-white p-10 rounded-2xl border border-slate-200">
+              <Lightbulb size={28} className="text-indigo-600 mb-6" />
+              <h2 className="text-2xl font-semibold text-slate-900 mb-4">Our Vision</h2>
+              <p className="text-slate-600 leading-relaxed">
                 To become India's trusted foundation for voice infrastructure. A future where control, compliance, and AI-driven intelligence are standard, not premium features.
               </p>
             </div>
-            <div className="p-10 rounded-2xl" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
-              <Code size={28} className="mb-6" style={{ color: 'var(--color-primary)' }} />
-              <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--color-text)' }}>Our Promise</h2>
-              <p className="leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+            <div className="bg-white p-10 rounded-2xl border border-slate-200">
+              <Code size={28} className="text-indigo-600 mb-6" />
+              <h2 className="text-2xl font-semibold text-slate-900 mb-4">Our Promise</h2>
+              <p className="text-slate-600 leading-relaxed">
                 Carrier-grade reliability. Transparent pricing. Complete control. No grey routes. No international calling. Just honest, compliant telecom built for Indian businesses.
               </p>
             </div>
@@ -213,12 +190,12 @@ export function AboutPage() {
       </section>
 
       {/* Why Callvia */}
-      <section className="py-20 px-6" style={{ backgroundColor: 'var(--color-bg)' }}>
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text-muted)' }}>Why Callvia</span>
-            <h2 className="text-4xl font-semibold mb-4" style={{ color: 'var(--color-text)' }}>What sets us apart</h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-text-muted)' }}>Built for regulated, high-volume environments with predictable performance.</p>
+            <span className="inline-block px-4 py-2 bg-slate-100 text-slate-600 rounded-full text-sm font-semibold mb-6">Why Callvia</span>
+            <h2 className="text-4xl font-semibold text-slate-900 mb-4">What sets us apart</h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">Built for regulated, high-volume environments with predictable performance.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
@@ -245,13 +222,13 @@ export function AboutPage() {
             ].map((item, i) => {
               const Icon = item.icon;
               return (
-                <div key={i} className="flex gap-6 p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ border: '1px solid var(--color-border)' }}>
-                    <Icon size={24} style={{ color: 'var(--color-primary)' }} />
+                <div key={i} className="flex gap-6 bg-slate-50 p-8 rounded-2xl border border-slate-200">
+                  <div className="w-12 h-12 rounded-xl border border-slate-200 flex items-center justify-center flex-shrink-0">
+                    <Icon size={24} className="text-indigo-600" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-semibold mb-2" style={{ color: 'var(--color-text)' }}>{item.title}</h3>
-                    <p className="leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{item.desc}</p>
+                    <h3 className="text-2xl font-semibold text-slate-900 mb-2">{item.title}</h3>
+                    <p className="text-slate-600 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               );
@@ -261,12 +238,12 @@ export function AboutPage() {
       </section>
 
       {/* Core Values as Separate Section */}
-      <section className="py-20 px-6" style={{ backgroundColor: 'var(--color-surface)' }}>
+      <section className="py-20 px-6 bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text-muted)' }}>Core Values</span>
-            <h2 className="text-4xl font-semibold mb-4" style={{ color: 'var(--color-text)' }}>How we operate</h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-text-muted)' }}>Four principles guide every decision we make</p>
+            <span className="inline-block px-4 py-2 bg-slate-100 text-slate-600 rounded-full text-sm font-semibold mb-6">Core Values</span>
+            <h2 className="text-4xl font-semibold text-slate-900 mb-4">How we operate</h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">Four principles guide every decision we make</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
@@ -297,13 +274,13 @@ export function AboutPage() {
             ].map((item, i) => {
               const Icon = item.icon;
               return (
-                <div key={i} className="p-8 rounded-2xl" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ border: '1px solid var(--color-border)' }}>
-                    <Icon size={22} style={{ color: 'var(--color-primary)' }} />
+                <div key={i} className="bg-white p-8 rounded-2xl border border-slate-200">
+                  <div className="w-12 h-12 rounded-xl border border-slate-200 flex items-center justify-center mb-4">
+                    <Icon size={22} className="text-indigo-600" />
                   </div>
-                  <h3 className="text-2xl font-semibold mb-2" style={{ color: 'var(--color-text)' }}>{item.title}</h3>
-                  <p className="text-sm font-semibold mb-3" style={{ color: 'var(--color-text-muted)' }}>{item.highlight}</p>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>{item.desc}</p>
+                  <h3 className="text-2xl font-semibold text-slate-900 mb-2">{item.title}</h3>
+                  <p className="text-sm font-semibold text-slate-600 mb-3">{item.highlight}</p>
+                  <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               );
             })}
@@ -312,12 +289,12 @@ export function AboutPage() {
       </section>
 
       {/* Explore Our Products */}
-      <section className="py-20 px-6" style={{ backgroundColor: 'var(--color-bg)' }}>
+      <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text-muted)' }}>Product Suite</span>
-            <h2 className="text-4xl font-semibold mb-4" style={{ color: 'var(--color-text)' }}>Everything you need</h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--color-text-muted)' }}>Enterprise-grade solutions for calling, routing, automation, and monitoring</p>
+            <span className="inline-block px-4 py-2 bg-slate-100 text-slate-600 rounded-full text-sm font-semibold mb-6">Product Suite</span>
+            <h2 className="text-4xl font-semibold text-slate-900 mb-4">Everything you need</h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">Enterprise-grade solutions for calling, routing, automation, and monitoring</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -333,14 +310,13 @@ export function AboutPage() {
                 <Link
                   key={product.path}
                   to={product.path}
-                  className="p-8 rounded-2xl hover:-translate-y-0.5 hover:shadow-sm transition-all no-underline group"
-                  style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)' }}
+                  className="bg-white p-8 rounded-2xl border border-slate-200 hover:-translate-y-0.5 hover:shadow-sm transition-all no-underline group"
                 >
-                  <div className="w-12 h-12 rounded-lg mb-4 flex items-center justify-center" style={{ border: '1px solid var(--color-border)' }}>
-                    <IconComponent size={22} style={{ color: 'var(--color-primary)' }} />
+                  <div className="w-12 h-12 rounded-lg border border-slate-200 mb-4 flex items-center justify-center">
+                    <IconComponent size={22} className="text-indigo-600" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--color-text)' }}>{product.name}</h3>
-                  <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>{product.desc}</p>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">{product.name}</h3>
+                  <p className="text-slate-600 text-sm">{product.desc}</p>
                 </Link>
               );
             })}
@@ -349,30 +325,29 @@ export function AboutPage() {
       </section>
 
       {/* Team & Contact Section */}
-      <section className="py-20 px-6" style={{ backgroundColor: 'var(--color-surface)' }}>
+      <section className="py-20 px-6 bg-slate-50">
         <div className="max-w-5xl mx-auto text-center">
-          <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6" style={{ backgroundColor: 'var(--color-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text-muted)' }}>Connect with us</span>
-          <h2 className="text-4xl font-semibold mb-6" style={{ color: 'var(--color-text)' }}>Ready to get started?</h2>
-          <p className="text-lg mb-12 leading-relaxed max-w-2xl mx-auto" style={{ color: 'var(--color-text-muted)' }}>
+          <span className="inline-block px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-full text-sm font-semibold mb-6">Connect with us</span>
+          <h2 className="text-4xl font-semibold text-slate-900 mb-6">Ready to get started?</h2>
+          <p className="text-lg text-slate-600 mb-12 leading-relaxed max-w-2xl mx-auto">
             Whether you're a call center, enterprise, reseller, or small business, our team is ready to help you build scalable, compliant telecom infrastructure.
           </p>
           <div className="flex gap-4 justify-center flex-wrap mb-8">
             <Link
               to="/contact"
-              className="px-10 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2 no-underline"
-              style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}
+              className="bg-indigo-600 text-white px-10 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-colors inline-flex items-center gap-2 no-underline"
             >
               Get Started <Rocket size={20} />
             </Link>
-            <button className="px-10 py-4 rounded-lg font-semibold transition-colors" style={{ border: '1px solid var(--color-border)', color: 'var(--color-text-muted)', backgroundColor: 'transparent' }}>
+            <button className="border border-slate-300 text-slate-700 px-10 py-4 rounded-lg font-semibold hover:bg-white transition-colors">
               Schedule a Demo
             </button>
           </div>
-          <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-            <a href="mailto:sales@callvia.in" className="font-semibold no-underline" style={{ color: 'var(--color-text-muted)' }}>sales@callvia.in</a> | 
-            <a href="mailto:support@callvia.in" className="font-semibold no-underline" style={{ color: 'var(--color-text-muted)' }}>support@callvia.in</a>
+          <p className="text-slate-600 text-sm">
+            <a href="mailto:sales@callvia.in" className="text-slate-700 hover:text-slate-900 font-semibold no-underline">sales@callvia.in</a> | 
+            <a href="mailto:support@callvia.in" className="text-slate-700 hover:text-slate-900 font-semibold no-underline">support@callvia.in</a>
           </p>
-          <p className="text-sm mt-4" style={{ color: 'var(--color-text-muted)' }}>
+          <p className="text-slate-500 text-sm mt-4">
             Support available: Monday to Friday, 9:00 AM – 6:00 PM IST
           </p>
         </div>

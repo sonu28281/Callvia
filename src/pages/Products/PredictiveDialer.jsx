@@ -3,6 +3,7 @@ import { ArrowRight, Check, PhoneCall, TrendingUp, Zap, Users, Target, BarChart3
 import EnquiryModal from '../../components/EnquiryModal';
 import SEO from '../../components/SEO';
 import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
+import getAnimationConfig from '../../config/animation_config';
 
 const PredictiveDialer = () => {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
@@ -53,28 +54,7 @@ const PredictiveDialer = () => {
           borderBottom: '1px solid var(--color-border)',
         }}
       >
-        <TelecomPacketAnimation
-          nodeCount={35}
-          maxConnectionsPerNode={3}
-          packetSpawnRate={0.5}
-          maxActivePackets={6}
-          packetSpeedMin={30}
-          packetSpeedMax={70}
-          tailLengthMin={40}
-          tailLengthMax={90}
-          dropProbability={0.15}
-          nodeGlowDuration={600}
-          nodeGlowIntensity={1.0}
-          edgeColor="rgba(29, 108, 244, 0.06)"
-          nodeColor="rgba(29, 108, 244, 0.25)"
-          packetColor="rgba(29, 108, 244, 0.8)"
-          glowColor="rgba(29, 108, 244, 1)"
-          darkModeEdgeColor="rgba(99, 102, 241, 0.1)"
-          darkModeNodeColor="rgba(99, 102, 241, 0.35)"
-          darkModePacketColor="rgba(99, 102, 241, 0.9)"
-          darkModeGlowColor="rgba(99, 102, 241, 1)"
-          zIndex={1}
-        />
+        <TelecomPacketAnimation {...getAnimationConfig()} />
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
