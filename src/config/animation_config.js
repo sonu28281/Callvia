@@ -29,7 +29,7 @@ const animationPresets = {
   // Cellular/hexagonal network animation
   cellular: {
     networkType: 'cellular',
-    cellSize: 85,
+    cellSize: 125,
     packetSpawnRate: 0.65,
     maxActivePackets: 10,
     packetSpeedMin: 45,
@@ -41,12 +41,12 @@ const animationPresets = {
     nodeGlowIntensity: 1.4,
     edgeColor: 'rgba(29, 108, 244, 0.04)',
     nodeColor: 'rgba(29, 108, 244, 0.25)',
-    packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
-    glowColor: 'rgba(252, 150, 42, 1)',
+    packetColor: 'rgba(236, 72, 153, 0.9)', // Pink/Magenta logo color
+    glowColor: 'rgba(236, 72, 153, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.05)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.28)',
-    darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
-    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+    darkModePacketColor: 'rgba(236, 72, 153, 0.95)', // Pink/Magenta logo color
+    darkModeGlowColor: 'rgba(236, 72, 153, 1)',
   },
 
   // Spider web radial network animation
@@ -65,12 +65,12 @@ const animationPresets = {
     nodeGlowIntensity: 1.4,
     edgeColor: 'rgba(29, 108, 244, 0.03)',
     nodeColor: 'rgba(29, 108, 244, 0.20)',
-    packetColor: 'rgba(252, 150, 42, 0.85)', // Saffron color
-    glowColor: 'rgba(252, 150, 42, 1)',
+    packetColor: 'rgba(236, 72, 153, 0.85)', // Pink/Magenta logo color
+    glowColor: 'rgba(236, 72, 153, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.04)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.23)',
-    darkModePacketColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
-    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+    darkModePacketColor: 'rgba(236, 72, 153, 0.9)', // Pink/Magenta logo color
+    darkModeGlowColor: 'rgba(236, 72, 153, 1)',
   },
 
   // Neural network / AI brain animation
@@ -89,19 +89,19 @@ const animationPresets = {
     nodeGlowIntensity: 1.5,
     edgeColor: 'rgba(29, 108, 244, 0.02)',
     nodeColor: 'rgba(29, 108, 244, 0.18)',
-    packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
-    glowColor: 'rgba(252, 150, 42, 1)',
+    packetColor: 'rgba(236, 72, 153, 0.9)', // Pink/Magenta logo color
+    glowColor: 'rgba(236, 72, 153, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.03)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.20)',
-    darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
-    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+    darkModePacketColor: 'rgba(236, 72, 153, 0.95)', // Pink/Magenta logo color
+    darkModeGlowColor: 'rgba(236, 72, 153, 1)',
   },
 
   // Grid network / power grid / circuit board animation
   grid: {
     networkType: 'grid',
-    gridSpacingX: 90,
-    gridSpacingY: 75,
+    gridSpacingX: 135,
+    gridSpacingY: 110,
     packetSpawnRate: 0.7,
     maxActivePackets: 12,
     packetSpeedMin: 45,
@@ -113,12 +113,12 @@ const animationPresets = {
     nodeGlowIntensity: 1.3,
     edgeColor: 'rgba(29, 108, 244, 0.03)',
     nodeColor: 'rgba(29, 108, 244, 0.20)',
-    packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
-    glowColor: 'rgba(252, 150, 42, 1)',
+    packetColor: 'rgba(236, 72, 153, 0.9)', // Pink/Magenta logo color
+    glowColor: 'rgba(236, 72, 153, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.04)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.23)',
-    darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
-    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+    darkModePacketColor: 'rgba(236, 72, 153, 0.95)', // Pink/Magenta logo color
+    darkModeGlowColor: 'rgba(236, 72, 153, 1)',
   },
 
   // Mesh network / dense interconnected network animation
@@ -137,12 +137,12 @@ const animationPresets = {
     nodeGlowIntensity: 1.4,
     edgeColor: 'rgba(29, 108, 244, 0.03)',
     nodeColor: 'rgba(29, 108, 244, 0.19)',
-    packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
-    glowColor: 'rgba(252, 150, 42, 1)',
+    packetColor: 'rgba(236, 72, 153, 0.9)', // Pink/Magenta logo color
+    glowColor: 'rgba(236, 72, 153, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.04)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.21)',
-    darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
-    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+    darkModePacketColor: 'rgba(236, 72, 153, 0.95)', // Pink/Magenta logo color
+    darkModeGlowColor: 'rgba(236, 72, 153, 1)',
   },
 
   // Constellation / star field animation
@@ -161,12 +161,12 @@ const animationPresets = {
     nodeGlowIntensity: 1.6,
     edgeColor: 'rgba(29, 108, 244, 0.02)',
     nodeColor: 'rgba(29, 108, 244, 0.15)',
-    packetColor: 'rgba(252, 150, 42, 0.85)', // Saffron color
-    glowColor: 'rgba(252, 150, 42, 1)',
+    packetColor: 'rgba(236, 72, 153, 0.85)', // Pink/Magenta logo color
+    glowColor: 'rgba(236, 72, 153, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.03)',
     darkModeNodeColor: 'rgba(99, 102, 241, 0.18)',
-    darkModePacketColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
-    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+    darkModePacketColor: 'rgba(236, 72, 153, 0.9)', // Pink/Magenta logo color
+    darkModeGlowColor: 'rgba(236, 72, 153, 1)',
   },
 };
 
