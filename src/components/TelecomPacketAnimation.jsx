@@ -11,7 +11,7 @@ const TelecomPacketAnimation = ({
   nodeCount = null, // null = auto-calculate based on size
   maxConnectionsPerNode = 3,
   edgeOpacity = 0.12,
-  networkType = 'organic', // 'organic', 'cellular', 'spiderweb', 'neural', 'grid', or 'mesh'
+  networkType = 'organic', // 'organic', 'cellular', 'spiderweb', 'neural', 'grid', 'mesh', or 'constellation'
   cellSize = 80, // Size of hexagonal cells for cellular network
   spiderWebRings = 6, // Number of concentric rings for spider web
   spiderWebSpokes = 12, // Number of radial spokes for spider web
@@ -21,6 +21,8 @@ const TelecomPacketAnimation = ({
   gridSpacingY = 80, // Vertical spacing for grid network
   meshNodeCount = 40, // Number of nodes for mesh network
   meshConnectionRadius = 150, // Max connection distance for mesh
+  constellationStars = 35, // Number of stars for constellation
+  constellationConnectionDistance = 200, // Max connection distance
   
   // Packet behavior
   packetSpawnRate = 0.8, // packets per second
@@ -203,6 +205,60 @@ const TelecomPacketAnimation = ({
       }
 
       return points;
+    };
+
+    // Generate constellation network (star pattern - elegant and minimal)
+    const generateConstellationNetwork = (width, height, starCount, maxDistance) => {
+      const nodes = [];
+      const edges = [];
+      let nodeId = 0;
+
+      // Use Poisson disk sampling for natural star distribution
+      const minDist = Math.sqrt((width * height) / starCount) * 1.2; // More spacing than mesh
+      const starPositions = poissonDiskSampling(width, height, minDist);
+      
+      // Create star nodes
+      starPositions.slice(0, starCount).forEach((pos) => {
+        nodes.push({
+          id: nodeId++,
+          x: pos.x,
+          y: pos.y,
+          connections: [],
+          brightness: 0.5 + Math.random() * 0.5, // Varying star brightness
+        });
+      });
+
+      // Connect stars to form constellations (minimal, elegant connections)
+      nodes.forEach(node => {
+        // Find nearby stars but connect to only 1-3 (creating sparse patterns)
+        const nearbyStars = nodes
+          .filter(n => n.id !== node.id && !node.connections.includes(n.id))
+          .map(n => ({
+            node: n,
+            dist: Math.hypot(n.x - node.x, n.y - node.y),
+          }))
+          .filter(n => n.dist < maxDistance)
+          .sort((a, b) => a.dist - b.dist);
+
+        // Connect to 1-3 nearest stars only (creating constellation lines)
+        const maxConnections = Math.min(1 + Math.floor(Math.random() * 2), 3);
+        const connectTo = Math.min(maxConnections, nearbyStars.length);
+        
+        for (let i = 0; i < connectTo; i++) {
+          const target = nearbyStars[i];
+          if (node.connections.length < 3 && target.node.connections.length < 3) {
+            edges.push({
+              from: node.id,
+              to: target.node.id,
+              length: target.dist,
+            });
+            node.connections.push(target.node.id);
+            target.node.connections.push(node.id);
+          }
+        }
+      });
+
+      return { nodes, edges };
     };
 
     // Generate mesh network (dense interconnected network)
@@ -549,6 +605,60 @@ const TelecomPacketAnimation = ({
           // Inner highlight
           ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
           ctx.fillRect(node.x - junctionSize * 0.5, node.y - junctionSize * 0.5, junctionSize, junctionSize);
+        } else if (networkType === 'constellation') {
+          // Draw stars with varying sizes and brightness
+          const baseBrightness = node.brightness || 0.7;
+          const starSize = (glow ? 5 : 3) * baseBrightness;
+          
+          // Draw star glow when active
+          if (glow) {
+            const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, starSize * 6);
+            gradient.addColorStop(0, colors.glow.replace(/[\d.]+\)$/g, '0.9)'));
+            gradient.addColorStop(0.3, colors.glow.replace(/[\d.]+\)$/g, '0.5)'));
+            gradient.addColorStop(0.7, colors.glow.replace(/[\d.]+\)$/g, '0.2)'));
+            gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, starSize * 6, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          
+          // Draw star body (bright center)
+          const starGradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, starSize);
+          if (glow) {
+            starGradient.addColorStop(0, '#FFFFFF');
+            starGradient.addColorStop(0.3, colors.glow);
+            starGradient.addColorStop(1, colors.glow.replace(/[\d.]+\)$/g, '0.5)'));
+          } else {
+            const opacity = baseBrightness * 0.6;
+            starGradient.addColorStop(0, colors.node.replace(/[\d.]+\)$/g, '0.9)'));
+            starGradient.addColorStop(0.5, colors.node.replace(/[\d.]+\)$/g, `${opacity})`));
+            starGradient.addColorStop(1, colors.node.replace(/[\d.]+\)$/g, '0.2)'));
+          }
+          ctx.fillStyle = starGradient;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, starSize, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Draw star points (4-point star shape for larger stars)
+          if (starSize > 3.5 || glow) {
+            ctx.fillStyle = glow ? colors.glow.replace(/[\d.]+\)$/g, '0.6)') : colors.node.replace(/[\d.]+\)$/g, '0.4)');
+            const points = 4;
+            const outerRadius = starSize * (glow ? 1.8 : 1.5);
+            const innerRadius = starSize * 0.6;
+            
+            ctx.beginPath();
+            for (let i = 0; i < points * 2; i++) {
+              const angle = (i * Math.PI) / points - Math.PI / 2;
+              const radius = i % 2 === 0 ? outerRadius : innerRadius;
+              const x = node.x + Math.cos(angle) * radius;
+              const y = node.y + Math.sin(angle) * radius;
+              if (i === 0) ctx.moveTo(x, y);
+              else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fill();
+          }
         } else if (networkType === 'mesh') {
           // Draw mesh network nodes (showing redundancy)
           const nodeSize = glow ? 4 : 3;
@@ -734,7 +844,11 @@ const TelecomPacketAnimation = ({
       // Skip if canvas has no dimensions
       if (width === 0 || height === 0) return;
 
-      if (networkType === 'mesh') {
+      if (networkType === 'constellation') {
+        // Generate constellation network
+        const { nodes, edges } = generateConstellationNetwork(width, height, constellationStars, constellationConnectionDistance);
+        networkRef.current = { nodes, edges };
+      } else if (networkType === 'mesh') {
         // Generate mesh network
         const { nodes, edges } = generateMeshNetwork(width, height, meshNodeCount, meshConnectionRadius);
         networkRef.current = { nodes, edges };
@@ -967,8 +1081,31 @@ const TelecomPacketAnimation = ({
 
       const { nodes, edges } = networkRef.current;
 
+      // Draw constellation network
+      if (networkType === 'constellation') {
+        // Draw constellation lines (elegant, thin)
+        ctx.lineWidth = 1;
+        edges.forEach(edge => {
+          const fromNode = nodes.find(n => n.id === edge.from);
+          const toNode = nodes.find(n => n.id === edge.to);
+          if (!fromNode || !toNode) return;
+
+          // Elegant thin lines with subtle opacity
+          const gradient = ctx.createLinearGradient(fromNode.x, fromNode.y, toNode.x, toNode.y);
+          gradient.addColorStop(0, colors.edge.replace(/[\d.]+\)$/g, `${fromNode.brightness * 0.15})`));
+          gradient.addColorStop(0.5, colors.edge.replace(/[\d.]+\)$/g, '0.12)'));
+          gradient.addColorStop(1, colors.edge.replace(/[\d.]+\)$/g, `${toNode.brightness * 0.15})`));
+
+          ctx.strokeStyle = gradient;
+          ctx.beginPath();
+          ctx.moveTo(fromNode.x, fromNode.y);
+          ctx.lineTo(toNode.x, toNode.y);
+          ctx.stroke();
+        });
+      }
+
       // Draw mesh network
-      if (networkType === 'mesh') {
+      else if (networkType === 'mesh') {
         // Draw edges with opacity based on length
         ctx.lineWidth = 1;
         edges.forEach(edge => {

@@ -144,6 +144,30 @@ const animationPresets = {
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
+
+  // Constellation / star field animation
+  constellation: {
+    networkType: 'constellation',
+    constellationStars: 35,
+    constellationConnectionDistance: 250,
+    packetSpawnRate: 0.4,
+    maxActivePackets: 8,
+    packetSpeedMin: 35,
+    packetSpeedMax: 75,
+    tailLengthMin: 50,
+    tailLengthMax: 100,
+    dropProbability: 0.18,
+    nodeGlowDuration: 800,
+    nodeGlowIntensity: 1.6,
+    edgeColor: 'rgba(29, 108, 244, 0.06)',
+    nodeColor: 'rgba(29, 108, 244, 0.3)',
+    packetColor: 'rgba(252, 150, 42, 0.85)', // Saffron color
+    glowColor: 'rgba(252, 150, 42, 1)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.08)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.35)',
+    darkModePacketColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
+    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+  },
 };
 
 // Get current animation configuration from site config
