@@ -3,9 +3,10 @@ import { ArrowRight, Check, PhoneCall, TrendingUp, Zap, Users, Target, BarChart3
 import EnquiryModal from '../../components/EnquiryModal';
 import SEO from '../../components/SEO';
 import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
-import getAnimationConfig from '../../config/animation_config';
+import { useAnimationConfig } from '../../hooks/useAnimationConfig';
 
 const PredictiveDialer = () => {
+  const animationConfig = useAnimationConfig();
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
 
   // Intersection observer for animations
@@ -54,7 +55,7 @@ const PredictiveDialer = () => {
           borderBottom: '1px solid var(--color-border)',
         }}
       >
-        <TelecomPacketAnimation {...getAnimationConfig()} />
+        <TelecomPacketAnimation {...animationConfig} />
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

@@ -3,9 +3,10 @@ import { ArrowRight, Check, Phone, Globe, Zap, Shield, BarChart3, Settings, MapP
 import EnquiryModal from '../../components/EnquiryModal';
 import SEO from '../../components/SEO';
 import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
-import getAnimationConfig from '../../config/animation_config';
+import { useAnimationConfig } from '../../hooks/useAnimationConfig';
 
 const DidNumbers = () => {
+  const animationConfig = useAnimationConfig();
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
 
   // Intersection observer for animations
@@ -54,7 +55,7 @@ const DidNumbers = () => {
         }}
       >
         {/* Telecom Packet Animation */}
-        <TelecomPacketAnimation {...getAnimationConfig()} />
+        <TelecomPacketAnimation {...animationConfig} />
         
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>

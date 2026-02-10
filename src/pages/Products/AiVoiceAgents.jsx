@@ -5,9 +5,10 @@ import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
 import SEO from '../../components/SEO';
 import { useSip } from '../../hooks/useSip';
 import { getAgentCallingNumber } from '../../config/sip_config';
-import getAnimationConfig from '../../config/animation_config';
+import { useAnimationConfig } from '../../hooks/useAnimationConfig';
 
 const AiVoiceAgents = () => {
+  const animationConfig = useAnimationConfig();
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('english');
   const { isRegistered, isConnecting, activeCall, callStatus, error, makeCall, hangUp } = useSip();
@@ -77,7 +78,7 @@ const AiVoiceAgents = () => {
           borderBottom: '1px solid var(--color-border)',
         }}
       >
-        <TelecomPacketAnimation {...getAnimationConfig()} />
+        <TelecomPacketAnimation {...animationConfig} />
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

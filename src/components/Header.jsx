@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon, Settings } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import siteConfig from '../config/site_config.json';
+import { availableAnimationTypes } from '../config/animation_config';
 import MegaMenu from './MegaMenu';
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [animationOpen, setAnimationOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, animationType, changeAnimation } = useTheme();
 
   // Handle scroll effect with hide/show behavior
   useEffect(() => {
@@ -34,6 +36,18 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+
+  // Close animation dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (animationOpen && !event.target.closest('[aria-label="Select animation"]') && !event.target.closest('.animation-dropdown')) {
+        setAnimationOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [animationOpen]);
 
   return (
     <header
@@ -243,8 +257,100 @@ const Header = () => {
             </Link>
           </nav>
 
-          {/* Right Side: Theme Toggle + Auth */}
+          {/* Right Side: Animation Selector + Theme Toggle + Auth */}
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }} className="desktop-auth">
+            {/* Animation Selector */}
+            <div style={{ position: 'relative' }}>
+              <button
+                onClick={() => setAnimationOpen(!animationOpen)}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '8px',
+                  border: '1px solid var(--color-border)',
+                  backgroundColor: 'var(--color-bg)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--color-accent)';
+                  e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--color-border)';
+                  e.currentTarget.style.backgroundColor = 'var(--color-bg)';
+                }}
+                aria-label="Select animation"
+              >
+                <Settings size={20} style={{ color: 'var(--color-primary)' }} />
+              </button>
+              
+              {/* Animation Dropdown */}
+              {animationOpen && (
+                <div className="animation-dropdown" style={{
+                  position: 'absolute',
+                  top: '110%',
+                  right: 0,
+                  backgroundColor: 'var(--color-surface)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.12)',
+                  padding: '8px',
+                  minWidth: '180px',
+                  zIndex: 1000,
+                }}>
+                  <div style={{ 
+                    padding: '8px 12px', 
+                    fontSize: '0.75rem', 
+                    fontWeight: 600, 
+                    color: 'var(--color-text-muted)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                  }}>
+                    Animation Style
+                  </div>
+                  {availableAnimationTypes.map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => {
+                        changeAnimation(type);
+                        setAnimationOpen(false);
+                      }}
+                      style={{
+                        width: '100%',
+                        padding: '10px 12px',
+                        border: 'none',
+                        borderRadius: '8px',
+                        backgroundColor: animationType === type ? 'var(--color-primary)' : 'transparent',
+                        color: animationType === type ? 'white' : 'var(--color-text)',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        fontSize: '0.875rem',
+                        fontWeight: animationType === type ? 600 : 400,
+                        transition: 'all 0.2s ease',
+                        textTransform: 'capitalize',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (animationType !== type) {
+                          e.currentTarget.style.backgroundColor = 'var(--color-bg)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (animationType !== type) {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }
+                      }}
+                    >
+                      {type}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}

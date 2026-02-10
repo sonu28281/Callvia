@@ -170,9 +170,11 @@ const animationPresets = {
   },
 };
 
-// Get current animation configuration from site config
+// Get current animation configuration from site config or localStorage
 export const getAnimationConfig = () => {
-  const animationType = siteConfig.animation?.type || 'organic';
+  // Check localStorage first (user preference), then fall back to site config
+  const storedType = typeof window !== 'undefined' ? localStorage.getItem('animationType') : null;
+  const animationType = storedType || siteConfig.animation?.type || 'organic';
   return {
     ...animationPresets[animationType],
     zIndex: 1,

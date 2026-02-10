@@ -6,9 +6,10 @@ import {
 } from 'lucide-react';
 import TelecomPacketAnimation from '../components/TelecomPacketAnimation';
 import siteConfig from '../config/site_config.json';
-import getAnimationConfig from '../config/animation_config';
+import { useAnimationConfig } from '../hooks/useAnimationConfig';
 
 export function ContactPage() {
+  const animationConfig = useAnimationConfig();
   const [contactForm, setContactForm] = useState({
     fullName: '',
     companyName: '',
@@ -235,7 +236,7 @@ export function ContactPage() {
     <div style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)', minHeight: '100vh' }}>
       {/* Hero Section */}
       <section className="animate-on-scroll" style={{ position: 'relative', backgroundColor: 'var(--color-surface)', padding: '4rem 1.5rem 4rem 1.5rem', borderBottom: '1px solid var(--color-border)', overflow: 'hidden' }}>
-        <TelecomPacketAnimation {...getAnimationConfig()} />
+        <TelecomPacketAnimation {...animationConfig} />
         <div className="container" style={{ maxWidth: '80rem', margin: '0 auto', position: 'relative', zIndex: 10 }}>
           <div style={{ textAlign: 'center', maxWidth: '42rem', margin: '0 auto' }}>
             <h1 style={{

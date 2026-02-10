@@ -5,9 +5,10 @@ import LeadForm from '../../components/LeadForm';
 import SEO from '../../components/SEO';
 import siteConfig from '../../config/site_config.json';
 import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
-import getAnimationConfig from '../../config/animation_config';
+import { useAnimationConfig } from '../../hooks/useAnimationConfig';
 
 const CallfloDeskAI = () => {
+  const animationConfig = useAnimationConfig();
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
   const [heroForm, setHeroForm] = useState({
     companyName: '',
@@ -158,7 +159,7 @@ const CallfloDeskAI = () => {
           overflow: 'hidden',
         }}
       >
-        <TelecomPacketAnimation {...getAnimationConfig()} />
+        <TelecomPacketAnimation {...animationConfig} />
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>

@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle2, Phone, Zap, Cpu, Globe, CreditCard, Building2
 import EnquiryModal from '../components/EnquiryModal';
 import TelecomPacketAnimation from '../components/TelecomPacketAnimation';
 import siteConfig from '../config/site_config.json';
-import getAnimationConfig from '../config/animation_config';
+import { useAnimationConfig } from '../hooks/useAnimationConfig';
 
 // Counter animation hook
 const useCounter = (end, duration = 2000, shouldStart) => {
@@ -91,6 +91,7 @@ const StatsCounter = ({ statsVisible }) => {
 };
 
 const Home = () => {
+  const animationConfig = useAnimationConfig();
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
   const [enquiryLeadSource, setEnquiryLeadSource] = useState('homeenquiry');
   const [earlyAccessForm, setEarlyAccessForm] = useState({
@@ -244,7 +245,7 @@ const Home = () => {
           overflow: 'hidden',
         }}
       >
-        <TelecomPacketAnimation {...getAnimationConfig()} />
+        <TelecomPacketAnimation {...animationConfig} />
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div
             style={{

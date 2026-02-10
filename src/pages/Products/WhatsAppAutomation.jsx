@@ -3,9 +3,10 @@ import { ArrowRight, Check, MessageSquare, Zap, Users, Clock, Bot, Send, Globe, 
 import EnquiryModal from '../../components/EnquiryModal';
 import TelecomPacketAnimation from '../../components/TelecomPacketAnimation';
 import SEO from '../../components/SEO';
-import getAnimationConfig from '../../config/animation_config';
+import { useAnimationConfig } from '../../hooks/useAnimationConfig';
 
 const WhatsAppAutomation = () => {
+  const animationConfig = useAnimationConfig();
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
 
   // Intersection observer for animations
@@ -54,7 +55,7 @@ const WhatsAppAutomation = () => {
           borderBottom: '1px solid var(--color-border)',
         }}
       >
-        <TelecomPacketAnimation {...getAnimationConfig()} />
+        <TelecomPacketAnimation {...animationConfig} />
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
