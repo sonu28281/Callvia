@@ -72,6 +72,30 @@ const animationPresets = {
     darkModePacketColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
+
+  // Neural network / AI brain animation
+  neural: {
+    networkType: 'neural',
+    neuralLayers: 5,
+    neuralNodesPerLayer: [10, 16, 20, 16, 10],
+    packetSpawnRate: 0.9,
+    maxActivePackets: 15,
+    packetSpeedMin: 50,
+    packetSpeedMax: 100,
+    tailLengthMin: 30,
+    tailLengthMax: 70,
+    dropProbability: 0.05,
+    nodeGlowDuration: 600,
+    nodeGlowIntensity: 1.5,
+    edgeColor: 'rgba(29, 108, 244, 0.08)',
+    nodeColor: 'rgba(29, 108, 244, 0.35)',
+    packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
+    glowColor: 'rgba(252, 150, 42, 1)',
+    darkModeEdgeColor: 'rgba(99, 102, 241, 0.12)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.4)',
+    darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
+    darkModeGlowColor: 'rgba(252, 150, 42, 1)',
+  },
 };
 
 // Get current animation configuration from site config

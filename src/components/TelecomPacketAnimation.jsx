@@ -11,10 +11,12 @@ const TelecomPacketAnimation = ({
   nodeCount = null, // null = auto-calculate based on size
   maxConnectionsPerNode = 3,
   edgeOpacity = 0.12,
-  networkType = 'organic', // 'organic', 'cellular', or 'spiderweb'
+  networkType = 'organic', // 'organic', 'cellular', 'spiderweb', or 'neural'
   cellSize = 80, // Size of hexagonal cells for cellular network
   spiderWebRings = 6, // Number of concentric rings for spider web
   spiderWebSpokes = 12, // Number of radial spokes for spider web
+  neuralLayers = 5, // Number of layers for neural network
+  neuralNodesPerLayer = [8, 12, 16, 12, 8], // Nodes in each layer
   
   // Packet behavior
   packetSpawnRate = 0.8, // packets per second
@@ -199,6 +201,90 @@ const TelecomPacketAnimation = ({
       return points;
     };
 
+    // Generate neural network
+    const generateNeuralNetwork = (width, height, layers, nodesPerLayer) => {
+      const nodes = [];
+      const edges = [];
+      let nodeId = 0;
+
+      // Zero padding for maximum coverage
+      const paddingX = 0;
+      const paddingY = 0;
+      
+      const usableWidth = width - 2 * paddingX;
+      const usableHeight = height - 2 * paddingY;
+      
+      // Calculate layer spacing
+      const layerSpacing = usableWidth / (layers - 1);
+      
+      // Store nodes by layer for connection logic
+      const layerNodes = [];
+
+      // Create nodes for each layer
+      for (let layer = 0; layer < layers; layer++) {
+        const numNodes = nodesPerLayer[layer] || 10;
+        
+        // Spread nodes evenly across full height
+        const nodeSpacing = usableHeight / (numNodes - 1);
+        const x = paddingX + layer * layerSpacing;
+        
+        layerNodes[layer] = [];
+        
+        for (let nodeIndex = 0; nodeIndex < numNodes; nodeIndex++) {
+          // Distribute evenly from top to bottom
+          const y = paddingY + nodeIndex * nodeSpacing;
+          
+          nodes.push({
+            id: nodeId,
+            x: x,
+            y: y,
+            connections: [],
+            layer: layer,
+            nodeIndex: nodeIndex,
+          });
+          
+          layerNodes[layer].push(nodeId);
+          nodeId++;
+        }
+      }
+
+      // Connect layers (each node connects to 3-5 nodes in next layer)
+      for (let layer = 0; layer < layers - 1; layer++) {
+        const currentLayerNodes = layerNodes[layer];
+        const nextLayerNodes = layerNodes[layer + 1];
+        
+        currentLayerNodes.forEach(currentNodeId => {
+          const currentNode = nodes[currentNodeId];
+          
+          // Connect to 3-5 random nodes in next layer
+          const numConnections = Math.min(
+            3 + Math.floor(Math.random() * 3),
+            nextLayerNodes.length
+          );
+          
+          // Shuffle and pick nodes
+          const shuffled = [...nextLayerNodes].sort(() => Math.random() - 0.5);
+          const selectedNodes = shuffled.slice(0, numConnections);
+          
+          selectedNodes.forEach(targetId => {
+            const targetNode = nodes[targetId];
+            const distance = Math.hypot(targetNode.x - currentNode.x, targetNode.y - currentNode.y);
+            
+            edges.push({
+              from: currentNodeId,
+              to: targetId,
+              length: distance,
+            });
+            
+            currentNode.connections.push(targetId);
+            targetNode.connections.push(currentNodeId);
+          });
+        });
+      }
+
+      return { nodes, edges };
+    };
+
     // Generate spider web network
     const generateSpiderWebNetwork = (width, height, rings, spokes) => {
       const nodes = [];
@@ -261,6 +347,51 @@ const TelecomPacketAnimation = ({
               targetNode.connections.push(node.id);
             }
           }
+        } else if (networkType === 'neural') {
+          // Draw neural network neurons
+          const layerColors = [
+            colors.node, // Input layer
+            colors.node.replace(/[\d.]+\)$/g, '0.5)'), // Hidden layers
+            colors.glow.replace(/[\d.]+\)$/g, '0.6)'), // Output layer
+          ];
+          
+          const colorIndex = node.layer === 0 ? 0 : (node.layer === neuralLayers - 1 ? 2 : 1);
+          const baseColor = layerColors[colorIndex];
+          
+          // Neuron size varies by layer (larger in middle)
+          const sizeFactor = 1 + (0.3 * Math.sin((node.layer / (neuralLayers - 1)) * Math.PI));
+          const nodeSize = (glow ? 5 : 3.5) * sizeFactor;
+          
+          // Draw outer glow for active neurons
+          if (glow) {
+            const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, nodeSize * 3);
+            gradient.addColorStop(0, colors.glow.replace(/[\d.]+\)$/g, '0.6)'));
+            gradient.addColorStop(0.5, colors.glow.replace(/[\d.]+\)$/g, '0.3)'));
+            gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, nodeSize * 3, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Pulsing ring
+            ctx.strokeStyle = colors.glow.replace(/[\d.]+\)$/g, '0.5)');
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, nodeSize + 3, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          
+          // Draw neuron body
+          ctx.fillStyle = glow ? colors.glow : baseColor;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, nodeSize, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Inner highlight
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+          ctx.beginPath();
+          ctx.arc(node.x - nodeSize * 0.3, node.y - nodeSize * 0.3, nodeSize * 0.4, 0, Math.PI * 2);
+          ctx.fill();
         } else {
           // Ring nodes: connect radially inward and circularly
           const currentRingStartId = 1 + spokes * (node.ring - 1);
@@ -402,7 +533,11 @@ const TelecomPacketAnimation = ({
       // Skip if canvas has no dimensions
       if (width === 0 || height === 0) return;
 
-      if (networkType === 'spiderweb') {
+      if (networkType === 'neural') {
+        // Generate neural network
+        const { nodes, edges } = generateNeuralNetwork(width, height, neuralLayers, neuralNodesPerLayer);
+        networkRef.current = { nodes, edges };
+      } else if (networkType === 'spiderweb') {
         // Generate spider web network
         const { nodes, edges } = generateSpiderWebNetwork(width, height, spiderWebRings, spiderWebSpokes);
         networkRef.current = { nodes, edges };
@@ -623,8 +758,30 @@ const TelecomPacketAnimation = ({
 
       const { nodes, edges } = networkRef.current;
 
+      // Draw neural network
+      if (networkType === 'neural') {
+        // Draw edges with gradient and varying opacity
+        edges.forEach(edge => {
+          const fromNode = nodes.find(n => n.id === edge.from);
+          const toNode = nodes.find(n => n.id === edge.to);
+          if (!fromNode || !toNode) return;
+
+          // Create gradient for synaptic connection
+          const gradient = ctx.createLinearGradient(fromNode.x, fromNode.y, toNode.x, toNode.y);
+          gradient.addColorStop(0, colors.edge);
+          gradient.addColorStop(1, colors.edge.replace(/[\d.]+\)$/g, '0.05)'));
+
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(fromNode.x, fromNode.y);
+          ctx.lineTo(toNode.x, toNode.y);
+          ctx.stroke();
+        });
+      }
+
       // Draw spider web pattern
-      if (networkType === 'spiderweb') {
+      else if (networkType === 'spiderweb') {
         // Draw edges with varying thickness (thicker toward center)
         edges.forEach(edge => {
           const fromNode = nodes.find(n => n.id === edge.from);
@@ -867,6 +1024,8 @@ const TelecomPacketAnimation = ({
     cellSize,
     spiderWebRings,
     spiderWebSpokes,
+    neuralLayers,
+    neuralNodesPerLayer,
     packetSpawnRate,
     maxActivePackets,
     packetSpeedMin,
