@@ -46,7 +46,7 @@ const WhatsAppAutomation = () => {
         style={{
           position: 'relative',
           background: 'var(--color-surface)',
-          paddingTop: '8rem',
+          paddingTop: '5rem',
           paddingBottom: '6rem',
           paddingLeft: '1.5rem',
           paddingRight: '1.5rem',

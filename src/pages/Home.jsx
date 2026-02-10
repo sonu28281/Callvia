@@ -237,7 +237,7 @@ const Home = () => {
         className="hero-section"
         style={{
           position: 'relative',
-          paddingTop: '6rem',
+          paddingTop: '4rem',
           paddingBottom: '6rem',
           paddingLeft: '1.5rem',
           paddingRight: '1.5rem',

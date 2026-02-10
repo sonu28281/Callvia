@@ -46,7 +46,7 @@ const DidNumbers = () => {
         style={{
           position: 'relative',
           background: 'linear-gradient(135deg, #F7F9FC 0%, #EEF2F7 100%)',
-          paddingTop: '8rem',
+          paddingTop: '5rem',
           paddingBottom: '6rem',
           paddingLeft: '1.5rem',
           paddingRight: '1.5rem',
