@@ -17,11 +17,11 @@ const animationPresets = {
     nodeGlowDuration: 600,
     nodeGlowIntensity: 1.0,
     edgeColor: 'rgba(29, 108, 244, 0.02)',
-    nodeColor: 'rgba(29, 108, 244, 0.25)',
+    nodeColor: 'rgba(29, 108, 244, 0.12)',
     packetColor: 'rgba(29, 108, 244, 0.8)',
     glowColor: 'rgba(29, 108, 244, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.03)',
-    darkModeNodeColor: 'rgba(99, 102, 241, 0.35)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.18)',
     darkModePacketColor: 'rgba(99, 102, 241, 0.9)',
     darkModeGlowColor: 'rgba(99, 102, 241, 1)',
   },
@@ -40,11 +40,11 @@ const animationPresets = {
     nodeGlowDuration: 750,
     nodeGlowIntensity: 1.4,
     edgeColor: 'rgba(29, 108, 244, 0.04)',
-    nodeColor: 'rgba(29, 108, 244, 0.5)',
+    nodeColor: 'rgba(29, 108, 244, 0.25)',
     packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.05)',
-    darkModeNodeColor: 'rgba(99, 102, 241, 0.55)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.28)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
@@ -64,11 +64,11 @@ const animationPresets = {
     nodeGlowDuration: 650,
     nodeGlowIntensity: 1.4,
     edgeColor: 'rgba(29, 108, 244, 0.03)',
-    nodeColor: 'rgba(29, 108, 244, 0.4)',
+    nodeColor: 'rgba(29, 108, 244, 0.20)',
     packetColor: 'rgba(252, 150, 42, 0.85)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.04)',
-    darkModeNodeColor: 'rgba(99, 102, 241, 0.45)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.23)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
@@ -88,11 +88,11 @@ const animationPresets = {
     nodeGlowDuration: 600,
     nodeGlowIntensity: 1.5,
     edgeColor: 'rgba(29, 108, 244, 0.02)',
-    nodeColor: 'rgba(29, 108, 244, 0.35)',
+    nodeColor: 'rgba(29, 108, 244, 0.18)',
     packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.03)',
-    darkModeNodeColor: 'rgba(99, 102, 241, 0.4)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.20)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
@@ -112,11 +112,11 @@ const animationPresets = {
     nodeGlowDuration: 550,
     nodeGlowIntensity: 1.3,
     edgeColor: 'rgba(29, 108, 244, 0.03)',
-    nodeColor: 'rgba(29, 108, 244, 0.4)',
+    nodeColor: 'rgba(29, 108, 244, 0.20)',
     packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.04)',
-    darkModeNodeColor: 'rgba(99, 102, 241, 0.45)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.23)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
@@ -136,11 +136,11 @@ const animationPresets = {
     nodeGlowDuration: 600,
     nodeGlowIntensity: 1.4,
     edgeColor: 'rgba(29, 108, 244, 0.03)',
-    nodeColor: 'rgba(29, 108, 244, 0.38)',
+    nodeColor: 'rgba(29, 108, 244, 0.19)',
     packetColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.04)',
-    darkModeNodeColor: 'rgba(99, 102, 241, 0.42)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.21)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.95)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
@@ -160,11 +160,11 @@ const animationPresets = {
     nodeGlowDuration: 800,
     nodeGlowIntensity: 1.6,
     edgeColor: 'rgba(29, 108, 244, 0.02)',
-    nodeColor: 'rgba(29, 108, 244, 0.3)',
+    nodeColor: 'rgba(29, 108, 244, 0.15)',
     packetColor: 'rgba(252, 150, 42, 0.85)', // Saffron color
     glowColor: 'rgba(252, 150, 42, 1)',
     darkModeEdgeColor: 'rgba(99, 102, 241, 0.03)',
-    darkModeNodeColor: 'rgba(99, 102, 241, 0.35)',
+    darkModeNodeColor: 'rgba(99, 102, 241, 0.18)',
     darkModePacketColor: 'rgba(252, 150, 42, 0.9)', // Saffron color
     darkModeGlowColor: 'rgba(252, 150, 42, 1)',
   },
