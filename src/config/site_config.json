@@ -23,7 +23,7 @@
   },
   "animation": {
     "_comment": "Available types: 'organic' (natural network), 'cellular' (hexagonal cells), 'spiderweb' (radial web), 'neural' (AI brain), 'grid' (power grid), 'mesh' (dense mesh), 'constellation' (star field)",
-    "type": "spiderweb"
+    "type": "grid"
   },
   "features": {
     "enableWhatsAppWidget": true,
