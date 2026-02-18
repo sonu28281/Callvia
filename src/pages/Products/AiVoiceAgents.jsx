@@ -147,6 +147,41 @@ const AiVoiceAgents = () => {
                 >
                   Get API Access <ArrowRight size={18} />
                 </button>
+                <button
+                  onClick={() => {
+                    const tryLiveSection = document.getElementById('try-live-agents');
+                    if (tryLiveSection) {
+                      tryLiveSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                  style={{
+                    background: 'var(--color-surface)',
+                    color: 'var(--color-text)',
+                    padding: '1rem 2rem',
+                    borderRadius: '0.5rem',
+                    fontWeight: 600,
+                    border: '2px solid var(--color-primary)',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 8px 20px rgba(29, 108, 244, 0.2)';
+                    e.target.style.background = 'var(--color-primary)';
+                    e.target.style.color = 'var(--color-primary-text)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = 'none';
+                    e.target.style.background = 'var(--color-surface)';
+                    e.target.style.color = 'var(--color-text)';
+                  }}
+                >
+                  <PhoneCall size={18} /> Try Live Agents
+                </button>
               </div>
             </div>
 
@@ -368,7 +403,7 @@ const AiVoiceAgents = () => {
       </section>
 
       {/* Try Live AI Agents Section */}
-      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem' }}>
+      <section id="try-live-agents" className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem', scrollMarginTop: '80px' }}>
         <div className="container">
           <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
