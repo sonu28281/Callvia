@@ -28,20 +28,20 @@ const AiVoiceAgents = () => {
 
       @keyframes siriBorderGlow {
         0%, 100% {
-          opacity: 0.45;
+          opacity: 0.3;
           box-shadow:
             0 0 0 0 rgba(255, 255, 255, 0),
-            0 0 18px var(--agent-glow-soft),
-            0 0 34px var(--agent-glow-strong);
+            0 0 12px var(--agent-glow-soft),
+            0 0 22px var(--agent-glow-strong);
           transform: scale(1);
         }
         50% {
-          opacity: 0.95;
+          opacity: 0.62;
           box-shadow:
             0 0 0 1px var(--agent-glow-soft),
-            0 0 26px var(--agent-glow-strong),
-            0 0 44px var(--agent-glow-strong);
-          transform: scale(1.008);
+            0 0 18px var(--agent-glow-strong),
+            0 0 30px var(--agent-glow-strong);
+          transform: scale(1.004);
         }
       }
 
@@ -58,9 +58,9 @@ const AiVoiceAgents = () => {
         border: 1px solid var(--agent-glow-soft);
         background: linear-gradient(
           135deg,
-          color-mix(in srgb, var(--agent-glow-color) 36%, transparent) 0%,
+          color-mix(in srgb, var(--agent-glow-color) 24%, transparent) 0%,
           transparent 45%,
-          color-mix(in srgb, var(--agent-glow-color) 52%, transparent) 100%
+          color-mix(in srgb, var(--agent-glow-color) 34%, transparent) 100%
         );
         animation: siriBorderGlow 2.1s ease-in-out infinite;
       }
@@ -68,7 +68,7 @@ const AiVoiceAgents = () => {
       @media (prefers-reduced-motion: reduce) {
         .siri-glow-card::before {
           animation: none !important;
-          opacity: 0.85;
+          opacity: 0.55;
         }
       }
     `;
@@ -690,8 +690,8 @@ const AiVoiceAgents = () => {
                     className={isInConversation ? 'siri-glow-card' : ''}
                     style={{
                       '--agent-glow-color': agent.color,
-                      '--agent-glow-soft': `${agent.color}66`,
-                      '--agent-glow-strong': `${agent.color}44`,
+                      '--agent-glow-soft': `${agent.color}4D`,
+                      '--agent-glow-strong': `${agent.color}30`,
                       backgroundColor: 'var(--color-surface)',
                       border: `2px solid ${isActive ? agent.color : 'var(--color-border)'}`,
                       borderRadius: '1rem',
@@ -709,7 +709,7 @@ const AiVoiceAgents = () => {
                         e.currentTarget.style.borderColor = agent.color;
                         e.currentTarget.style.transform = 'translateY(-6px)';
                         e.currentTarget.style.boxShadow = isInConversation
-                          ? `0 14px 34px ${agent.color}40, 0 2px 8px rgba(0, 0, 0, 0.1)`
+                          ? `0 10px 24px ${agent.color}30, 0 2px 8px rgba(0, 0, 0, 0.1)`
                           : `0 12px 32px ${agent.color}30, 0 2px 8px rgba(0, 0, 0, 0.1)`;
                       }
                     }}
@@ -719,7 +719,7 @@ const AiVoiceAgents = () => {
                       }
                       e.currentTarget.style.transform = 'translateY(0)';
                       e.currentTarget.style.boxShadow = isInConversation
-                        ? `0 0 0 1px ${agent.color}2A, 0 8px 28px ${agent.color}2D`
+                        ? `0 0 0 1px ${agent.color}22, 0 6px 18px ${agent.color}24`
                         : '0 1px 3px rgba(0, 0, 0, 0.05)';
                     }}
                   >
