@@ -403,10 +403,42 @@ const AiVoiceAgents = () => {
       </section>
 
       {/* Try Live AI Agents Section */}
-      <section id="try-live-agents" className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem', scrollMarginTop: '80px' }}>
+      <section id="try-live-agents" className="animate-on-scroll" style={{ backgroundColor: 'var(--color-surface)', padding: '4.5rem 1.5rem', scrollMarginTop: '80px', position: 'relative' }}>
         <div className="container">
-          <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <div style={{ 
+            maxWidth: '72rem', 
+            margin: '0 auto',
+            backgroundColor: 'var(--color-surface)',
+            border: '2px solid var(--color-primary)',
+            borderRadius: '1.5rem',
+            padding: '4rem 2.5rem',
+            boxShadow: '0 20px 60px rgba(29, 108, 244, 0.15), 0 0 0 1px rgba(29, 108, 244, 0.1)',
+            position: 'relative',
+          }}>
+            {/* USP Badge */}
+            <div style={{
+              position: 'absolute',
+              top: '-1rem',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.625rem 1.5rem',
+              background: 'linear-gradient(135deg, var(--color-primary) 0%, #347BF5 100%)',
+              color: '#FFFFFF',
+              borderRadius: '2rem',
+              fontSize: '0.875rem',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              boxShadow: '0 4px 20px rgba(29, 108, 244, 0.4)',
+            }}>
+              <Zap size={16} />
+              <span>Our USP - Try Real AI Agents Live</span>
+            </div>
+            
+            <div style={{ textAlign: 'center', marginBottom: '3rem', marginTop: '1rem' }}>
               <h2 style={{
                 fontSize: 'clamp(2rem, 4vw, 3rem)',
                 fontFamily: 'Sora, sans-serif',
@@ -414,31 +446,44 @@ const AiVoiceAgents = () => {
                 color: 'var(--color-text)',
                 marginBottom: '1rem',
               }}>
-                Try Live AI Voice Agents
+                Try <span style={{
+                  background: 'linear-gradient(135deg, var(--color-primary) 0%, #347BF5 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  fontWeight: 800,
+                }}>Live</span> AI Voice Agents
               </h2>
               <p style={{ fontSize: '1.125rem', color: 'var(--color-text-muted)', marginBottom: '1.5rem' }}>
                 Experience our AI agents in action. Click to call and interact with different agent scenarios.
               </p>
               
-              {/* Language Selector */}
+              {/* Language Selector & Status in one row */}
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '0.75rem',
+                gap: '2rem',
                 marginBottom: '1.5rem',
+                flexWrap: 'wrap',
               }}>
+                {/* Language Selector */}
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
-                  color: 'var(--color-text-muted)',
-                  fontSize: '0.9375rem',
-                  fontWeight: 500,
+                  gap: '0.75rem',
                 }}>
-                  <Languages size={20} />
-                  <span>Language:</span>
-                </div>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    color: 'var(--color-text-muted)',
+                    fontSize: '0.9375rem',
+                    fontWeight: 500,
+                  }}>
+                    <Languages size={20} />
+                    <span>Language:</span>
+                  </div>
                 <div style={{
                   display: 'inline-flex',
                   backgroundColor: 'var(--color-surface)',
@@ -517,6 +562,7 @@ const AiVoiceAgents = () => {
                   </>
                 )}
               </div>
+            </div>
 
               {error && (
                 <div style={{
@@ -745,7 +791,7 @@ const AiVoiceAgents = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-surface)', padding: '6rem 1.5rem' }}>
+      <section className="animate-on-scroll" style={{ backgroundColor: 'var(--color-bg)', padding: '6rem 1.5rem' }}>
         <div className="container">
           <div style={{
             maxWidth: '48rem',
