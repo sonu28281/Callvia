@@ -312,7 +312,9 @@ const Header = () => {
                   }}>
                     Animation Style
                   </div>
-                  {availableAnimationTypes.map((type) => (
+                  {availableAnimationTypes
+                    .filter(type => !(type === 'bgvideo' && theme === 'dark'))
+                    .map((type) => (
                     <button
                       key={type}
                       onClick={() => {

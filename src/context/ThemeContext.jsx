@@ -17,7 +17,12 @@ export const ThemeProvider = ({ children }) => {
   });
 
   const [animationType, setAnimationType] = useState(() => {
-    return localStorage.getItem('animationType') || siteConfig.animation?.type || 'grid';
+    const storedAnimation = localStorage.getItem('animationType');
+    if (storedAnimation) return storedAnimation;
+    
+    // Default based on theme
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    return currentTheme === 'light' ? 'bgvideo' : 'organic';
   });
 
   useEffect(() => {
@@ -33,7 +38,16 @@ export const ThemeProvider = ({ children }) => {
   }, [animationType]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme(prev => {
+      const newTheme = prev === 'light' ? 'dark' : 'light';
+      // Auto-switch animation based on theme
+      if (newTheme === 'dark') {
+        setAnimationType('organic');
+      } else {
+        setAnimationType('bgvideo');
+      }
+      return newTheme;
+    });
   };
 
   const changeAnimation = (type) => {

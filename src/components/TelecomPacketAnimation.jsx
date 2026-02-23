@@ -1572,6 +1572,7 @@ const TelecomPacketAnimation = ({
           objectFit: 'cover',
           zIndex: zIndex,
           pointerEvents: 'none',
+          transform: 'scaleY(-1)',
         }}
         aria-hidden="true"
       >
