@@ -42,8 +42,8 @@ const TelecomPacketAnimation = ({
   
   // Particle Wave props (for particleWave type - canvas-based)
   particleDensity = 160,
-  particleColor = ['#3B82F6', '#60A5FA', '#93C5FD', '#DBEAFE'],
-  linkColor = '#3B82F6',
+  particleColor = ['#EC4899', '#8B5CF6', '#3B82F6', '#10B981', '#F59E0B'],
+  linkColor = '#EC4899',
   linkDistance = 80,
   waveAmplitude = 1.2,
   

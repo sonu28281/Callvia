@@ -191,12 +191,12 @@ const animationPresets = {
     enablePulse: true,
   },
 
-  // Dense nano particle wave with blue colors (canvas-based)
+  // Dense nano particle wave with colorful logo colors (canvas-based)
   particleWave: {
     networkType: 'particleWave',
     particleDensity: 160,
-    particleColor: ['#3B82F6', '#60A5FA', '#93C5FD', '#DBEAFE'],
-    linkColor: '#3B82F6',
+    particleColor: ['#EC4899', '#8B5CF6', '#3B82F6', '#10B981', '#F59E0B'],
+    linkColor: '#EC4899',
     linkDistance: 80,
     particleSpeed: 0.2,
     waveAmplitude: 1.2,

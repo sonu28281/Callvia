@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from 'react';
  */
 const ParticleWaveBackground = ({
   particleDensity = 160,
-  particleColor = ['#3B82F6', '#60A5FA', '#93C5FD', '#DBEAFE'],
-  linkColor = '#3B82F6',
+  particleColor = ['#EC4899', '#8B5CF6', '#3B82F6', '#10B981', '#F59E0B'],
+  linkColor = '#EC4899',
   linkDistance = 80,
   particleSpeed = 0.2,
   waveAmplitude = 1.2,
@@ -61,8 +61,11 @@ const ParticleWaveBackground = ({
       const width = canvas.width;
       const height = canvas.height;
       const count = Math.floor(particleDensity * (width * height) / 100000); // Much higher density
-
+      
+      const colorCounts = [0, 0, 0, 0, 0];
       for (let i = 0; i < count; i++) {
+        const randomColor = Math.floor(Math.random() * particleColor.length);
+        colorCounts[randomColor]++;
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
@@ -70,27 +73,29 @@ const ParticleWaveBackground = ({
           vx: (Math.random() - 0.5) * particleSpeed * 0.15,
           vy: (Math.random() - 0.5) * particleSpeed * 0.15,
           radius: Math.random() * 0.6 + 0.3, // Nano particles (0.3-0.9px)
-          colorIndex: Math.floor(Math.random() * particleColor.length),
+          colorIndex: randomColor,
           phase: Math.random() * Math.PI * 2,
         });
       }
+      console.log('🌈 Particle colors:', particleColor);
+      console.log('🎨 Color distribution:', colorCounts);
     };
 
-    // Get theme-aware colors (blue theme for tech aesthetic)
+    // Get theme-aware colors (distinct logo color palette)
     const getColors = () => {
       if (isDark) {
         return {
-          particles: ['#60A5FA', '#93C5FD', '#DBEAFE', '#EFF6FF'],
-          links: '#60A5FA',
-          particleOpacity: 0.18,
-          linkOpacity: 0.10,
+          particles: ['#EC4899', '#8B5CF6', '#3B82F6', '#10B981', '#F59E0B'],
+          links: '#EC4899',
+          particleOpacity: 0.35,
+          linkOpacity: 0.15,
         };
       }
       return {
-        particles: ['#3B82F6', '#60A5FA', '#93C5FD', '#DBEAFE'],
-        links: '#3B82F6',
-        particleOpacity: 0.25,
-        linkOpacity: 0.14,
+        particles: ['#EC4899', '#8B5CF6', '#3B82F6', '#10B981', '#F59E0B'],
+        links: '#EC4899',
+        particleOpacity: 0.4,
+        linkOpacity: 0.18,
       };
     };
 
