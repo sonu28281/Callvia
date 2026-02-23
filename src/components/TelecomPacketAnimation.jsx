@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import NetworkBackground from './NetworkBackground';
+import NetworkBackgroundPremium from './NetworkBackgroundPremium';
+import ParticleWaveBackground from './ParticleWaveBackground';
 
 /**
  * TelecomPacketAnimation - Network packet visualization
@@ -11,7 +14,7 @@ const TelecomPacketAnimation = ({
   nodeCount = null, // null = auto-calculate based on size
   maxConnectionsPerNode = 3,
   edgeOpacity = 0.12,
-  networkType = 'organic', // 'organic', 'cellular', 'spiderweb', 'neural', 'grid', 'mesh', or 'constellation'
+  networkType = 'organic', // 'organic', 'cellular', 'spiderweb', 'neural', 'grid', 'mesh', 'constellation', 'particleNetwork', 'premiumParticle', or 'particleWave'
   cellSize = 80, // Size of hexagonal cells for cellular network
   spiderWebRings = 6, // Number of concentric rings for spider web
   spiderWebSpokes = 12, // Number of radial spokes for spider web
@@ -23,6 +26,26 @@ const TelecomPacketAnimation = ({
   meshConnectionRadius = 150, // Max connection distance for mesh
   constellationStars = 35, // Number of stars for constellation
   constellationConnectionDistance = 200, // Max connection distance
+  
+  // Particle Network props (for particleNetwork type)
+  particleCount = 80,
+  connectionDistance = 120,
+  particleSpeed = 0.3,
+  enableParallax = true,
+  particleSize = 2,
+  glowIntensity = 0.6,
+  
+  // Premium Particle props (for premiumParticle type)
+  particleSizeRange = [1.5, 4],
+  speedFactor = 0.6,
+  enablePulse = true,
+  
+  // Particle Wave props (for particleWave type - canvas-based)
+  particleDensity = 160,
+  particleColor = ['#3B82F6', '#60A5FA', '#93C5FD', '#DBEAFE'],
+  linkColor = '#3B82F6',
+  linkDistance = 80,
+  waveAmplitude = 1.2,
   
   // Packet behavior
   packetSpawnRate = 0.8, // packets per second
@@ -1489,6 +1512,48 @@ const TelecomPacketAnimation = ({
     darkModePacketColor,
     darkModeGlowColor,
   ]);
+
+  // Use NetworkBackground for particleNetwork type
+  if (networkType === 'particleNetwork') {
+    return (
+      <NetworkBackground
+        particleCount={particleCount}
+        connectionDistance={connectionDistance}
+        particleSpeed={particleSpeed}
+        enableParallax={enableParallax}
+        particleSize={particleSize}
+        glowIntensity={glowIntensity}
+      />
+    );
+  }
+
+  // Use NetworkBackgroundPremium for premiumParticle type
+  if (networkType === 'premiumParticle') {
+    return (
+      <NetworkBackgroundPremium
+        particleCount={particleCount}
+        particleSizeRange={particleSizeRange}
+        connectionDistance={connectionDistance}
+        speedFactor={speedFactor}
+        enableParallax={enableParallax}
+        enablePulse={enablePulse}
+      />
+    );
+  }
+
+  // Use ParticleWaveBackground for particleWave type (canvas-based dense nano particles)
+  if (networkType === 'particleWave') {
+    return (
+      <ParticleWaveBackground
+        particleDensity={particleDensity}
+        particleColor={particleColor}
+        linkColor={linkColor}
+        linkDistance={linkDistance}
+        particleSpeed={particleSpeed}
+        waveAmplitude={waveAmplitude}
+      />
+    );
+  }
 
   return (
     <canvas

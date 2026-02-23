@@ -168,6 +168,39 @@ const animationPresets = {
     darkModePacketColor: 'rgba(236, 72, 153, 0.9)', // Pink/Magenta logo color
     darkModeGlowColor: 'rgba(236, 72, 153, 1)',
   },
+
+  // Premium AI-style particle network animation
+  particleNetwork: {
+    networkType: 'particleNetwork',
+    particleCount: 80,
+    connectionDistance: 120,
+    particleSpeed: 0.3,
+    enableParallax: true,
+    particleSize: 2,
+    glowIntensity: 0.6,
+  },
+
+  // Premium network with gradient background and pulse animation
+  premiumParticle: {
+    networkType: 'premiumParticle',
+    particleCount: 80,
+    particleSizeRange: [1.5, 4],
+    connectionDistance: 120,
+    speedFactor: 0.6,
+    enableParallax: true,
+    enablePulse: true,
+  },
+
+  // Dense nano particle wave with blue colors (canvas-based)
+  particleWave: {
+    networkType: 'particleWave',
+    particleDensity: 160,
+    particleColor: ['#3B82F6', '#60A5FA', '#93C5FD', '#DBEAFE'],
+    linkColor: '#3B82F6',
+    linkDistance: 80,
+    particleSpeed: 0.2,
+    waveAmplitude: 1.2,
+  },
 };
 
 // Get current animation configuration from site config or localStorage
