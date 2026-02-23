@@ -201,6 +201,15 @@ const animationPresets = {
     particleSpeed: 0.2,
     waveAmplitude: 1.2,
   },
+
+  // Background video animation
+  bgvideo: {
+    networkType: 'bgvideo',
+    videoSource: '/bgvideo2.mp4',
+    videoLoop: true,
+    videoMuted: true,
+    videoAutoplay: true,
+  },
 };
 
 // Get current animation configuration from site config or localStorage

@@ -1555,6 +1555,31 @@ const TelecomPacketAnimation = ({
     );
   }
 
+  // Use video background for bgvideo type
+  if (networkType === 'bgvideo') {
+    return (
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: zIndex,
+          pointerEvents: 'none',
+        }}
+        aria-hidden="true"
+      >
+        <source src="/bgvideo2.mp4" type="video/mp4" />
+      </video>
+    );
+  }
+
   return (
     <canvas
       ref={canvasRef}
