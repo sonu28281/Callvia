@@ -112,7 +112,7 @@ export function AboutPage() {
                 Built by operators, for operators
               </h2>
               <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                Callvia was founded by telecom infrastructure professionals who saw a clear need for domestic-first
+                Callvia Cloud Solutions Private Limited was founded by telecom infrastructure professionals who saw a clear need for domestic-first
                 telecom operations in India.
               </p>
               <p className="text-lg text-slate-600 leading-relaxed mb-4">
