@@ -202,7 +202,7 @@ const Footer = ({ onEnquiryClick }) => {
           }}
         >
           <p style={{ color: 'var(--color-text-muted)', fontSize: '0.75rem' }}>
-            © {currentYear} {siteConfig.company.name}. All rights reserved.
+            © {currentYear} {siteConfig.company.name} Cloud Solutions Private Limited. All rights reserved.
           </p>
         </div>
       </div>
